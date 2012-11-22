@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomSwitch.h"
+#import "CustomLabel.h"
 
 @interface ViewController : UIViewController
-
 @end

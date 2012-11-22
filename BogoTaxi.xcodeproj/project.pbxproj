@@ -19,6 +19,10 @@
 		7542BF1B165E82D2008A51B7 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7542BF19165E82D2008A51B7 /* MainStoryboard_iPhone.storyboard */; };
 		7542BF1E165E82D2008A51B7 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7542BF1C165E82D2008A51B7 /* MainStoryboard_iPad.storyboard */; };
 		7542BF21165E82D2008A51B7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BF20165E82D2008A51B7 /* ViewController.m */; };
+		7542BF2F165E8DB7008A51B7 /* CustomSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BF2E165E8DB7008A51B7 /* CustomSwitch.m */; };
+		7542BF31165E917E008A51B7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7542BF30165E917E008A51B7 /* QuartzCore.framework */; };
+		7542BF46165EA8BA008A51B7 /* league_gothic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7542BF45165EA75F008A51B7 /* league_gothic.ttf */; };
+		7542BF49165EAE48008A51B7 /* CustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BF48165EAE48008A51B7 /* CustomLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +43,12 @@
 		7542BF1D165E82D2008A51B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		7542BF1F165E82D2008A51B7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		7542BF20165E82D2008A51B7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7542BF2D165E8DB7008A51B7 /* CustomSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSwitch.h; sourceTree = "<group>"; };
+		7542BF2E165E8DB7008A51B7 /* CustomSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSwitch.m; sourceTree = "<group>"; };
+		7542BF30165E917E008A51B7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		7542BF45165EA75F008A51B7 /* league_gothic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = league_gothic.ttf; sourceTree = "<group>"; };
+		7542BF47165EAE47008A51B7 /* CustomLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomLabel.h; sourceTree = "<group>"; };
+		7542BF48165EAE48008A51B7 /* CustomLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomLabel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7542BF31165E917E008A51B7 /* QuartzCore.framework in Frameworks */,
 				7542BF02165E82D2008A51B7 /* UIKit.framework in Frameworks */,
 				7542BF04165E82D2008A51B7 /* Foundation.framework in Frameworks */,
 				7542BF06165E82D2008A51B7 /* CoreGraphics.framework in Frameworks */,
@@ -58,6 +69,7 @@
 		7542BEF2165E82D2008A51B7 = {
 			isa = PBXGroup;
 			children = (
+				7542BF30165E917E008A51B7 /* QuartzCore.framework */,
 				7542BF07165E82D2008A51B7 /* BogoTaxi */,
 				7542BF00165E82D2008A51B7 /* Frameworks */,
 				7542BEFE165E82D2008A51B7 /* Products */,
@@ -91,6 +103,7 @@
 				7542BF1C165E82D2008A51B7 /* MainStoryboard_iPad.storyboard */,
 				7542BF1F165E82D2008A51B7 /* ViewController.h */,
 				7542BF20165E82D2008A51B7 /* ViewController.m */,
+				7542BF2C165E8D92008A51B7 /* SubViews */,
 				7542BF08165E82D2008A51B7 /* Supporting Files */,
 			);
 			path = BogoTaxi;
@@ -99,6 +112,7 @@
 		7542BF08165E82D2008A51B7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7542BF45165EA75F008A51B7 /* league_gothic.ttf */,
 				7542BF09165E82D2008A51B7 /* BogoTaxi-Info.plist */,
 				7542BF0A165E82D2008A51B7 /* InfoPlist.strings */,
 				7542BF0D165E82D2008A51B7 /* main.m */,
@@ -108,6 +122,17 @@
 				7542BF17165E82D2008A51B7 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7542BF2C165E8D92008A51B7 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				7542BF2D165E8DB7008A51B7 /* CustomSwitch.h */,
+				7542BF2E165E8DB7008A51B7 /* CustomSwitch.m */,
+				7542BF47165EAE47008A51B7 /* CustomLabel.h */,
+				7542BF48165EAE48008A51B7 /* CustomLabel.m */,
+			);
+			name = SubViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +190,7 @@
 				7542BF14165E82D2008A51B7 /* Default.png in Resources */,
 				7542BF16165E82D2008A51B7 /* Default@2x.png in Resources */,
 				7542BF18165E82D2008A51B7 /* Default-568h@2x.png in Resources */,
+				7542BF46165EA8BA008A51B7 /* league_gothic.ttf in Resources */,
 				7542BF1B165E82D2008A51B7 /* MainStoryboard_iPhone.storyboard in Resources */,
 				7542BF1E165E82D2008A51B7 /* MainStoryboard_iPad.storyboard in Resources */,
 			);
@@ -180,6 +206,8 @@
 				7542BF0E165E82D2008A51B7 /* main.m in Sources */,
 				7542BF12165E82D2008A51B7 /* AppDelegate.m in Sources */,
 				7542BF21165E82D2008A51B7 /* ViewController.m in Sources */,
+				7542BF2F165E8DB7008A51B7 /* CustomSwitch.m in Sources */,
+				7542BF49165EAE48008A51B7 /* CustomLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +299,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BogoTaxi/BogoTaxi-Prefix.pch";
 				INFOPLIST_FILE = "BogoTaxi/BogoTaxi-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -282,6 +311,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BogoTaxi/BogoTaxi-Prefix.pch";
 				INFOPLIST_FILE = "BogoTaxi/BogoTaxi-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -306,6 +336,7 @@
 				7542BF26165E82D2008A51B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
