@@ -13,16 +13,20 @@
 		7542BF0C165E82D2008A51B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7542BF0A165E82D2008A51B7 /* InfoPlist.strings */; };
 		7542BF0E165E82D2008A51B7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BF0D165E82D2008A51B7 /* main.m */; };
 		7542BF12165E82D2008A51B7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BF11165E82D2008A51B7 /* AppDelegate.m */; };
-		7542BF14165E82D2008A51B7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7542BF13165E82D2008A51B7 /* Default.png */; };
-		7542BF16165E82D2008A51B7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7542BF15165E82D2008A51B7 /* Default@2x.png */; };
 		7542BF18165E82D2008A51B7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7542BF17165E82D2008A51B7 /* Default-568h@2x.png */; };
 		7542BF1B165E82D2008A51B7 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7542BF19165E82D2008A51B7 /* MainStoryboard_iPhone.storyboard */; };
 		7542BF1E165E82D2008A51B7 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7542BF1C165E82D2008A51B7 /* MainStoryboard_iPad.storyboard */; };
-		7542BF21165E82D2008A51B7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BF20165E82D2008A51B7 /* ViewController.m */; };
+		7542BF21165E82D2008A51B7 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BF20165E82D2008A51B7 /* MainViewController.m */; };
 		7542BF2F165E8DB7008A51B7 /* CustomSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BF2E165E8DB7008A51B7 /* CustomSwitch.m */; };
 		7542BF31165E917E008A51B7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7542BF30165E917E008A51B7 /* QuartzCore.framework */; };
 		7542BF46165EA8BA008A51B7 /* league_gothic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7542BF45165EA75F008A51B7 /* league_gothic.ttf */; };
 		7542BF49165EAE48008A51B7 /* CustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BF48165EAE48008A51B7 /* CustomLabel.m */; };
+		7542BF4F165EDC7B008A51B7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7542BF4E165EDC7B008A51B7 /* MapKit.framework */; };
+		7542BF56165EEC0C008A51B7 /* BannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BF55165EEC0B008A51B7 /* BannerView.m */; };
+		7542BF7116600379008A51B7 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BF7016600378008A51B7 /* CustomButton.m */; };
+		75926D141665217000B3CDD5 /* Taximetro.m in Sources */ = {isa = PBXBuildFile; fileRef = 75926D131665217000B3CDD5 /* Taximetro.m */; };
+		75D52B141660351100EAC142 /* TaximetroManualViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D52B131660351100EAC142 /* TaximetroManualViewController.m */; };
+		75D6C68D1667F66600D90A0D /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D6C68C1667F66600D90A0D /* MenuView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,19 +40,28 @@
 		7542BF0F165E82D2008A51B7 /* BogoTaxi-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BogoTaxi-Prefix.pch"; sourceTree = "<group>"; };
 		7542BF10165E82D2008A51B7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7542BF11165E82D2008A51B7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		7542BF13165E82D2008A51B7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		7542BF15165E82D2008A51B7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		7542BF17165E82D2008A51B7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		7542BF1A165E82D2008A51B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		7542BF1D165E82D2008A51B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		7542BF1F165E82D2008A51B7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		7542BF20165E82D2008A51B7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7542BF1F165E82D2008A51B7 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		7542BF20165E82D2008A51B7 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		7542BF2D165E8DB7008A51B7 /* CustomSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSwitch.h; sourceTree = "<group>"; };
 		7542BF2E165E8DB7008A51B7 /* CustomSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSwitch.m; sourceTree = "<group>"; };
 		7542BF30165E917E008A51B7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7542BF45165EA75F008A51B7 /* league_gothic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = league_gothic.ttf; sourceTree = "<group>"; };
 		7542BF47165EAE47008A51B7 /* CustomLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomLabel.h; sourceTree = "<group>"; };
 		7542BF48165EAE48008A51B7 /* CustomLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomLabel.m; sourceTree = "<group>"; };
+		7542BF4E165EDC7B008A51B7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		7542BF54165EEC0B008A51B7 /* BannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerView.h; sourceTree = "<group>"; };
+		7542BF55165EEC0B008A51B7 /* BannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerView.m; sourceTree = "<group>"; };
+		7542BF6F16600378008A51B7 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
+		7542BF7016600378008A51B7 /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
+		75926D121665217000B3CDD5 /* Taximetro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Taximetro.h; sourceTree = "<group>"; };
+		75926D131665217000B3CDD5 /* Taximetro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Taximetro.m; sourceTree = "<group>"; };
+		75D52B121660351100EAC142 /* TaximetroManualViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaximetroManualViewController.h; sourceTree = "<group>"; };
+		75D52B131660351100EAC142 /* TaximetroManualViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaximetroManualViewController.m; sourceTree = "<group>"; };
+		75D6C68B1667F66600D90A0D /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
+		75D6C68C1667F66600D90A0D /* MenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7542BF4F165EDC7B008A51B7 /* MapKit.framework in Frameworks */,
 				7542BF31165E917E008A51B7 /* QuartzCore.framework in Frameworks */,
 				7542BF02165E82D2008A51B7 /* UIKit.framework in Frameworks */,
 				7542BF04165E82D2008A51B7 /* Foundation.framework in Frameworks */,
@@ -69,6 +83,7 @@
 		7542BEF2165E82D2008A51B7 = {
 			isa = PBXGroup;
 			children = (
+				7542BF4E165EDC7B008A51B7 /* MapKit.framework */,
 				7542BF30165E917E008A51B7 /* QuartzCore.framework */,
 				7542BF07165E82D2008A51B7 /* BogoTaxi */,
 				7542BF00165E82D2008A51B7 /* Frameworks */,
@@ -97,12 +112,15 @@
 		7542BF07165E82D2008A51B7 /* BogoTaxi */ = {
 			isa = PBXGroup;
 			children = (
+				75926D101665215A00B3CDD5 /* Objects */,
 				7542BF10165E82D2008A51B7 /* AppDelegate.h */,
 				7542BF11165E82D2008A51B7 /* AppDelegate.m */,
 				7542BF19165E82D2008A51B7 /* MainStoryboard_iPhone.storyboard */,
 				7542BF1C165E82D2008A51B7 /* MainStoryboard_iPad.storyboard */,
-				7542BF1F165E82D2008A51B7 /* ViewController.h */,
-				7542BF20165E82D2008A51B7 /* ViewController.m */,
+				7542BF1F165E82D2008A51B7 /* MainViewController.h */,
+				7542BF20165E82D2008A51B7 /* MainViewController.m */,
+				75D52B121660351100EAC142 /* TaximetroManualViewController.h */,
+				75D52B131660351100EAC142 /* TaximetroManualViewController.m */,
 				7542BF2C165E8D92008A51B7 /* SubViews */,
 				7542BF08165E82D2008A51B7 /* Supporting Files */,
 			);
@@ -117,8 +135,6 @@
 				7542BF0A165E82D2008A51B7 /* InfoPlist.strings */,
 				7542BF0D165E82D2008A51B7 /* main.m */,
 				7542BF0F165E82D2008A51B7 /* BogoTaxi-Prefix.pch */,
-				7542BF13165E82D2008A51B7 /* Default.png */,
-				7542BF15165E82D2008A51B7 /* Default@2x.png */,
 				7542BF17165E82D2008A51B7 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
@@ -131,8 +147,23 @@
 				7542BF2E165E8DB7008A51B7 /* CustomSwitch.m */,
 				7542BF47165EAE47008A51B7 /* CustomLabel.h */,
 				7542BF48165EAE48008A51B7 /* CustomLabel.m */,
+				7542BF54165EEC0B008A51B7 /* BannerView.h */,
+				7542BF55165EEC0B008A51B7 /* BannerView.m */,
+				7542BF6F16600378008A51B7 /* CustomButton.h */,
+				7542BF7016600378008A51B7 /* CustomButton.m */,
+				75D6C68B1667F66600D90A0D /* MenuView.h */,
+				75D6C68C1667F66600D90A0D /* MenuView.m */,
 			);
 			name = SubViews;
+			sourceTree = "<group>";
+		};
+		75926D101665215A00B3CDD5 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				75926D121665217000B3CDD5 /* Taximetro.h */,
+				75926D131665217000B3CDD5 /* Taximetro.m */,
+			);
+			name = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,8 +218,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7542BF0C165E82D2008A51B7 /* InfoPlist.strings in Resources */,
-				7542BF14165E82D2008A51B7 /* Default.png in Resources */,
-				7542BF16165E82D2008A51B7 /* Default@2x.png in Resources */,
 				7542BF18165E82D2008A51B7 /* Default-568h@2x.png in Resources */,
 				7542BF46165EA8BA008A51B7 /* league_gothic.ttf in Resources */,
 				7542BF1B165E82D2008A51B7 /* MainStoryboard_iPhone.storyboard in Resources */,
@@ -205,9 +234,14 @@
 			files = (
 				7542BF0E165E82D2008A51B7 /* main.m in Sources */,
 				7542BF12165E82D2008A51B7 /* AppDelegate.m in Sources */,
-				7542BF21165E82D2008A51B7 /* ViewController.m in Sources */,
+				7542BF21165E82D2008A51B7 /* MainViewController.m in Sources */,
 				7542BF2F165E8DB7008A51B7 /* CustomSwitch.m in Sources */,
 				7542BF49165EAE48008A51B7 /* CustomLabel.m in Sources */,
+				7542BF56165EEC0C008A51B7 /* BannerView.m in Sources */,
+				7542BF7116600379008A51B7 /* CustomButton.m in Sources */,
+				75D52B141660351100EAC142 /* TaximetroManualViewController.m in Sources */,
+				75926D141665217000B3CDD5 /* Taximetro.m in Sources */,
+				75D6C68D1667F66600D90A0D /* MenuView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

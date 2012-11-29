@@ -13,6 +13,14 @@
     UIScrollView *scrollView;
     UIView *bolita;
     UIView *cuadrito;
+    UITapGestureRecognizer *scrollTap;
+    
+    SEL delegatedSelector;
+    id targetClass;
+    
 }
 @property(nonatomic,readonly)BOOL isOn;
+@property(nonatomic,retain)UILabel *onLabel;
+@property(nonatomic,retain)UILabel *offLabel;
+-(void)addTarget:(id)target action:(SEL)selector;
 @end

@@ -9,7 +9,6 @@
 #import "CustomLabel.h"
 
 @implementation CustomLabel
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -28,7 +27,19 @@
     self.textColor=color;
     self.font=overlayLabel.font=fuente;
 }
-
+-(void)setOverlayOff:(BOOL)state{
+    if (state) {
+        overlayLabel.alpha=0;
+    }
+    else{
+        overlayLabel.alpha=0.25;
+    }
+}
+-(void)setCentrado:(BOOL)state{
+    if (state) {
+        self.textAlignment=overlayLabel.textAlignment=UITextAlignmentCenter;
+    }
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
