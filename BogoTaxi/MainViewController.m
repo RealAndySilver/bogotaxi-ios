@@ -203,7 +203,7 @@
     [menu.taximetroGps addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
     [menu.calcular addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
     [menu.placa addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [menu.llamadas addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
     
     containerMenu=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 120, 100)];
     containerMenu.backgroundColor=kDarkRedColor;
@@ -620,6 +620,13 @@ int counter=0;
     else if ([button.titleLabel.text isEqualToString:@"Enviar Placa"]){
         [self irAPaginaDeScroll:2];
         [menu changeState];
+    }
+    else if ([button.titleLabel.text isEqualToString:@"Llamadas"]) {
+        LlamadasViewController *lVC=[[LlamadasViewController alloc]init];
+        lVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Llamadas"];
+        lVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:lVC animated:YES];
+        //[menu changeState];
     }
 }
 -(void)encenderTaximetro:(CustomSwitch*)customSwitch{
