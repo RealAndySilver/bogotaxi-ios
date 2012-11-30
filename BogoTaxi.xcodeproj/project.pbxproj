@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		331D618C1668132A00F02BD9 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 331D618B1668132A00F02BD9 /* CustomCell.m */; };
+		331D61901668154900F02BD9 /* LlamadasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 331D618F1668154900F02BD9 /* LlamadasViewController.m */; };
+		33459DAB1669073F001B7DBF /* InformacionLlamadaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33459DAA1669073E001B7DBF /* InformacionLlamadaView.m */; };
 		7542BF02165E82D2008A51B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7542BF01165E82D2008A51B7 /* UIKit.framework */; };
 		7542BF04165E82D2008A51B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7542BF03165E82D2008A51B7 /* Foundation.framework */; };
 		7542BF06165E82D2008A51B7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7542BF05165E82D2008A51B7 /* CoreGraphics.framework */; };
@@ -30,6 +33,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		331D618A1668132A00F02BD9 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
+		331D618B1668132A00F02BD9 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
+		331D618E1668154900F02BD9 /* LlamadasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LlamadasViewController.h; sourceTree = "<group>"; };
+		331D618F1668154900F02BD9 /* LlamadasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LlamadasViewController.m; sourceTree = "<group>"; };
+		33459DA91669073E001B7DBF /* InformacionLlamadaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformacionLlamadaView.h; sourceTree = "<group>"; };
+		33459DAA1669073E001B7DBF /* InformacionLlamadaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformacionLlamadaView.m; sourceTree = "<group>"; };
 		7542BEFD165E82D2008A51B7 /* BogoTaxi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BogoTaxi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7542BF01165E82D2008A51B7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7542BF03165E82D2008A51B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -121,6 +130,8 @@
 				7542BF20165E82D2008A51B7 /* MainViewController.m */,
 				75D52B121660351100EAC142 /* TaximetroManualViewController.h */,
 				75D52B131660351100EAC142 /* TaximetroManualViewController.m */,
+				331D618E1668154900F02BD9 /* LlamadasViewController.h */,
+				331D618F1668154900F02BD9 /* LlamadasViewController.m */,
 				7542BF2C165E8D92008A51B7 /* SubViews */,
 				7542BF08165E82D2008A51B7 /* Supporting Files */,
 			);
@@ -153,6 +164,10 @@
 				7542BF7016600378008A51B7 /* CustomButton.m */,
 				75D6C68B1667F66600D90A0D /* MenuView.h */,
 				75D6C68C1667F66600D90A0D /* MenuView.m */,
+				331D618A1668132A00F02BD9 /* CustomCell.h */,
+				331D618B1668132A00F02BD9 /* CustomCell.m */,
+				33459DA91669073E001B7DBF /* InformacionLlamadaView.h */,
+				33459DAA1669073E001B7DBF /* InformacionLlamadaView.m */,
 			);
 			name = SubViews;
 			sourceTree = "<group>";
@@ -242,6 +257,9 @@
 				75D52B141660351100EAC142 /* TaximetroManualViewController.m in Sources */,
 				75926D141665217000B3CDD5 /* Taximetro.m in Sources */,
 				75D6C68D1667F66600D90A0D /* MenuView.m in Sources */,
+				331D618C1668132A00F02BD9 /* CustomCell.m in Sources */,
+				331D61901668154900F02BD9 /* LlamadasViewController.m in Sources */,
+				33459DAB1669073F001B7DBF /* InformacionLlamadaView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
