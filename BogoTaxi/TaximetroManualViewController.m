@@ -195,7 +195,6 @@
 
 }
 -(void)sliderChange:(UISlider*)slider1{
-    NSLog(@"Slider value %.0f",slider1.value);
     float temp=[taximetro unidadesADinero:(int)slider1.value];
     [self agregarOquitarCargos:temp];
     labelUnidades.text=[NSString stringWithFormat:@"%.0f",slider1.value];

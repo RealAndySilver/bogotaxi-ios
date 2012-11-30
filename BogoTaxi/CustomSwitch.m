@@ -78,10 +78,12 @@
     if (roundedValue==1) {
         isOn = NO;
         [self animarColorUno];
+        //[self setUserInteractionEnabled:NO];
     }
     else{
         isOn = YES;
         [self animarColorDos];
+        //[self setUserInteractionEnabled:NO];
     }
 }
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView1 willDecelerate:(BOOL)decelerate{
@@ -89,6 +91,10 @@
     [self callSelector];
 }
 -(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView1{
+    [self setUserInteractionEnabled:YES];
+    [self callSelector];
+}
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self setUserInteractionEnabled:YES];
     [self callSelector];
 }

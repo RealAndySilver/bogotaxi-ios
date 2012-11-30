@@ -85,6 +85,11 @@
     CGFloat viewHeight;
     
     BOOL tecladoUp;
+    
+    //Timer
+    NSTimer *vTimer;
+    int lastMovementTime;
+    int seconds;
 
 }
 @end

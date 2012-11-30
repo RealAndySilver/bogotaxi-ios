@@ -153,6 +153,7 @@
     [containerInfoTaximetro addSubview:labelRecorrido];
     
     switchEncender=[[CustomSwitch alloc]initWithFrame:CGRectMake(75, 8, 0, 0)];
+    [switchEncender addTarget:self action:@selector(encenderTaximetro:)];
     [containerInfoTaximetro addSubview:switchEncender];
     
     labelMetros=[[CustomLabel alloc]initWithFrame:CGRectMake(78, 34, 80, 20)];
@@ -189,7 +190,7 @@
     labelUnidades=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, containerUnidades.frame.size.width-10, containerUnidades.frame.size.height-20)];
     labelUnidades.center=CGPointMake(containerUnidades.frame.size.width/2, (containerUnidades.frame.size.height/2)-8);
     labelUnidades.textAlignment=UITextAlignmentCenter;
-    [labelUnidades ponerTexto:@"25000" fuente:[UIFont fontWithName:kFontType size:40] color:kDarkRedColor];
+    [labelUnidades ponerTexto:@"25" fuente:[UIFont fontWithName:kFontType size:40] color:kDarkRedColor];
     [labelUnidades setOverlayOff:YES];
     [containerUnidades addSubview:labelUnidades];
 }
@@ -462,7 +463,6 @@
         [UIView setAnimationDelegate:self];
         [UIView setAnimationDuration:0.25];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        self.view.backgroundColor=backgroundColor;
         self.view.frame=viewFrame;
         [UIView commitAnimations];
     }
@@ -526,6 +526,38 @@ int counter=0;
         [UIView commitAnimations];
     }
 }
+#pragma mark - timer
+-(void)clockStart {
+    if (![vTimer isValid]) {
+        vTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(vTimerVoid) userInfo:nil repeats:YES];
+    }
+    lastMovementTime = seconds;
+}
+-(void)clockStop {
+    if ([vTimer isValid]) {
+        [vTimer invalidate];
+        vTimer = nil;
+    }
+    lastMovementTime = seconds;
+}
+-(void)vTimerVoid{
+    seconds +=1;
+    
+    NSString *Seconds;
+    NSString *Minutes;
+    if (seconds/60<10)
+        Minutes=[NSString stringWithFormat:@"0%i",seconds/60];
+    else
+        Minutes=[NSString stringWithFormat:@"%i",seconds/60];
+    
+    if (seconds%60<10)
+        Seconds=[NSString stringWithFormat:@"0%i",seconds%60];
+    else
+        Seconds=[NSString stringWithFormat:@"%i",seconds%60];
+    
+    tiempoInputLabel.text = [NSString stringWithFormat:@"%@:%@",Minutes,Seconds];
+    
+}
 #pragma mark - menu principal
 -(void)callMenu{
     
@@ -588,6 +620,17 @@ int counter=0;
     else if ([button.titleLabel.text isEqualToString:@"Enviar Placa"]){
         [self irAPaginaDeScroll:2];
         [menu changeState];
+    }
+}
+-(void)encenderTaximetro:(CustomSwitch*)customSwitch{
+    if (customSwitch.isOn) {
+        seconds=0;
+        [self irAPaginaDeScroll:2];
+        [self clockStart];
+    }
+    else{
+        [self irAPaginaDeScroll:0];
+        [self clockStop];
     }
 }
 @end
