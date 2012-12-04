@@ -8,11 +8,18 @@
 
 #import "LlamadasViewController.h"
 #define kFontType @"LeagueGothic"
+#define kYellowColor [UIColor colorWithRed:0.984375 green:0.828125 blue:0.390625 alpha:1]
+#define kLiteRedColor [UIColor colorWithHue:0 saturation:0.53 brightness:0.95 alpha:1]
+#define kDarkRedColor [UIColor colorWithHue:0 saturation:0.67 brightness:0.94 alpha:1]
+#define kNightColor [UIColor colorWithRed:0.2265625 green:0.28515625 blue:0.3515625 alpha:1]
+#define kGreenColor [UIColor colorWithRed:0.16015625 green:0.97265625 blue:0.65625 alpha:1]
+#define kTitleBlueColor [UIColor colorWithRed:0.1484375 green:0.4765625 blue:0.5390625 alpha:1]
+#define kBeigeColor [UIColor colorWithRed:1 green:0.984375 blue:0.87890625 alpha:1]
+#define kLiteBlueColor [UIColor colorWithRed:0.47265625 green:0.87109375 blue:0.984375 alpha:1]
 #define kBlueColor [UIColor colorWithRed:0.50390625 green:0.796875 blue:0.8515625 alpha:1]
-#define kYellowColor [UIColor colorWithRed:0.984375 green:0.828125 blue:0.390625 alpha:1]
-#define kYellowColor [UIColor colorWithRed:0.984375 green:0.828125 blue:0.390625 alpha:1]
 #define kDarkGrayColor [UIColor darkGrayColor]
 #define kGrayColor [UIColor grayColor]
+#define kWhiteColor [UIColor whiteColor]
 
 @interface LlamadasViewController ()
 
@@ -24,8 +31,9 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor=kBlueColor;
-    tableViewLlamadas=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.height)-50)];
-    tableViewLlamadas.backgroundColor=[UIColor clearColor];
+        
+    tableViewLlamadas=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.height)-40)];
+    tableViewLlamadas.backgroundColor=kBlueColor;
     tableViewLlamadas.separatorStyle=NO;
     tableViewLlamadas.delegate=self;
     tableViewLlamadas.dataSource=self;
@@ -40,9 +48,11 @@
     arrayDeNumeros=[arrayDeNumeros sortedArrayUsingSelector:@selector(compare:)];
     NSLog(@"Diccionario es %@",diccionarioDeLlamadas);
     
-    CustomButton *backButton=[[CustomButton alloc]initWithFrame:CGRectMake(10, self.view.frame.size.height-40, 50, 30)];
+   
+    
+    CustomButton *backButton=[[CustomButton alloc]initWithFrame:CGRectMake(5, self.view.frame.size.height-35, 50, 30)];
     backButton.backgroundColor=kYellowColor;
-    [backButton setTitleColor:kGrayColor forState:UIControlStateNormal];
+    [backButton setTitleColor:kDarkGrayColor forState:UIControlStateNormal];
     [backButton setTitle:@"Atrás" forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(dismissView) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
@@ -133,7 +143,7 @@
     }
     
     titleFooter.font=[UIFont fontWithName:kFontType size:16];
-    titleFooter.textColor=[UIColor whiteColor];
+    titleFooter.textColor=kWhiteColor;
     titleFooter.backgroundColor=[UIColor clearColor];
     [footerView addSubview:titleFooter];
     

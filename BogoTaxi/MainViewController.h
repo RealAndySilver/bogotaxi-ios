@@ -14,6 +14,7 @@
 #import "CustomButton.h"
 #import "TaximetroManualViewController.h"
 #import "LlamadasViewController.h"
+#import "OpcionesViewController.h"
 #import "MenuView.h"
 #import <CoreLocation/CoreLocation.h>
 

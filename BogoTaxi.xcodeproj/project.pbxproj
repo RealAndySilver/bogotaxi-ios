@@ -10,6 +10,7 @@
 		331D618C1668132A00F02BD9 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 331D618B1668132A00F02BD9 /* CustomCell.m */; };
 		331D61901668154900F02BD9 /* LlamadasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 331D618F1668154900F02BD9 /* LlamadasViewController.m */; };
 		33459DAB1669073F001B7DBF /* InformacionLlamadaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33459DAA1669073E001B7DBF /* InformacionLlamadaView.m */; };
+		334ED8A4166E6D7E001DD624 /* OpcionesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 334ED8A3166E6D7E001DD624 /* OpcionesViewController.m */; };
 		7542BF02165E82D2008A51B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7542BF01165E82D2008A51B7 /* UIKit.framework */; };
 		7542BF04165E82D2008A51B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7542BF03165E82D2008A51B7 /* Foundation.framework */; };
 		7542BF06165E82D2008A51B7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7542BF05165E82D2008A51B7 /* CoreGraphics.framework */; };
@@ -42,6 +43,8 @@
 		331D618F1668154900F02BD9 /* LlamadasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LlamadasViewController.m; sourceTree = "<group>"; };
 		33459DA91669073E001B7DBF /* InformacionLlamadaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformacionLlamadaView.h; sourceTree = "<group>"; };
 		33459DAA1669073E001B7DBF /* InformacionLlamadaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformacionLlamadaView.m; sourceTree = "<group>"; };
+		334ED8A2166E6D7E001DD624 /* OpcionesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpcionesViewController.h; sourceTree = "<group>"; };
+		334ED8A3166E6D7E001DD624 /* OpcionesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpcionesViewController.m; sourceTree = "<group>"; };
 		7542BEFD165E82D2008A51B7 /* BogoTaxi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BogoTaxi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7542BF01165E82D2008A51B7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7542BF03165E82D2008A51B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -141,6 +144,8 @@
 				75D52B131660351100EAC142 /* TaximetroManualViewController.m */,
 				331D618E1668154900F02BD9 /* LlamadasViewController.h */,
 				331D618F1668154900F02BD9 /* LlamadasViewController.m */,
+				334ED8A2166E6D7E001DD624 /* OpcionesViewController.h */,
+				334ED8A3166E6D7E001DD624 /* OpcionesViewController.m */,
 				7542BF2C165E8D92008A51B7 /* SubViews */,
 				7542BF08165E82D2008A51B7 /* Supporting Files */,
 			);
@@ -274,6 +279,7 @@
 				331D61901668154900F02BD9 /* LlamadasViewController.m in Sources */,
 				33459DAB1669073F001B7DBF /* InformacionLlamadaView.m in Sources */,
 				75E4F37F1669819E007BE4C5 /* LLamadasObject.m in Sources */,
+				334ED8A4166E6D7E001DD624 /* OpcionesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,11 +368,15 @@
 		7542BF25165E82D2008A51B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nicolle Jimenez Vasquez (5MQFB67YC8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nicolle Jimenez Vasquez (5MQFB67YC8)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BogoTaxi/BogoTaxi-Prefix.pch";
 				INFOPLIST_FILE = "BogoTaxi/BogoTaxi-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -374,11 +384,15 @@
 		7542BF26165E82D2008A51B7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nicolle Jimenez Vasquez (5MQFB67YC8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nicolle Jimenez Vasquez (5MQFB67YC8)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BogoTaxi/BogoTaxi-Prefix.pch";
 				INFOPLIST_FILE = "BogoTaxi/BogoTaxi-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

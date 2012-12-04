@@ -84,7 +84,7 @@
 
 #pragma mark - interfaz superior
 -(void)crearInterfazSuperior{
-    mapView=[[MKMapView alloc]initWithFrame:CGRectMake(0, -100, self.view.frame.size.width, 100)];
+    mapView=[[MKMapView alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height-126)*-1, self.view.frame.size.width, self.view.frame.size.height-126)];
     [self.view addSubview:mapView];
     containerSuperior=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 126)];
     containerSuperior.backgroundColor=[UIColor grayColor];
@@ -211,6 +211,7 @@
     [menu.calcular addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
     [menu.placa addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
     [menu.llamadas addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
+    [menu.opciones addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
     
     containerMenu=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 120, 100)];
     containerMenu.backgroundColor=kDarkRedColor;
@@ -484,7 +485,7 @@ int counter=0;
         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
         [UIView setAnimationDidStopSelector:@selector(bringMenuToFront)];
         containerSuperior.frame=CGRectMake(0, 0, self.view.frame.size.width, 126);
-        mapView.frame=CGRectMake(0,0, self.view.frame.size.width, 1);
+        mapView.frame=CGRectMake(0,(self.view.frame.size.height-126)*-1, self.view.frame.size.width, self.view.frame.size.height-126);
         [UIView commitAnimations];
         animationFinished=NO;
         [botonBarraSuperior setTitle:@"Mapa" forState:UIControlStateNormal];
@@ -510,16 +511,16 @@ int counter=0;
             mapView.frame=CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height-126);
         }
         else if (counter==1){
-            containerSuperior.frame=CGRectMake(0,self.view.frame.size.height-170, self.view.frame.size.width, 126);
-            mapView.frame=CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height-170);
+            containerSuperior.frame=CGRectMake(0,self.view.frame.size.height-176, self.view.frame.size.width, 126);
+            mapView.frame=CGRectMake(0,-50, self.view.frame.size.width, self.view.frame.size.height-126);
         }
         else if (counter==2){
             containerSuperior.frame=CGRectMake(0,self.view.frame.size.height-126, self.view.frame.size.width, 126);
             mapView.frame=CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height-126);
         }
         else if (counter==3){
-            containerSuperior.frame=CGRectMake(0,self.view.frame.size.height-130, self.view.frame.size.width, 126);
-            mapView.frame=CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height-130);
+            containerSuperior.frame=CGRectMake(0,self.view.frame.size.height-136, self.view.frame.size.width, 126);
+            mapView.frame=CGRectMake(0,-10, self.view.frame.size.width, self.view.frame.size.height-126);
         }
         else if (counter==4){
             containerSuperior.frame=CGRectMake(0,self.view.frame.size.height-126, self.view.frame.size.width, 126);
@@ -633,6 +634,13 @@ int counter=0;
         lVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Llamadas"];
         lVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:lVC animated:YES];
+        //[menu changeState];
+    }
+    else if ([button.titleLabel.text isEqualToString:@"Opciones"]) {
+        OpcionesViewController *oVC=[[OpcionesViewController alloc]init];
+        oVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Opciones"];
+        oVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:oVC animated:YES];
         //[menu changeState];
     }
 }
