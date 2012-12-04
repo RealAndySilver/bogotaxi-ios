@@ -28,8 +28,11 @@
 		7542BF56165EEC0C008A51B7 /* BannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BF55165EEC0B008A51B7 /* BannerView.m */; };
 		7542BF7116600379008A51B7 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BF7016600378008A51B7 /* CustomButton.m */; };
 		75926D141665217000B3CDD5 /* Taximetro.m in Sources */ = {isa = PBXBuildFile; fileRef = 75926D131665217000B3CDD5 /* Taximetro.m */; };
+		75A959FE166D4A0F0012CFA5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75A959FD166D4A0F0012CFA5 /* CoreLocation.framework */; };
 		75D52B141660351100EAC142 /* TaximetroManualViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D52B131660351100EAC142 /* TaximetroManualViewController.m */; };
 		75D6C68D1667F66600D90A0D /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D6C68C1667F66600D90A0D /* MenuView.m */; };
+		75E4F37B16697D7C007BE4C5 /* TelefonosTaxis.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75E4F37A16697D7C007BE4C5 /* TelefonosTaxis.plist */; };
+		75E4F37F1669819E007BE4C5 /* LLamadasObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E4F37E1669819E007BE4C5 /* LLamadasObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,10 +70,14 @@
 		7542BF7016600378008A51B7 /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
 		75926D121665217000B3CDD5 /* Taximetro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Taximetro.h; sourceTree = "<group>"; };
 		75926D131665217000B3CDD5 /* Taximetro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Taximetro.m; sourceTree = "<group>"; };
+		75A959FD166D4A0F0012CFA5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		75D52B121660351100EAC142 /* TaximetroManualViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaximetroManualViewController.h; sourceTree = "<group>"; };
 		75D52B131660351100EAC142 /* TaximetroManualViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaximetroManualViewController.m; sourceTree = "<group>"; };
 		75D6C68B1667F66600D90A0D /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
 		75D6C68C1667F66600D90A0D /* MenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuView.m; sourceTree = "<group>"; };
+		75E4F37A16697D7C007BE4C5 /* TelefonosTaxis.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TelefonosTaxis.plist; sourceTree = "<group>"; };
+		75E4F37D1669819E007BE4C5 /* LLamadasObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLamadasObject.h; sourceTree = "<group>"; };
+		75E4F37E1669819E007BE4C5 /* LLamadasObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLamadasObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75A959FE166D4A0F0012CFA5 /* CoreLocation.framework in Frameworks */,
 				7542BF4F165EDC7B008A51B7 /* MapKit.framework in Frameworks */,
 				7542BF31165E917E008A51B7 /* QuartzCore.framework in Frameworks */,
 				7542BF02165E82D2008A51B7 /* UIKit.framework in Frameworks */,
@@ -92,8 +100,6 @@
 		7542BEF2165E82D2008A51B7 = {
 			isa = PBXGroup;
 			children = (
-				7542BF4E165EDC7B008A51B7 /* MapKit.framework */,
-				7542BF30165E917E008A51B7 /* QuartzCore.framework */,
 				7542BF07165E82D2008A51B7 /* BogoTaxi */,
 				7542BF00165E82D2008A51B7 /* Frameworks */,
 				7542BEFE165E82D2008A51B7 /* Products */,
@@ -111,6 +117,9 @@
 		7542BF00165E82D2008A51B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				75A959FD166D4A0F0012CFA5 /* CoreLocation.framework */,
+				7542BF4E165EDC7B008A51B7 /* MapKit.framework */,
+				7542BF30165E917E008A51B7 /* QuartzCore.framework */,
 				7542BF01165E82D2008A51B7 /* UIKit.framework */,
 				7542BF03165E82D2008A51B7 /* Foundation.framework */,
 				7542BF05165E82D2008A51B7 /* CoreGraphics.framework */,
@@ -141,6 +150,7 @@
 		7542BF08165E82D2008A51B7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				75E4F37A16697D7C007BE4C5 /* TelefonosTaxis.plist */,
 				7542BF45165EA75F008A51B7 /* league_gothic.ttf */,
 				7542BF09165E82D2008A51B7 /* BogoTaxi-Info.plist */,
 				7542BF0A165E82D2008A51B7 /* InfoPlist.strings */,
@@ -177,6 +187,8 @@
 			children = (
 				75926D121665217000B3CDD5 /* Taximetro.h */,
 				75926D131665217000B3CDD5 /* Taximetro.m */,
+				75E4F37D1669819E007BE4C5 /* LLamadasObject.h */,
+				75E4F37E1669819E007BE4C5 /* LLamadasObject.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -237,6 +249,7 @@
 				7542BF46165EA8BA008A51B7 /* league_gothic.ttf in Resources */,
 				7542BF1B165E82D2008A51B7 /* MainStoryboard_iPhone.storyboard in Resources */,
 				7542BF1E165E82D2008A51B7 /* MainStoryboard_iPad.storyboard in Resources */,
+				75E4F37B16697D7C007BE4C5 /* TelefonosTaxis.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +273,7 @@
 				331D618C1668132A00F02BD9 /* CustomCell.m in Sources */,
 				331D61901668154900F02BD9 /* LlamadasViewController.m in Sources */,
 				33459DAB1669073F001B7DBF /* InformacionLlamadaView.m in Sources */,
+				75E4F37F1669819E007BE4C5 /* LLamadasObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

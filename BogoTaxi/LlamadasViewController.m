@@ -20,15 +20,6 @@
 
 @implementation LlamadasViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -40,15 +31,14 @@
     tableViewLlamadas.dataSource=self;
     [self.view addSubview:tableViewLlamadas];
     
-    arrayTableView=[[NSMutableArray alloc]init];
-    [arrayTableView addObject:@"Aero Taxi"];
-    [arrayTableView addObject:@"Alo Taxis"];
-    [arrayTableView addObject:@"Astaxdorado"];
-    [arrayTableView addObject:@"Auto Taxi Ejecutivo"];
-    [arrayTableView addObject:@"Aero Taxi"];
-    [arrayTableView addObject:@"Alo Taxis"];
-    [arrayTableView addObject:@"Astaxdorado"];
-    [arrayTableView addObject:@"Auto Taxi Ejecutivo"];
+    
+    
+    
+    
+    diccionarioDeLlamadas=[LLamadasObject traerDiccionarioConNumerosDeTaxis];
+    arrayDeNumeros=[[NSMutableArray alloc]initWithArray:[diccionarioDeLlamadas allKeys]];
+    arrayDeNumeros=[arrayDeNumeros sortedArrayUsingSelector:@selector(compare:)];
+    NSLog(@"Diccionario es %@",diccionarioDeLlamadas);
     
     CustomButton *backButton=[[CustomButton alloc]initWithFrame:CGRectMake(10, self.view.frame.size.height-40, 50, 30)];
     backButton.backgroundColor=kYellowColor;
@@ -56,6 +46,14 @@
     [backButton setTitle:@"Atrás" forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(dismissView) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
+    
+    informacion=[[InformacionLlamadaView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [informacion construirInformaconConDeviceKind:deviceKind];
+    informacion.tableView.delegate=self;
+    informacion.tableView.dataSource=self;
+    informacion.tableView.tag=100;
+    informacion.tableView.separatorStyle=NO;
+    [self.view addSubview:informacion];
 }
 -(void)dismissView{
     [self dismissModalViewControllerAnimated:YES];
@@ -71,7 +69,13 @@
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return arrayTableView.count;
+    if (tableView.tag==100) {
+        int count=[temporal allKeys].count;
+        tableView.frame=CGRectMake(0, 0, informacion.frame.size.width, (55*count)+40);
+        tableView.center=CGPointMake(informacion.frame.size.width/2, informacion.frame.size.height/2);
+        return count;
+    }
+    return arrayDeNumeros.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -86,9 +90,19 @@
     if (cell == nil) {
         cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+    //cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     //NSArray *arr=[[NSArray alloc]initWithArray:arrayTableView];
-    cell.labelEmpresaTaxi.text=[arrayTableView objectAtIndex:indexPath.row];
+    if (tableView.tag==100) {
+        NSArray *temp=[temporal allKeys];
+        temp=[temp sortedArrayUsingSelector:@selector(compare:)];
+        cell.labelEmpresaTaxi.text=[temp objectAtIndex:indexPath.row];
+    }
+    
+    else{
+        NSArray *sortedArray=[arrayDeNumeros sortedArrayUsingSelector:@selector(compare:) ];
+        cell.labelEmpresaTaxi.text=[sortedArray objectAtIndex:indexPath.row];
+        
+    }
     return cell;
 }
 
@@ -98,20 +112,57 @@
     [headerView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7]];
     UILabel *titleHeader=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, 300, 20)];
     titleHeader.text=[NSString stringWithFormat:@"Empresas de taxi de Bogotá"];
+    if (tableView.tag==100) {
+        titleHeader.text=[NSString stringWithFormat:@"Números %@",nombreEmpresa];
+    }
+    
     titleHeader.font=[UIFont fontWithName:kFontType size:16];
     titleHeader.textColor=[UIColor whiteColor];
     titleHeader.backgroundColor=[UIColor clearColor];
     [headerView addSubview:titleHeader];
+    
     return headerView;
 }
-
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
+    [footerView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7]];
+    UILabel *titleFooter=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, 300, 20)];
+    titleFooter.text=[NSString stringWithFormat:@"Listado con todos los números de taxi de la ciudad"];
+    if (tableView.tag==100) {
+        titleFooter.text=[NSString stringWithFormat:@"Números %@",nombreEmpresa];
+    }
+    
+    titleFooter.font=[UIFont fontWithName:kFontType size:16];
+    titleFooter.textColor=[UIColor whiteColor];
+    titleFooter.backgroundColor=[UIColor clearColor];
+    [footerView addSubview:titleFooter];
+    
+    return footerView;
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self callInformacion];
+    if (tableView.tag==100) {
+        NSArray *temp=[temporal allKeys];
+        temp=[temp sortedArrayUsingSelector:@selector(compare:)];
+        NSString *number=[temporal objectForKey:[temp objectAtIndex:indexPath.row]];
+        NSString *phoneNumber = [@"tel://" stringByAppendingString:[NSString stringWithFormat:@"%@",number]];
+        UIWebView *webview=[[UIWebView alloc]init];
+        NSURL *theURL=[NSURL URLWithString:phoneNumber];
+        [webview loadRequest:[NSURLRequest requestWithURL:theURL]];
+        [self.view addSubview:webview];
+
+    }
+    else{
+        temporal=nil;
+        nombreEmpresa=[arrayDeNumeros objectAtIndex:indexPath.row];
+        temporal=[LLamadasObject traerDiccionarioConNombre:nombreEmpresa];
+        NSLog(@"Cell touched %@ at index %i",nombreEmpresa,indexPath.row);
+        [informacion.tableView reloadData];
+        [self callInformacion];
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 -(void)callInformacion{
-    InformacionLlamadaView *informacion=[[InformacionLlamadaView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [informacion construirInformaconConDeviceKind:deviceKind];
-    [self.view addSubview:informacion];
+    
     [informacion changeState];
 }
 

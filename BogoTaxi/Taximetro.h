@@ -20,4 +20,5 @@
 
 -(float)unidadesADinero:(int)unidades;
 -(id)initWithCiudad:(NSString*)ciudad;
++(float)medidorDeMetrosRecorridos:(NSMutableArray*)puntos;
 @end

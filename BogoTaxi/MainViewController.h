@@ -15,8 +15,9 @@
 #import "TaximetroManualViewController.h"
 #import "LlamadasViewController.h"
 #import "MenuView.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface MainViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate>{
+@interface MainViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate>{
     UIScrollView *mainScrollView;
     MenuView *menu;
     //Hud taximetro
@@ -91,6 +92,17 @@
     NSTimer *vTimer;
     int lastMovementTime;
     int seconds;
+    
+    //Location
+    CLLocationManager *locManager;
+    CLLocationCoordinate2D zoomLocation;
+    CLLocationCoordinate2D zoomLocation2;
+    CLLocationCoordinate2D zoomLocationPast;
+    BOOL banderaLocation;
+    NSMutableArray *arregloDePuntos;
+    NSMutableArray *coordenadasParaDibujar;
+
+
 
 }
 @end

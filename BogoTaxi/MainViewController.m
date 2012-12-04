@@ -25,6 +25,9 @@
 #define kGrayColor [UIColor grayColor]
 #define kWhiteColor [UIColor whiteColor]
 
+#define METERS_PER_MILE 1609.344
+
+
 #pragma mark - interface
 @interface MainViewController ()
 
@@ -40,7 +43,6 @@
     viewWidth=self.view.frame.size.width;
     viewHeight=self.view.frame.size.height;
     tecladoUp=NO;
-    
     if (self.view.frame.size.height<480) {
         deviceKind=1;
     }
@@ -69,6 +71,11 @@
     backgroundColor=self.view.backgroundColor;
     [paginaUnoContainer bringSubviewToFront:containerConfig];
     [self crearMenu];
+    locManager=[[CLLocationManager alloc]init];
+    locManager.delegate=self;
+    mapView.showsUserLocation=YES;
+    mapView.delegate=self;
+
 }
 
 -(void)didReceiveMemoryWarning{
@@ -77,7 +84,7 @@
 
 #pragma mark - interfaz superior
 -(void)crearInterfazSuperior{
-    mapView=[[MKMapView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0)];
+    mapView=[[MKMapView alloc]initWithFrame:CGRectMake(0, -100, self.view.frame.size.width, 100)];
     [self.view addSubview:mapView];
     containerSuperior=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 126)];
     containerSuperior.backgroundColor=[UIColor grayColor];
@@ -142,7 +149,7 @@
     infoTaximetroOverlay.alpha=0.08;
     [containerInfoTaximetro addSubview:infoTaximetroOverlay];
     
-    labelEncender=[[CustomLabel alloc]initWithFrame:CGRectMake(5, 8, 80, 20)];
+    labelEncender=[[CustomLabel alloc]initWithFrame:CGRectMake(5, 8, 80, 23)];
     [labelEncender ponerTexto:@"Encender" fuente:[UIFont fontWithName:kFontType size:22] color:kYellowColor];
     [labelEncender setOverlayOff:YES];
     [containerInfoTaximetro addSubview:labelEncender];
@@ -632,12 +639,87 @@ int counter=0;
 -(void)encenderTaximetro:(CustomSwitch*)customSwitch{
     if (customSwitch.isOn) {
         seconds=0;
+        tiempoInputLabel.text=@"00:00";
+        labelEncender.text=@"Apagar";
+
+        [arregloDePuntos removeAllObjects];
+        arregloDePuntos=nil;
+        arregloDePuntos=[[NSMutableArray alloc]init];
+        
+        [locManager startUpdatingLocation];
+        
         [self irAPaginaDeScroll:2];
         [self clockStart];
     }
     else{
+        labelEncender.text=@"Encender";
+        [locManager stopUpdatingLocation];
         [self irAPaginaDeScroll:0];
         [self clockStop];
     }
+}
+#pragma mark location
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)location fromLocation:(CLLocation *)oldLocation{
+    if (switchEncender.isOn) {
+        zoomLocation.latitude = location.coordinate.latitude;
+        zoomLocation.longitude = location.coordinate.longitude;
+        if (banderaLocation) {
+            zoomLocation.latitude=zoomLocationPast.latitude;
+            zoomLocation.longitude=zoomLocationPast.longitude;
+        }
+        zoomLocation2.latitude = location.coordinate.latitude;
+        zoomLocation2.longitude = location.coordinate.longitude;
+        
+        MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation,
+                                                                           0.5*METERS_PER_MILE,
+                                                                           0.5*METERS_PER_MILE);
+        MKCoordinateRegion adjustedRegion = [mapView regionThatFits:viewRegion];
+        [mapView setRegion:adjustedRegion animated:YES];
+        CLLocation *pointALocation = [[CLLocation alloc] initWithLatitude:zoomLocation2.latitude longitude:zoomLocation2.longitude];
+        CLLocation *pointBLocation = [[CLLocation alloc] initWithLatitude:zoomLocation.latitude longitude:zoomLocation.longitude];
+        //double distanciaMetros = [pointALocation getDistanceFrom:pointBLocation];
+        double distanciaMetros = [pointALocation distanceFromLocation:pointBLocation];
+
+        double distanciaKm=distanciaMetros/1000;
+        
+        zoomLocationPast.latitude=zoomLocation2.latitude;
+        zoomLocationPast.longitude=zoomLocation2.longitude;
+        zoomLocation.latitude=zoomLocationPast.latitude;
+        zoomLocation.longitude=zoomLocationPast.longitude;
+        
+        if (distanciaKm>0.001) {
+            [arregloDePuntos addObject:[NSNumber numberWithDouble:distanciaMetros]];
+            [coordenadasParaDibujar addObject:pointALocation];
+            [coordenadasParaDibujar addObject:pointBLocation];
+        }
+        
+        banderaLocation = YES;
+        [self contarMetros];
+    }
+    else{
+    }
+    //[NSThread detachNewThreadSelector: @selector(updateRouteView) toTarget:self withObject:NULL];
+    
+
+}
+-(NSString *)contarMetros{
+    float metros=0;
+    int unidades=0;
+    float adicional=0;
+    metros=[Taximetro medidorDeMetrosRecorridos:arregloDePuntos];
+    labelMetros.text= [NSString stringWithFormat:@"%.1f m",metros];
+    
+    return @"";
+}
+#pragma mark map delegate
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+    if (!switchEncender.isOn) {
+
+    }
+	else{
+        
+    }
+
 }
 @end

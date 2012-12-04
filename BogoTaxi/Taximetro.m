@@ -37,4 +37,13 @@
         costoPuerta=600;
     }
 }
++(float)medidorDeMetrosRecorridos:(NSMutableArray*)puntos{
+    float suma=0;
+    float value=0;
+    for (int i = 0; i < [puntos count]; i++) {
+        value = [[puntos objectAtIndex: i] floatValue];
+		suma = suma + value;
+	}
+    return suma;
+}
 @end

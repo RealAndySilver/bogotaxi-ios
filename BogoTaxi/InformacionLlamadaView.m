@@ -9,15 +9,13 @@
 #import "InformacionLlamadaView.h"
 
 @implementation InformacionLlamadaView
-
+@synthesize tableView;
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.alpha=0;
         myFrame=frame;
-        UITapGestureRecognizer *tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changeState)];
-        [self addGestureRecognizer:tapRecognizer];
     }
     return self;
 }
@@ -25,7 +23,13 @@
     UIView *background=[[UIView alloc]initWithFrame:myFrame];
     background.backgroundColor=[UIColor blackColor];
     background.alpha=0.9;
+    UITapGestureRecognizer *tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changeState)];
+    [background addGestureRecognizer:tapRecognizer];
     [self addSubview:background];
+    tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width-10, self.frame.size.height-200)];
+    tableView.center=CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    tableView.backgroundColor=[UIColor clearColor];
+    [self addSubview:tableView];
 }
 -(void)changeState{
     if (self.alpha<1) {
@@ -45,14 +49,5 @@
         [UIView commitAnimations];
     }
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

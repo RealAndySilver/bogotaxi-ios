@@ -19,6 +19,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         backgroundCell=[[UIView alloc]initWithFrame:CGRectMake(5, 5, (self.frame.size.width)-10, 45)];
         backgroundCell.backgroundColor=kTitleBlueColor;
         backgroundCell.layer.cornerRadius=3;
@@ -35,10 +36,10 @@
         labelEmpresaTaxi.backgroundColor=[UIColor clearColor];
         [backgroundCell addSubview:labelEmpresaTaxi];
         
-        /*accessoryCell=[[UIView alloc]initWithFrame:CGRectMake((self.frame.size.width)-30, 22, 15, 15)];
+        accessoryCell=[[UIView alloc]initWithFrame:CGRectMake((self.frame.size.width)-30, 22, 15, 15)];
         accessoryCell.backgroundColor=kYellowColor;
         accessoryCell.layer.cornerRadius=accessoryCell.frame.size.width/2;
-        [self addSubview:accessoryCell];*/
+        [self addSubview:accessoryCell];
         
     }
     return self;

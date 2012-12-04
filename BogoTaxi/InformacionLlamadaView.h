@@ -10,7 +10,9 @@
 
 @interface InformacionLlamadaView : UIView{
     CGRect myFrame;
+    
 }
+@property(nonatomic,retain)UITableView *tableView;
 -(void)changeState;
 -(void)construirInformaconConDeviceKind:(int)deviceKind;
 

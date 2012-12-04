@@ -10,11 +10,16 @@
 #import "CustomCell.h"
 #import "CustomButton.h"
 #import "InformacionLlamadaView.h"
+#import "LLamadasObject.h"
 
 @interface LlamadasViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>{
-    NSMutableArray *arrayTableView;
     UITableView *tableViewLlamadas;
-    /*InformacionLlamadaView *informacion;*/
+    NSDictionary *diccionarioDeLlamadas;
+    NSArray *arrayDeNumeros;
+    
+    NSDictionary *temporal;
+    InformacionLlamadaView *informacion;
+    NSString *nombreEmpresa;
     int deviceKind;//1=iphone4, 2=iphone5, 3=ipad.
 }
 

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Taxexpress</key>
+	<dict>
+		<key>Llamar</key>
+		<string>0314111111</string>
+		<key>Quejas</key>
+		<string>0314129333</string>
+	</dict>
+	<key>Taxis Libres</key>
+	<dict>
+		<key>Llamar 1</key>
+		<string>0313111111</string>
+		<key>Llamar 2</key>
+		<string>0312111111 </string>
+		<key>Quejas</key>
+		<string>0314129333</string>
+	</dict>
+	<key>Radiotaxi</key>
+	<dict>
+		<key>Llamar</key>
+		<string>0312888888</string>
+		<key>Quejas</key>
+		<string>0312888888</string>
+	</dict>
+	<key>Radio Taxi Aeropuerto</key>
+	<dict>
+		<key>Llamar</key>
+		<string>0313111111</string>
+		<key>Quejas</key>
+		<string>0314202600</string>
+	</dict>
+	<key>Radio Taxi Bogotá	</key>
+	<dict>
+		<key>Llamar</key>
+		<string>0312244444</string>
+		<key>Quejas</key>
+		<string>0312247325</string>
+	</dict>
+	<key>Radio Taxi Internacional</key>
+	<dict>
+		<key>Llamar</key>
+		<string>0312042878</string>
+		<key>Quejas</key>
+		<string>0312042878</string>
+	</dict>
+	<key>Taxis Verdes</key>
+	<dict>
+		<key>Llamar</key>
+		<string>0313555555</string>
+		<key>Quejas</key>
+		<string>0313555555</string>
+	</dict>
+	<key>Taxi Perla</key>
+	<dict>
+		<key>Llamar</key>
+		<string>0315333333</string>
+		<key>Quejas</key>
+		<string>0312010411</string>
+	</dict>
+	<key>Autolagos</key>
+	<dict>
+		<key>Llamar</key>
+		<string>0312100000</string>
+		<key>Quejas</key>
+		<string>0312116527</string>
+	</dict>
+	<key>Tele Taxi</key>
+	<dict>
+		<key>Llamar 1</key>
+		<string>0316111111</string>
+		<key>Llamar 2</key>
+		<string>0312333333</string>
+		<key>Quejas</key>
+		<string>0312503670</string>
+	</dict>
+	<key>Auto Taxi Ejecutivo</key>
+	<dict>
+		<key>Llamar 1</key>
+		<string>0313666666</string>
+		<key>Llamar 2</key>
+		<string>0314001111</string>
+		<key>Quejas</key>
+		<string>0314342000</string>
+	</dict>
+	<key>City Taxi</key>
+	<dict>
+		<key>Quejas</key>
+		<string>0312252510</string>
+	</dict>
+	<key>Astaxdorado</key>
+	<dict>
+		<key>Llamar</key>
+		<string>0312444444</string>
+		<key>Quejas</key>
+		<string>0312444444</string>
+	</dict>
+	<key>Taxi Estrella</key>
+	<dict>
+		<key>Llamar</key>
+		<string>0312886677</string>
+		<key>Quejas</key>
+		<string>0312882800</string>
+	</dict>
+	<key>Taxi Roxy</key>
+	<dict>
+		<key>Quejas</key>
+		<string>0312211010</string>
+	</dict>
+	<key>Car Taxis</key>
+	<dict>
+		<key>Llamar</key>
+		<string>0316666666</string>
+		<key>Quejas</key>
+		<string>0316666666</string>
+	</dict>
+	<key>Taxi Movi QAP</key>
+	<dict>
+		<key>Llamar</key>
+		<string>0314444444</string>
+		<key>Quejas</key>
+		<string>0314444444</string>
+	</dict>
+	<key>Super Taxi</key>
+	<dict>
+		<key>Quejas</key>
+		<string>0314202600</string>
+	</dict>
+	<key>Computaxi</key>
+	<dict>
+		<key>Llamar</key>
+		<string>0316666666</string>
+		<key>Quejas</key>
+		<string>0313111112</string>
+	</dict>
+	<key>Radio Taxi Confort</key>
+	<dict>
+		<key>Quejas</key>
+		<string>0314351313</string>
+	</dict>
+	<key>Taxis Ya</key>
+	<dict>
+		<key>Llamar</key>
+		<string>0312000000</string>
+		<key>Quejas</key>
+		<string>0314121153</string>
+	</dict>
+	<key>Taxis ATH</key>
+	<dict>
+		<key>Quejas</key>
+		<string>0312625924</string>
+	</dict>
+	<key>Teleclub</key>
+	<dict>
+		<key>Llamar</key>
+		<string>0315200040</string>
+		<key>Quejas</key>
+		<string>0315222222</string>
+	</dict>
+	<key>Taxis Cab</key>
+	<dict>
+		<key>Quejas</key>
+		<string>0312440020</string>
+	</dict>
+	<key>Taxivision</key>
+	<dict>
+		<key>Quejas</key>
+		<string>0312333795</string>
+	</dict>
+	<key>Celutaxi Aeropuerto (celutax)</key>
+	<dict>
+		<key>Llamar 1</key>
+		<string>0316033333</string>
+		<key>Llamar 2</key>
+		<string>0312262222 </string>
+		<key>Celular 1</key>
+		<string>3102222222</string>
+		<key>Celular 2</key>
+		<string>3104444444</string>
+		<key>Quejas</key>
+		<string>0312262222</string>
+	</dict>
+	<key>Alo Taxis</key>
+	<dict>
+		<key>Quejas</key>
+		<string>0316143030</string>
+	</dict>
+	<key>STU SA</key>
+	<dict>
+		<key>Quejas</key>
+		<string>0314211938</string>
+	</dict>
+	<key>Air Taxis</key>
+	<dict>
+		<key>Quejas</key>
+		<string>0314099999</string>
+	</dict>
+	<key>Real Transportadora</key>
+	<dict>
+		<key>Quejas</key>
+		<string>0313333333</string>
+	</dict>
+	<key>Coop Teletaxi</key>
+	<dict>
+		<key>Quejas</key>
+		<string>0312506666</string>
+	</dict>
+	<key>Taxi Mio</key>
+	<dict>
+		<key>Llamar 1</key>
+		<string>0315999999</string>
+		<key>Llamar 2</key>
+		<string>0316333333</string>
+		<key>Quejas</key>
+		<string>0312476619</string>
+	</dict>
+	<key>Taxatelite</key>
+	<dict>
+		<key>Llamar</key>
+		<string>0314442222</string>
+		<key>Quejas</key>
+		<string>0314442222</string>
+	</dict>
+	<key>Telecoper</key>
+	<dict>
+		<key>Llamar</key>
+		<string>0312222111</string>
+		<key>Quejas</key>
+		<string>0315603000</string>
+	</dict>
+	<key>Nueva empresa de taxis</key>
+	<dict>
+		<key>Llamar</key>
+		<string>0315269999</string>
+		<key>Quejas</key>
+		<string>0315269999</string>
+	</dict>
+</dict>
+</plist>
