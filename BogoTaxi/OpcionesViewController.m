@@ -56,6 +56,9 @@
     [backButton addTarget:self action:@selector(dismissView) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
     [self crearContainerConfiguracion];
+    [self crearViewOpcionesTaximetro];
+    [self crearViewOpcionesCompartir];
+    [self crearViewOpcionesContacto];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -66,13 +69,13 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 -(void)crearContainerConfiguracion{
-    BannerView *bannerView=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-20, 0)];
+    BannerView *bannerView=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-10, 0)];
     
     [bannerView ponerTexto:@"OPCIONES"];
     bannerView.configBannerLabel.textColor=kYellowColor;
-    [bannerView.configBannerLabel setOverlayOff:YES];
+    //[bannerView.configBannerLabel setOverlayOff:YES];
     [bannerView setBannerColor:kWhiteColor];
-    bannerView.center=CGPointMake(self.view.frame.size.width/2, 50);
+    bannerView.center=CGPointMake(self.view.frame.size.width/2, 55);
     if (deviceKind==2) {
         bannerView.center=CGPointMake(self.view.frame.size.width/2, 60);
     }
@@ -88,8 +91,9 @@
     [configTituloLabel setCentrado:YES];
     [self.view addSubview:configTituloLabel];
     
-    containerView=[[UIView alloc]initWithFrame:CGRectMake(10, bannerView.frame.size.height+50, (self.view.frame.size.width)-20, (self.view.frame.size.height)-(bannerView.frame.size.height)-100)];
-    containerView.backgroundColor=kGrayColor;
+    containerView=[[UIView alloc]initWithFrame:CGRectMake(5, bannerView.frame.size.height+50, (self.view.frame.size.width)-10, (self.view.frame.size.height)-(bannerView.frame.size.height)-100)];
+    containerView.backgroundColor=kDarkGrayColor;
+    containerView.layer.cornerRadius=3;
     if (deviceKind==2) {
         containerView.frame=CGRectMake(10, bannerView.frame.size.height+70, (self.view.frame.size.width)-20, (self.view.frame.size.height)-(bannerView.frame.size.height)-120);
     }
@@ -103,29 +107,91 @@
         opcionesTaxi.frame=CGRectMake(0, 0, (containerView.frame.size.width)-20, (containerView.frame.size.height/2)-80);
         opcionesTaxi.center=CGPointMake((containerView.frame.size.width/2), ((containerView.frame.size.height/3)/2)+5);
     }
+    [opcionesTaxi addTarget:self action:@selector(callOpcionesTaxi) forControlEvents:UIControlEventTouchUpInside];
     [containerView addSubview:opcionesTaxi];
     
     compartirGPS=[[CustomButton alloc]initWithFrame:CGRectMake(0, 0, (containerView.frame.size.width)-20, (containerView.frame.size.height/2)-60)];
-    [compartirGPS setTitle:@"Opciones Copartir GPS y seguridad" forState:UIControlStateNormal];
+    [compartirGPS setTitle:@"Opciones Compartir GPS y seguridad" forState:UIControlStateNormal];
     compartirGPS.titleLabel.font=[UIFont fontWithName:kFontType size:24];
     compartirGPS.center=CGPointMake((containerView.frame.size.width/2), opcionesTaxi.frame.size.height+60);
     if (deviceKind==2) {
         compartirGPS.frame=CGRectMake(0, 0, (containerView.frame.size.width)-20, (containerView.frame.size.height/2)-80);
         compartirGPS.center=CGPointMake((containerView.frame.size.width/2), opcionesTaxi.frame.size.height+80);
     }
+    [compartirGPS addTarget:self action:@selector(callOpcionesCompartir) forControlEvents:UIControlEventTouchUpInside];
     [containerView addSubview:compartirGPS];
     
     contacto=[[CustomButton alloc]initWithFrame:CGRectMake(0, 0, (containerView.frame.size.width)-20, (containerView.frame.size.height/2)-60)];
-    [contacto setTitle:@"Opciones Copartir GPS y seguridad" forState:UIControlStateNormal];
+    [contacto setTitle:@"Contacto e información" forState:UIControlStateNormal];
     contacto.titleLabel.font=[UIFont fontWithName:kFontType size:24];
     contacto.center=CGPointMake((containerView.frame.size.width/2), opcionesTaxi.frame.size.height+ compartirGPS.frame.size.height+70);
     if (deviceKind==2) {
         contacto.frame=CGRectMake(0, 0, (containerView.frame.size.width)-20, (containerView.frame.size.height/2)-80);
-        contacto.center=CGPointMake((containerView.frame.size.width/2), opcionesTaxi.frame.size.height+ compartirGPS.frame.size.height+95);
+        contacto.center=CGPointMake((containerView.frame.size.width/2), opcionesTaxi.frame.size.height+ compartirGPS.frame.size.height+97);
      }
+    [contacto addTarget:self action:@selector(callOpcionesContacto) forControlEvents:UIControlEventTouchUpInside];
     [containerView addSubview:contacto];
     
     
+}
+-(void)crearViewOpcionesTaximetro{
+    opcionesTaxiView=[[OpcionesTaximetroView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [opcionesTaxiView construirMenuConDeviceKind:deviceKind];
+    [self.view addSubview:opcionesTaxiView];
+}
+-(void)crearViewOpcionesCompartir{
+    opcionesCompartir=[[OpcionesCompartirView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [opcionesCompartir construirMenuConDeviceKind:deviceKind];
+    [self.view addSubview:opcionesCompartir];
+}
+-(void)crearViewOpcionesContacto{
+    opcionesContactoeInformacion=[[OpcionesContactoView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [opcionesContactoeInformacion construirConDeviceKind:deviceKind];
+    [self.view addSubview:opcionesContactoeInformacion];
+}
+-(void)callOpcionesTaxi{
+    
+    [opcionesTaxiView changeState];
+    [opcionesTaxiView.estadisticas addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
+}
+-(void)callOpcionesCompartir{
+    
+    [opcionesCompartir changeState];
+    [opcionesCompartir.botonDePanico addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
+}
+-(void)callOpcionesContacto{
+    
+    [opcionesContactoeInformacion changeState];
+    [opcionesContactoeInformacion.advertencia addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
+    [opcionesContactoeInformacion.acercaDeBogoTaxi addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)goTo:(CustomButton*)button{
+    if ([button.titleLabel.text isEqualToString:@"Estadísticas"]) {
+        EstadisticasViewController *eVC=[[EstadisticasViewController alloc]init];
+        eVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Estadisticas"];
+        eVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:eVC animated:YES];
+    }
+    else if ([button.titleLabel.text isEqualToString:@"Botón de Panico"]) {
+        PanicoViewController *pVC=[[PanicoViewController alloc]init];
+        pVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Panico"];
+        pVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:pVC animated:YES];
+    }
+    else if ([button.titleLabel.text isEqualToString:@"Advertencia"]) {
+        NSLog(@"entreee");
+        AdvertenciaViewController *adVC=[[AdvertenciaViewController alloc]init];
+        adVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Advertencia"];
+        adVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:adVC animated:YES];
+    }
+    else if ([button.titleLabel.text isEqualToString:@"Acerca de BogoTaxi"]) {
+        AcercaDeViewController *aVC=[[AcercaDeViewController alloc]init];
+        aVC=[self.storyboard instantiateViewControllerWithIdentifier:@"AcercaDe"];
+        aVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:aVC animated:YES];
+    }
 }
 
 @end

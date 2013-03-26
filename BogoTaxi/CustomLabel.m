@@ -9,12 +9,13 @@
 #import "CustomLabel.h"
 
 @implementation CustomLabel
+@synthesize overlayLabel;
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor=[UIColor clearColor];
-        overlayLabel=[[UILabel alloc]initWithFrame:CGRectMake(1,1,frame.size.width,frame.size.height)];
+        overlayLabel=[[UILabel alloc]initWithFrame:CGRectMake(-0.5,0.5,frame.size.width,frame.size.height)];
         overlayLabel.backgroundColor=[UIColor clearColor];
         overlayLabel.textColor=[UIColor whiteColor];
         overlayLabel.alpha=0.25;

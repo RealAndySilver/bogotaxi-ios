@@ -58,7 +58,7 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 -(void)crearContainerConfiguracion{
-    BannerView *bannerView=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-20, 0)];
+    BannerView *bannerView=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-10, 0)];
 
     [bannerView ponerTexto:@"TAXÍMETRO MANUAL"];
     bannerView.configBannerLabel.textColor=kYellowColor;
@@ -82,13 +82,13 @@
     [containerValores addSubview:containerPlata];
     
     CustomLabel *valorLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 10, containerPlata.frame.size.width, 35)];
-    [valorLabel ponerTexto:@"Valor Total" fuente:[UIFont fontWithName:kFontType size:35] color:kWhiteColor];
+    [valorLabel ponerTexto:@"Valor Total" fuente:[UIFont fontWithName:kFontType size:32] color:kWhiteColor];
     [valorLabel setOverlayOff:YES];
     [valorLabel setCentrado:YES];
     [containerPlata addSubview:valorLabel];
     
     valorInputLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0 , 50, containerPlata.frame.size.width, 35)];
-    [valorInputLabel ponerTexto:@"$3.400" fuente:[UIFont fontWithName:kFontType size:35] color:kDarkRedColor];
+    [valorInputLabel ponerTexto:@"$3.400" fuente:[UIFont fontWithName:kFontType size:40] color:kDarkRedColor];
     [valorInputLabel setOverlayOff:YES];
     [valorInputLabel setCentrado:YES];
     [containerPlata addSubview:valorInputLabel];
@@ -101,7 +101,7 @@
     containerUnidadesOverlay.backgroundColor=[UIColor whiteColor];
     containerUnidadesOverlay.alpha=0.08;
     //[containerUnidades addSubview:containerUnidadesOverlay];
-    UIView *containerBotonesUnidades=[[UIView alloc]initWithFrame:CGRectMake(0, containerUnidades.frame.size.height-20, containerUnidades.frame.size.width, 20)];
+    UIView *containerBotonesUnidades=[[UIView alloc]initWithFrame:CGRectMake(0, containerUnidades.frame.size.height-30, containerUnidades.frame.size.width, 30)];
     containerBotonesUnidades.backgroundColor=[UIColor darkGrayColor];
     [containerUnidades addSubview:containerBotonesUnidades];
     UIButton *botonMenos=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -123,7 +123,7 @@
     [containerBotonesUnidades addSubview:botonMas];
     
     labelUnidades=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, containerUnidades.frame.size.width-10, containerUnidades.frame.size.height-20)];
-    labelUnidades.center=CGPointMake(containerUnidades.frame.size.width/2, (containerUnidades.frame.size.height/2)-8);
+    labelUnidades.center=CGPointMake(containerUnidades.frame.size.width/2, (containerUnidades.frame.size.height/2)-11);
     labelUnidades.textAlignment=UITextAlignmentCenter;
     [labelUnidades ponerTexto:@"25" fuente:[UIFont fontWithName:kFontType size:60] color:kDarkRedColor];
     [labelUnidades setOverlayOff:YES];
@@ -142,9 +142,9 @@
     slider.minimumValue=25;
     slider.maximumValue=399;
     [slider addTarget:self action:@selector(sliderChange:) forControlEvents:UIControlEventValueChanged];
-    containerConfig=[[UIView alloc]initWithFrame:CGRectMake(10, self.view.frame.size.height-160-50, self.view.frame.size.width-20, 160)];
+    containerConfig=[[UIView alloc]initWithFrame:CGRectMake(5, self.view.frame.size.height-160-50, self.view.frame.size.width-10, 160)];
     if (deviceKind==2) {
-        containerConfig.frame=CGRectMake(10, self.view.frame.size.height-160-100, self.view.frame.size.width-20, 160);
+        containerConfig.frame=CGRectMake(5, self.view.frame.size.height-160-100, self.view.frame.size.width-10, 160);
     }
     containerConfig.backgroundColor=kDarkGrayColor;
     containerConfig.layer.cornerRadius=3;

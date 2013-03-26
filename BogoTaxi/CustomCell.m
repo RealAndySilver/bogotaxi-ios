@@ -32,12 +32,12 @@
         
         backgroundCell=[[UIView alloc]initWithFrame:CGRectMake(5, 5, (self.frame.size.width)-10, 45)];
         backgroundCell.backgroundColor=kTitleBlueColor;
-        //backgroundCell.layer.cornerRadius=3;
+        backgroundCell.layer.cornerRadius=3;
         [self addSubview:backgroundCell];
         
         backgroundOverlay=[[UIView alloc]initWithFrame:CGRectMake(6, 6, (self.frame.size.width)-10, 45)];
         backgroundOverlay.backgroundColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.1];
-        //backgroundOverlay.layer.cornerRadius=3;
+        backgroundOverlay.layer.cornerRadius=3;
         [self addSubview:backgroundOverlay];
         
         labelEmpresaTaxi=[[UILabel alloc]initWithFrame:CGRectMake(10, 5, (backgroundCell.frame.size.width)-25, (backgroundCell.frame.size.height)-10)];

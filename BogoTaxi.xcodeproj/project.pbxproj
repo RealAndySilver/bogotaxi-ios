@@ -7,10 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		331481DA16791E59006AB746 /* EstadisticasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 331481D916791E59006AB746 /* EstadisticasViewController.m */; };
 		331D618C1668132A00F02BD9 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 331D618B1668132A00F02BD9 /* CustomCell.m */; };
 		331D61901668154900F02BD9 /* LlamadasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 331D618F1668154900F02BD9 /* LlamadasViewController.m */; };
+		332AC87C167BD70E001A187B /* PanicoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 332AC87B167BD70E001A187B /* PanicoViewController.m */; };
+		333740FC166FA76300510C52 /* CalcularView.m in Sources */ = {isa = PBXBuildFile; fileRef = 333740FB166FA76300510C52 /* CalcularView.m */; };
+		33374100166FC25D00510C52 /* OpcionesTaximetroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 333740FF166FC25D00510C52 /* OpcionesTaximetroView.m */; };
 		33459DAB1669073F001B7DBF /* InformacionLlamadaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33459DAA1669073E001B7DBF /* InformacionLlamadaView.m */; };
+		3346273F167F81D900578B79 /* AcercaDeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3346273E167F81D900578B79 /* AcercaDeViewController.m */; };
+		33462743167F947200578B79 /* AdvertenciaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33462742167F947200578B79 /* AdvertenciaViewController.m */; };
+		3348559116F7901F00929946 /* RegionAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3348558E16F7901F00929946 /* RegionAnnotation.m */; };
+		3348559216F7901F00929946 /* RegionAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3348559016F7901F00929946 /* RegionAnnotationView.m */; };
+		3348559516F7904300929946 /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3348559416F7904300929946 /* Annotation.m */; };
+		334AC8BE167A967600F077A0 /* AlertMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334AC8BD167A967600F077A0 /* AlertMessageView.m */; };
+		334E2A00167103F2005D1E9C /* OpcionesCompartirView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334E29FF167103F2005D1E9C /* OpcionesCompartirView.m */; };
+		334E2A04167141B0005D1E9C /* OpcionesContactoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334E2A03167141AF005D1E9C /* OpcionesContactoView.m */; };
+		334E2A0716714B5D005D1E9C /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334E2A0616714B5D005D1E9C /* AlertView.m */; };
 		334ED8A4166E6D7E001DD624 /* OpcionesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 334ED8A3166E6D7E001DD624 /* OpcionesViewController.m */; };
+		335CA20F16EE9B820078D488 /* ServerCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 335CA20E16EE9B820078D488 /* ServerCommunicator.m */; };
+		335CA21216EE9B9A0078D488 /* IAmCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 335CA21116EE9B9A0078D488 /* IAmCoder.m */; };
+		335CA21516EE9C450078D488 /* ConsultarPlacaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335CA21416EE9C450078D488 /* ConsultarPlacaViewController.m */; };
+		335CA21A16EE9DE70078D488 /* CustomCellReporte.m in Sources */ = {isa = PBXBuildFile; fileRef = 335CA21716EE9DE60078D488 /* CustomCellReporte.m */; };
+		335CA21B16EE9DE70078D488 /* CustomCellReporteUno.m in Sources */ = {isa = PBXBuildFile; fileRef = 335CA21916EE9DE70078D488 /* CustomCellReporteUno.m */; };
+		335CA21E16EE9E250078D488 /* CustomCellTop.m in Sources */ = {isa = PBXBuildFile; fileRef = 335CA21D16EE9E250078D488 /* CustomCellTop.m */; };
+		335CA22116EE9E520078D488 /* Taxista.m in Sources */ = {isa = PBXBuildFile; fileRef = 335CA22016EE9E520078D488 /* Taxista.m */; };
+		335CA22416EE9E6B0078D488 /* Reportes.m in Sources */ = {isa = PBXBuildFile; fileRef = 335CA22316EE9E6B0078D488 /* Reportes.m */; };
+		335CA22716EE9E980078D488 /* TopTaxi.m in Sources */ = {isa = PBXBuildFile; fileRef = 335CA22616EE9E980078D488 /* TopTaxi.m */; };
+		335CA22A16EE9EB90078D488 /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 335CA22916EE9EB90078D488 /* DeviceInfo.m */; };
+		335CA22D16EE9F030078D488 /* ViewInformacion.m in Sources */ = {isa = PBXBuildFile; fileRef = 335CA22C16EE9F030078D488 /* ViewInformacion.m */; };
+		335CA23016EE9F1D0078D488 /* MBProgressHud.m in Sources */ = {isa = PBXBuildFile; fileRef = 335CA22F16EE9F1D0078D488 /* MBProgressHud.m */; };
+		335CA23316EE9F440078D488 /* DetailReporteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335CA23216EE9F440078D488 /* DetailReporteViewController.m */; };
+		335CA23516EE9FDD0078D488 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335CA23416EE9FDD0078D488 /* CoreTelephony.framework */; };
+		3368F00116F911950093C022 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3368F00016F911950093C022 /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3368F00716F912480093C022 /* libicucore.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3368F00616F912480093C022 /* libicucore.A.dylib */; };
+		33BCB86016F929FE00354F2B /* Modelador.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BCB85F16F929FE00354F2B /* Modelador.m */; };
 		7542BF02165E82D2008A51B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7542BF01165E82D2008A51B7 /* UIKit.framework */; };
 		7542BF04165E82D2008A51B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7542BF03165E82D2008A51B7 /* Foundation.framework */; };
 		7542BF06165E82D2008A51B7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7542BF05165E82D2008A51B7 /* CoreGraphics.framework */; };
@@ -37,14 +67,72 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		331481D816791E59006AB746 /* EstadisticasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstadisticasViewController.h; sourceTree = "<group>"; };
+		331481D916791E59006AB746 /* EstadisticasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstadisticasViewController.m; sourceTree = "<group>"; };
 		331D618A1668132A00F02BD9 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
 		331D618B1668132A00F02BD9 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
 		331D618E1668154900F02BD9 /* LlamadasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LlamadasViewController.h; sourceTree = "<group>"; };
 		331D618F1668154900F02BD9 /* LlamadasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LlamadasViewController.m; sourceTree = "<group>"; };
+		332AC87A167BD70E001A187B /* PanicoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanicoViewController.h; sourceTree = "<group>"; };
+		332AC87B167BD70E001A187B /* PanicoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanicoViewController.m; sourceTree = "<group>"; };
+		333740FA166FA76300510C52 /* CalcularView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcularView.h; sourceTree = "<group>"; };
+		333740FB166FA76300510C52 /* CalcularView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalcularView.m; sourceTree = "<group>"; };
+		333740FE166FC25D00510C52 /* OpcionesTaximetroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpcionesTaximetroView.h; sourceTree = "<group>"; };
+		333740FF166FC25D00510C52 /* OpcionesTaximetroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpcionesTaximetroView.m; sourceTree = "<group>"; };
 		33459DA91669073E001B7DBF /* InformacionLlamadaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformacionLlamadaView.h; sourceTree = "<group>"; };
 		33459DAA1669073E001B7DBF /* InformacionLlamadaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformacionLlamadaView.m; sourceTree = "<group>"; };
+		3346273D167F81D900578B79 /* AcercaDeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcercaDeViewController.h; sourceTree = "<group>"; };
+		3346273E167F81D900578B79 /* AcercaDeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AcercaDeViewController.m; sourceTree = "<group>"; };
+		33462741167F947200578B79 /* AdvertenciaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertenciaViewController.h; sourceTree = "<group>"; };
+		33462742167F947200578B79 /* AdvertenciaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertenciaViewController.m; sourceTree = "<group>"; };
+		3348558D16F7901F00929946 /* RegionAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionAnnotation.h; sourceTree = "<group>"; };
+		3348558E16F7901F00929946 /* RegionAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegionAnnotation.m; sourceTree = "<group>"; };
+		3348558F16F7901F00929946 /* RegionAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionAnnotationView.h; sourceTree = "<group>"; };
+		3348559016F7901F00929946 /* RegionAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegionAnnotationView.m; sourceTree = "<group>"; };
+		3348559316F7904300929946 /* Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Annotation.h; sourceTree = "<group>"; };
+		3348559416F7904300929946 /* Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Annotation.m; sourceTree = "<group>"; };
+		334AC8BC167A967600F077A0 /* AlertMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertMessageView.h; sourceTree = "<group>"; };
+		334AC8BD167A967600F077A0 /* AlertMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertMessageView.m; sourceTree = "<group>"; };
+		334E29FE167103F2005D1E9C /* OpcionesCompartirView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpcionesCompartirView.h; sourceTree = "<group>"; };
+		334E29FF167103F2005D1E9C /* OpcionesCompartirView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpcionesCompartirView.m; sourceTree = "<group>"; };
+		334E2A02167141AF005D1E9C /* OpcionesContactoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpcionesContactoView.h; sourceTree = "<group>"; };
+		334E2A03167141AF005D1E9C /* OpcionesContactoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpcionesContactoView.m; sourceTree = "<group>"; };
+		334E2A0516714B5D005D1E9C /* AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
+		334E2A0616714B5D005D1E9C /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
 		334ED8A2166E6D7E001DD624 /* OpcionesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpcionesViewController.h; sourceTree = "<group>"; };
 		334ED8A3166E6D7E001DD624 /* OpcionesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpcionesViewController.m; sourceTree = "<group>"; };
+		335CA20D16EE9B820078D488 /* ServerCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerCommunicator.h; sourceTree = "<group>"; };
+		335CA20E16EE9B820078D488 /* ServerCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerCommunicator.m; sourceTree = "<group>"; };
+		335CA21016EE9B9A0078D488 /* IAmCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAmCoder.h; sourceTree = "<group>"; };
+		335CA21116EE9B9A0078D488 /* IAmCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAmCoder.m; sourceTree = "<group>"; };
+		335CA21316EE9C450078D488 /* ConsultarPlacaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsultarPlacaViewController.h; sourceTree = "<group>"; };
+		335CA21416EE9C450078D488 /* ConsultarPlacaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsultarPlacaViewController.m; sourceTree = "<group>"; };
+		335CA21616EE9DE60078D488 /* CustomCellReporte.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCellReporte.h; sourceTree = "<group>"; };
+		335CA21716EE9DE60078D488 /* CustomCellReporte.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCellReporte.m; sourceTree = "<group>"; };
+		335CA21816EE9DE70078D488 /* CustomCellReporteUno.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCellReporteUno.h; sourceTree = "<group>"; };
+		335CA21916EE9DE70078D488 /* CustomCellReporteUno.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCellReporteUno.m; sourceTree = "<group>"; };
+		335CA21C16EE9E250078D488 /* CustomCellTop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCellTop.h; sourceTree = "<group>"; };
+		335CA21D16EE9E250078D488 /* CustomCellTop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCellTop.m; sourceTree = "<group>"; };
+		335CA21F16EE9E520078D488 /* Taxista.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Taxista.h; sourceTree = "<group>"; };
+		335CA22016EE9E520078D488 /* Taxista.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Taxista.m; sourceTree = "<group>"; };
+		335CA22216EE9E6A0078D488 /* Reportes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reportes.h; sourceTree = "<group>"; };
+		335CA22316EE9E6B0078D488 /* Reportes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reportes.m; sourceTree = "<group>"; };
+		335CA22516EE9E980078D488 /* TopTaxi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopTaxi.h; sourceTree = "<group>"; };
+		335CA22616EE9E980078D488 /* TopTaxi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopTaxi.m; sourceTree = "<group>"; };
+		335CA22816EE9EB90078D488 /* DeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfo.h; sourceTree = "<group>"; };
+		335CA22916EE9EB90078D488 /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
+		335CA22B16EE9F030078D488 /* ViewInformacion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewInformacion.h; sourceTree = "<group>"; };
+		335CA22C16EE9F030078D488 /* ViewInformacion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewInformacion.m; sourceTree = "<group>"; };
+		335CA22E16EE9F1D0078D488 /* MBProgressHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHud.h; sourceTree = "<group>"; };
+		335CA22F16EE9F1D0078D488 /* MBProgressHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHud.m; sourceTree = "<group>"; };
+		335CA23116EE9F440078D488 /* DetailReporteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailReporteViewController.h; sourceTree = "<group>"; };
+		335CA23216EE9F440078D488 /* DetailReporteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailReporteViewController.m; sourceTree = "<group>"; };
+		335CA23416EE9FDD0078D488 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		3368EFFF16F911950093C022 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		3368F00016F911950093C022 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		3368F00616F912480093C022 /* libicucore.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.A.dylib; path = usr/lib/libicucore.A.dylib; sourceTree = SDKROOT; };
+		33BCB85E16F929FE00354F2B /* Modelador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Modelador.h; sourceTree = "<group>"; };
+		33BCB85F16F929FE00354F2B /* Modelador.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Modelador.m; sourceTree = "<group>"; };
 		7542BEFD165E82D2008A51B7 /* BogoTaxi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BogoTaxi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7542BF01165E82D2008A51B7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7542BF03165E82D2008A51B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -88,6 +176,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3368F00716F912480093C022 /* libicucore.A.dylib in Frameworks */,
+				335CA23516EE9FDD0078D488 /* CoreTelephony.framework in Frameworks */,
 				75A959FE166D4A0F0012CFA5 /* CoreLocation.framework in Frameworks */,
 				7542BF4F165EDC7B008A51B7 /* MapKit.framework in Frameworks */,
 				7542BF31165E917E008A51B7 /* QuartzCore.framework in Frameworks */,
@@ -103,6 +193,8 @@
 		7542BEF2165E82D2008A51B7 = {
 			isa = PBXGroup;
 			children = (
+				3368F00616F912480093C022 /* libicucore.A.dylib */,
+				335CA23416EE9FDD0078D488 /* CoreTelephony.framework */,
 				7542BF07165E82D2008A51B7 /* BogoTaxi */,
 				7542BF00165E82D2008A51B7 /* Frameworks */,
 				7542BEFE165E82D2008A51B7 /* Products */,
@@ -138,14 +230,32 @@
 				7542BF11165E82D2008A51B7 /* AppDelegate.m */,
 				7542BF19165E82D2008A51B7 /* MainStoryboard_iPhone.storyboard */,
 				7542BF1C165E82D2008A51B7 /* MainStoryboard_iPad.storyboard */,
+				335CA22E16EE9F1D0078D488 /* MBProgressHud.h */,
+				335CA22F16EE9F1D0078D488 /* MBProgressHud.m */,
+				335CA21016EE9B9A0078D488 /* IAmCoder.h */,
+				335CA21116EE9B9A0078D488 /* IAmCoder.m */,
+				335CA20D16EE9B820078D488 /* ServerCommunicator.h */,
+				335CA20E16EE9B820078D488 /* ServerCommunicator.m */,
 				7542BF1F165E82D2008A51B7 /* MainViewController.h */,
 				7542BF20165E82D2008A51B7 /* MainViewController.m */,
+				335CA21316EE9C450078D488 /* ConsultarPlacaViewController.h */,
+				335CA21416EE9C450078D488 /* ConsultarPlacaViewController.m */,
+				335CA23116EE9F440078D488 /* DetailReporteViewController.h */,
+				335CA23216EE9F440078D488 /* DetailReporteViewController.m */,
 				75D52B121660351100EAC142 /* TaximetroManualViewController.h */,
 				75D52B131660351100EAC142 /* TaximetroManualViewController.m */,
 				331D618E1668154900F02BD9 /* LlamadasViewController.h */,
 				331D618F1668154900F02BD9 /* LlamadasViewController.m */,
 				334ED8A2166E6D7E001DD624 /* OpcionesViewController.h */,
 				334ED8A3166E6D7E001DD624 /* OpcionesViewController.m */,
+				331481D816791E59006AB746 /* EstadisticasViewController.h */,
+				331481D916791E59006AB746 /* EstadisticasViewController.m */,
+				332AC87A167BD70E001A187B /* PanicoViewController.h */,
+				332AC87B167BD70E001A187B /* PanicoViewController.m */,
+				33462741167F947200578B79 /* AdvertenciaViewController.h */,
+				33462742167F947200578B79 /* AdvertenciaViewController.m */,
+				3346273D167F81D900578B79 /* AcercaDeViewController.h */,
+				3346273E167F81D900578B79 /* AcercaDeViewController.m */,
 				7542BF2C165E8D92008A51B7 /* SubViews */,
 				7542BF08165E82D2008A51B7 /* Supporting Files */,
 			);
@@ -169,6 +279,8 @@
 		7542BF2C165E8D92008A51B7 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				335CA22B16EE9F030078D488 /* ViewInformacion.h */,
+				335CA22C16EE9F030078D488 /* ViewInformacion.m */,
 				7542BF2D165E8DB7008A51B7 /* CustomSwitch.h */,
 				7542BF2E165E8DB7008A51B7 /* CustomSwitch.m */,
 				7542BF47165EAE47008A51B7 /* CustomLabel.h */,
@@ -181,8 +293,28 @@
 				75D6C68C1667F66600D90A0D /* MenuView.m */,
 				331D618A1668132A00F02BD9 /* CustomCell.h */,
 				331D618B1668132A00F02BD9 /* CustomCell.m */,
+				335CA21616EE9DE60078D488 /* CustomCellReporte.h */,
+				335CA21716EE9DE60078D488 /* CustomCellReporte.m */,
+				335CA21816EE9DE70078D488 /* CustomCellReporteUno.h */,
+				335CA21916EE9DE70078D488 /* CustomCellReporteUno.m */,
+				335CA21C16EE9E250078D488 /* CustomCellTop.h */,
+				335CA21D16EE9E250078D488 /* CustomCellTop.m */,
 				33459DA91669073E001B7DBF /* InformacionLlamadaView.h */,
 				33459DAA1669073E001B7DBF /* InformacionLlamadaView.m */,
+				333740FA166FA76300510C52 /* CalcularView.h */,
+				333740FB166FA76300510C52 /* CalcularView.m */,
+				333740FE166FC25D00510C52 /* OpcionesTaximetroView.h */,
+				333740FF166FC25D00510C52 /* OpcionesTaximetroView.m */,
+				334E29FE167103F2005D1E9C /* OpcionesCompartirView.h */,
+				334E29FF167103F2005D1E9C /* OpcionesCompartirView.m */,
+				334E2A02167141AF005D1E9C /* OpcionesContactoView.h */,
+				334E2A03167141AF005D1E9C /* OpcionesContactoView.m */,
+				334E2A0516714B5D005D1E9C /* AlertView.h */,
+				334E2A0616714B5D005D1E9C /* AlertView.m */,
+				334AC8BC167A967600F077A0 /* AlertMessageView.h */,
+				334AC8BD167A967600F077A0 /* AlertMessageView.m */,
+				3368EFFF16F911950093C022 /* RegexKitLite.h */,
+				3368F00016F911950093C022 /* RegexKitLite.m */,
 			);
 			name = SubViews;
 			sourceTree = "<group>";
@@ -190,10 +322,26 @@
 		75926D101665215A00B3CDD5 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				335CA22816EE9EB90078D488 /* DeviceInfo.h */,
+				335CA22916EE9EB90078D488 /* DeviceInfo.m */,
+				335CA22216EE9E6A0078D488 /* Reportes.h */,
+				335CA22316EE9E6B0078D488 /* Reportes.m */,
+				335CA22516EE9E980078D488 /* TopTaxi.h */,
+				335CA22616EE9E980078D488 /* TopTaxi.m */,
+				335CA21F16EE9E520078D488 /* Taxista.h */,
+				335CA22016EE9E520078D488 /* Taxista.m */,
 				75926D121665217000B3CDD5 /* Taximetro.h */,
 				75926D131665217000B3CDD5 /* Taximetro.m */,
 				75E4F37D1669819E007BE4C5 /* LLamadasObject.h */,
 				75E4F37E1669819E007BE4C5 /* LLamadasObject.m */,
+				3348558D16F7901F00929946 /* RegionAnnotation.h */,
+				3348558E16F7901F00929946 /* RegionAnnotation.m */,
+				3348558F16F7901F00929946 /* RegionAnnotationView.h */,
+				3348559016F7901F00929946 /* RegionAnnotationView.m */,
+				3348559316F7904300929946 /* Annotation.h */,
+				3348559416F7904300929946 /* Annotation.m */,
+				33BCB85E16F929FE00354F2B /* Modelador.h */,
+				33BCB85F16F929FE00354F2B /* Modelador.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -280,6 +428,34 @@
 				33459DAB1669073F001B7DBF /* InformacionLlamadaView.m in Sources */,
 				75E4F37F1669819E007BE4C5 /* LLamadasObject.m in Sources */,
 				334ED8A4166E6D7E001DD624 /* OpcionesViewController.m in Sources */,
+				333740FC166FA76300510C52 /* CalcularView.m in Sources */,
+				33374100166FC25D00510C52 /* OpcionesTaximetroView.m in Sources */,
+				334E2A00167103F2005D1E9C /* OpcionesCompartirView.m in Sources */,
+				334E2A04167141B0005D1E9C /* OpcionesContactoView.m in Sources */,
+				334E2A0716714B5D005D1E9C /* AlertView.m in Sources */,
+				331481DA16791E59006AB746 /* EstadisticasViewController.m in Sources */,
+				334AC8BE167A967600F077A0 /* AlertMessageView.m in Sources */,
+				332AC87C167BD70E001A187B /* PanicoViewController.m in Sources */,
+				3346273F167F81D900578B79 /* AcercaDeViewController.m in Sources */,
+				33462743167F947200578B79 /* AdvertenciaViewController.m in Sources */,
+				335CA20F16EE9B820078D488 /* ServerCommunicator.m in Sources */,
+				335CA21216EE9B9A0078D488 /* IAmCoder.m in Sources */,
+				335CA21516EE9C450078D488 /* ConsultarPlacaViewController.m in Sources */,
+				335CA21A16EE9DE70078D488 /* CustomCellReporte.m in Sources */,
+				335CA21B16EE9DE70078D488 /* CustomCellReporteUno.m in Sources */,
+				335CA21E16EE9E250078D488 /* CustomCellTop.m in Sources */,
+				335CA22116EE9E520078D488 /* Taxista.m in Sources */,
+				335CA22416EE9E6B0078D488 /* Reportes.m in Sources */,
+				335CA22716EE9E980078D488 /* TopTaxi.m in Sources */,
+				335CA22A16EE9EB90078D488 /* DeviceInfo.m in Sources */,
+				335CA22D16EE9F030078D488 /* ViewInformacion.m in Sources */,
+				335CA23016EE9F1D0078D488 /* MBProgressHud.m in Sources */,
+				335CA23316EE9F440078D488 /* DetailReporteViewController.m in Sources */,
+				3348559116F7901F00929946 /* RegionAnnotation.m in Sources */,
+				3348559216F7901F00929946 /* RegionAnnotationView.m in Sources */,
+				3348559516F7904300929946 /* Annotation.m in Sources */,
+				3368F00116F911950093C022 /* RegexKitLite.m in Sources */,
+				33BCB86016F929FE00354F2B /* Modelador.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,7 +511,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -357,7 +533,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -372,6 +548,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nicolle Jimenez Vasquez (5MQFB67YC8)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BogoTaxi/BogoTaxi-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "BogoTaxi/BogoTaxi-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -388,6 +565,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nicolle Jimenez Vasquez (5MQFB67YC8)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BogoTaxi/BogoTaxi-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "BogoTaxi/BogoTaxi-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";

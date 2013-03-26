@@ -15,12 +15,23 @@
 #import "TaximetroManualViewController.h"
 #import "LlamadasViewController.h"
 #import "OpcionesViewController.h"
+#import "ConsultarPlacaViewController.h"
 #import "MenuView.h"
+#import "CalcularView.h"
+#import "AlertView.h"
+#import "AlertMessageView.h"
 #import <CoreLocation/CoreLocation.h>
+#import "RegionAnnotationView.h"
+#import "RegionAnnotation.h"
+#import "RegexKitLite.h"
+#import "Modelador.h"
 
-@interface MainViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate>{
+@interface MainViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate>{
     UIScrollView *mainScrollView;
     MenuView *menu;
+    CalcularView *calcular;
+    AlertView *alert;
+    AlertMessageView *alertMessage;
     //Hud taximetro
     UIView *containerSuperior;
     UIView *barraSuperior;
@@ -74,18 +85,34 @@
     UIButton *botonDestino;
     MKMapView *mapaPaginaDos;
     CustomButton *botonCalcular;
+    UITapGestureRecognizer *recognizerAnotattion;
+    RegionAnnotation *myRegionAnnotation;
+    int banderaTouch;
+    CLLocationManager *locationManager;
+    CLLocationCoordinate2D currentLocation;
+    CLLocationCoordinate2D locationOne;
+    CLLocationCoordinate2D locationTwo;
+    CLLocationCoordinate2D locationPast;
+    RegionAnnotation *annotationA;
+    RegionAnnotation *annotationB;
+    int seleccionarAB;
+    CLLocation* ptoA;
+    CLLocation* ptoB;
+    BOOL banderaU;
+    double distanciaMetros;
+    NSArray* routes;
+    UIImageView *routeView;
+    UIColor* lineColor;
     
     //Pagina Tres
     UIView *paginaTres;
     BannerView *bannerPaginaTres;
     UIView *containerPlacaPaginaTres;
     UITextField *placa;
-    CustomLabel *footer;
-    CustomButton *botonEnviarRedes;
-    CustomButton *botonEnviarDenuncie;
     CGRect viewFrame;
     CGFloat viewWidth;
     CGFloat viewHeight;
+    UILabel *footer;
     
     BOOL tecladoUp;
     
@@ -106,4 +133,5 @@
 
 
 }
+
 @end

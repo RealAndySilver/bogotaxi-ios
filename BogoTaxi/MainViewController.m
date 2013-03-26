@@ -28,6 +28,12 @@
 #define METERS_PER_MILE 1609.344
 
 
+#ifdef NSTextAlignmentCenter
+#define ALIGN_CENTER NSTextAlignmentCenter
+#else
+#define ALIGN_CENTER UITextAlignmentCenter
+#endif
+
 #pragma mark - interface
 @interface MainViewController ()
 
@@ -66,11 +72,14 @@
     [self.view addSubview:mainScrollView];
     [self crearPaginaUno];
     [self crearPaginaDos];
+    [self crearViewCalcular];
     [self crearPaginaTres];
     [self crearInterfazSuperior];
     backgroundColor=self.view.backgroundColor;
     [paginaUnoContainer bringSubviewToFront:containerConfig];
     [self crearMenu];
+    [self crearViewAlert];
+    [self crearViewAlertMessage];
     locManager=[[CLLocationManager alloc]init];
     locManager.delegate=self;
     mapView.showsUserLocation=YES;
@@ -85,13 +94,14 @@
 #pragma mark - interfaz superior
 -(void)crearInterfazSuperior{
     mapView=[[MKMapView alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height-126)*-1, self.view.frame.size.width, self.view.frame.size.height-126)];
+    mapView.tag=1000;
     [self.view addSubview:mapView];
     containerSuperior=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 126)];
-    containerSuperior.backgroundColor=[UIColor grayColor];
+    containerSuperior.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
     [self.view addSubview:containerSuperior];
     
     barraSuperior=[[UIView alloc]initWithFrame:CGRectMake(0, 0, containerSuperior.frame.size.width, 37)];
-    barraSuperior.backgroundColor=[UIColor darkGrayColor];
+    barraSuperior.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
     [containerSuperior addSubview:barraSuperior];
     botonBarraSuperior=[UIButton buttonWithType:UIButtonTypeCustom];
     animationFinished=NO;
@@ -99,19 +109,21 @@
     [botonBarraSuperior setTitle:@"Mapa" forState:UIControlStateNormal];
     [botonBarraSuperior setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [botonBarraSuperior setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-
     botonBarraSuperior.titleLabel.font=[UIFont fontWithName:kFontType size:20];
     botonBarraSuperior.backgroundColor=kLiteRedColor;
-    botonBarraSuperior.frame=CGRectMake(containerSuperior.frame.size.width-96, 6, 81, 25);
+    botonBarraSuperior.frame=CGRectMake(containerSuperior.frame.size.width-87, 6, 81, 25);
     [barraSuperior addSubview:botonBarraSuperior];
     
-    valorLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(25, 7, 120, 20)];
-    [valorLabel ponerTexto:@"Valor Total:" fuente:[UIFont fontWithName:kFontType size:20] color:[UIColor whiteColor]];
+    valorLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, 70, 22)];
+    valorLabel.center=CGPointMake(45, barraSuperior.frame.size.height/2);
+    [valorLabel ponerTexto:@"Valor Total:" fuente:[UIFont fontWithName:kFontType size:22] color:[UIColor whiteColor]];
     [valorLabel setOverlayOff:YES];
     [barraSuperior addSubview:valorLabel];
     
-    valorInputLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(100, 4, 150, 30)];
-    [valorInputLabel ponerTexto:@"$99.900" fuente:[UIFont fontWithName:kFontType size:30] color:kDarkRedColor];
+    valorInputLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, 130, 35)];
+    valorInputLabel.center=CGPointMake(155, barraSuperior.frame.size.height/2);
+    [valorInputLabel ponerTexto:@"$99.900" fuente:[UIFont fontWithName:kFontType size:32] color:kDarkRedColor];
+    //valorInputLabel.backgroundColor=kGreenColor;
     [valorInputLabel setOverlayOff:YES];
     [barraSuperior addSubview:valorInputLabel];
     
@@ -123,21 +135,21 @@
     containerSuperiorInferior.layer.shadowOpacity = 0.3;
     [containerSuperior addSubview:containerSuperiorInferior];
     
-    containerInfoTaximetro=[[UIView alloc]initWithFrame:CGRectMake(15, 15.5, 135, 60)];
-    containerInfoTaximetro.backgroundColor=[UIColor darkGrayColor];
+    containerInfoTaximetro=[[UIView alloc]initWithFrame:CGRectMake(5, 5, 135, 78)];
+    containerInfoTaximetro.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
     [containerSuperiorInferior addSubview:containerInfoTaximetro];
     
     
-    containerTiempo=[[UIView alloc]initWithFrame:CGRectMake(137+15, 15.5, 70, 60)];
-    containerTiempo.backgroundColor=[UIColor darkGrayColor];
+    containerTiempo=[[UIView alloc]initWithFrame:CGRectMake(137+4, 5, 70, 78)];
+    containerTiempo.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
     [containerSuperiorInferior addSubview:containerTiempo];
     
-    tiempoLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, containerTiempo.frame.size.width, 30)];
+    tiempoLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 7, containerTiempo.frame.size.width, 30)];
     [tiempoLabel ponerTexto:@"Tiempo" fuente:[UIFont fontWithName:kFontType size:22] color:kYellowColor];
     [tiempoLabel setCentrado:YES];
     [tiempoLabel setOverlayOff:YES];
     [containerTiempo addSubview:tiempoLabel];
-    tiempoInputLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 28, containerTiempo.frame.size.width, 30)];
+    tiempoInputLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 40, containerTiempo.frame.size.width, 30)];
     [tiempoInputLabel ponerTexto:@"00:00" fuente:[UIFont fontWithName:kFontType size:22] color:[UIColor whiteColor]];
     [tiempoInputLabel setCentrado:YES];
     [tiempoInputLabel setOverlayOff:YES];
@@ -149,41 +161,42 @@
     infoTaximetroOverlay.alpha=0.08;
     [containerInfoTaximetro addSubview:infoTaximetroOverlay];
     
-    labelEncender=[[CustomLabel alloc]initWithFrame:CGRectMake(5, 8, 80, 23)];
+    labelEncender=[[CustomLabel alloc]initWithFrame:CGRectMake(8, 10, 80, 23)];
     [labelEncender ponerTexto:@"Encender" fuente:[UIFont fontWithName:kFontType size:22] color:kYellowColor];
     [labelEncender setOverlayOff:YES];
     [containerInfoTaximetro addSubview:labelEncender];
     
-    labelRecorrido=[[CustomLabel alloc]initWithFrame:CGRectMake(5, 33, 80, 20)];
+    labelRecorrido=[[CustomLabel alloc]initWithFrame:CGRectMake(8, 46, 80, 20)];
     [labelRecorrido ponerTexto:@"Recorrido" fuente:[UIFont fontWithName:kFontType size:22] color:kYellowColor];
     [labelRecorrido setOverlayOff:YES];
     [containerInfoTaximetro addSubview:labelRecorrido];
     
-    switchEncender=[[CustomSwitch alloc]initWithFrame:CGRectMake(75, 8, 0, 0)];
+    switchEncender=[[CustomSwitch alloc]initWithFrame:CGRectMake(70, 10, 0, 0)];
     [switchEncender addTarget:self action:@selector(encenderTaximetro:)];
     [containerInfoTaximetro addSubview:switchEncender];
     
-    labelMetros=[[CustomLabel alloc]initWithFrame:CGRectMake(78, 34, 80, 20)];
-    [labelMetros ponerTexto:@"4.4 metros" fuente:[UIFont fontWithName:kFontType size:14] color:[UIColor whiteColor]];
+    labelMetros=[[CustomLabel alloc]initWithFrame:CGRectMake(78, 46, 50, 20)];
+    [labelMetros ponerTexto:@"44444.4 m" fuente:[UIFont fontWithName:kFontType size:22] color:[UIColor whiteColor]];
+    labelMetros.adjustsFontSizeToFitWidth = YES;
     [labelMetros setOverlayOff:YES];
     [containerInfoTaximetro addSubview:labelMetros];
     
-    containerUnidades=[[UIView alloc]initWithFrame:CGRectMake(15+206+3, 15.5, 81, 60)];
-    containerUnidades.backgroundColor=[UIColor darkGrayColor];
+    containerUnidades=[[UIView alloc]initWithFrame:CGRectMake(6+206, 5, 103, 78)];
+    containerUnidades.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
     [containerSuperiorInferior addSubview:containerUnidades];
     UIView *containerUnidadesOverlay=[[UIView alloc]initWithFrame:CGRectMake(3, 3, containerUnidades.frame.size.width-5, containerUnidades.frame.size.height-5)];
     containerUnidadesOverlay.backgroundColor=[UIColor whiteColor];
     containerUnidadesOverlay.alpha=0.08;
     //[containerUnidades addSubview:containerUnidadesOverlay];
-    UIView *containerBotonesUnidades=[[UIView alloc]initWithFrame:CGRectMake(0, containerUnidades.frame.size.height-20, containerUnidades.frame.size.width, 20)];
-    containerBotonesUnidades.backgroundColor=[UIColor darkGrayColor];
+    UIView *containerBotonesUnidades=[[UIView alloc]initWithFrame:CGRectMake(0, containerUnidades.frame.size.height-30, containerUnidades.frame.size.width, 30)];
+    containerBotonesUnidades.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
     [containerUnidades addSubview:containerBotonesUnidades];
     UIButton *botonMenos=[UIButton buttonWithType:UIButtonTypeCustom];
     [botonMenos addTarget:self action:@selector(startAnimationSequence) forControlEvents:UIControlEventTouchUpInside];
     botonMenos.frame=CGRectMake(0, 0, (containerBotonesUnidades.frame.size.width/2)-0.5, containerBotonesUnidades.frame.size.height);
     [botonMenos setTitle:@"-" forState:UIControlStateNormal];
     botonMenos.titleLabel.font=[UIFont  boldSystemFontOfSize:15];
-    botonMenos.backgroundColor=[UIColor grayColor];
+    botonMenos.backgroundColor=kDarkGrayColor;
     [containerBotonesUnidades addSubview:botonMenos];
     
     UIButton *botonMas=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -191,13 +204,15 @@
     botonMas.frame=CGRectMake((containerBotonesUnidades.frame.size.width/2)+0.5, 0, (containerBotonesUnidades.frame.size.width/2)-0.5, containerBotonesUnidades.frame.size.height);
     [botonMas setTitle:@"+" forState:UIControlStateNormal];
     botonMas.titleLabel.font=[UIFont  boldSystemFontOfSize:15];
-    botonMas.backgroundColor=[UIColor grayColor];
+    botonMas.backgroundColor=kDarkGrayColor;
     [containerBotonesUnidades addSubview:botonMas];
     
     labelUnidades=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, containerUnidades.frame.size.width-10, containerUnidades.frame.size.height-20)];
-    labelUnidades.center=CGPointMake(containerUnidades.frame.size.width/2, (containerUnidades.frame.size.height/2)-8);
-    labelUnidades.textAlignment=UITextAlignmentCenter;
-    [labelUnidades ponerTexto:@"25" fuente:[UIFont fontWithName:kFontType size:40] color:kDarkRedColor];
+    labelUnidades.center=CGPointMake(containerUnidades.frame.size.width/2, (containerUnidades.frame.size.height/2)-13);
+    //labelUnidades.textAlignment=UITextAlignmentCenter;
+    labelUnidades.textAlignment=ALIGN_CENTER;
+
+    [labelUnidades ponerTexto:@"25" fuente:[UIFont fontWithName:kFontType size:50] color:kDarkRedColor];
     [labelUnidades setOverlayOff:YES];
     [containerUnidades addSubview:labelUnidades];
 }
@@ -223,7 +238,7 @@
     menuButton=[UIButton buttonWithType:UIButtonTypeCustom];
     [menuButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
     [menuButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [menuButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    [menuButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     menuButton.titleLabel.layer.shouldRasterize=YES;
     
     menuButton.frame=CGRectMake(0, self.view.frame.size.height-30, 50, 30);
@@ -238,68 +253,77 @@
 
 -(void)crearPaginaUno{
     paginaUnoContainer=[[UIView alloc]initWithFrame:CGRectMake(0, 0, mainScrollView.frame.size.width, mainScrollView.frame.size.height)];
-    paginaUnoContainer.backgroundColor=[UIColor clearColor];
+    paginaUnoContainer.backgroundColor=kYellowColor;
     [mainScrollView addSubview:paginaUnoContainer];
     
-    BannerView *bannerView=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, mainScrollView.frame.size.width-20, 0)];
+    BannerView *bannerView=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, mainScrollView.frame.size.width-10, 0)];
     [bannerView ponerTexto:@"CONFIGURACIÓN"];
-    bannerView.center=CGPointMake(mainScrollView.frame.size.width/2, 50);
+    bannerView.configBannerLabel.textColor=[UIColor colorWithRed:0.75390625 green:0.02734375 blue:0.02734375 alpha:1];
+    [bannerView.configBannerLabel setOverlayOff:NO];
+    [bannerView setBannerColor:[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1]];
+    bannerView.center=CGPointMake(self.view.frame.size.width/2, 50);
     [paginaUnoContainer addSubview:bannerView];
     
-    configTituloLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-20, 30)];
+    /*BannerView *bannerView=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, mainScrollView.frame.size.width-10, 0)];
+    [bannerView ponerTexto:@"CONFIGURACIÓN"];
+    bannerView.center=CGPointMake(mainScrollView.frame.size.width/2, 50);
+    [paginaUnoContainer addSubview:bannerView];*/
+    
+    /*configTituloLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-20, 30)];
     
     configTituloLabel.center=CGPointMake(paginaUnoContainer.frame.size.width/2, 104);
     if (deviceKind==2) {
         configTituloLabel.center=CGPointMake(paginaUnoContainer.frame.size.width/2, 124);
     }
-    [configTituloLabel ponerTexto:@"CONFIGURA TU TAXÍMETRO" fuente:[UIFont fontWithName:kFontType size:30] color:kTitleBlueColor];
+    [configTituloLabel ponerTexto:@"CONFIGURA TU TAXÍMETRO" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor colorWithRed:0.75390625 green:0.57421875 blue:0.06640625 alpha:1]];
     [configTituloLabel setCentrado:YES];
-    [paginaUnoContainer addSubview:configTituloLabel];
+    //[configTituloLabel setOverlayOff:YES];
+    [paginaUnoContainer addSubview:configTituloLabel];*/
     
-    containerConfig=[[UIView alloc]initWithFrame:CGRectMake(10, bannerView.frame.size.height+configTituloLabel.frame.size.height+5,paginaUnoContainer.frame.size.width-20, 160)];
+    containerConfig=[[UIView alloc]initWithFrame:CGRectMake(5, bannerView.frame.size.height+15,paginaUnoContainer.frame.size.width-10, 165)];
     
     if (deviceKind==2) {
-        containerConfig.frame=CGRectMake(10, bannerView.frame.size.height+configTituloLabel.frame.size.height+45, paginaUnoContainer.frame.size.width-20, 160);
+        containerConfig.frame=CGRectMake(5, bannerView.frame.size.height+configTituloLabel.frame.size.height+45, paginaUnoContainer.frame.size.width-10, 160);
     }
     
-    containerConfig.backgroundColor=[UIColor darkGrayColor];
+    containerConfig.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
     containerConfig.layer.cornerRadius=3;
     [paginaUnoContainer addSubview:containerConfig];
     
     int margenLabels=10;
-    nocDomFesLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 10, 130, 20)];
-    [nocDomFesLabel ponerTexto:@"Noc-Dom-Fes" fuente:[UIFont fontWithName:kFontType size:25] color:[UIColor whiteColor]];
+    nocDomFesLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 10, 130, 30)];
+    [nocDomFesLabel ponerTexto:@"Noc-Dom-Fes" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1]];
     [nocDomFesLabel setOverlayOff:YES];
     [containerConfig addSubview:nocDomFesLabel];
     
-    nocDomFesSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-60, 8, 0, 0)];
+    nocDomFesSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 8, 0, 0)];
     
     [nocDomFesSwitch addTarget:self action:@selector(animacionNoche:)];
     
     [containerConfig addSubview:nocDomFesSwitch];
     
-    aeropuertoLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 50, 130, 20)];
-    [aeropuertoLabel ponerTexto:@"Aeropuerto" fuente:[UIFont fontWithName:kFontType size:25] color:[UIColor whiteColor]];
+    aeropuertoLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 50, 130, 30)];
+    [aeropuertoLabel ponerTexto:@"Aeropuerto" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1]];
     [aeropuertoLabel setOverlayOff:YES];
     [containerConfig addSubview:aeropuertoLabel];
     
-    aeropuertoSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-60, 48, 0, 0)];
+    aeropuertoSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 48, 0, 0)];
     [containerConfig addSubview:aeropuertoSwitch];
     
-    puertaApuertaLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 90, 130, 20)];
-    [puertaApuertaLabel ponerTexto:@"Puerta a puerta" fuente:[UIFont fontWithName:kFontType size:25] color:[UIColor whiteColor]];
+    puertaApuertaLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 90, 130, 30)];
+    [puertaApuertaLabel ponerTexto:@"Puerta a puerta" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1]];
     [puertaApuertaLabel setOverlayOff:YES];
     [containerConfig addSubview:puertaApuertaLabel];
     
-    puertaApuertaSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-60, 88, 0, 0)];
+    puertaApuertaSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 88, 0, 0)];
     [containerConfig addSubview:puertaApuertaSwitch];
     
-    terminalLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 130, 130, 20)];
-    [terminalLabel ponerTexto:@"Terminal" fuente:[UIFont fontWithName:kFontType size:25] color:[UIColor whiteColor]];
+    terminalLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 130, 130, 30)];
+    [terminalLabel ponerTexto:@"Terminal" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1]];
     [terminalLabel setOverlayOff:YES];
     [containerConfig addSubview:terminalLabel];
     
-    terminalSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-60, 128, 0, 0)];
+    terminalSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 128, 0, 0)];
     [containerConfig addSubview:terminalSwitch];
     
     UIView *containerValoresYTiempo=[[UIView alloc]initWithFrame:CGRectMake(0, 0, paginaUnoContainer.frame.size.width-20, 40)];
@@ -307,9 +331,12 @@
     containerValoresYTiempo.center=CGPointMake(paginaUnoContainer.frame.size.width/2, (bannerView.frame.size.height+configTituloLabel.frame.size.height+containerConfig.frame.size.height+10)+(containerValoresYTiempo.frame.size.height/2));
     [paginaUnoContainer addSubview:containerValoresYTiempo];
     
-    CustomButton *botonEnviarPlaca=[[CustomButton alloc]initWithFrame:CGRectMake(0, 0, 80, 40)];
-    botonEnviarPlaca.center=CGPointMake(paginaUnoContainer.frame.size.width-10-(botonEnviarPlaca.frame.size.width/2), paginaUnoContainer.frame.size.height-(botonEnviarPlaca.frame.size.height/2)-8);
-    [botonEnviarPlaca setTitle:@"Enviar Placa" forState:UIControlStateNormal];
+    CustomButton *botonEnviarPlaca=[[CustomButton alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
+    botonEnviarPlaca.center=CGPointMake(paginaUnoContainer.frame.size.width-5-(botonEnviarPlaca.frame.size.width/2), paginaUnoContainer.frame.size.height-(botonEnviarPlaca.frame.size.height/2)-8);
+    [botonEnviarPlaca setTitle:@"Consultar Placa" forState:UIControlStateNormal];
+    botonEnviarPlaca.backgroundColor=kDarkRedColor;
+    [botonEnviarPlaca setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [botonEnviarPlaca setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     [botonEnviarPlaca addTarget:self action:@selector(irAPlaca) forControlEvents:UIControlEventTouchUpInside];
     [paginaUnoContainer addSubview:botonEnviarPlaca];
     
@@ -321,42 +348,54 @@
     paginaDos.backgroundColor=[UIColor clearColor];
     [mainScrollView addSubview:paginaDos];
     
-    bannerPaginaDos=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, paginaDos.frame.size.width-20, 50)];
+    bannerPaginaDos=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, paginaDos.frame.size.width-10, 50)];
     bannerPaginaDos.center=CGPointMake(paginaDos.frame.size.width/2, 25);
     [bannerPaginaDos ponerTexto:@"CALCULAR" fuente:[UIFont fontWithName:kFontType size:40] color:kTitleBlueColor];
     [bannerPaginaDos setCentrado:YES];
     [paginaDos addSubview:bannerPaginaDos];
     
-    containerBotonesPaginaDos=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 215, 30)];
-    containerBotonesPaginaDos.center=CGPointMake(paginaDos.frame.size.width/2, 60);
+    containerBotonesPaginaDos=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 200, 35)];
+    containerBotonesPaginaDos.center=CGPointMake(paginaDos.frame.size.width/2, 62);
     containerBotonesPaginaDos.layer.cornerRadius=3;
     containerBotonesPaginaDos.backgroundColor=kBeigeColor;
+    containerBotonesPaginaDos.layer.shadowColor = [[UIColor colorWithWhite:0.1 alpha:1] CGColor];
+    containerBotonesPaginaDos.layer.shadowOffset = CGSizeMake(0.0f,1.0f);
+    containerBotonesPaginaDos.layer.shadowRadius = 1;
+    containerBotonesPaginaDos.layer.shadowOpacity = 0.3;
     [paginaDos addSubview:containerBotonesPaginaDos];
+    
     UIView *separador=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 1, containerBotonesPaginaDos.frame.size.height-5)];
     separador.center=CGPointMake(containerBotonesPaginaDos.frame.size.width/2, containerBotonesPaginaDos.frame.size.height/2);
     separador.backgroundColor=[UIColor grayColor];
     [containerBotonesPaginaDos addSubview:separador];
     
-    botonSalida=[UIButton buttonWithType:UIButtonTypeCustom];
-    botonSalida.frame=CGRectMake(10, 5, 60, 20);
-    botonSalida.titleLabel.font=[UIFont fontWithName:kFontType size:20];
-    [botonSalida setTitle:@"Salida" forState:UIControlStateNormal];
-    [botonSalida setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [botonSalida setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
-    [containerBotonesPaginaDos addSubview:botonSalida];
     ledSalida=[[UIView alloc]initWithFrame:CGRectMake(80, 7.5, 15, 15)];
     ledSalida.center=CGPointMake((containerBotonesPaginaDos.frame.size.width/2)-20, containerBotonesPaginaDos.frame.size.height/2);
     ledSalida.backgroundColor=kLiteRedColor;
     ledSalida.layer.cornerRadius=ledSalida.frame.size.width/2;
     [containerBotonesPaginaDos addSubview:ledSalida];
+    botonSalida=[UIButton buttonWithType:UIButtonTypeCustom];
+    botonSalida.frame=CGRectMake(0, 0, 88, containerBotonesPaginaDos.frame.size.height);
+    botonSalida.titleLabel.font=[UIFont fontWithName:kFontType size:20];
+    [botonSalida setTitle:@"Salida" forState:UIControlStateNormal];
+    botonSalida.tag=1;
+    //botonSalida.backgroundColor=kGreenColor;
+    [botonSalida setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [botonSalida setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
+    [containerBotonesPaginaDos addSubview:botonSalida];
+    [botonSalida addTarget:self action:@selector(callAlert:) forControlEvents:UIControlEventTouchUpInside];
     
     botonDestino=[UIButton buttonWithType:UIButtonTypeCustom];
-    botonDestino.frame=CGRectMake(containerBotonesPaginaDos.frame.size.width-70, 5, 60, 20);
+    botonDestino.frame=CGRectMake(containerBotonesPaginaDos.frame.size.width-88, 0, 95, containerBotonesPaginaDos.frame.size.height);
     botonDestino.titleLabel.font=[UIFont fontWithName:kFontType size:20];
+    //botonDestino.backgroundColor=kGreenColor;
     [botonDestino setTitle:@"Destino" forState:UIControlStateNormal];
     [botonDestino setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [botonDestino setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
+    botonDestino.tag=2;
     [containerBotonesPaginaDos addSubview:botonDestino];
+    [botonDestino addTarget:self action:@selector(callAlert:) forControlEvents:UIControlEventTouchUpInside];
+    
     ledDestino=[[UIView alloc]initWithFrame:CGRectMake(120, 7.5, 15, 15)];
     ledDestino.center=CGPointMake((containerBotonesPaginaDos.frame.size.width/2)+20, containerBotonesPaginaDos.frame.size.height/2);
 
@@ -364,77 +403,138 @@
     ledDestino.layer.cornerRadius=ledSalida.frame.size.width/2;
     [containerBotonesPaginaDos addSubview:ledDestino];
     
-    mapaPaginaDos=[[MKMapView alloc]initWithFrame:CGRectMake(10, bannerPaginaDos.frame.size.height+configTituloLabel.frame.size.height+5, paginaUnoContainer.frame.size.width-20, 195)];
+    locationManager = [[CLLocationManager alloc] init];
+	locationManager.delegate = self;
+	locationManager.distanceFilter = kCLLocationAccuracyHundredMeters;
+	locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    mapaPaginaDos=[[MKMapView alloc]initWithFrame:CGRectMake(5, bannerPaginaDos.frame.size.height+configTituloLabel.frame.size.height+35, paginaUnoContainer.frame.size.width-10, 195)];
     if (self.view.frame.size.height>480) {
-        mapaPaginaDos.frame=CGRectMake(10, bannerPaginaDos.frame.size.height+configTituloLabel.frame.size.height+5, paginaUnoContainer.frame.size.width-20, 280);
+        mapaPaginaDos.frame=CGRectMake(5, bannerPaginaDos.frame.size.height+configTituloLabel.frame.size.height+5, paginaUnoContainer.frame.size.width-10, 280);
     }
+    mapaPaginaDos.delegate=self;
     mapaPaginaDos.layer.cornerRadius=3;
+    mapaPaginaDos.tag=1001;
+    recognizerAnotattion = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandler:)];
+    recognizerAnotattion.delegate=self;
+    [mapaPaginaDos addGestureRecognizer:recognizerAnotattion];
+    myRegionAnnotation = [[RegionAnnotation alloc] init];
+    annotationA= [[RegionAnnotation alloc] init];
+    annotationB= [[RegionAnnotation alloc] init];
     [paginaDos addSubview:mapaPaginaDos];
+    routeView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, mapaPaginaDos.frame.size.width, mapaPaginaDos.frame.size.height)];
+    routeView.userInteractionEnabled = NO;
+    [mapaPaginaDos addSubview:routeView];
+
+    /*UITapGestureRecognizer *zoomTapMap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(zoomMapView)];
+    [mapaPaginaDos addGestureRecognizer:zoomTapMap];*/
+    
     botonCalcular=[[CustomButton alloc]initWithFrame:CGRectMake(0, 0, 80, 40)];
     botonCalcular.center=CGPointMake(paginaUnoContainer.frame.size.width-10-(botonCalcular.frame.size.width/2), paginaDos.frame.size.height-(botonCalcular.frame.size.height/2)-8);
     [botonCalcular setTitle:@"Calcular" forState:UIControlStateNormal];
+    [botonCalcular addTarget:self action:@selector(callCalcular) forControlEvents:UIControlEventTouchUpInside];
     [paginaDos addSubview:botonCalcular];
     
-    
+}
+#pragma mark - ViewCalcular
+-(void)crearViewCalcular{
+    calcular=[[CalcularView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [calcular construirMenuConDeviceKind:deviceKind];
+    [self.view addSubview:calcular];
+}
+#pragma mark - ViewAlert
+-(void)crearViewAlert{
+    alert=[[AlertView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [alert crearView];    
+    [self.view addSubview:alert];
 }
 #pragma mark - pagina tres
 -(void)crearPaginaTres{
     paginaTres=[[UIView alloc]initWithFrame:CGRectMake(mainScrollView.frame.size.width*2, 0, mainScrollView.frame.size.width, mainScrollView.frame.size.height)];
-    paginaTres.backgroundColor=[UIColor clearColor];
+    paginaTres.backgroundColor=kYellowColor;
     [mainScrollView addSubview:paginaTres];
     
-    bannerPaginaTres=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, mainScrollView.frame.size.width-20, 0)];
+    BannerView *bannerView=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, mainScrollView.frame.size.width-10, 0)];
+    [bannerView ponerTexto:@"CONSULTAR PLACA"];
+    bannerView.configBannerLabel.textColor=[UIColor colorWithRed:0.75390625 green:0.02734375 blue:0.02734375 alpha:1];
+    [bannerView.configBannerLabel setOverlayOff:NO];
+    [bannerView setBannerColor:[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1]];
+    bannerView.center=CGPointMake(self.view.frame.size.width/2, 50);
+    [paginaTres addSubview:bannerView];
+    
+    /*bannerPaginaTres=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, mainScrollView.frame.size.width-10, 0)];
     [bannerPaginaTres ponerTexto:@"ENVÍA TU PLACA"];
     bannerPaginaTres.center=CGPointMake(mainScrollView.frame.size.width/2, 50);
-    [paginaTres addSubview:bannerPaginaTres];
+    [paginaTres addSubview:bannerPaginaTres];*/
     
-    containerPlacaPaginaTres=[[UIView alloc]initWithFrame:CGRectMake(10, bannerPaginaTres.frame.size.height+5,paginaTres.frame.size.width-20, 190)];
+    containerPlacaPaginaTres=[[UIView alloc]initWithFrame:CGRectMake(5, bannerView.frame.size.height+20,paginaTres.frame.size.width-10, 190)];
     
     if (deviceKind==2) {
-        containerPlacaPaginaTres.frame=CGRectMake(10, bannerPaginaTres.frame.size.height+45, paginaTres.frame.size.width-20, 190);
+        containerPlacaPaginaTres.frame=CGRectMake(5, bannerPaginaTres.frame.size.height+45, paginaTres.frame.size.width-10, 190);
     }
-    
-    containerPlacaPaginaTres.backgroundColor=[UIColor darkGrayColor];
-    containerPlacaPaginaTres.layer.cornerRadius=3;
+    containerPlacaPaginaTres.backgroundColor=[UIColor clearColor];
     [paginaTres addSubview:containerPlacaPaginaTres];
-    footer=[[CustomLabel alloc]initWithFrame:CGRectMake(10, containerPlacaPaginaTres.frame.size.height-50, containerPlacaPaginaTres.frame.size.width-20, 40)];
-    //footer.backgroundColor=kYellowColor;
-    [footer ponerTexto:@"Envía la placa a la red social que elijas, o consulta el historial del taxi en Denuncie Al Taxista." fuente:[UIFont fontWithName:kFontType size:15] color:kWhiteColor];
-    footer.numberOfLines=3;
-    [footer setCentrado:YES];
-    [footer setOverlayOff:YES];
-    [containerPlacaPaginaTres addSubview:footer];
+    
+    UIButton *buttonConsultar=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 90, 40)];
+    buttonConsultar.center=CGPointMake(self.view.frame.size.width/2, 130);
+    buttonConsultar.titleLabel.font=[UIFont fontWithName:kFontType size:24];
+    [buttonConsultar setTitle:@"Consultar" forState:UIControlStateNormal];
+    buttonConsultar.backgroundColor=kDarkRedColor;
+    [buttonConsultar addTarget:self action:@selector(consultar) forControlEvents:UIControlEventTouchUpInside];
+    [containerPlacaPaginaTres addSubview:buttonConsultar];
     
     UIView *placaContainer=[[UIView alloc]initWithFrame:CGRectMake(30, 20, containerPlacaPaginaTres.frame.size.width-60, 90)];
-    placaContainer.backgroundColor=kYellowColor;
+    placaContainer.backgroundColor=kWhiteColor;
+    placaContainer.layer.shadowColor = [[UIColor colorWithWhite:0.1 alpha:1] CGColor];
+    placaContainer.layer.shadowOffset = CGSizeMake(0.0f,1.0f);
+    placaContainer.layer.shadowRadius = 1;
+    placaContainer.layer.shadowOpacity = 0.3;
     [containerPlacaPaginaTres addSubview:placaContainer];
     placa=[[UITextField alloc]initWithFrame:CGRectMake(10, 5, placaContainer.frame.size.width-20, placaContainer.frame.size.height-10)];
     placa.backgroundColor=[UIColor clearColor];
     placa.placeholder=@"#PLACA";
     placa.delegate=self;
     placa.font=[UIFont fontWithName:kFontType size:70];
-    placa.textAlignment=UITextAlignmentCenter;
+    //placa.textAlignment=UITextAlignmentCenter;
+    placa.textAlignment=ALIGN_CENTER;
+
     placa.autocorrectionType=UITextAutocorrectionTypeNo;
     placa.autocapitalizationType=UITextAutocapitalizationTypeAllCharacters;
     placa.textColor=kDarkGrayColor;
     [placaContainer addSubview:placa];
     
-    botonEnviarRedes=[[CustomButton alloc]initWithFrame:CGRectMake(0, 0, 80, 40)];
-    botonEnviarRedes.center=CGPointMake(paginaTres.frame.size.width-10-(botonEnviarRedes.frame.size.width/2), paginaTres.frame.size.height-(botonEnviarRedes.frame.size.height/2)-8);
-    [botonEnviarRedes setTitle:@"Enviar" forState:UIControlStateNormal];
-    [botonEnviarRedes setTitleColor:kGrayColor forState:UIControlStateNormal];
-    [botonEnviarRedes setTitleColor:kDarkGrayColor forState:UIControlStateHighlighted];
-    [paginaTres addSubview:botonEnviarRedes];
-    
-    botonEnviarDenuncie=[[CustomButton alloc]initWithFrame:CGRectMake(0, 0, 140, 40)];
-    botonEnviarDenuncie.center=CGPointMake(paginaTres.frame.size.width-30-(botonEnviarDenuncie.frame.size.width), paginaTres.frame.size.height-(botonEnviarRedes.frame.size.height/2)-8);
-    [botonEnviarDenuncie setTitle:@"Denuncie Al Taxista" forState:UIControlStateNormal];
-    [botonEnviarDenuncie setTitleColor:kGrayColor forState:UIControlStateNormal];
-    [botonEnviarDenuncie setTitleColor:kDarkGrayColor forState:UIControlStateHighlighted];
-    [paginaTres addSubview:botonEnviarDenuncie];
+    footer=[[UILabel alloc]initWithFrame:CGRectMake(0, 150, containerPlacaPaginaTres.frame.size.width, 50)];
+    footer.backgroundColor=[UIColor clearColor];
+    //&footer.textAlignment=UITextAlignmentCenter;
+    footer.textAlignment=ALIGN_CENTER;
 
-
+    footer.font=[UIFont fontWithName:kFontType size:28];
+    footer.textColor=[UIColor colorWithRed:0.3 green:0.3 blue:0.3 alpha:1];
+    footer.text=@"Por favor escriba una placa valida";
+    footer.alpha=0;
+    [containerPlacaPaginaTres addSubview:footer];
+}
+-(BOOL)checkPlaca:(NSString *)placaConsultada {
     
+    NSString* placaRegex = @"[A-Za-z]{3,3}[0-9]{3,3}";
+    NSPredicate* placaTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", placaRegex];
+    
+    return [placaTest evaluateWithObject:placaConsultada];
+}
+-(void)consultar{
+    BOOL *resultado= [self checkPlaca:placa.text];
+    if ([placa.text isEqual:@""] || resultado==NO) {
+        [self animarView:footer ConOpacidad:1];
+    }
+    else{
+        ConsultarPlacaViewController *cPVC=[[ConsultarPlacaViewController alloc]init];
+        cPVC=[self.storyboard instantiateViewControllerWithIdentifier:@"ConsultarPlaca"];
+        cPVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        cPVC.stringPlaca=placa.text;
+        [cPVC.self consutar];
+        [self presentModalViewController:cPVC animated:YES];
+    }
+   
 }
 #pragma mark - animaciones
 -(void)animacionNoche:(CustomSwitch*)switch1{
@@ -463,7 +563,7 @@
         [UIView setAnimationDelegate:self];
         [UIView setAnimationDuration:0.3];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        self.view.frame=CGRectMake(0, -100, viewWidth, viewHeight);
+        self.view.frame=CGRectMake(0, -115, viewWidth, viewHeight);
         [UIView commitAnimations];
     }
     else{
@@ -534,6 +634,13 @@ int counter=0;
         [UIView commitAnimations];
     }
 }
+-(void)animarView:(UIView*)view ConOpacidad:(float)opacidad{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDuration:0.5];
+    view.alpha=opacidad;
+    [UIView commitAnimations];
+}
 #pragma mark - timer
 -(void)clockStart {
     if (![vTimer isValid]) {
@@ -568,7 +675,9 @@ int counter=0;
 }
 #pragma mark - menu principal
 -(void)callMenu{
-    
+    [self.view bringSubviewToFront:menu];
+    [self.view bringSubviewToFront:containerMenu];
+    [self.view bringSubviewToFront:menuButton];
     [menu changeState];
 }
 -(void)irAPlaca{
@@ -579,29 +688,417 @@ int counter=0;
 }
 -(void)bringMenuToFront{
     [self.view setUserInteractionEnabled:YES];
-    [self.view bringSubviewToFront:menu];
-    [self.view bringSubviewToFront:containerMenu];
-    [self.view bringSubviewToFront:menuButton];
+    //[self.view bringSubviewToFront:menu];
+    //[self.view bringSubviewToFront:containerMenu];
+    //[self.view bringSubviewToFront:menuButton];
 }
+#pragma mark Calcular
+-(void)callCalcular{
+    //double distanciaPreliminar;
+    CLLocationDistance distanciaPreliminar=[ptoA distanceFromLocation:ptoB];
+    routes =[self calculateRoutesFrom:ptoA.coordinate to:ptoB.coordinate];
+    if (distanciaPreliminar<120000) {
+    NSLog(@"Estoyyy aquiiii");
+    [self updateRouteView];
+    
+     }
+     else{
+     routeView.Hidden=YES;
+     
+     }
+    [calcular changeState];
+    [self.view bringSubviewToFront:calcular];
+}
+-(float)calcularValor{
+    float unidades = [Modelador conversorMetrosAUnidades:distanciaMetros paraElTaximetro:taximetro];
+    float total = [Modelador unidadesADinero:unidades paraElTaximetro:taximetro];
+    if (total<taximetro.carreraMinima) {
+        total=taximetro.carreraMinima;
+    }
+    //NSLog(@"Total a pagar %.0f",total);
+    return total;
+}
+#pragma mark Alert
+-(void)callAlert:(CustomButton*)button{
+    [alert changeState];
+    [self.view bringSubviewToFront:alert];
+    if (button.tag==1) {
+        seleccionarAB=1;
+        [alert.buttonCancelar removeTarget:self action:@selector(backPaginados:) forControlEvents:UIControlEventTouchUpInside];
+        [alert.buttonNo removeTarget:self action:@selector(showAlertMessageView:) forControlEvents:UIControlEventTouchUpInside];
+        [alert.buttonSi removeTarget:self action:@selector(pocisionActual) forControlEvents:UIControlEventTouchUpInside];
+        [alert.labelMensaje ponerTexto:@"¿Quieres que tu punto de salida sea el lugar donde te encuentras?" fuente:[UIFont fontWithName:kFontType size:32] color:kWhiteColor];
+        alert.buttonCancelar.tag=2000;
+        [alert.buttonCancelar addTarget:self action:@selector(backPaginados:) forControlEvents:UIControlEventTouchUpInside];
+        alert.buttonNo.tag=1;
+        [alert.buttonNo addTarget:self action:@selector(showAlertMessageView:) forControlEvents:UIControlEventTouchUpInside];
+        [alert.buttonSi addTarget:self action:@selector(pocisionActual) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    else if(button.tag==2){
+        seleccionarAB=2;
+        [alert.buttonCancelar removeTarget:self action:@selector(backPaginados:) forControlEvents:UIControlEventTouchUpInside];
+        [alert.buttonNo removeTarget:self action:@selector(showAlertMessageView:) forControlEvents:UIControlEventTouchUpInside];
+        [alert.buttonSi removeTarget:self action:@selector(pocisionActual) forControlEvents:UIControlEventTouchUpInside];
+        [alert.labelMensaje ponerTexto:@"¿Quieres que tu punto de destino sea el lugar donde te encuentras?" fuente:[UIFont fontWithName:kFontType size:32] color:kWhiteColor];
+        alert.buttonCancelar.tag=2001;
+        [alert.buttonCancelar addTarget:self action:@selector(backPaginados:) forControlEvents:UIControlEventTouchUpInside];
+        alert.buttonNo.tag=2;
+        [alert.buttonNo addTarget:self action:@selector(showAlertMessageView:) forControlEvents:UIControlEventTouchUpInside];
+        [alert.buttonSi addTarget:self action:@selector(pocisionActual) forControlEvents:UIControlEventTouchUpInside];
+    }
+}
+-(void)backPaginados:(CustomButton*)button{
+    NSLog(@"%i", button.tag);
+    if (button.tag==2000 && seleccionarAB==2) {
+        seleccionarAB=2;
+    }
+    else if (button.tag==2001 && seleccionarAB==1){
+        seleccionarAB=1;
+    }
+    [alert changeState];
+}
+
+-(void)pocisionActual{
+    [alert changeState];
+    currentLocation = locationManager.location.coordinate;
+    MKCoordinateRegion extentsRegion = MKCoordinateRegionMakeWithDistance(currentLocation, 2000, 2000);
+    [mapaPaginaDos setRegion:extentsRegion animated:YES];
+    CLRegion *newRegion = [[CLRegion alloc] initCircularRegionWithCenter:currentLocation
+                                                                  radius:1000.0
+                                                              identifier:[NSString stringWithFormat:@"%f, %f", mapaPaginaDos.centerCoordinate.latitude, mapaPaginaDos.centerCoordinate.longitude]];
+    if (seleccionarAB==1) {
+        ptoA=[[CLLocation alloc] initWithLatitude:currentLocation.latitude longitude:currentLocation.longitude];
+        NSString *annotationIdentifier = [annotationA title];
+        RegionAnnotationView *regionView = (RegionAnnotationView *)[mapaPaginaDos dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
+        regionView = [[RegionAnnotationView alloc] initWithAnnotation:annotationA withcolor:MKPinAnnotationColorRed];
+        regionView.map = mapaPaginaDos;
+        [annotationA setRegion:newRegion];
+        [annotationA setCoordinate:newRegion.center];
+        [mapaPaginaDos addAnnotation:annotationA];
+    }
+    else{
+        ptoB=[[CLLocation alloc] initWithLatitude:currentLocation.latitude longitude:currentLocation.longitude];
+        NSString *annotationIdentifier = [annotationB title];
+        RegionAnnotationView *regionView = (RegionAnnotationView *)[mapaPaginaDos dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
+        regionView = [[RegionAnnotationView alloc] initWithAnnotation:annotationB withcolor:MKPinAnnotationColorGreen];
+        regionView.map = mapaPaginaDos;
+        [annotationB setRegion:newRegion];
+        [annotationB setCoordinate:newRegion.center];
+        [mapaPaginaDos addAnnotation:annotationB];
+    }
+    
+   
+}
+
+#pragma mark - ViewAlertMessage
+-(void)crearViewAlertMessage{
+    alertMessage=[[AlertMessageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [alertMessage crearView];
+    [self.view addSubview:alertMessage];
+}
+-(void)showAlertMessageView:(CustomButton*)button{
+    [alert changeState];
+    [alertMessage changeState];
+    [self.view bringSubviewToFront:alertMessage];
+    if (button.tag==1) {
+    alertMessage.tag=100;
+    [alertMessage.labelMensaje ponerTexto:@"Ubica cual quieres que sea tu punto de salida tocando un punto en el mapa." fuente:[UIFont fontWithName:kFontType size:32] color:kWhiteColor];
+    }
+    else if(button.tag==2){
+    alertMessage.tag=100;
+    [alertMessage.labelMensaje ponerTexto:@"Ubica cual quieres que sea tu punto de destino tocando un punto en el mapa." fuente:[UIFont fontWithName:kFontType size:32] color:kWhiteColor];
+    }
+    
+}
+#pragma mark - MKMapViewDelegate
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    
+	if([annotation isKindOfClass:[RegionAnnotation class]]) {
+		RegionAnnotation *currentAnnotation = (RegionAnnotation *)annotation;
+		NSString *annotationIdentifier = [currentAnnotation title];
+		RegionAnnotationView *regionView = (RegionAnnotationView *)[mapaPaginaDos dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
+        if (!regionView) {
+            if (seleccionarAB==1) {
+                regionView = [[RegionAnnotationView alloc] initWithAnnotation:annotation withcolor:MKPinAnnotationColorRed];
+            }
+            else if (seleccionarAB==2){
+                regionView = [[RegionAnnotationView alloc] initWithAnnotation:annotation withcolor:MKPinAnnotationColorGreen];
+            }
+			regionView.map = mapaPaginaDos;
+			
+			// Create a button for the left callout accessory view of each annotation to remove the annotation and region being monitored.
+			UIButton *removeRegionButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            removeRegionButton.backgroundColor=kLiteRedColor;
+            [removeRegionButton setTitle:@"x" forState:UIControlStateNormal];
+			[removeRegionButton setFrame:CGRectMake(0., 0., 25., 25.)];
+			
+			regionView.leftCalloutAccessoryView = removeRegionButton;
+		} else {
+			regionView.annotation = annotation;
+			regionView.theAnnotation = annotation;
+		}
+		
+		return regionView;
+	}
+	
+	return nil;
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState {
+	if([annotationView isKindOfClass:[RegionAnnotationView class]]) {
+		RegionAnnotationView *regionView = (RegionAnnotationView *)annotationView;
+		RegionAnnotation *regionAnnotation = (RegionAnnotation *)regionView.annotation;
+		
+		// If the annotation view is starting to be dragged, remove the overlay and stop monitoring the region.
+		if (newState == MKAnnotationViewDragStateStarting) {
+			[locationManager stopMonitoringForRegion:regionAnnotation.region];
+		}
+		
+		// Once the annotation view has been dragged and placed in a new location, update and add the overlay and begin monitoring the new region.
+		if (oldState == MKAnnotationViewDragStateDragging && newState == MKAnnotationViewDragStateEnding) {
+			
+			CLRegion *newRegion = [[CLRegion alloc] initCircularRegionWithCenter:regionAnnotation.coordinate radius:1000.0 identifier:[NSString stringWithFormat:@"%f, %f", regionAnnotation.coordinate.latitude, regionAnnotation.coordinate.longitude]];
+			regionAnnotation.region = newRegion;
+            
+		}
+	}
+}
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+	RegionAnnotationView *regionView = (RegionAnnotationView *)view;
+	RegionAnnotation *regionAnnotation = (RegionAnnotation *)regionView.annotation;
+	
+	// Stop monitoring the region, remove the radius overlay, and finally remove the annotation from the map.
+	[locationManager stopMonitoringForRegion:regionAnnotation.region];
+	[mapaPaginaDos removeAnnotation:regionAnnotation];
+}
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+    [self updateRouteView];
+	routeView.hidden = NO;
+    [routeView setNeedsDisplay];
+}
+
+- (void)tapGestureHandler:(UITapGestureRecognizer *)tgr{
+    NSLog(@"%i", seleccionarAB);
+    CGPoint touchPoint = [tgr locationInView:mapaPaginaDos];
+    CLLocationCoordinate2D touchMapCoordinate= [mapaPaginaDos convertPoint:touchPoint toCoordinateFromView:mapaPaginaDos];
+    CLRegion *newRegion = [[CLRegion alloc] initCircularRegionWithCenter:touchMapCoordinate
+                                                                  radius:1000.0
+                                                              identifier:[NSString stringWithFormat:@"%f, %f", mapaPaginaDos.centerCoordinate.latitude, mapaPaginaDos.centerCoordinate.longitude]];
+    routes = nil;
+    [self updateRouteView];
+    if (seleccionarAB==1) {
+        if ([CLLocationManager regionMonitoringAvailable]) {
+            NSString *annotationIdentifier = [annotationA title];
+            RegionAnnotationView *regionView = (RegionAnnotationView *)[mapaPaginaDos dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
+            
+            if (!regionView) {
+                NSLog(@"Entroo al 1");
+                NSLog(@"%f",touchMapCoordinate.latitude);
+                ptoA=[[CLLocation alloc] initWithLatitude:touchMapCoordinate.latitude longitude:touchMapCoordinate.longitude];
+                regionView = [[RegionAnnotationView alloc] initWithAnnotation:annotationA withcolor:MKPinAnnotationColorRed];
+                regionView.map = mapaPaginaDos;
+                [mapaPaginaDos removeAnnotation:annotationA];
+                [annotationA setRegion:newRegion];
+                [annotationA setCoordinate:newRegion.center];
+                [mapaPaginaDos addAnnotation:annotationA];
+            }
+            [locationManager stopMonitoringForRegion:newRegion];
+        }
+    }
+    else if (seleccionarAB==2){
+        if ([CLLocationManager regionMonitoringAvailable]) {
+            NSString *annotationIdentifier = [annotationB title];
+            RegionAnnotationView *regionView = (RegionAnnotationView *)[mapaPaginaDos dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
+            
+            if (!regionView) {
+                NSLog(@"Entroo al 2");
+                NSLog(@"%f",touchMapCoordinate.latitude);
+                ptoB=[[CLLocation alloc] initWithLatitude:touchMapCoordinate.latitude longitude:touchMapCoordinate.longitude];
+                regionView = [[RegionAnnotationView alloc] initWithAnnotation:annotationB withcolor:MKPinAnnotationColorGreen];
+                regionView.map = mapaPaginaDos;
+                [mapaPaginaDos removeAnnotation:annotationB];
+                [annotationB setRegion:newRegion];
+                [annotationB setCoordinate:newRegion.center];
+                [mapaPaginaDos addAnnotation:annotationB];
+           }
+            [locationManager stopMonitoringForRegion:newRegion];
+        }
+        
+    }
+    
+}
+#pragma mark decodificacion
+-(NSMutableArray *)decodePolyLine: (NSMutableString *)encoded {
+	[encoded replaceOccurrencesOfString:@"\\\\" withString:@"\\"
+								options:NSLiteralSearch
+								  range:NSMakeRange(0, [encoded length])];
+	NSInteger len = [encoded length];
+	NSInteger index = 0;
+	NSMutableArray *array = [[NSMutableArray alloc] init];
+	NSInteger lat=0;
+	NSInteger lng=0;
+    banderaU = NO;
+    distanciaMetros = 0;
+	while (index < len) {
+		NSInteger b;
+		NSInteger shift = 0;
+		NSInteger result = 0;
+		do {
+			b = [encoded characterAtIndex:index++] - 63;
+			result |= (b & 0x1f) << shift;
+			shift += 5;
+		} while (b >= 0x20);
+		NSInteger dlat = ((result & 1) ? ~(result >> 1) : (result >> 1));
+		lat += dlat;
+		shift = 0;
+		result = 0;
+		do {
+			b = [encoded characterAtIndex:index++] - 63;
+			result |= (b & 0x1f) << shift;
+			shift += 5;
+		} while (b >= 0x20);
+		NSInteger dlng = ((result & 1) ? ~(result >> 1) : (result >> 1));
+		lng += dlng;
+		NSNumber *latitude = [[NSNumber alloc] initWithFloat:lat * 1e-5];
+		NSNumber *longitude = [[NSNumber alloc] initWithFloat:lng * 1e-5];
+		CLLocation *loc = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
+        
+        ////////
+        locationOne.latitude = loc.coordinate.latitude;
+        locationOne.longitude = loc.coordinate.longitude;
+        if (banderaU) {
+            locationOne.latitude= locationPast.latitude;
+            locationOne.longitude= locationPast.longitude;
+        }
+        locationTwo.latitude=loc.coordinate.latitude;
+        locationTwo.longitude=loc.coordinate.longitude;
+        
+        
+        CLLocation *pointALocation = [[CLLocation alloc] initWithLatitude:locationTwo.latitude longitude:locationTwo.longitude];
+        CLLocation *pointBLocation = [[CLLocation alloc] initWithLatitude:locationOne.latitude longitude:locationOne.longitude];
+        distanciaMetros += [pointALocation getDistanceFrom:pointBLocation];
+        //NSLog(@"Distancia metros %f",distanciaMetros);
+        
+        locationPast.latitude=locationTwo.latitude;
+        locationPast.longitude=locationTwo.longitude;
+        locationOne.latitude=locationPast.latitude;
+        locationOne.longitude=locationPast.longitude;
+        banderaU = YES;
+		[array addObject:loc];
+	}
+	return array;
+}
+
+#pragma mark calcular ruta
+-(NSArray*) calculateRoutesFrom:(CLLocationCoordinate2D) f to: (CLLocationCoordinate2D) t {
+    /* UIActivityIndicatorView *myIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+     myIndicator.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2);
+     myIndicator.hidesWhenStopped = NO;
+     [self.view addSubview:myIndicator];
+     [myIndicator startAnimating];*/
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	NSString* saddr = [NSString stringWithFormat:@"%f,%f", f.latitude, f.longitude];
+	NSString* daddr = [NSString stringWithFormat:@"%f,%f", t.latitude, t.longitude];
+	
+	NSString* apiUrlStr = [NSString stringWithFormat:@"http://maps.google.com/maps?output=dragdir&saddr=%@&daddr=%@", saddr, daddr];
+	NSURL* apiUrl = [NSURL URLWithString:apiUrlStr];
+	NSString *apiResponse = [NSString stringWithContentsOfURL:apiUrl];
+	NSString* encodedPoints = [apiResponse stringByMatching:@"points:\\\"([^\\\"]*)\\\"" capture:1];
+	//NSLog(@" Puntos decodificados = %@",[self decodePolyLine:[encodedPoints mutableCopy]]);
+    //printf("Lista la DECOOO00000\n");
+    //NSLog(@"Terminada la decodificación");
+    //[self delayer];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    
+	return [self decodePolyLine:[encodedPoints mutableCopy]];
+}
+
+#pragma mark mostrar ruta
+-(void) updateRouteView {
+    
+    routeView.Hidden=NO;
+	CGContextRef context = 	CGBitmapContextCreate(nil,
+												  routeView.frame.size.width,
+												  routeView.frame.size.height,
+												  8,
+												  4 * routeView.frame.size.width,
+												  CGColorSpaceCreateDeviceRGB(),
+												  kCGImageAlphaPremultipliedLast);
+    
+    
+	for(int i = 0; i < routes.count; i++) {
+        lineColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.5];
+        CGContextSetStrokeColorWithColor(context, lineColor.CGColor);
+        CGContextSetLineWidth(context, 3.0);
+		CLLocation* location = [routes objectAtIndex:i];
+		CGPoint point = [mapaPaginaDos convertCoordinate:location.coordinate toPointToView:routeView];
+		
+		if(i == 0) {
+			CGContextMoveToPoint(context, point.x, routeView.frame.size.height - point.y);
+		} else {
+			CGContextAddLineToPoint(context, point.x, routeView.frame.size.height - point.y);
+		}
+        //CGContextBeginPath(context);
+	}
+	
+    CGContextStrokePath(context);
+    
+	
+	CGImageRef image = CGBitmapContextCreateImage(context);
+	UIImage* img = [UIImage imageWithCGImage:image];
+	
+	routeView.image = img;
+	CGContextRelease(context);
+}
+
 #pragma mark - dismiss keyboard
 -(void)dismissKeyboard{
     [placa resignFirstResponder];
     tecladoUp=NO;
     [self animarViewPorTeclado];
 }
+/*-(void)zoomMapView{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDuration:0.3];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    mapaPaginaDos.frame=CGRectMake(0, 100, viewWidth, viewHeight);
+    [UIView commitAnimations];
+}*/
 #pragma mark - textfield delegate
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     tecladoUp=YES;
     [self animarViewPorTeclado];
+    [self animarView:footer ConOpacidad:0];
 }
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField{
     tecladoUp=NO;
     [self animarViewPorTeclado];
+    textField.text=[[[textField.text uppercaseString] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
     return YES;
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [self dismissKeyboard];
+    BOOL *resultado= [self checkPlaca:placa.text];
+    if ([placa.text isEqual:@""] || resultado==NO) {
+        [self animarView:footer ConOpacidad:1];
+    }
+    else{
+        ConsultarPlacaViewController *cPVC=[[ConsultarPlacaViewController alloc]init];
+        
+        //[cPVC.self consultarPlaca];
+        cPVC=[self.storyboard instantiateViewControllerWithIdentifier:@"ConsultarPlaca"];
+        
+        cPVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        cPVC.stringPlaca=placa.text;
+        [cPVC.self consutar];
+        [self presentModalViewController:cPVC animated:YES];
+    }
     return YES;
+    
 }
 
 #pragma mark - scroll delegate
@@ -653,21 +1150,21 @@ int counter=0;
         [arregloDePuntos removeAllObjects];
         arregloDePuntos=nil;
         arregloDePuntos=[[NSMutableArray alloc]init];
-        
         [locManager startUpdatingLocation];
-        
+       
         [self irAPaginaDeScroll:2];
         [self clockStart];
     }
     else{
         labelEncender.text=@"Encender";
         [locManager stopUpdatingLocation];
-        [self irAPaginaDeScroll:0];
+        //[self irAPaginaDeScroll:0];
         [self clockStop];
     }
 }
 #pragma mark location
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)location fromLocation:(CLLocation *)oldLocation{
+
     if (switchEncender.isOn) {
         zoomLocation.latitude = location.coordinate.latitude;
         zoomLocation.longitude = location.coordinate.longitude;
@@ -710,16 +1207,24 @@ int counter=0;
     
 
 }
+#pragma mark - CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError: %@", error);
+    UIAlertView *errorAlert = [[UIAlertView alloc]
+                               initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorAlert show];
+}
 -(NSString *)contarMetros{
     float metros=0;
-    int unidades=0;
-    float adicional=0;
+    //int unidades=0;
+    //float adicional=0;
     metros=[Taximetro medidorDeMetrosRecorridos:arregloDePuntos];
     labelMetros.text= [NSString stringWithFormat:@"%.1f m",metros];
     
     return @"";
 }
-#pragma mark map delegate
+/*#pragma mark map delegate
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
     if (!switchEncender.isOn) {
@@ -729,5 +1234,5 @@ int counter=0;
         
     }
 
-}
+}*/
 @end

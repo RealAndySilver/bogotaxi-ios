@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "BannerView.h"
+#import "OpcionesTaximetroView.h"
+#import "OpcionesCompartirView.h"
+#import "OpcionesContactoView.h"
 #import "CustomButton.h"
+#import "EstadisticasViewController.h"
+#import "PanicoViewController.h"
+#import "AdvertenciaViewController.h"
+#import "AcercaDeViewController.h"
 
 @interface OpcionesViewController : UIViewController{
     int deviceKind;
@@ -17,6 +24,11 @@
     CustomButton *opcionesTaxi;
     CustomButton *compartirGPS;
     CustomButton *contacto;
+    OpcionesTaximetroView *opcionesTaxiView;
+    OpcionesCompartirView *opcionesCompartir;
+    OpcionesContactoView *opcionesContactoeInformacion;
+    EstadisticasViewController *estadisticas;
+    PanicoViewController *panico;
 }
 
 @end

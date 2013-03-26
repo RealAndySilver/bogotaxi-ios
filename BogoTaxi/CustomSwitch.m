@@ -9,9 +9,9 @@
 #import "CustomSwitch.h"
 
 @implementation CustomSwitch
-#define kANCHO 50
-#define kALTO 25
-#define kFontSize 15
+#define kANCHO 60
+#define kALTO 30
+#define kFontSize 20
 #define kFontType @"LeagueGothic"
 @synthesize isOn,onLabel,offLabel;
 - (id)initWithFrame:(CGRect)frame
@@ -72,7 +72,7 @@
     return self;
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView1{
-    bolita.frame=CGRectMake((26)+(scrollView.contentOffset.x/2)*-1, 0.5, (kANCHO-2)/2, (kANCHO-2)/2);
+    bolita.frame=CGRectMake((31)+(scrollView.contentOffset.x/2)*-1, 0.5, (kANCHO-2)/2, (kANCHO-2)/2);
     cuadrito.frame=CGRectMake(0, 0, bolita.center.x, kALTO);
     int roundedValue = round(scrollView.contentOffset.x / scrollView.frame.size.width);
     if (roundedValue==1) {
@@ -109,7 +109,7 @@
         [scrollView setContentOffset:CGPointMake(0, 0.0f) animated:YES];
     }
     else{
-        [scrollView setContentOffset:CGPointMake(50, 0.0f) animated:YES];
+        [scrollView setContentOffset:CGPointMake(60, 0.0f) animated:YES];
     }
 }
 -(void)animarColorUno{

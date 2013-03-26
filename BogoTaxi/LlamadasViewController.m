@@ -38,10 +38,7 @@
     tableViewLlamadas.delegate=self;
     tableViewLlamadas.dataSource=self;
     [self.view addSubview:tableViewLlamadas];
-    
-    
-    
-    
+ 
     
     diccionarioDeLlamadas=[LLamadasObject traerDiccionarioConNumerosDeTaxis];
     arrayDeNumeros=[[NSMutableArray alloc]initWithArray:[diccionarioDeLlamadas allKeys]];

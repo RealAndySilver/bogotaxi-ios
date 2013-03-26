@@ -11,6 +11,7 @@
 @interface CustomLabel : UILabel{
     UILabel *overlayLabel;
 }
+@property(nonatomic,retain) UILabel *overlayLabel;
 -(void)ponerTexto:(NSString *)text fuente:(UIFont*)fuente color:(UIColor*)color;
 -(void)setOverlayOff:(BOOL)state;
 -(void)setCentrado:(BOOL)state;
