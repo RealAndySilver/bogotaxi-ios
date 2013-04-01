@@ -26,7 +26,24 @@
     UIButton *buttonMail;
     UIView *smsView;
     UIButton *buttonSms;
+    BOOL banderaDesplazar;
+    
+    NSString *mensaje;
+    BOOL banderaInfo;
+    UITextField *tf;
+    UITextField *tfMail;
+    UITextView *tv;
+    UITextView *tvMail;
    
 }
+-(NSString *)actualizarMensaje;
+-(void)enviarMensaje;
+-(void)dismissKeyboard;
+-(IBAction)twitterTrigger;
+-(IBAction)facebookTrigger;
+-(IBAction)mailTrigger;
+-(IBAction)smsTrigger;
+-(void)moverViewArriba;
+-(void)moverViewAbajo;
 
 @end

@@ -58,7 +58,7 @@
         datosEstadistica = tempDictB;
         datosCompras = tempDictD;
 	}
-#warning habia un log
+# warning habia un log
     //NSLog(@"DatosEst %@",datosEstadistica);
     
 	return self;
