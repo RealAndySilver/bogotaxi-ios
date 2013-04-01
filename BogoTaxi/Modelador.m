@@ -263,8 +263,7 @@
 		[xmlData writeToFile:DataPath atomically:YES];  
 		return YES;
 	} else {  
-		NSLog(@"Error writing plist to file '%s', error = '%s'", [DataPath UTF8String], [error UTF8String]);  
-		[error release];
+		NSLog(@"Error writing plist to file '%s', error = '%s'", [DataPath UTF8String], [error UTF8String]);
 		return NO;
 	}
 }
@@ -281,8 +280,7 @@
 		[xmlData writeToFile:DataPath atomically:YES];  
 		return YES;
 	} else {  
-		NSLog(@"Error writing plist to file '%s', error = '%s'", [DataPath UTF8String], [error UTF8String]);  
-		[error release];
+		NSLog(@"Error writing plist to file '%s', error = '%s'", [DataPath UTF8String], [error UTF8String]);
 		return NO;
 	}
 }
@@ -300,7 +298,6 @@
 		return YES;
 	} else {  
 		NSLog(@"Error writing plist to file '%s', error = '%s'", [DataPath UTF8String], [error UTF8String]);  
-		[error release];
 		return NO;
 	}
 }

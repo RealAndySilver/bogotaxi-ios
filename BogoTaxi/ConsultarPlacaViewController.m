@@ -108,7 +108,7 @@
     [menuButtonTop10 addTarget:self action:@selector(viewTop:) forControlEvents:UIControlEventTouchUpInside];
     [containerBotones addSubview:menuButtonTop10];
     
-    alert=[[AlertView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    alert=[[AlertMessageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [alert crearView];
     [self.view addSubview:alert];
     
@@ -895,7 +895,7 @@
     [self.view bringSubviewToFront:alert];
     //[alert.buttonCancelar removeTarget:self action:@selector(backScrollContent) forControlEvents:UIControlEventTouchUpInside];
     [alert.labelMensaje ponerTexto:@"No tienes conexion a internet, por favor conectate a una red" fuente:[UIFont fontWithName:kFontType size:32] color:kWhiteColor];
-    [alert.buttonCancelar addTarget:self action:@selector(backScrollContent) forControlEvents:UIControlEventTouchUpInside];
+    //[alert.buttonOK addTarget:self action:@selector(backScrollContent) forControlEvents:UIControlEventTouchUpInside];
 }
 -(void)backScrollContent{
     [alert changeState];

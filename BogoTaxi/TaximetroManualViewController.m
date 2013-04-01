@@ -142,9 +142,9 @@
     slider.minimumValue=25;
     slider.maximumValue=399;
     [slider addTarget:self action:@selector(sliderChange:) forControlEvents:UIControlEventValueChanged];
-    containerConfig=[[UIView alloc]initWithFrame:CGRectMake(5, self.view.frame.size.height-160-50, self.view.frame.size.width-10, 160)];
+    containerConfig=[[UIView alloc]initWithFrame:CGRectMake(5, self.view.frame.size.height-162-50, self.view.frame.size.width-10, 160)];
     if (deviceKind==2) {
-        containerConfig.frame=CGRectMake(5, self.view.frame.size.height-160-100, self.view.frame.size.width-10, 160);
+        containerConfig.frame=CGRectMake(5, self.view.frame.size.height-162-100, self.view.frame.size.width-10, 160);
     }
     containerConfig.backgroundColor=kDarkGrayColor;
     containerConfig.layer.cornerRadius=3;
@@ -155,41 +155,41 @@
     [self.view addSubview:containerConfig];
     
     int margenLabels=10;
-    nocDomFesLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 10, 130, 20)];
-    [nocDomFesLabel ponerTexto:@"Noc-Dom-Fes" fuente:[UIFont fontWithName:kFontType size:25] color:[UIColor whiteColor]];
+    nocDomFesLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 8, 130, 30)];
+    [nocDomFesLabel ponerTexto:@"Noc-Dom-Fes" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
     [nocDomFesLabel setOverlayOff:YES];
     [containerConfig addSubview:nocDomFesLabel];
     
-    nocDomFesSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-60, 8, 0, 0)];
+    nocDomFesSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 6, 0, 0)];
     
     [nocDomFesSwitch addTarget:self action:@selector(switchChanged)];
     
     [containerConfig addSubview:nocDomFesSwitch];
     
-    aeropuertoLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 50, 130, 20)];
-    [aeropuertoLabel ponerTexto:@"Aeropuerto" fuente:[UIFont fontWithName:kFontType size:25] color:[UIColor whiteColor]];
+    aeropuertoLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 48, 130, 30)];
+    [aeropuertoLabel ponerTexto:@"Aeropuerto" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
     [aeropuertoLabel setOverlayOff:YES];
     [containerConfig addSubview:aeropuertoLabel];
 
-    aeropuertoSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-60, 48, 0, 0)];
+    aeropuertoSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 46, 0, 0)];
     [containerConfig addSubview:aeropuertoSwitch];
     [aeropuertoSwitch addTarget:self action:@selector(switchChanged)];
 
-    puertaApuertaLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 90, 130, 20)];
-    [puertaApuertaLabel ponerTexto:@"Puerta a puerta" fuente:[UIFont fontWithName:kFontType size:25] color:[UIColor whiteColor]];
+    puertaApuertaLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 88, 130, 30)];
+    [puertaApuertaLabel ponerTexto:@"Puerta a puerta" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
     [puertaApuertaLabel setOverlayOff:YES];
     [containerConfig addSubview:puertaApuertaLabel];
     
-    puertaApuertaSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-60, 88, 0, 0)];
+    puertaApuertaSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 86, 0, 0)];
     [containerConfig addSubview:puertaApuertaSwitch];
     [puertaApuertaSwitch addTarget:self action:@selector(switchChanged)];
 
-    terminalLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 130, 130, 20)];
-    [terminalLabel ponerTexto:@"Terminal" fuente:[UIFont fontWithName:kFontType size:25] color:[UIColor whiteColor]];
+    terminalLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 128, 130, 30)];
+    [terminalLabel ponerTexto:@"Terminal" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
     [terminalLabel setOverlayOff:YES];
     [containerConfig addSubview:terminalLabel];
     
-    terminalSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-60, 128, 0, 0)];
+    terminalSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 126, 0, 0)];
     [containerConfig addSubview:terminalSwitch];
     [terminalSwitch addTarget:self action:@selector(switchChanged)];
 

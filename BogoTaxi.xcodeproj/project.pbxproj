@@ -64,6 +64,7 @@
 		75D6C68D1667F66600D90A0D /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D6C68C1667F66600D90A0D /* MenuView.m */; };
 		75E4F37B16697D7C007BE4C5 /* TelefonosTaxis.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75E4F37A16697D7C007BE4C5 /* TelefonosTaxis.plist */; };
 		75E4F37F1669819E007BE4C5 /* LLamadasObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E4F37E1669819E007BE4C5 /* LLamadasObject.m */; };
+		81408CD617034E1200B5981F /* TaximetroObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 81408CD517034E1200B5981F /* TaximetroObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -169,6 +170,8 @@
 		75E4F37A16697D7C007BE4C5 /* TelefonosTaxis.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TelefonosTaxis.plist; sourceTree = "<group>"; };
 		75E4F37D1669819E007BE4C5 /* LLamadasObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLamadasObject.h; sourceTree = "<group>"; };
 		75E4F37E1669819E007BE4C5 /* LLamadasObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLamadasObject.m; sourceTree = "<group>"; };
+		81408CD417034E1200B5981F /* TaximetroObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaximetroObject.h; sourceTree = "<group>"; };
+		81408CD517034E1200B5981F /* TaximetroObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaximetroObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,6 +335,8 @@
 				335CA22016EE9E520078D488 /* Taxista.m */,
 				75926D121665217000B3CDD5 /* Taximetro.h */,
 				75926D131665217000B3CDD5 /* Taximetro.m */,
+				81408CD417034E1200B5981F /* TaximetroObject.h */,
+				81408CD517034E1200B5981F /* TaximetroObject.m */,
 				75E4F37D1669819E007BE4C5 /* LLamadasObject.h */,
 				75E4F37E1669819E007BE4C5 /* LLamadasObject.m */,
 				3348558D16F7901F00929946 /* RegionAnnotation.h */,
@@ -456,6 +461,7 @@
 				3348559516F7904300929946 /* Annotation.m in Sources */,
 				3368F00116F911950093C022 /* RegexKitLite.m in Sources */,
 				33BCB86016F929FE00354F2B /* Modelador.m in Sources */,
+				81408CD617034E1200B5981F /* TaximetroObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

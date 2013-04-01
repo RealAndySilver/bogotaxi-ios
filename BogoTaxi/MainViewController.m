@@ -25,7 +25,7 @@
 #define kGrayColor [UIColor grayColor]
 #define kWhiteColor [UIColor whiteColor]
 
-#define METERS_PER_MILE 1609.344
+#define METERS_PER_MILE 1609.344 
 
 
 #ifdef NSTextAlignmentCenter
@@ -96,6 +96,12 @@
     mapView=[[MKMapView alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height-126)*-1, self.view.frame.size.width, self.view.frame.size.height-126)];
     mapView.tag=1000;
     [self.view addSubview:mapView];
+    
+    buttonAlert=[[UIButton alloc]initWithFrame:CGRectMake(10, mapView.frame.size.height-50, 40, 40)];
+    buttonAlert.backgroundColor=kLiteRedColor;
+    buttonAlert.layer.opacity=0;
+    [mapView addSubview:buttonAlert];
+    
     containerSuperior=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 126)];
     containerSuperior.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
     [self.view addSubview:containerSuperior];
@@ -123,7 +129,6 @@
     valorInputLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, 130, 35)];
     valorInputLabel.center=CGPointMake(155, barraSuperior.frame.size.height/2);
     [valorInputLabel ponerTexto:@"$99.900" fuente:[UIFont fontWithName:kFontType size:32] color:kDarkRedColor];
-    //valorInputLabel.backgroundColor=kGreenColor;
     [valorInputLabel setOverlayOff:YES];
     [barraSuperior addSubview:valorInputLabel];
     
@@ -176,7 +181,7 @@
     [containerInfoTaximetro addSubview:switchEncender];
     
     labelMetros=[[CustomLabel alloc]initWithFrame:CGRectMake(78, 46, 50, 20)];
-    [labelMetros ponerTexto:@"44444.4 m" fuente:[UIFont fontWithName:kFontType size:22] color:[UIColor whiteColor]];
+    [labelMetros ponerTexto:@"0.0 m" fuente:[UIFont fontWithName:kFontType size:22] color:[UIColor whiteColor]];
     labelMetros.adjustsFontSizeToFitWidth = YES;
     [labelMetros setOverlayOff:YES];
     [containerInfoTaximetro addSubview:labelMetros];
@@ -191,20 +196,23 @@
     UIView *containerBotonesUnidades=[[UIView alloc]initWithFrame:CGRectMake(0, containerUnidades.frame.size.height-30, containerUnidades.frame.size.width, 30)];
     containerBotonesUnidades.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
     [containerUnidades addSubview:containerBotonesUnidades];
+    unidades=25;
     UIButton *botonMenos=[UIButton buttonWithType:UIButtonTypeCustom];
-    [botonMenos addTarget:self action:@selector(startAnimationSequence) forControlEvents:UIControlEventTouchUpInside];
     botonMenos.frame=CGRectMake(0, 0, (containerBotonesUnidades.frame.size.width/2)-0.5, containerBotonesUnidades.frame.size.height);
     [botonMenos setTitle:@"-" forState:UIControlStateNormal];
     botonMenos.titleLabel.font=[UIFont  boldSystemFontOfSize:15];
+    botonMenos.tag=3000;
     botonMenos.backgroundColor=kDarkGrayColor;
+    [botonMenos addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [containerBotonesUnidades addSubview:botonMenos];
     
     UIButton *botonMas=[UIButton buttonWithType:UIButtonTypeCustom];
-    [botonMas addTarget:self action:@selector(startAnimationSequence) forControlEvents:UIControlEventTouchUpInside];
     botonMas.frame=CGRectMake((containerBotonesUnidades.frame.size.width/2)+0.5, 0, (containerBotonesUnidades.frame.size.width/2)-0.5, containerBotonesUnidades.frame.size.height);
     [botonMas setTitle:@"+" forState:UIControlStateNormal];
     botonMas.titleLabel.font=[UIFont  boldSystemFontOfSize:15];
+    botonMas.tag=3001;
     botonMas.backgroundColor=kDarkGrayColor;
+    [botonMas addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [containerBotonesUnidades addSubview:botonMas];
     
     labelUnidades=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, containerUnidades.frame.size.width-10, containerUnidades.frame.size.height-20)];
@@ -215,6 +223,17 @@
     [labelUnidades ponerTexto:@"25" fuente:[UIFont fontWithName:kFontType size:50] color:kDarkRedColor];
     [labelUnidades setOverlayOff:YES];
     [containerUnidades addSubview:labelUnidades];
+}
+-(void)buttonPressed:(UIButton*)button{
+    if (button.tag==3000) {
+        unidades-=1;
+        labelUnidades.text=[NSString stringWithFormat:@"%i",unidades];
+        
+    }
+    else if (button.tag==3001){
+        unidades+=1;
+        labelUnidades.text=[NSString stringWithFormat:@"%i",unidades];
+    }
 }
 #pragma mark - boton menu
 -(void)crearMenu{
@@ -348,6 +367,8 @@
     paginaDos.backgroundColor=[UIColor clearColor];
     [mainScrollView addSubview:paginaDos];
     
+    taximetro=[[Taximetro alloc]initWithCiudad:@"bogota"];
+    
     bannerPaginaDos=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, paginaDos.frame.size.width-10, 50)];
     bannerPaginaDos.center=CGPointMake(paginaDos.frame.size.width/2, 25);
     [bannerPaginaDos ponerTexto:@"CALCULAR" fuente:[UIFont fontWithName:kFontType size:40] color:kTitleBlueColor];
@@ -376,7 +397,7 @@
     [containerBotonesPaginaDos addSubview:ledSalida];
     botonSalida=[UIButton buttonWithType:UIButtonTypeCustom];
     botonSalida.frame=CGRectMake(0, 0, 88, containerBotonesPaginaDos.frame.size.height);
-    botonSalida.titleLabel.font=[UIFont fontWithName:kFontType size:20];
+    botonSalida.titleLabel.font=[UIFont fontWithName:kFontType size:25];
     [botonSalida setTitle:@"Salida" forState:UIControlStateNormal];
     botonSalida.tag=1;
     //botonSalida.backgroundColor=kGreenColor;
@@ -387,7 +408,7 @@
     
     botonDestino=[UIButton buttonWithType:UIButtonTypeCustom];
     botonDestino.frame=CGRectMake(containerBotonesPaginaDos.frame.size.width-88, 0, 95, containerBotonesPaginaDos.frame.size.height);
-    botonDestino.titleLabel.font=[UIFont fontWithName:kFontType size:20];
+    botonDestino.titleLabel.font=[UIFont fontWithName:kFontType size:25];
     //botonDestino.backgroundColor=kGreenColor;
     [botonDestino setTitle:@"Destino" forState:UIControlStateNormal];
     [botonDestino setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
@@ -698,26 +719,20 @@ int counter=0;
     CLLocationDistance distanciaPreliminar=[ptoA distanceFromLocation:ptoB];
     routes =[self calculateRoutesFrom:ptoA.coordinate to:ptoB.coordinate];
     if (distanciaPreliminar<120000) {
-    NSLog(@"Estoyyy aquiiii");
-    [self updateRouteView];
-    
+        [self updateRouteView];
      }
      else{
      routeView.Hidden=YES;
-     
      }
+    calcular.metros=distanciaMetros;
+    float temp=[taximetro unidadesADinero:distanciaMetros];
+    NSLog(@"Este es el valor %f",temp);
+    calcular.valueTotalAprox.text=[NSString stringWithFormat:@"$%.0f",temp];
+    calcular.valueRecorrido.text=[NSString stringWithFormat:@"%.0f m",distanciaMetros];
     [calcular changeState];
     [self.view bringSubviewToFront:calcular];
 }
--(float)calcularValor{
-    float unidades = [Modelador conversorMetrosAUnidades:distanciaMetros paraElTaximetro:taximetro];
-    float total = [Modelador unidadesADinero:unidades paraElTaximetro:taximetro];
-    if (total<taximetro.carreraMinima) {
-        total=taximetro.carreraMinima;
-    }
-    //NSLog(@"Total a pagar %.0f",total);
-    return total;
-}
+
 #pragma mark Alert
 -(void)callAlert:(CustomButton*)button{
     [alert changeState];
@@ -1151,13 +1166,14 @@ int counter=0;
         arregloDePuntos=nil;
         arregloDePuntos=[[NSMutableArray alloc]init];
         [locManager startUpdatingLocation];
-       
+        [self animarView:buttonAlert ConOpacidad:1];
         [self irAPaginaDeScroll:2];
         [self clockStart];
     }
     else{
         labelEncender.text=@"Encender";
         [locManager stopUpdatingLocation];
+        [self animarView:buttonAlert ConOpacidad:0];
         //[self irAPaginaDeScroll:0];
         [self clockStop];
     }

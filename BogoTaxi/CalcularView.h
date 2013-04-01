@@ -10,6 +10,7 @@
 #import "CustomSwitch.h"
 #import "CustomLabel.h"
 #import "CustomButton.h"
+#import "Taximetro.h"
 
 @interface CalcularView : UIView{
     CGRect myFrame;
@@ -31,8 +32,12 @@
     CustomLabel *terminalLabel;
     CustomSwitch *terminalSwitch;
     CustomButton *botonVolverAlMapa;
+    Taximetro *taximetro;
 }
 -(void)changeState;
 -(void)construirMenuConDeviceKind:(int)deviceKind;
+@property (nonatomic,retain) CustomLabel *valueTotalAprox;
+@property (nonatomic,retain) CustomLabel *valueRecorrido;
+@property (readwrite) double metros;
 
 @end

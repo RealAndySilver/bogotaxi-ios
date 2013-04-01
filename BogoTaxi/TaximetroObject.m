@@ -115,7 +115,6 @@
 
     if ([laCiudad isEqualToString:@" "]||laCiudad ==nil||[laCiudad isEqualToString:@""]||laCiudad ==NULL) {
         [obj setCiudad:laCiudad];
-        [obj release];
     }
     if ([laCiudad isEqualToString:@"Bogota"]||[laCiudad isEqualToString:@"Bogota "]) {
         

@@ -46,6 +46,7 @@
     CustomLabel *labelMetros;
     CustomLabel *labelUnidades;
     BOOL animationFinished;
+    int unidades;
     
     int deviceKind;//1=iphone4, 2=iphone5, 3=ipad.
     
@@ -69,6 +70,7 @@
     CustomSwitch *puertaApuertaSwitch;
     CustomLabel *terminalLabel;
     CustomSwitch *terminalSwitch;
+    UIButton *buttonAlert;
     
     CustomLabel *valorLabel;
     CustomLabel *valorInputLabel;
@@ -103,6 +105,7 @@
     NSArray* routes;
     UIImageView *routeView;
     UIColor* lineColor;
+    Taximetro *taximetro;
     
     //Pagina Tres
     UIView *paginaTres;

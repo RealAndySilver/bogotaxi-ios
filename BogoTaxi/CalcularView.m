@@ -22,6 +22,7 @@
 #define kWhiteColor [UIColor whiteColor]
 
 @implementation CalcularView
+@synthesize metros,valueTotalAprox,valueRecorrido;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -39,6 +40,8 @@
     background.backgroundColor=[UIColor blackColor];
     background.alpha=0.9;
     [self addSubview:background];
+    
+    taximetro=[[Taximetro alloc]initWithCiudad:@"bogota"];
     
     contenedorCalcular=[[UIView alloc]initWithFrame:CGRectMake(0, 0,self.frame.size.width-10, 140+160+10)];
     contenedorCalcular.center=CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
@@ -90,46 +93,50 @@
     //[valueRecorrido setCentrado:YES];
     [containerRecorrido addSubview:valueRecorrido];
 
-    containerConfig=[[UIView alloc]initWithFrame:CGRectMake(0, containerValores.frame.size.height+10,contenedorCalcular.frame.size.width, 160)];
+    containerConfig=[[UIView alloc]initWithFrame:CGRectMake(0, containerValores.frame.size.height+10,contenedorCalcular.frame.size.width, 162)];
     containerConfig.backgroundColor=[UIColor darkGrayColor];
     containerConfig.layer.cornerRadius=3;
     [contenedorCalcular addSubview:containerConfig];
     
     int margenLabels=10;
-    nocDomFesLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 10, 130, 20)];
-    [nocDomFesLabel ponerTexto:@"Noc-Dom-Fes" fuente:[UIFont fontWithName:kFontType size:25] color:[UIColor whiteColor]];
+    nocDomFesLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 8, 130, 30)];
+    [nocDomFesLabel ponerTexto:@"Noc-Dom-Fes" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
     [nocDomFesLabel setOverlayOff:YES];
     [containerConfig addSubview:nocDomFesLabel];
     
-    nocDomFesSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-60, 8, 0, 0)];
+    nocDomFesSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 6, 0, 0)];
     
     [nocDomFesSwitch addTarget:self action:@selector(animacionNoche:)];
     
     [containerConfig addSubview:nocDomFesSwitch];
+    [nocDomFesSwitch addTarget:self action:@selector(switchChanged)];
     
-    aeropuertoLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 50, 130, 20)];
-    [aeropuertoLabel ponerTexto:@"Aeropuerto" fuente:[UIFont fontWithName:kFontType size:25] color:[UIColor whiteColor]];
+    aeropuertoLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 48, 130, 30)];
+    [aeropuertoLabel ponerTexto:@"Aeropuerto" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
     [aeropuertoLabel setOverlayOff:YES];
     [containerConfig addSubview:aeropuertoLabel];
     
-    aeropuertoSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-60, 48, 0, 0)];
+    aeropuertoSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 46, 0, 0)];
     [containerConfig addSubview:aeropuertoSwitch];
+    [aeropuertoSwitch addTarget:self action:@selector(switchChanged)];
     
-    puertaApuertaLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 90, 130, 20)];
-    [puertaApuertaLabel ponerTexto:@"Puerta a puerta" fuente:[UIFont fontWithName:kFontType size:25] color:[UIColor whiteColor]];
+    puertaApuertaLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 88, 130, 30)];
+    [puertaApuertaLabel ponerTexto:@"Puerta a puerta" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
     [puertaApuertaLabel setOverlayOff:YES];
     [containerConfig addSubview:puertaApuertaLabel];
     
-    puertaApuertaSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-60, 88, 0, 0)];
+    puertaApuertaSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 86, 0, 0)];
     [containerConfig addSubview:puertaApuertaSwitch];
+    [puertaApuertaSwitch addTarget:self action:@selector(switchChanged)];
     
-    terminalLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 130, 130, 20)];
-    [terminalLabel ponerTexto:@"Terminal" fuente:[UIFont fontWithName:kFontType size:25] color:[UIColor whiteColor]];
+    terminalLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 128, 130, 30)];
+    [terminalLabel ponerTexto:@"Terminal" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
     [terminalLabel setOverlayOff:YES];
     [containerConfig addSubview:terminalLabel];
     
-    terminalSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-60, 128, 0, 0)];
+    terminalSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 126, 0, 0)];
     [containerConfig addSubview:terminalSwitch];
+    [terminalSwitch addTarget:self action:@selector(switchChanged)];
     
     botonVolverAlMapa=[[CustomButton alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
     botonVolverAlMapa.center=CGPointMake(self.frame.size.width-266, self.frame.size.height-(botonVolverAlMapa.frame.size.height/2)-8);
@@ -155,7 +162,26 @@
         [UIView commitAnimations];
     }
 }
-
+-(void)switchChanged{
+    NSLog(@"Estos son los metros: %f",metros);
+    float temp=[taximetro unidadesADinero:metros];
+    [self agregarOquitarCargos:temp];
+}
+-(void)agregarOquitarCargos:(float)dinero{
+    if (nocDomFesSwitch.isOn) {
+        dinero+=taximetro.costoNoc;
+    }
+    if (aeropuertoSwitch.isOn) {
+        dinero+=taximetro.costoAero;
+    }
+    if (puertaApuertaSwitch.isOn) {
+        dinero+=taximetro.costoPuerta;
+    }
+    if (terminalSwitch.isOn) {
+        dinero+=taximetro.costoTerm;
+    }
+    valueTotalAprox.text=[NSString stringWithFormat:@"$%.0f",dinero];
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.
