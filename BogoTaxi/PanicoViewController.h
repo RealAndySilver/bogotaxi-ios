@@ -10,6 +10,7 @@
 #import "CustomButton.h"
 #import "BannerView.h"
 #import "CustomLabel.h"
+#import "Modelador.h"
 
 @interface PanicoViewController : UIViewController<UITextFieldDelegate>{
     int deviceKind;//1=iphone4, 2=iphone5, 3=ipad.
@@ -18,14 +19,11 @@
     CustomLabel *labelMensaje;
     CustomLabel *labelTitulo;
     UIView *contentMensajeView;
-    UIView *twitterView;
     UIButton *buttonTwitter;
-    UIView *facebookView;
     UIButton *buttonFacebook;
-    UIView *mailView;
     UIButton *buttonMail;
-    UIView *smsView;
     UIButton *buttonSms;
+    UIView *viewDesplazar;
     BOOL banderaDesplazar;
     
     NSString *mensaje;
@@ -39,10 +37,10 @@
 -(NSString *)actualizarMensaje;
 -(void)enviarMensaje;
 -(void)dismissKeyboard;
--(IBAction)twitterTrigger;
--(IBAction)facebookTrigger;
--(IBAction)mailTrigger;
--(IBAction)smsTrigger;
+-(void)twitterTrigger;
+-(void)facebookTrigger;
+-(void)mailTrigger;
+-(void)smsTrigger;
 -(void)moverViewArriba;
 -(void)moverViewAbajo;
 
