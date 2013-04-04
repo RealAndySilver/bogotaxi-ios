@@ -40,7 +40,7 @@
 @end
 
 @implementation MainViewController
-
+@synthesize lastAcceleration, shakeDetected;
 #pragma mark - lifecycle
 - (void)viewDidLoad
 {
@@ -84,7 +84,13 @@
     locManager.delegate=self;
     mapView.showsUserLocation=YES;
     mapView.delegate=self;
-
+    
+    unidadesAjuste=0;
+    unidadesAjusteTotal=0;
+    tiempoQuieto=0;
+    tiempoQuieto = 0;
+    totalQuieto=0;
+    estaMoviendose = NO;
 }
 
 -(void)didReceiveMemoryWarning{
@@ -128,7 +134,7 @@
     
     valorInputLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, 130, 35)];
     valorInputLabel.center=CGPointMake(155, barraSuperior.frame.size.height/2);
-    [valorInputLabel ponerTexto:@"$99.900" fuente:[UIFont fontWithName:kFontType size:32] color:kDarkRedColor];
+    [valorInputLabel ponerTexto:@"$0" fuente:[UIFont fontWithName:kFontType size:32] color:kDarkRedColor];
     [valorInputLabel setOverlayOff:YES];
     [barraSuperior addSubview:valorInputLabel];
     
@@ -196,7 +202,7 @@
     UIView *containerBotonesUnidades=[[UIView alloc]initWithFrame:CGRectMake(0, containerUnidades.frame.size.height-30, containerUnidades.frame.size.width, 30)];
     containerBotonesUnidades.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
     [containerUnidades addSubview:containerBotonesUnidades];
-    unidades=25;
+    //unidades=25;
     UIButton *botonMenos=[UIButton buttonWithType:UIButtonTypeCustom];
     botonMenos.frame=CGRectMake(0, 0, (containerBotonesUnidades.frame.size.width/2)-0.5, containerBotonesUnidades.frame.size.height);
     [botonMenos setTitle:@"-" forState:UIControlStateNormal];
@@ -226,14 +232,80 @@
 }
 -(void)buttonPressed:(UIButton*)button{
     if (button.tag==3000) {
-        unidades-=1;
-        labelUnidades.text=[NSString stringWithFormat:@"%i",unidades];
+        unidadesAjuste-=1;
+        labelUnidades.text=[NSString stringWithFormat:@"%i",unidadesAjuste+25];
+        [self contarMetros];
         
     }
     else if (button.tag==3001){
-        unidades+=1;
-        labelUnidades.text=[NSString stringWithFormat:@"%i",unidades];
+        unidadesAjuste+=1;
+        labelUnidades.text=[NSString stringWithFormat:@"%i",unidadesAjuste+25];
+        [self contarMetros];
     }
+}
+-(NSString *)contarMetros{
+    float metros=0;
+    int unidades=0;
+    //float adicional=0;
+    metros=[Taximetro medidorDeMetrosRecorridos:arregloDePuntos];
+    labelMetros.text= [NSString stringWithFormat:@"%.1f m",metros];
+    
+    unidadesAjusteTotal=[Modelador conversorSegundosAUnidades:totalQuieto :taximetro.segundosDeEspera]+unidadesAjuste;
+    unidades=[Modelador conversorMetrosAUnidades:metros paraElTaximetro:taximetro]+unidadesAjusteTotal;
+    
+    /*if (unidades>299)unidades=299;*/
+    float temp=[taximetro unidadesADinero:(int)unidades];
+    //valorInputLabel.text=[NSString stringWithFormat:@"$%.0f",temp];
+    labelUnidades.text= [NSString stringWithFormat:@"%i",unidades];
+    [self agregarOquitarCargos:temp];
+    return [NSString stringWithFormat:@"%.0f",temp];
+}
+#pragma mark método de movimiento
+-(void) empezoAMoverse {
+    
+}
+-(void) dejarDeMoverse {    
+    tiempoQuieto = 0;
+    estaMoviendose = NO;
+    
+}
+#pragma mark método de aceleración
+static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, double threshold) {
+    double deltaX = fabs(last.x - current.x);
+    double deltaY = fabs(last.y - current.y);
+    double deltaZ = fabs(last.z - current.z);
+    return (deltaX > threshold && deltaY > threshold) ||
+    (deltaX > threshold && deltaZ > threshold) ||
+    (deltaY > threshold && deltaZ > threshold);
+}
+
+-(void) accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
+    
+	if (self.lastAcceleration) {
+        if (!shakeDetected && IsDeviceShaking(self.lastAcceleration, acceleration, 0.035)) {
+            shakeDetected = YES;
+            //NSLog(@"unidades de secs %i", [self conversorSegundosAUnidades:seconds]);
+            
+            if (!estaMoviendose) {
+                [self empezoAMoverse];
+            }
+            estaMoviendose = YES;
+            
+            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dejarDeMoverse) object:nil];
+            Modelador *model = [[Modelador alloc]init];
+            BOOL ok=[model getBackgroundResponse];
+            if (ok) {
+                [self performSelector:@selector(dejarDeMoverse) withObject:nil afterDelay:1];
+            }
+            else if(!ok){
+                [self performSelector:@selector(dejarDeMoverse) withObject:nil afterDelay:60];
+                
+            }
+        } else if (shakeDetected && !IsDeviceShaking(lastAcceleration, acceleration, 0.035)) {
+            shakeDetected = NO;
+        }
+    }
+    self.lastAcceleration = acceleration;
 }
 #pragma mark - boton menu
 -(void)crearMenu{
@@ -318,6 +390,7 @@
     nocDomFesSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 8, 0, 0)];
     
     [nocDomFesSwitch addTarget:self action:@selector(animacionNoche:)];
+    [nocDomFesSwitch addTarget:self action:@selector(switchChanged)];
     
     [containerConfig addSubview:nocDomFesSwitch];
     
@@ -327,6 +400,7 @@
     [containerConfig addSubview:aeropuertoLabel];
     
     aeropuertoSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 48, 0, 0)];
+    [aeropuertoSwitch addTarget:self action:@selector(switchChanged)];
     [containerConfig addSubview:aeropuertoSwitch];
     
     puertaApuertaLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 90, 130, 30)];
@@ -335,6 +409,7 @@
     [containerConfig addSubview:puertaApuertaLabel];
     
     puertaApuertaSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 88, 0, 0)];
+    [puertaApuertaSwitch addTarget:self action:@selector(switchChanged)];
     [containerConfig addSubview:puertaApuertaSwitch];
     
     terminalLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 130, 130, 30)];
@@ -343,6 +418,7 @@
     [containerConfig addSubview:terminalLabel];
     
     terminalSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 128, 0, 0)];
+    [terminalSwitch addTarget:self action:@selector(switchChanged)];
     [containerConfig addSubview:terminalSwitch];
     
     UIView *containerValoresYTiempo=[[UIView alloc]initWithFrame:CGRectMake(0, 0, paginaUnoContainer.frame.size.width-20, 40)];
@@ -360,6 +436,31 @@
     [paginaUnoContainer addSubview:botonEnviarPlaca];
     
 }
+#pragma mark - switch changed
+
+-(void)switchChanged{
+   /* NSLog(@"Estos son los metros: %f",metros);
+    float temp=[taximetro unidadesADinero:metros];*/
+    NSString *resultadoContarMetros=[self contarMetros];
+    float temp=[resultadoContarMetros floatValue];
+    [self agregarOquitarCargos:temp];
+}
+-(void)agregarOquitarCargos:(float)dinero{
+    if (nocDomFesSwitch.isOn) {
+        dinero+=taximetro.costoNoc;
+    }
+    if (aeropuertoSwitch.isOn) {
+        dinero+=taximetro.costoAero;
+    }
+    if (puertaApuertaSwitch.isOn) {
+        dinero+=taximetro.costoPuerta;
+    }
+    if (terminalSwitch.isOn) {
+        dinero+=taximetro.costoTerm;
+    }
+    valorInputLabel.text=[NSString stringWithFormat:@"$%.0f",dinero];
+}
+
 
 #pragma mark - pagina dos
 -(void)crearPaginaDos{
@@ -693,6 +794,20 @@ int counter=0;
     
     tiempoInputLabel.text = [NSString stringWithFormat:@"%@:%@",Minutes,Seconds];
     
+    if (!estaMoviendose) {
+        Modelador *model=[[Modelador alloc]init];
+        BOOL ok=[model getBackgroundResponse];
+        if (ok) {
+            tiempoQuieto++;
+            totalQuieto++;
+            NSLog(@"aumento tiempo quieto");
+        }
+        else if(!ok){
+            tiempoQuieto=tiempoQuieto;
+            totalQuieto=totalQuieto;
+            NSLog(@"Sigo igual");
+        }
+    }
 }
 #pragma mark - menu principal
 -(void)callMenu{
@@ -1169,6 +1284,8 @@ int counter=0;
         [self animarView:buttonAlert ConOpacidad:1];
         [self irAPaginaDeScroll:2];
         [self clockStart];
+        totalQuieto=0;
+        unidadesAjuste=0;
     }
     else{
         labelEncender.text=@"Encender";
@@ -1231,15 +1348,7 @@ int counter=0;
                                initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [errorAlert show];
 }
--(NSString *)contarMetros{
-    float metros=0;
-    //int unidades=0;
-    //float adicional=0;
-    metros=[Taximetro medidorDeMetrosRecorridos:arregloDePuntos];
-    labelMetros.text= [NSString stringWithFormat:@"%.1f m",metros];
-    
-    return @"";
-}
+
 /*#pragma mark map delegate
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {

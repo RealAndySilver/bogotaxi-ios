@@ -46,7 +46,6 @@
     CustomLabel *labelMetros;
     CustomLabel *labelUnidades;
     BOOL animationFinished;
-    int unidades;
     
     int deviceKind;//1=iphone4, 2=iphone5, 3=ipad.
     
@@ -76,6 +75,14 @@
     CustomLabel *valorInputLabel;
     CustomLabel *tiempoLabel;
     CustomLabel *tiempoInputLabel;
+    
+    Modelador *mod;
+    int unidadesAjuste;
+    int unidadesAjusteTotal;
+    int totalQuieto;
+    int tiempoQuieto;
+    BOOL estaMoviendose;
+    int unidadesGlobales;
     
     //Pagina Dos
     UIView *paginaDos;
@@ -136,5 +143,7 @@
 
 
 }
+@property (nonatomic, retain) UIAcceleration *lastAcceleration;
+@property BOOL shakeDetected;
 
 @end

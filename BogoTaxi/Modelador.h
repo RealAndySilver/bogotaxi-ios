@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "TaximetroObject.h"
-@class TaximetroObject;
+#import "Taximetro.h"
+@class Taximetro;
 @interface Modelador : NSObject{ 
     NSDictionary *datos;
     NSDictionary *datosConf;
@@ -16,7 +17,7 @@
     NSDictionary *datosCompras; 
 
     NSDictionary *tableDataSource; 
-    TaximetroObject *taximetro;
+    Taximetro *taximetro;
 
 }
 -(BOOL)onShake;
@@ -73,9 +74,9 @@
 +(int)unidadesADinero:(int)unidades paraLaCiudad:(NSString*)ciudad;
 +(int)unidadesAPesos:(int)unidades;
 
-+(int)conversorMetrosAUnidades:(float)totalMetros paraElTaximetro:(TaximetroObject*)objeto;
-+(int)unidadesADinero:(int)unidades paraElTaximetro:(TaximetroObject*)objeto;
-+(float)unidadesADineroFloat:(int)unidades paraElTaximetro:(TaximetroObject *)objeto;
++(int)conversorMetrosAUnidades:(float)totalMetros paraElTaximetro:(Taximetro*)objeto;
++(int)unidadesADinero:(int)unidades paraElTaximetro:(Taximetro*)objeto;
++(float)unidadesADineroFloat:(int)unidades paraElTaximetro:(Taximetro *)objeto;
 
 #pragma mark compras in app
 -(int)getPackPurchaseWithID:(int)ID;
