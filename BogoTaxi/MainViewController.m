@@ -82,9 +82,10 @@
     [self crearViewAlertMessage];
     locManager=[[CLLocationManager alloc]init];
     locManager.delegate=self;
-    mapView.showsUserLocation=YES;
-    mapView.delegate=self;
+    mapViewGPS.showsUserLocation=YES;
+    mapViewGPS.delegate=self;
     
+    banderaSecs=YES;
     unidadesAjuste=0;
     unidadesAjusteTotal=0;
     tiempoQuieto=0;
@@ -99,14 +100,18 @@
 
 #pragma mark - interfaz superior
 -(void)crearInterfazSuperior{
-    mapView=[[MKMapView alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height-126)*-1, self.view.frame.size.width, self.view.frame.size.height-126)];
-    mapView.tag=1000;
-    [self.view addSubview:mapView];
+    mapViewGPS=[[MKMapView alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height-126)*-1, self.view.frame.size.width, self.view.frame.size.height-126)];
+    mapViewGPS.tag=1000;
+    [self.view addSubview:mapViewGPS];
     
-    buttonAlert=[[UIButton alloc]initWithFrame:CGRectMake(10, mapView.frame.size.height-50, 40, 40)];
+    routeView2 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, mapViewGPS.frame.size.width, mapViewGPS.frame.size.height)];
+    routeView2.userInteractionEnabled = NO;
+    [mapViewGPS addSubview:routeView2];
+    
+    buttonAlert=[[UIButton alloc]initWithFrame:CGRectMake(10, mapViewGPS.frame.size.height-50, 40, 40)];
     buttonAlert.backgroundColor=kLiteRedColor;
     buttonAlert.layer.opacity=0;
-    [mapView addSubview:buttonAlert];
+    [mapViewGPS addSubview:buttonAlert];
     
     containerSuperior=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 126)];
     containerSuperior.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
@@ -134,7 +139,7 @@
     
     valorInputLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, 130, 35)];
     valorInputLabel.center=CGPointMake(155, barraSuperior.frame.size.height/2);
-    [valorInputLabel ponerTexto:@"$0" fuente:[UIFont fontWithName:kFontType size:32] color:kDarkRedColor];
+    [valorInputLabel ponerTexto:@"$3500" fuente:[UIFont fontWithName:kFontType size:32] color:kDarkRedColor];
     [valorInputLabel setOverlayOff:YES];
     [barraSuperior addSubview:valorInputLabel];
     
@@ -232,7 +237,13 @@
 }
 -(void)buttonPressed:(UIButton*)button{
     if (button.tag==3000) {
-        unidadesAjuste-=1;
+        if (unidadesAjuste+25>25) {
+            unidadesAjuste-=1;
+        }
+        else{
+            
+        }
+        
         labelUnidades.text=[NSString stringWithFormat:@"%i",unidadesAjuste+25];
         [self contarMetros];
         
@@ -250,14 +261,15 @@
     metros=[Taximetro medidorDeMetrosRecorridos:arregloDePuntos];
     labelMetros.text= [NSString stringWithFormat:@"%.1f m",metros];
     
-    unidadesAjusteTotal=[Modelador conversorSegundosAUnidades:totalQuieto :taximetro.segundosDeEspera]+unidadesAjuste;
-    unidades=[Modelador conversorMetrosAUnidades:metros paraElTaximetro:taximetro]+unidadesAjusteTotal;
+    unidadesAjusteTotal=[Taximetro conversorSegundosAUnidades:totalQuieto :taximetro.segundosDeEspera]+unidadesAjuste;
+    unidades=[Taximetro conversorMetrosAUnidades:metros paraElTaximetro:taximetro]+unidadesAjusteTotal;
     
     /*if (unidades>299)unidades=299;*/
     float temp=[taximetro unidadesADinero:(int)unidades];
-    valorInputLabel.text=[NSString stringWithFormat:@"$%.0f",temp];
+    //valorInputLabel.text=[NSString stringWithFormat:@"$%.0f",temp];
     labelUnidades.text= [NSString stringWithFormat:@"%i",unidades];
-    return @"";
+    [self agregarOquitarCargos:temp];
+    return [NSString stringWithFormat:@"%.0f",temp];
 }
 #pragma mark método de movimiento
 -(void) empezoAMoverse {
@@ -439,8 +451,10 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
 
 -(void)switchChanged{
    /* NSLog(@"Estos son los metros: %f",metros);
-    float temp=[taximetro unidadesADinero:metros];
-    [self agregarOquitarCargos:temp];*/
+    float temp=[taximetro unidadesADinero:metros];*/
+    NSString *resultadoContarMetros=[self contarMetros];
+    float temp=[resultadoContarMetros floatValue];
+    [self agregarOquitarCargos:temp];
 }
 -(void)agregarOquitarCargos:(float)dinero{
     if (nocDomFesSwitch.isOn) {
@@ -457,7 +471,61 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     }
     valorInputLabel.text=[NSString stringWithFormat:@"$%.0f",dinero];
 }
-
+#pragma mark guardar estadisticas
+-(void)guardarEstadisticas{
+    Modelador *obj=[[Modelador alloc]init];
+    FileSaver *saver=[[FileSaver alloc]init];
+    if (seconds>10) {
+        //Registro para el Rate
+       // iRate *rate= [[iRate alloc]init];
+        //[rate logEvent:YES];
+        NSString *stringMetros;
+        NSString *stringViajes;
+        NSString *stringDinero;
+        NSString *stringMinutos;
+        
+        [saver setIP:stringMetros];
+        float metros=[Taximetro medidorDeMetrosRecorridos:arregloDePuntos];
+        //metros+=[[saver getIp] floatValue];
+        //stringMetros=[NSString stringWithFormat:@"%f", metros];
+        //[saver setIP:stringMetros];
+        NSLog(@"metroooos %@",[saver getIp]);
+        
+        metros+=[obj getKm];
+        [obj setKm:metros];
+        
+        int viajes=[obj getViajes]+1;
+        [obj setViajes:viajes];
+        
+        int segundos = seconds;
+        segundos+=[obj getMinutosTaxi];
+        [obj setMinutosTaxi:segundos];
+        
+        
+        
+        if (!taximetro.medicionEnPrecio) {
+            NSString *stringA= valorInputLabel.text;
+            stringA = [stringA stringByReplacingOccurrencesOfString:@"Valor: $"
+                                                         withString:@""];
+            
+            float precio = [stringA floatValue];
+            precio+=[obj getCantidadTaxis];
+            [obj setCantidadTaxis:precio];
+        }
+        else if(taximetro.medicionEnPrecio){
+            NSString *stringA= labelUnidades.text;
+            stringA = [stringA stringByReplacingOccurrencesOfString:@"$"
+                                                         withString:@""];
+            float precio = [stringA floatValue];
+            if (precio<taximetro.carreraMinima) {
+                precio=taximetro.carreraMinima;
+            }
+            precio+=[obj getCantidadTaxis];
+            [obj setCantidadTaxis:precio];
+        }
+        
+    }
+}
 
 #pragma mark - pagina dos
 -(void)crearPaginaDos{
@@ -581,11 +649,6 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     bannerView.center=CGPointMake(self.view.frame.size.width/2, 50);
     [paginaTres addSubview:bannerView];
     
-    /*bannerPaginaTres=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, mainScrollView.frame.size.width-10, 0)];
-    [bannerPaginaTres ponerTexto:@"ENVÍA TU PLACA"];
-    bannerPaginaTres.center=CGPointMake(mainScrollView.frame.size.width/2, 50);
-    [paginaTres addSubview:bannerPaginaTres];*/
-    
     containerPlacaPaginaTres=[[UIView alloc]initWithFrame:CGRectMake(5, bannerView.frame.size.height+20,paginaTres.frame.size.width-10, 190)];
     
     if (deviceKind==2) {
@@ -704,7 +767,7 @@ int counter=0;
         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
         [UIView setAnimationDidStopSelector:@selector(bringMenuToFront)];
         containerSuperior.frame=CGRectMake(0, 0, self.view.frame.size.width, 126);
-        mapView.frame=CGRectMake(0,(self.view.frame.size.height-126)*-1, self.view.frame.size.width, self.view.frame.size.height-126);
+        mapViewGPS.frame=CGRectMake(0,(self.view.frame.size.height-126)*-1, self.view.frame.size.width, self.view.frame.size.height-126);
         [UIView commitAnimations];
         animationFinished=NO;
         [botonBarraSuperior setTitle:@"Mapa" forState:UIControlStateNormal];
@@ -727,23 +790,23 @@ int counter=0;
         }
         if (counter==0) {
             containerSuperior.frame=CGRectMake(0,self.view.frame.size.height-126, self.view.frame.size.width, 126);
-            mapView.frame=CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height-126);
+            mapViewGPS.frame=CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height-126);
         }
         else if (counter==1){
             containerSuperior.frame=CGRectMake(0,self.view.frame.size.height-176, self.view.frame.size.width, 126);
-            mapView.frame=CGRectMake(0,-50, self.view.frame.size.width, self.view.frame.size.height-126);
+            mapViewGPS.frame=CGRectMake(0,-50, self.view.frame.size.width, self.view.frame.size.height-126);
         }
         else if (counter==2){
             containerSuperior.frame=CGRectMake(0,self.view.frame.size.height-126, self.view.frame.size.width, 126);
-            mapView.frame=CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height-126);
+            mapViewGPS.frame=CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height-126);
         }
         else if (counter==3){
             containerSuperior.frame=CGRectMake(0,self.view.frame.size.height-136, self.view.frame.size.width, 126);
-            mapView.frame=CGRectMake(0,-10, self.view.frame.size.width, self.view.frame.size.height-126);
+            mapViewGPS.frame=CGRectMake(0,-10, self.view.frame.size.width, self.view.frame.size.height-126);
         }
         else if (counter==4){
             containerSuperior.frame=CGRectMake(0,self.view.frame.size.height-126, self.view.frame.size.width, 126);
-            mapView.frame=CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height-126);
+            mapViewGPS.frame=CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height-126);
             [botonBarraSuperior setTitle:@"Esconder" forState:UIControlStateNormal];
             animationFinished=YES;
             [self.view setUserInteractionEnabled:YES];
@@ -1000,11 +1063,33 @@ int counter=0;
 	[locationManager stopMonitoringForRegion:regionAnnotation.region];
 	[mapaPaginaDos removeAnnotation:regionAnnotation];
 }
-- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
 {
-    [self updateRouteView];
-	routeView.hidden = NO;
-    [routeView setNeedsDisplay];
+    if (mapView.tag==1000) {
+        routeView2.hidden=YES;
+    }
+    else{
+        routeView.hidden = YES;
+    }
+}
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
+    if (mapView.tag==1000) {
+        if (!switchEncender.isOn) {
+            routeView2.hidden = NO;
+            /*newThread = [[NSThread alloc] initWithTarget:self selector:@selector(updateRouteView) object:NULL];
+             [newThread start];*/
+            [NSThread detachNewThreadSelector: @selector(updateRouteView2) toTarget:self withObject:NULL];
+            //[self updateRouteView];
+        }
+        else
+            routeView2.hidden = YES;
+        [routeView2 setNeedsDisplay];
+    }
+    else{
+        [self updateRouteView];
+        routeView.hidden = NO;
+        [routeView setNeedsDisplay];
+    }
 }
 
 - (void)tapGestureHandler:(UITapGestureRecognizer *)tgr{
@@ -1145,7 +1230,6 @@ int counter=0;
 
 #pragma mark mostrar ruta
 -(void) updateRouteView {
-    
     routeView.Hidden=NO;
 	CGContextRef context = 	CGBitmapContextCreate(nil,
 												  routeView.frame.size.width,
@@ -1178,6 +1262,38 @@ int counter=0;
 	UIImage* img = [UIImage imageWithCGImage:image];
 	
 	routeView.image = img;
+	CGContextRelease(context);
+}
+-(void) updateRouteView2{
+    CGContextRef context = 	CGBitmapContextCreate(nil,
+												  routeView2.frame.size.width,
+												  routeView2.frame.size.height,
+												  8,
+												  4 * routeView2.frame.size.width,
+												  CGColorSpaceCreateDeviceRGB(),
+												  kCGImageAlphaPremultipliedLast);
+	lineColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.5];
+	CGContextSetStrokeColorWithColor(context, lineColor.CGColor);
+	CGContextSetRGBFillColor(context, 0.0, 0.0, 1.0, 1.0);
+	CGContextSetLineWidth(context, 3.0);
+	
+	for(int i = 0; i < coordenadasParaDibujar.count; i++) {
+		CLLocation* location = [coordenadasParaDibujar objectAtIndex:i];
+		CGPoint point = [mapViewGPS convertCoordinate:location.coordinate toPointToView:routeView2];
+		
+		if(i == 0) {
+			CGContextMoveToPoint(context, point.x, routeView2.frame.size.height - point.y);
+		} else {
+			CGContextAddLineToPoint(context, point.x, routeView2.frame.size.height - point.y);
+		}
+	}
+	
+	CGContextStrokePath(context);
+	
+	CGImageRef image = CGBitmapContextCreateImage(context);
+	UIImage* img = [UIImage imageWithCGImage:image];
+	
+	routeView2.image = img;
 	CGContextRelease(context);
 }
 
@@ -1270,17 +1386,23 @@ int counter=0;
 }
 -(void)encenderTaximetro:(CustomSwitch*)customSwitch{
     if (customSwitch.isOn) {
-        seconds=0;
+        //Modelador *obj=[[Modelador alloc]init];
+        routeView2.hidden = YES;
         tiempoInputLabel.text=@"00:00";
         labelEncender.text=@"Apagar";
-
         [arregloDePuntos removeAllObjects];
         arregloDePuntos=nil;
         arregloDePuntos=[[NSMutableArray alloc]init];
-        [locManager startUpdatingLocation];
         [self animarView:buttonAlert ConOpacidad:1];
-        [self irAPaginaDeScroll:2];
+        //[self irAPaginaDeScroll:2];
         [self clockStart];
+        if (banderaSecs) {
+            seconds = 0;
+            tiempoQuieto = 0;
+        }
+        coordenadasParaDibujar=[[NSMutableArray alloc]init];
+        [locManager startUpdatingLocation];
+        banderaSecs = NO;
         totalQuieto=0;
         unidadesAjuste=0;
     }
@@ -1289,7 +1411,12 @@ int counter=0;
         [locManager stopUpdatingLocation];
         [self animarView:buttonAlert ConOpacidad:0];
         //[self irAPaginaDeScroll:0];
+        [self updateRouteView2];
+        routeView2.hidden = NO;
+        [self guardarEstadisticas];
         [self clockStop];
+        banderaSecs=YES;
+        banderaU = NO;
     }
 }
 #pragma mark location
@@ -1308,8 +1435,8 @@ int counter=0;
         MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation,
                                                                            0.5*METERS_PER_MILE,
                                                                            0.5*METERS_PER_MILE);
-        MKCoordinateRegion adjustedRegion = [mapView regionThatFits:viewRegion];
-        [mapView setRegion:adjustedRegion animated:YES];
+        MKCoordinateRegion adjustedRegion = [mapViewGPS regionThatFits:viewRegion];
+        [mapViewGPS setRegion:adjustedRegion animated:YES];
         CLLocation *pointALocation = [[CLLocation alloc] initWithLatitude:zoomLocation2.latitude longitude:zoomLocation2.longitude];
         CLLocation *pointBLocation = [[CLLocation alloc] initWithLatitude:zoomLocation.latitude longitude:zoomLocation.longitude];
         //double distanciaMetros = [pointALocation getDistanceFrom:pointBLocation];

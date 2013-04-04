@@ -88,7 +88,7 @@
     [containerPlata addSubview:valorLabel];
     
     valorInputLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0 , 50, containerPlata.frame.size.width, 35)];
-    [valorInputLabel ponerTexto:@"$3.400" fuente:[UIFont fontWithName:kFontType size:40] color:kDarkRedColor];
+    [valorInputLabel ponerTexto:@"$3.500" fuente:[UIFont fontWithName:kFontType size:40] color:kDarkRedColor];
     [valorInputLabel setOverlayOff:YES];
     [valorInputLabel setCentrado:YES];
     [containerPlata addSubview:valorInputLabel];

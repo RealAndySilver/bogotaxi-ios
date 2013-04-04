@@ -40,6 +40,10 @@
 {
     [super viewDidLoad];
 	self.view.backgroundColor=kBlueColor;
+    recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(processTap:)];
+    recognizer.delegate=self;
+    [self.view setUserInteractionEnabled:YES];
+    [self.view addGestureRecognizer:recognizer];
     if (self.view.frame.size.height<480) {
         deviceKind=1;
     }
@@ -49,6 +53,11 @@
     else if (self.view.frame.size.height>600){
         deviceKind=3;
     }
+    viewFrame=self.view.frame;
+    viewWidth=self.view.frame.size.width;
+    viewHeight=self.view.frame.size.height;
+    tecladoUp=NO;
+    
     banderaInfo=YES;
     CGRect tfRect = CGRectMake(90, 50, 200, 30);
     CGRect tfMailRect = CGRectMake(10, 50, 200, 30);
@@ -59,6 +68,15 @@
     tfMail.autocorrectionType=UITextAutocorrectionTypeNo;
     tv=[[UITextView alloc]initWithFrame:tvRect];
     tvMail=[[UITextView alloc]initWithFrame:tvRectMail];
+    
+    redSocialLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
+    redSocialLabel.font=[UIFont fontWithName:kFontType size:22];
+    redSocialLabel.textColor=kDarkGrayColor;
+    redSocialLabel.overlayLabel.numberOfLines=4;
+    redSocialLabel.center=CGPointMake(190, self.view.frame.size.height-70);
+    [redSocialLabel setOverlayOff:NO];
+    [self.view addSubview:redSocialLabel];
+
     
     CustomButton *backButton=[[CustomButton alloc]initWithFrame:CGRectMake(5, self.view.frame.size.height-50, 80, 40)];
     backButton.backgroundColor=kYellowColor;
@@ -71,7 +89,7 @@
     saveButton.backgroundColor=kYellowColor;
     [saveButton setTitleColor:kGrayColor forState:UIControlStateNormal];
     [saveButton setTitle:@"Guardar" forState:UIControlStateNormal];
-    //[saveButton addTarget:self action:@selector(enviarMensaje) forControlEvents:UIControlEventTouchUpInside];
+    [saveButton addTarget:self action:@selector(enviarMensaje) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:saveButton];
     
     BannerView *bannerView=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-10, 0)];
@@ -92,7 +110,6 @@
     labelMensajeUbicacion.overlayLabel.numberOfLines=2;
     labelMensajeUbicacion.center=CGPointMake(self.view.frame.size.width/2, 110);
     [labelMensajeUbicacion setOverlayOff:NO];
-    //[labelMensajeUbicacion setCentrado:YES];
     [self.view addSubview:labelMensajeUbicacion];
     
     textFieldUbicacion = [[UITextField alloc] initWithFrame:CGRectMake(90, 112, 215, 30)];
@@ -102,15 +119,14 @@
     textFieldUbicacion.placeholder = @"Mi ubicación actual es";  //place holder
     textFieldUbicacion.backgroundColor = [UIColor whiteColor];
     textFieldUbicacion.autocorrectionType = UITextAutocorrectionTypeNo;
-    //textFieldUbicacion.backgroundColor = [UIColor clearColor];
     textFieldUbicacion.keyboardType = UIKeyboardTypeDefault;
     textFieldUbicacion.returnKeyType = UIReturnKeyDone;
     textFieldUbicacion.clearButtonMode = UITextFieldViewModeWhileEditing;
-    //[textFieldUbicacion addTarget:self action:@selector(actualizarMensaje) forControlEvents:UIControlEventEditingChanged];
-    //[textFieldUbicacion addTarget:self action:@selector(enviarMensaje) forControlEvents:UIControlEventEditingDidEndOnExit];
+    [textFieldUbicacion addTarget:self action:@selector(actualizarMensaje) forControlEvents:UIControlEventEditingChanged];
+    [textFieldUbicacion addTarget:self action:@selector(enviarMensaje) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.view addSubview:textFieldUbicacion];
     textFieldUbicacion.delegate = self;
-    
+    textFieldUbicacion.tag=3000;
     Modelador *obj=[[Modelador alloc]init];
     NSString *mensajePanico;
     NSString *numeroSMS;
@@ -141,20 +157,16 @@
         tfMail.text=correo;
     }
     textFieldUbicacion.text=mensajePanico;
-    //[[[[[self tabBarController] tabBar] items] objectAtIndex:3] setBadgeValue:@"Editando"];
-    /*UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                          action:@selector(dismissKeyboard)];
-    [self.view addGestureRecognizer:tap];*/
     
     NSString *redSocialName=[obj obtenerNombreDeRedSocial];
+    NSLog(@"red sociaal %@",[obj obtenerNombreDeRedSocial]);
     if ([redSocialName isEqualToString:@""]||[redSocialName isEqualToString:@" "]||redSocialName ==nil) {
         [obj redSocialConNombre:@"Twitter"];
-        //redSocialLabel.text=[obj obtenerNombreDeRedSocial];
+        redSocialLabel.text=[obj obtenerNombreDeRedSocial];
     }
     
     labelMensaje=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width)-20, 80)];
     [labelMensaje ponerTexto:@"Si no ingresas ningún mensaje la aplicación pondra por defecto ''Mi ubicación actual es''. Tu mensaje siempre llevará una imagen del mapa con tu ubicación actual para que tus seguidores o a quién decidas enviar el mensaje lo pueda ver." fuente:[UIFont fontWithName:kFontType size:14] color:kTitleBlueColor];
-    //labelMensaje.backgroundColor=kGreenColor;
     labelMensaje.numberOfLines = 4;
     labelMensaje.overlayLabel.numberOfLines=4;
     labelMensaje.center=CGPointMake(self.view.frame.size.width/2, 180);
@@ -176,7 +188,6 @@
     [self.view addSubview:contentMensajeView];
     
     viewDesplazar=[[UIView alloc]initWithFrame:CGRectMake(0, 0, contentMensajeView.frame.size.width, contentMensajeView.frame.size.height)];
-    //viewDesplazar.backgroundColor=kGreenColor;
     [contentMensajeView addSubview:viewDesplazar];
     
     banderaDesplazar=NO;
@@ -185,32 +196,21 @@
     tf.borderStyle = UITextBorderStyleRoundedRect;
     [contentMensajeView addSubview:tf];
     tf.alpha=0;
-    [tf addTarget:self
-           action:@selector(moverViewArriba)
- forControlEvents:UIControlEventEditingDidBegin];
-    [tf addTarget:self
-           action:@selector(moverViewAbajo)
- forControlEvents:UIControlEventEditingDidEnd];
-    //tf.placeholder = @"Número predeterminado";
+    tf.tag=3001;
+    tf.delegate=self;
     tf.returnKeyType = UIReturnKeyDone;
     tf.keyboardType = UIKeyboardTypeNumberPad;
+    tf.font = [UIFont fontWithName:kFontType size:22];
     
     //TextField del Mail////////////////////////////
     tfMail.borderStyle = UITextBorderStyleRoundedRect;
     [contentMensajeView addSubview:tfMail];
     tfMail.alpha=0;
-    [tfMail addTarget:self
-               action:@selector(moverViewArriba)
-     forControlEvents:UIControlEventEditingDidBegin];
-    [tfMail addTarget:self
-               action:@selector(moverViewAbajo)
-     forControlEvents:UIControlEventEditingDidEnd];
-    [tfMail addTarget:self
-               action:@selector(enviarMensaje)
-     forControlEvents:UIControlEventEditingDidEndOnExit];
-    //tf.placeholder = @"Número predeterminado";
+    tfMail.tag=3002;
+    tfMail.delegate=self;
     tfMail.returnKeyType = UIReturnKeyDone;
     tfMail.keyboardType = UIKeyboardTypeEmailAddress;
+    tfMail.font = [UIFont fontWithName:kFontType size:22];
     
     
     
@@ -264,24 +264,19 @@
     labelMensaje2.overlayLabel.numberOfLines=4;
     labelMensaje2.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-100);
     [labelMensaje2 setOverlayOff:NO];
-    //[labelMensaje setCentrado:YES];
     [self.view addSubview:labelMensaje2];
     
     CustomLabel *labelMensajeServicio=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width)-20, 16)];
     [labelMensajeServicio ponerTexto:@"Servicio actual seleccionado:" fuente:[UIFont fontWithName:kFontType size:18] color:kTitleBlueColor];
     labelMensajeServicio.numberOfLines = 4;
     labelMensajeServicio.overlayLabel.numberOfLines=4;
-    labelMensajeServicio.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-62);
+    labelMensajeServicio.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-70);
     [labelMensajeServicio setOverlayOff:NO];
-    //[labelMensaje setCentrado:YES];
     [self.view addSubview:labelMensajeServicio];
+    
 }
 -(void)dismissView{
     [self dismissModalViewControllerAnimated:YES];
-}
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    return YES;
 }
 - (void)didReceiveMemoryWarning
 {
@@ -293,15 +288,19 @@
     NSString *redSocialName=[obj obtenerNombreDeRedSocial];
     if ([redSocialName isEqualToString:@""]||[redSocialName isEqualToString:@" "]||redSocialName ==nil) {
         [obj redSocialConNombre:@"Twitter"];
-        //redSocialLabel.text=[obj obtenerNombreDeRedSocial];
-        NSLog(@"No existía y lo creé");
+        redSocialLabel.text=[obj obtenerNombreDeRedSocial];
     }
     else
-        //redSocialLabel.text=[obj obtenerNombreDeRedSocial];
+        redSocialLabel.text=[obj obtenerNombreDeRedSocial];
     banderaInfo=YES;
 }
 -(NSString*)actualizarMensaje{
+    if ([textFieldUbicacion.text isEqualToString:@""]) {
+        mensaje=@"Mi Ubicación actual es";
+    }
+    else{
     mensaje = textFieldUbicacion.text;
+    }
     return mensaje;
 }
 -(void)enviarMensaje{
@@ -317,61 +316,56 @@
     double numeroDouble = [numeroString doubleValue];
     [msj setNumeroSMS:numeroDouble];
     [msj setMail:correo];
+    [self dismissView];
 }
 -(void)twitterTrigger{
     Modelador *obj=[[Modelador alloc]init];
     [obj redSocialConNombre:@"Twitter"];
-    //redSocialLabel.text=[obj obtenerNombreDeRedSocial];
+    redSocialLabel.text=[obj obtenerNombreDeRedSocial];
     NSLog(@"Red Social: %@",[obj obtenerNombreDeRedSocial]);
 }
 -(void)facebookTrigger{
     Modelador *obj=[[Modelador alloc]init];
     [obj redSocialConNombre:@"Facebook"];
-    //redSocialLabel.text=[obj obtenerNombreDeRedSocial];
+    redSocialLabel.text=[obj obtenerNombreDeRedSocial];
     NSLog(@"Red Social: %@",[obj obtenerNombreDeRedSocial]);
 }
 -(void)mailTrigger{
     Modelador *obj=[[Modelador alloc]init];
     [obj redSocialConNombre:@"Mail"];
-    //redSocialLabel.text=[obj obtenerNombreDeRedSocial];
+    redSocialLabel.text=[obj obtenerNombreDeRedSocial];
     NSLog(@"Red Social: %@",[obj obtenerNombreDeRedSocial]);
     if (!banderaDesplazar) {
         
         CGRect myMapRect = CGRectMake(75, 0, contentMensajeView.frame.size.width, contentMensajeView.frame.size.height);
-        //viewDesplazar.alpha=1;
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3];
         viewDesplazar.frame = myMapRect;
         buttonTwitter.alpha=0;
         buttonFacebook.alpha=0;
         buttonSms.alpha=0;
-        //viewDesplazar.alpha=0;
         [UIView commitAnimations];
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:1.0];
         tfMail.alpha=1;
         tvMail.alpha=1;
-        //viewDesplazar.alpha=0;
         [UIView commitAnimations];
         banderaDesplazar=YES;
         return;
     }
     else{
         CGRect myMapRect = CGRectMake(0, 0, contentMensajeView.frame.size.width, contentMensajeView.frame.size.height);
-        //viewDesplazar.alpha=1;
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.5];
         viewDesplazar.frame = myMapRect;
         buttonTwitter.alpha=1;
         buttonFacebook.alpha=1;
         buttonSms.alpha=1;
-        //viewDesplazar.alpha=0;
         [UIView commitAnimations];
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.2];
         tfMail.alpha=0;
         tvMail.alpha=0;
-        //viewDesplazar.alpha=0;
         [UIView commitAnimations];
         banderaDesplazar=NO;
         return;
@@ -380,69 +374,92 @@
 -(void)smsTrigger{
     Modelador *obj=[[Modelador alloc]init];
     [obj redSocialConNombre:@"SMS"];
-    //redSocialLabel.text=[obj obtenerNombreDeRedSocial];
+    redSocialLabel.text=[obj obtenerNombreDeRedSocial];
     NSLog(@"Red Social: %@",[obj obtenerNombreDeRedSocial]);
     if (!banderaDesplazar) {
         
         CGRect myMapRect = CGRectMake(-220, 0, contentMensajeView.frame.size.width, contentMensajeView.frame.size.height);
-        //viewDesplazar.alpha=1;
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.5];
         viewDesplazar.frame = myMapRect;
         buttonMail.alpha=0;
-        //viewDesplazar.alpha=0;
         [UIView commitAnimations];
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:1.0];
         viewDesplazar.frame = myMapRect;
         tf.alpha=1;
         tv.alpha=1;
-        //viewDesplazar.alpha=0;
         [UIView commitAnimations];
         banderaDesplazar=YES;
         return;
     }
     else{
         CGRect myMapRect = CGRectMake(0, 0, contentMensajeView.frame.size.width, contentMensajeView.frame.size.height);
-        //viewDesplazar.alpha=1;
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.5];
         viewDesplazar.frame = myMapRect;
         buttonMail.alpha=1;
-        //viewDesplazar.alpha=0;
         [UIView commitAnimations];
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.2];
         viewDesplazar.frame = myMapRect;
         tf.alpha=0;
         tv.alpha=0;
-        //viewDesplazar.alpha=0;
         [UIView commitAnimations];
         banderaDesplazar=NO;
         return;
     }
     
 }
--(void)moverViewArriba{
-    CGRect myMapRect = CGRectMake(0, -150, self.view.frame.size.width, self.view.frame.size.height);
-    //viewDesplazar.alpha=1;
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.5];
-    self.view.frame = myMapRect;
-    //viewDesplazar.alpha=0;
-    [UIView commitAnimations];
-    
+#pragma mark - textfield delegate
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (textField.tag==3000) {
+        
+    }
+    else{
+        tecladoUp=YES;
+        [self animarViewPorTeclado];
+    }
 }
--(void)moverViewAbajo{
-    CGRect myMapRect = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    //viewDesplazar.alpha=1;
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.5];
-    self.view.frame = myMapRect;
-    //viewDesplazar.alpha=0;
-    [UIView commitAnimations];
-    
-    
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    tecladoUp=NO;
+    return YES;
+}
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self dismissKeyboard];
+    return YES;
+}
+-(void)processTap:(id)sender{
+    tecladoUp=NO;
+    [self dismissKeyboard];
+}
+
+#pragma mark - animar view por teclado
+-(void)animarViewPorTeclado{
+    if (tecladoUp) {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDuration:0.3];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        self.view.frame=CGRectMake(0, -((self.view.frame.size.height/2)/2)+10, viewWidth, viewHeight);
+        [UIView commitAnimations];
+    }
+    else{
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDuration:0.25];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        self.view.frame=viewFrame;
+        [UIView commitAnimations];
+    }
+}
+#pragma mark - dismiss keyboard
+-(void)dismissKeyboard{
+    [textFieldUbicacion resignFirstResponder];
+    [tf resignFirstResponder];
+    [tfMail resignFirstResponder];
+    tecladoUp=NO;
+    [self animarViewPorTeclado];
 }
 
 @end

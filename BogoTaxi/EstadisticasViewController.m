@@ -68,6 +68,7 @@
     [self.view addSubview:bannerView];
     
     [self crearContainer];
+    [self updateView];
 
 }
 -(void)crearContainer{
@@ -139,6 +140,7 @@
     reiniciar=[[CustomButton alloc]initWithFrame:CGRectMake(0, 0, (contentView.frame.size.width)-10, 40)];
     [reiniciar setTitle:@"Reiniciar" forState:UIControlStateNormal];
     reiniciar.titleLabel.font=[UIFont fontWithName:kFontType size:24];
+    [reiniciar addTarget:self action:@selector(resetEstadisticas) forControlEvents:UIControlEventTouchUpInside];
     reiniciar.center=CGPointMake((contentView.frame.size.width/2), (contentView.frame.size.height)-25);
     [contentView addSubview:reiniciar];
 }
@@ -150,6 +152,23 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+-(void)updateView{
+    Modelador *mod=[[Modelador alloc]init];
+    
+    labelImputRecorridos.text=[NSString stringWithFormat:@"%.2f km",[mod getKm]/1000];
+    labelImputNoViajes.text=[NSString stringWithFormat:@"%i",[mod getViajes]];
+    labelImputCantPagada.text=[NSString stringWithFormat:@"$%.2f",[mod getCantidadTaxis]];
+    labelImputMinutos.text=[NSString stringWithFormat:@"%.2f minutos",[mod getMinutosTaxi]/60];
+}
+-(void)resetEstadisticas{
+    Modelador *mod=[[Modelador alloc]init];
+    int resetVar=0;
+    [mod setKm:resetVar];
+    [mod setViajes:resetVar];
+    [mod setCantidadTaxis:resetVar];
+    [mod setMinutosTaxi:resetVar];
+    [self updateView];
 }
 
 @end

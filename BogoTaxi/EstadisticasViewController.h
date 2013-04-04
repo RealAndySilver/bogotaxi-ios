@@ -10,6 +10,7 @@
 #import "CustomButton.h"
 #import "BannerView.h"
 #import "CustomLabel.h"
+#import "Modelador.h"
 
 @interface EstadisticasViewController : UIViewController{
     int deviceKind;//1=iphone4, 2=iphone5, 3=ipad.
@@ -24,5 +25,6 @@
     CustomLabel *labelImputMinutos;
     CustomButton *reiniciar;
 }
+-(void)updateView;
 
 @end

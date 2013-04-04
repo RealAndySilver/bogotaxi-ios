@@ -25,6 +25,8 @@
 #import "RegionAnnotation.h"
 #import "RegexKitLite.h"
 #import "Modelador.h"
+#import "iRate.h"
+#import "FileSaver.h"
 
 @interface MainViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate>{
     UIScrollView *mainScrollView;
@@ -51,7 +53,8 @@
     
     UIColor *backgroundColor;
     
-    MKMapView *mapView;
+    MKMapView *mapViewGPS;
+    UIImageView *routeView2;
     //Menú
     UIView *containerMenu;
     UIButton *menuButton;
@@ -76,13 +79,16 @@
     CustomLabel *tiempoLabel;
     CustomLabel *tiempoInputLabel;
     
-    Modelador *mod;
+    //Modelador *mod;
+    //FileSaver *saver;
     int unidadesAjuste;
     int unidadesAjusteTotal;
     int totalQuieto;
     int tiempoQuieto;
     BOOL estaMoviendose;
     int unidadesGlobales;
+    BOOL banderaSecs;
+    NSMutableArray *coordenadasParaDibujar;
     
     //Pagina Dos
     UIView *paginaDos;
@@ -138,8 +144,6 @@
     CLLocationCoordinate2D zoomLocationPast;
     BOOL banderaLocation;
     NSMutableArray *arregloDePuntos;
-    NSMutableArray *coordenadasParaDibujar;
-
 
 
 }

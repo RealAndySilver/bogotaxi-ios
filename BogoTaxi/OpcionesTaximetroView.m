@@ -63,7 +63,7 @@
     [resumenViajeLabel setOverlayOff:YES];
     [containerOpciones addSubview:resumenViajeLabel];
     
-    switchResumen=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerOpciones.frame.size.width-60, bannerOpcionesTaxi.frame.size.height+20, 0, 0)];
+    switchResumen=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerOpciones.frame.size.width-70, bannerOpcionesTaxi.frame.size.height+20, 0, 0)];
     [containerOpciones addSubview:switchResumen];
     
     estadisticas=[[CustomButton alloc]initWithFrame:CGRectMake(0, 0, containerOpciones.frame.size.width-20, 40)];

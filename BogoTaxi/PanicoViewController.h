@@ -12,7 +12,7 @@
 #import "CustomLabel.h"
 #import "Modelador.h"
 
-@interface PanicoViewController : UIViewController<UITextFieldDelegate>{
+@interface PanicoViewController : UIViewController<UITextFieldDelegate, UIGestureRecognizerDelegate>{
     int deviceKind;//1=iphone4, 2=iphone5, 3=ipad.
     CustomLabel *labelMensajeUbicacion;
     UITextField *textFieldUbicacion;
@@ -32,6 +32,14 @@
     UITextField *tfMail;
     UITextView *tv;
     UITextView *tvMail;
+    
+    CustomLabel *redSocialLabel;
+    
+    CGRect viewFrame;
+    CGFloat viewWidth;
+    CGFloat viewHeight;
+    BOOL tecladoUp;
+    UITapGestureRecognizer *recognizer;
    
 }
 -(NSString *)actualizarMensaje;

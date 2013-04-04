@@ -311,7 +311,7 @@
 	}
     return suma;    
 }
-+(int)conversorSegundosAUnidades:(int)tiempoquieto :(int)cantidadADividir{
+/*+(int)conversorSegundosAUnidades:(int)tiempoquieto :(int)cantidadADividir{
     //Pilas, a veces sale división por 0
     int unidadesTiempoEspera = tiempoquieto/cantidadADividir;
     return unidadesTiempoEspera;
@@ -339,7 +339,7 @@
     }
     else
         return 0;
-}
+}*/
 +(int)unidadesADinero:(int)unidades paraLaCiudad:(NSString*)ciudad{
     int unidadesRecibidas=unidades;
     NSString* nombreCiudad=ciudad;
@@ -388,11 +388,11 @@
 
 
 
-+(int)conversorMetrosAUnidades:(float)totalMetros paraElTaximetro:(TaximetroObject*)objeto{
+/*+(int)conversorMetrosAUnidades:(float)totalMetros paraElTaximetro:(Taximetro*)objeto{
     int unidades = totalMetros/objeto.metrosParaCambio;
     return unidades+objeto.unidadesDeArranque;
-}
-+(int)unidadesADinero:(int)unidades paraElTaximetro:(TaximetroObject *)objeto{
+}*/
++(int)unidadesADinero:(int)unidades paraElTaximetro:(Taximetro *)objeto{
     /*if (unidades<objeto.unidadesCarreraMinima) {
      return objeto.carreraMinima;
      }
@@ -403,7 +403,7 @@
     return res3;
     //}
 }
-+(float)unidadesADineroFloat:(int)unidades paraElTaximetro:(TaximetroObject *)objeto{
++(float)unidadesADineroFloat:(int)unidades paraElTaximetro:(Taximetro *)objeto{
     
     if (unidades<objeto.unidadesCarreraMinima) {
         return objeto.carreraMinimaFloat;
