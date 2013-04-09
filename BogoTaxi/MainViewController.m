@@ -108,10 +108,21 @@
     routeView2.userInteractionEnabled = NO;
     [mapViewGPS addSubview:routeView2];
     
-    buttonAlert=[[UIButton alloc]initWithFrame:CGRectMake(10, mapViewGPS.frame.size.height-50, 40, 40)];
+    buttonAlert=[[UIButton alloc]initWithFrame:CGRectMake(10, mapViewGPS.frame.size.height-60, 40, 40)];
     buttonAlert.backgroundColor=kLiteRedColor;
     buttonAlert.layer.opacity=0;
     [mapViewGPS addSubview:buttonAlert];
+    
+    buttonCallUser=[[UIButton alloc]initWithFrame:CGRectMake(10, mapViewGPS.frame.size.height-110, 40, 40)];
+    buttonCallUser.backgroundColor=kGreenColor;
+    buttonCallUser.layer.opacity=0;
+    [buttonCallUser addTarget:self action:@selector(userCallTrigger) forControlEvents:UIControlEventTouchUpInside];
+    [mapViewGPS addSubview:buttonCallUser];
+    
+    buttonEmergencyCall=[[UIButton alloc]initWithFrame:CGRectMake(10, mapViewGPS.frame.size.height-160, 40, 40)];
+    buttonEmergencyCall.backgroundColor=kYellowColor;
+    buttonEmergencyCall.layer.opacity=0;
+    [mapViewGPS addSubview:buttonEmergencyCall];
     
     containerSuperior=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 126)];
     containerSuperior.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
@@ -235,6 +246,27 @@
     [labelUnidades setOverlayOff:YES];
     [containerUnidades addSubview:labelUnidades];
 }
+#pragma mark Acciones botones de llamada
+-(void)userCallTrigger{
+    Modelador *guardar=[[Modelador alloc]init];
+    NSLog(@"Cuantos hay %i", [[guardar getNumeroEmergencia] length]);
+    NSString *phoneNumber1=@"";
+    if ([[guardar getNumeroEmergencia] length]>2) {
+        //NSString *numeroEmergenciaString=[guardar getNumeroEmergencia];
+        phoneNumber1=[guardar getNumeroEmergencia];
+    }
+    else{
+        NSLog(@"No hay numero");
+        phoneNumber1=@"123";
+    }
+    
+    NSString *phoneNumber = [@"tel://" stringByAppendingString:phoneNumber1];
+    UIWebView *webview=[[UIWebView alloc]init];
+    NSURL *theURL=[NSURL URLWithString:phoneNumber];
+    [webview loadRequest:[NSURLRequest requestWithURL:theURL]];
+    [self.view addSubview:webview];
+}
+
 -(void)buttonPressed:(UIButton*)button{
     if (button.tag==3000) {
         if (unidadesAjuste+25>25) {
@@ -474,40 +506,14 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
 #pragma mark guardar estadisticas
 -(void)guardarEstadisticas{
     Modelador *obj=[[Modelador alloc]init];
-    FileSaver *saver=[[FileSaver alloc]init];
     if (seconds>10) {
         //Registro para el Rate
        // iRate *rate= [[iRate alloc]init];
         //[rate logEvent:YES];
-        NSString *stringMetros=@"";
-        NSString *stringViajes=@"";
-        NSString *stringDinero=@"";
-        NSString *stringMinutos=@"";
-        NSDictionary *dic=[[NSDictionary alloc]init];
-        NSArray *keys = [NSArray arrayWithObjects:@"Metros", @"key2", @"key3", nil];
-        NSArray *objects = [NSArray arrayWithObjects:@"", @"are", @"you", nil];
-        dic = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
-        
-        //[dic objectForKey:@"Metros"];
-        NSLog(@"keyyy antees %@",[dic objectForKey:@"Metros"]);
-        stringMetros=[dic objectForKey:@"Metros"];
         float metros=[Taximetro medidorDeMetrosRecorridos:arregloDePuntos];
-        metros+=[stringMetros floatValue];
-        stringMetros=[NSString stringWithFormat:@"%.0f",metros];
-        NSLog(@"metros acumiladoos %f",metros);
-        [dic setValue:stringMetros forKey:@"Metros"];
-        NSLog(@"keyyy %@",[dic objectForKey:@"Metros"]);
         
-        //metros+=[obj getKm];
-        //[obj setKm:metros];
-        if (![saver getDictionary:@"Estadisticas"]) {
-            [saver setDictionary:dic withName:@"Estadisticas"];
-            // [saver getDictionary:@"Estadisticas"];
-        }
-        else{
-            [saver getDictionary:@"Estadisticas"];
-            [saver setDictionary:dic withName:@"Estadisticas"];
-        }
+        metros+=[obj getKm];
+        [obj setKm:metros];
         
         int viajes=[obj getViajes]+1;
         [obj setViajes:viajes];
@@ -518,8 +524,7 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
         
         if (!taximetro.medicionEnPrecio) {
             NSString *stringA= valorInputLabel.text;
-            stringA = [stringA stringByReplacingOccurrencesOfString:@"Valor: $"
-                                                         withString:@""];
+            stringA = [stringA stringByReplacingOccurrencesOfString:@"$" withString:@""];
             
             float precio = [stringA floatValue];
             precio+=[obj getCantidadTaxis];
@@ -1399,7 +1404,9 @@ int counter=0;
 }
 -(void)encenderTaximetro:(CustomSwitch*)customSwitch{
     if (customSwitch.isOn) {
-        //Modelador *obj=[[Modelador alloc]init];
+        Modelador *obj=[[Modelador alloc]init];
+        int userCallAlpha;
+        int emergencyCallAlpha;
         routeView2.hidden = YES;
         tiempoInputLabel.text=@"00:00";
         labelEncender.text=@"Apagar";
@@ -1407,6 +1414,21 @@ int counter=0;
         arregloDePuntos=nil;
         arregloDePuntos=[[NSMutableArray alloc]init];
         [self animarView:buttonAlert ConOpacidad:1];
+        if ([[obj getNumeroEmergencia] length]>2) {
+            userCallAlpha=1;
+        }
+        else{
+            userCallAlpha=0;
+        }
+        
+        if ([[obj getNumero123] isEqualToString:@"1"]) {
+            emergencyCallAlpha=1;
+        }
+        else if([[obj getNumero123] isEqualToString:@"0"]){
+            emergencyCallAlpha=0;
+        }
+        [self animarView:buttonCallUser ConOpacidad:userCallAlpha];
+        [self animarView:buttonEmergencyCall ConOpacidad:emergencyCallAlpha];
         //[self irAPaginaDeScroll:2];
         [self clockStart];
         if (banderaSecs) {
@@ -1423,8 +1445,19 @@ int counter=0;
         labelEncender.text=@"Encender";
         [locManager stopUpdatingLocation];
         [self animarView:buttonAlert ConOpacidad:0];
+        [self animarView:buttonCallUser ConOpacidad:0];
+        [self animarView:buttonEmergencyCall ConOpacidad:0];
         //[self irAPaginaDeScroll:0];
         [self updateRouteView2];
+        Modelador *obj=[[Modelador alloc]init];
+        /*if (![obj getAlertSwitchValue]) {
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Total"
+                                                              message:[self contarMetros]
+                                                             delegate:self
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles:nil];
+            [message show];
+        }*/
         routeView2.hidden = NO;
         [self guardarEstadisticas];
         [self clockStop];
@@ -1486,15 +1519,47 @@ int counter=0;
     [errorAlert show];
 }
 
-/*#pragma mark map delegate
-- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
-{
-    if (!switchEncender.isOn) {
-
+/*#pragma mark Guardar imagen
+- (void)saveScreenshot {
+    
+    // Define the dimensions of the screenshot you want to take (the entire screen in this case)
+    //CGSize size =  [[UIScreen mainScreen] bounds].size;
+    
+    // Create the screenshot
+    UIGraphicsBeginImageContextWithOptions(self.mapViewGPS.bounds.size, NO, 0.0);
+    
+    // Put everything in the current view into the screenshot
+    [[self.mapViewGPS layer] renderInContext:UIGraphicsGetCurrentContext()];
+    // Save the current image context info into a UIImage
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // Save the screenshot to the device's photo album
+    //UIImageWriteToSavedPhotosAlbum(newImage, self,
+    //                             @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    NSString *savePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Screenshot.jpg"];
+    
+    // Write image to PNG
+    //[UIImagePNGRepresentation(newImage) writeToFile:savePath atomically:YES];
+    [UIImageJPEGRepresentation(newImage, 0.1 ) writeToFile:savePath atomically:YES];
+    NSError *error;
+    NSFileManager *fileMgr = [NSFileManager defaultManager];
+    
+    // Point to Document directory
+    NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    
+    // Write out the contents of home directory to console
+    NSLog(@"Documents directory: %@", [fileMgr contentsOfDirectoryAtPath:documentsDirectory error:&error]);
+    
+}
+// callback for UIImageWriteToSavedPhotosAlbum
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    
+    if (error) {
+        NSLog(@"Error al guardar");    }
+    else {
+        NSLog(@"Guardada con éxito");
     }
-	else{
-        
-    }
-
-}*/
+}
+int tf=0;*/
 @end

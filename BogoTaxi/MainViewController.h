@@ -73,6 +73,8 @@
     CustomLabel *terminalLabel;
     CustomSwitch *terminalSwitch;
     UIButton *buttonAlert;
+    UIButton *buttonCallUser;
+    UIButton *buttonEmergencyCall;
     
     CustomLabel *valorLabel;
     CustomLabel *valorInputLabel;

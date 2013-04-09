@@ -23,4 +23,5 @@
 @property(nonatomic,retain)UILabel *onLabel;
 @property(nonatomic,retain)UILabel *offLabel;
 -(void)addTarget:(id)target action:(SEL)selector;
+-(void)onOff:(BOOL)on;
 @end

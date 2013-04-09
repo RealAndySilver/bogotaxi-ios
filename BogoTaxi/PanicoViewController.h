@@ -49,7 +49,5 @@
 -(void)facebookTrigger;
 -(void)mailTrigger;
 -(void)smsTrigger;
--(void)moverViewArriba;
--(void)moverViewAbajo;
 
 @end

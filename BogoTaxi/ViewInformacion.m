@@ -44,7 +44,7 @@
         [self addSubview:labelTituloInformacion];
         
         labelNombreTaxista=[[UILabel alloc]initWithFrame:CGRectMake(5, 40, self.frame.size.width-10, 30)];
-        labelNombreTaxista.text=@"Nombre: Andres Aparicio";
+        labelNombreTaxista.text=@"Nombre:";
         labelNombreTaxista.font=[UIFont fontWithName:kFontType size:24];
         labelNombreTaxista.backgroundColor=kBeigeColor;
         labelNombreTaxista.textAlignment=UITextAlignmentCenter;
@@ -53,7 +53,7 @@
         [self addSubview:labelNombreTaxista];
         
         labelTwitterTaxista=[[UILabel alloc]initWithFrame:CGRectMake(5, 75, self.frame.size.width-10, 30)];
-        labelTwitterTaxista.text=@"Twitter: @taxi_Andrew";
+        labelTwitterTaxista.text=@"Twitter:";
         labelTwitterTaxista.font=[UIFont fontWithName:kFontType size:24];
         labelTwitterTaxista.textAlignment=UITextAlignmentCenter;
         labelTwitterTaxista.textAlignment=NSTextAlignmentCenter;
@@ -62,7 +62,7 @@
         [self addSubview:labelTwitterTaxista];
         
         labelAsociacionTaxista=[[UILabel alloc]initWithFrame:CGRectMake(5, 110, self.frame.size.width-10, 30)];
-        labelAsociacionTaxista.text=@"Asociación: @TaxiBTA";
+        labelAsociacionTaxista.text=@"Asociación:";
         labelAsociacionTaxista.font=[UIFont fontWithName:kFontType size:24];
         labelAsociacionTaxista.textAlignment=UITextAlignmentCenter;
         labelAsociacionTaxista.textAlignment=NSTextAlignmentCenter;
@@ -71,7 +71,7 @@
         [self addSubview:labelAsociacionTaxista];
         
         labelHoraInicio=[[UILabel alloc]initWithFrame:CGRectMake(5, 145, self.frame.size.width-10, 30)];
-        labelHoraInicio.text=@"Hora Inicio: 6";
+        labelHoraInicio.text=@"Hora Inicio: ";
         labelHoraInicio.font=[UIFont fontWithName:kFontType size:24];
         labelHoraInicio.textAlignment=UITextAlignmentCenter;
         labelHoraInicio.textAlignment=NSTextAlignmentCenter;
@@ -80,7 +80,7 @@
         [self addSubview:labelHoraInicio];
         
         labelHoraFin=[[UILabel alloc]initWithFrame:CGRectMake(5, 180, self.frame.size.width-10, 30)];
-        labelHoraFin.text=@"Hora Fin: 23";
+        labelHoraFin.text=@"Hora Fin: ";
         labelHoraFin.font=[UIFont fontWithName:kFontType size:24];
         labelHoraFin.textAlignment=UITextAlignmentCenter;
         labelHoraFin.textAlignment=NSTextAlignmentCenter;

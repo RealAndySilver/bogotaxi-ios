@@ -311,35 +311,6 @@
 	}
     return suma;    
 }
-/*+(int)conversorSegundosAUnidades:(int)tiempoquieto :(int)cantidadADividir{
-    //Pilas, a veces sale división por 0
-    int unidadesTiempoEspera = tiempoquieto/cantidadADividir;
-    return unidadesTiempoEspera;
-}
-+(int)conversorMetrosAUnidades:(float)totalMetros paraLaCiudad:(NSString*)ciudad{
-    if ([ciudad isEqual:@"Bogota"]||[ciudad isEqual:@"Bogota "]||[ciudad isEqual:@""]) {
-        if (totalMetros>10) {
-            int unidades = totalMetros/METROSBOGOTA;
-            return unidades+25;
-        }
-        else{
-            int unidades = 25 ;
-            return unidades;
-        }
-    }
-    else if ([ciudad isEqual:@"Medellin"]) {
-        if (totalMetros>10) {
-            int unidades = totalMetros/METROSMEDELLIN;
-            return unidades+31;
-        }
-        else{
-            int unidades = 31 ;
-            return unidades;
-        }
-    }
-    else
-        return 0;
-}*/
 +(int)unidadesADinero:(int)unidades paraLaCiudad:(NSString*)ciudad{
     int unidadesRecibidas=unidades;
     NSString* nombreCiudad=ciudad;

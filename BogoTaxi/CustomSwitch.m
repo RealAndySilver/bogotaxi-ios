@@ -86,6 +86,19 @@
         //[self setUserInteractionEnabled:NO];
     }
 }
+-(void)onOff:(BOOL)on{
+    if (!on) {
+        isOn=on;
+        //[self animarColorDos];
+        [scrollView setContentOffset:CGPointMake(60, 0)];
+    }
+    else{
+        isOn=on;
+        [self animarColorUno];
+        [scrollView setContentOffset:CGPointMake(0, 0)];
+    }
+    //[self scrollViewDidScroll:scrollView];
+}
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView1 willDecelerate:(BOOL)decelerate{
     [self setUserInteractionEnabled:YES];
     [self callSelector];

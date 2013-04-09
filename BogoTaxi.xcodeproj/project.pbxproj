@@ -41,6 +41,7 @@
 		3368F00116F911950093C022 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3368F00016F911950093C022 /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3368F00716F912480093C022 /* libicucore.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3368F00616F912480093C022 /* libicucore.A.dylib */; };
 		33BCB86016F929FE00354F2B /* Modelador.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BCB85F16F929FE00354F2B /* Modelador.m */; };
+		33C430B81714A1CF006749C0 /* LlamadaDeEmergenciaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C430B71714A1CF006749C0 /* LlamadaDeEmergenciaViewController.m */; };
 		33F0DBD2170E0B79009581CB /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F0DBD1170E0B79009581CB /* iRate.m */; };
 		33F0DBD4170E23D5009581CB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33F0DBD3170E23D5009581CB /* StoreKit.framework */; };
 		33F0DBD7170E3001009581CB /* FileSaver.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F0DBD6170E3001009581CB /* FileSaver.m */; };
@@ -136,6 +137,8 @@
 		3368F00616F912480093C022 /* libicucore.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.A.dylib; path = usr/lib/libicucore.A.dylib; sourceTree = SDKROOT; };
 		33BCB85E16F929FE00354F2B /* Modelador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Modelador.h; sourceTree = "<group>"; };
 		33BCB85F16F929FE00354F2B /* Modelador.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Modelador.m; sourceTree = "<group>"; };
+		33C430B61714A1CE006749C0 /* LlamadaDeEmergenciaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LlamadaDeEmergenciaViewController.h; sourceTree = "<group>"; };
+		33C430B71714A1CF006749C0 /* LlamadaDeEmergenciaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LlamadaDeEmergenciaViewController.m; sourceTree = "<group>"; };
 		33F0DBD0170E0B79009581CB /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
 		33F0DBD1170E0B79009581CB /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
 		33F0DBD3170E23D5009581CB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -262,6 +265,8 @@
 				331481D916791E59006AB746 /* EstadisticasViewController.m */,
 				332AC87A167BD70E001A187B /* PanicoViewController.h */,
 				332AC87B167BD70E001A187B /* PanicoViewController.m */,
+				33C430B61714A1CE006749C0 /* LlamadaDeEmergenciaViewController.h */,
+				33C430B71714A1CF006749C0 /* LlamadaDeEmergenciaViewController.m */,
 				33462741167F947200578B79 /* AdvertenciaViewController.h */,
 				33462742167F947200578B79 /* AdvertenciaViewController.m */,
 				3346273D167F81D900578B79 /* AcercaDeViewController.h */,
@@ -472,6 +477,7 @@
 				33BCB86016F929FE00354F2B /* Modelador.m in Sources */,
 				33F0DBD2170E0B79009581CB /* iRate.m in Sources */,
 				33F0DBD7170E3001009581CB /* FileSaver.m in Sources */,
+				33C430B81714A1CF006749C0 /* LlamadaDeEmergenciaViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

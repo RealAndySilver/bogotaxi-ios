@@ -69,11 +69,9 @@
 #pragma mark ClassMethods
 +(float)medidorDeMetrosRecorridos:(NSMutableArray*)puntos;
 +(int)conversorMetrosAUnidades:(float)totalMetros paraLaCiudad:(NSString*)ciudad;
-//+(int)conversorSegundosAUnidades:(int)tiempoquieto :(int)cantidadADividir;
 +(int)unidadesADinero:(int)unidades paraLaCiudad:(NSString*)ciudad;
 +(int)unidadesAPesos:(int)unidades;
 
-//+(int)conversorMetrosAUnidades:(float)totalMetros paraElTaximetro:(Taximetro*)objeto;
 +(int)unidadesADinero:(int)unidades paraElTaximetro:(Taximetro*)objeto;
 +(float)unidadesADineroFloat:(int)unidades paraElTaximetro:(Taximetro *)objeto;
 

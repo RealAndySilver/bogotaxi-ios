@@ -21,6 +21,7 @@
     
 }
 @property(nonatomic,retain) CustomButton *botonDePanico;
+@property(nonatomic,retain) CustomButton *LlamadaEmergencia;
 -(void)changeState;
 -(void)construirMenuConDeviceKind:(int)deviceKind;
 

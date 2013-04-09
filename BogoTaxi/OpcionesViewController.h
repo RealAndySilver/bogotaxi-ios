@@ -16,6 +16,7 @@
 #import "PanicoViewController.h"
 #import "AdvertenciaViewController.h"
 #import "AcercaDeViewController.h"
+#import "LlamadaDeEmergenciaViewController.h"
 
 @interface OpcionesViewController : UIViewController{
     int deviceKind;
@@ -27,8 +28,9 @@
     OpcionesTaximetroView *opcionesTaxiView;
     OpcionesCompartirView *opcionesCompartir;
     OpcionesContactoView *opcionesContactoeInformacion;
-    EstadisticasViewController *estadisticas;
-    PanicoViewController *panico;
+    //EstadisticasViewController *estadisticas;
+    //PanicoViewController *panico;
+    //LlamadaDeEmergenciaViewController *llamadaEmergencia;
 }
 
 @end

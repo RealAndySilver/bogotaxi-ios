@@ -70,11 +70,11 @@
     tvMail=[[UITextView alloc]initWithFrame:tvRectMail];
     
     redSocialLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
-    redSocialLabel.font=[UIFont fontWithName:kFontType size:22];
-    redSocialLabel.textColor=kDarkGrayColor;
+    redSocialLabel.font=[UIFont fontWithName:kFontType size:24];
+    redSocialLabel.textColor=kTitleBlueColor;
     redSocialLabel.overlayLabel.numberOfLines=4;
     redSocialLabel.center=CGPointMake(190, self.view.frame.size.height-70);
-    [redSocialLabel setOverlayOff:NO];
+    [redSocialLabel setOverlayOff:YES];
     [self.view addSubview:redSocialLabel];
 
     
@@ -140,7 +140,7 @@
     }
     if ([[obj getNumeroSMS] isEqualToString:@" "]||[[obj getNumeroSMS] isEqualToString:@""]||[obj getNumeroSMS]==nil
         ||[[obj getNumeroSMS] isEqualToString:@"0"]) {
-        tf.placeholder=@"# predeterminado";
+        tf.placeholder=@"# Predeterminado";
         
     }
     else{
@@ -322,19 +322,16 @@
     Modelador *obj=[[Modelador alloc]init];
     [obj redSocialConNombre:@"Twitter"];
     redSocialLabel.text=[obj obtenerNombreDeRedSocial];
-    NSLog(@"Red Social: %@",[obj obtenerNombreDeRedSocial]);
 }
 -(void)facebookTrigger{
     Modelador *obj=[[Modelador alloc]init];
     [obj redSocialConNombre:@"Facebook"];
     redSocialLabel.text=[obj obtenerNombreDeRedSocial];
-    NSLog(@"Red Social: %@",[obj obtenerNombreDeRedSocial]);
 }
 -(void)mailTrigger{
     Modelador *obj=[[Modelador alloc]init];
     [obj redSocialConNombre:@"Mail"];
     redSocialLabel.text=[obj obtenerNombreDeRedSocial];
-    NSLog(@"Red Social: %@",[obj obtenerNombreDeRedSocial]);
     if (!banderaDesplazar) {
         
         CGRect myMapRect = CGRectMake(75, 0, contentMensajeView.frame.size.width, contentMensajeView.frame.size.height);

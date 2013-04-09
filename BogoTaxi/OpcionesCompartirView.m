@@ -22,7 +22,7 @@
 #define kWhiteColor [UIColor whiteColor]
 
 @implementation OpcionesCompartirView
-@synthesize botonDePanico;
+@synthesize botonDePanico,LlamadaEmergencia;
 
 - (id)initWithFrame:(CGRect)frame
 {

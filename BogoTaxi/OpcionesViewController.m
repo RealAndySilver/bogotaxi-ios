@@ -158,6 +158,7 @@
     
     [opcionesCompartir changeState];
     [opcionesCompartir.botonDePanico addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
+    [opcionesCompartir.LlamadaEmergencia addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
 }
 -(void)callOpcionesContacto{
     
@@ -178,6 +179,12 @@
         pVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Panico"];
         pVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:pVC animated:YES];
+    }
+    else if ([button.titleLabel.text isEqualToString:@"Llamada de emergencia"]) {
+        LlamadaDeEmergenciaViewController *lVC=[[LlamadaDeEmergenciaViewController alloc]init];
+        lVC=[self.storyboard instantiateViewControllerWithIdentifier:@"LlamadaEmergencia"];
+        lVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:lVC animated:YES];
     }
     else if ([button.titleLabel.text isEqualToString:@"Advertencia"]) {
         NSLog(@"entreee");
