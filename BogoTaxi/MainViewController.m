@@ -479,20 +479,35 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
         //Registro para el Rate
        // iRate *rate= [[iRate alloc]init];
         //[rate logEvent:YES];
-        NSString *stringMetros;
-        NSString *stringViajes;
-        NSString *stringDinero;
-        NSString *stringMinutos;
+        NSString *stringMetros=@"";
+        NSString *stringViajes=@"";
+        NSString *stringDinero=@"";
+        NSString *stringMinutos=@"";
+        NSDictionary *dic=[[NSDictionary alloc]init];
+        NSArray *keys = [NSArray arrayWithObjects:@"Metros", @"key2", @"key3", nil];
+        NSArray *objects = [NSArray arrayWithObjects:@"", @"are", @"you", nil];
+        dic = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
         
-        [saver setIP:stringMetros];
+        //[dic objectForKey:@"Metros"];
+        NSLog(@"keyyy antees %@",[dic objectForKey:@"Metros"]);
+        stringMetros=[dic objectForKey:@"Metros"];
         float metros=[Taximetro medidorDeMetrosRecorridos:arregloDePuntos];
-        //metros+=[[saver getIp] floatValue];
-        //stringMetros=[NSString stringWithFormat:@"%f", metros];
-        //[saver setIP:stringMetros];
-        NSLog(@"metroooos %@",[saver getIp]);
+        metros+=[stringMetros floatValue];
+        stringMetros=[NSString stringWithFormat:@"%.0f",metros];
+        NSLog(@"metros acumiladoos %f",metros);
+        [dic setValue:stringMetros forKey:@"Metros"];
+        NSLog(@"keyyy %@",[dic objectForKey:@"Metros"]);
         
-        metros+=[obj getKm];
-        [obj setKm:metros];
+        //metros+=[obj getKm];
+        //[obj setKm:metros];
+        if (![saver getDictionary:@"Estadisticas"]) {
+            [saver setDictionary:dic withName:@"Estadisticas"];
+            // [saver getDictionary:@"Estadisticas"];
+        }
+        else{
+            [saver getDictionary:@"Estadisticas"];
+            [saver setDictionary:dic withName:@"Estadisticas"];
+        }
         
         int viajes=[obj getViajes]+1;
         [obj setViajes:viajes];
@@ -500,8 +515,6 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
         int segundos = seconds;
         segundos+=[obj getMinutosTaxi];
         [obj setMinutosTaxi:segundos];
-        
-        
         
         if (!taximetro.medicionEnPrecio) {
             NSString *stringA= valorInputLabel.text;
