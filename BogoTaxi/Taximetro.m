@@ -47,6 +47,7 @@
         carreraMinimaFloat=3500;
         aeropuertoAnula=NO;
         medicionEnPrecio=NO;
+        numeroDeEmergenciasLocal=123;
     }
 }
 -(void)resetToCero{

@@ -122,6 +122,7 @@
     buttonEmergencyCall=[[UIButton alloc]initWithFrame:CGRectMake(10, mapViewGPS.frame.size.height-160, 40, 40)];
     buttonEmergencyCall.backgroundColor=kYellowColor;
     buttonEmergencyCall.layer.opacity=0;
+    [buttonEmergencyCall addTarget:self action:@selector(emergencyCallTrigger) forControlEvents:UIControlEventTouchUpInside];
     [mapViewGPS addSubview:buttonEmergencyCall];
     
     containerSuperior=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 126)];
@@ -163,11 +164,17 @@
     [containerSuperior addSubview:containerSuperiorInferior];
     
     containerInfoTaximetro=[[UIView alloc]initWithFrame:CGRectMake(5, 5, 135, 78)];
+    if (deviceKind==3) {
+        containerInfoTaximetro.frame=CGRectMake(5, 5, (135*2)+50, 78);
+    }
     containerInfoTaximetro.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
     [containerSuperiorInferior addSubview:containerInfoTaximetro];
     
     
     containerTiempo=[[UIView alloc]initWithFrame:CGRectMake(137+4, 5, 70, 78)];
+    if (deviceKind==3) {
+        containerTiempo.frame=CGRectMake((137+4+23)*2, 5, (70*2)+50, 78);
+    }
     containerTiempo.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
     [containerSuperiorInferior addSubview:containerTiempo];
     
@@ -210,6 +217,9 @@
     
     containerUnidades=[[UIView alloc]initWithFrame:CGRectMake(6+206, 5, 103, 78)];
     containerUnidades.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
+    if (deviceKind==3) {
+        containerUnidades.frame=CGRectMake((6+206+48)*2, 5, (103*2)+35, 78);
+    }
     [containerSuperiorInferior addSubview:containerUnidades];
     UIView *containerUnidadesOverlay=[[UIView alloc]initWithFrame:CGRectMake(3, 3, containerUnidades.frame.size.width-5, containerUnidades.frame.size.height-5)];
     containerUnidadesOverlay.backgroundColor=[UIColor whiteColor];
@@ -266,7 +276,16 @@
     [webview loadRequest:[NSURLRequest requestWithURL:theURL]];
     [self.view addSubview:webview];
 }
-
+-(void)emergencyCallTrigger{
+    
+    NSString *phoneNumber1=[NSString stringWithFormat:@"%.0f",taximetro.numeroDeEmergenciasLocal];
+    NSLog(@" %@",phoneNumber1);
+    NSString *phoneNumber = [@"tel://" stringByAppendingString:phoneNumber1];
+    UIWebView *webview=[[UIWebView alloc]init];
+    NSURL *theURL=[NSURL URLWithString:phoneNumber];
+    [webview loadRequest:[NSURLRequest requestWithURL:theURL]];
+    [self.view addSubview:webview];
+}
 -(void)buttonPressed:(UIButton*)button{
     if (button.tag==3000) {
         if (unidadesAjuste+25>25) {
@@ -548,7 +567,7 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
 #pragma mark - pagina dos
 -(void)crearPaginaDos{
     paginaDos=[[UIView alloc]initWithFrame:CGRectMake(mainScrollView.frame.size.width*1, 0, mainScrollView.frame.size.width, mainScrollView.frame.size.height)];
-    paginaDos.backgroundColor=[UIColor clearColor];
+    paginaDos.backgroundColor=kBlueColor;
     [mainScrollView addSubview:paginaDos];
     
     taximetro=[[Taximetro alloc]initWithCiudad:@"bogota"];
@@ -614,8 +633,8 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
 	locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     
     mapaPaginaDos=[[MKMapView alloc]initWithFrame:CGRectMake(5, bannerPaginaDos.frame.size.height+configTituloLabel.frame.size.height+35, paginaUnoContainer.frame.size.width-10, 195)];
-    if (self.view.frame.size.height>480) {
-        mapaPaginaDos.frame=CGRectMake(5, bannerPaginaDos.frame.size.height+configTituloLabel.frame.size.height+5, paginaUnoContainer.frame.size.width-10, 280);
+    if (deviceKind==3) {
+        mapaPaginaDos.frame=CGRectMake(5, 120, paginaUnoContainer.frame.size.width-10, 670);
     }
     mapaPaginaDos.delegate=self;
     mapaPaginaDos.layer.cornerRadius=3;
@@ -917,11 +936,12 @@ int counter=0;
      else{
      routeView.Hidden=YES;
      }
-    calcular.metros=distanciaMetros;
-    float temp=[taximetro unidadesADinero:distanciaMetros];
+    calcular.metros=distanciaMetros/1000;
+    int unidades =[Taximetro conversorMetrosAUnidades:distanciaMetros paraElTaximetro:taximetro];
+    float temp=[taximetro unidadesADinero:unidades];
     NSLog(@"Este es el valor %f",temp);
     calcular.valueTotalAprox.text=[NSString stringWithFormat:@"$%.0f",temp];
-    calcular.valueRecorrido.text=[NSString stringWithFormat:@"%.0f m",distanciaMetros];
+    calcular.valueRecorrido.text=[NSString stringWithFormat:@"%.2f Km",distanciaMetros/1000];
     [calcular changeState];
     [self.view bringSubviewToFront:calcular];
 }

@@ -68,11 +68,17 @@
         if (tipo==2) {
             temp.center=CGPointMake((self.frame.size.width/2)/2, (((self.frame.size.height/3)/2)+espacio+20)*(posicion));
         }
+        else if (tipo==3){
+            temp.center=CGPointMake((self.frame.size.width/2)/2, (((self.frame.size.height/3)/2)+espacio+50)*(posicion));
+        }
     }
     else if (posicion==4){
         temp.center=CGPointMake((self.frame.size.width/2)/2, (((self.frame.size.height/3)/2)+espacio)*(posicion-1));
         if (tipo==2) {
             temp.center=CGPointMake((self.frame.size.width/2)/2, (((self.frame.size.height/3)/2)+espacio+27.5)*(posicion-1));
+        }
+        else if (tipo==3){
+            temp.center=CGPointMake((self.frame.size.width/2)/2, (((self.frame.size.height/3)/2)+espacio+68)*(posicion-1));
         }
     }
     
@@ -84,12 +90,18 @@
         if (tipo==2) {
             temp.center=CGPointMake((self.frame.size.width/4)*3, (((self.frame.size.height/3)/2)+espacio+20)*(posicion-1));
         }
+        else if (tipo==3){
+            temp.center=CGPointMake((self.frame.size.width/4)*3, (((self.frame.size.height/3)/2)+espacio+50)*(posicion-1));
+        }
     }
     else if (posicion==5){
         
         temp.center=CGPointMake((self.frame.size.width/4)*3, (((self.frame.size.height/3)/2)+espacio)*(posicion-2));
         if (tipo==2) {
             temp.center=CGPointMake((self.frame.size.width/4)*3, (((self.frame.size.height/3)/2)+espacio+27.5)*(posicion-2));
+        }
+        else if (tipo==3){
+            temp.center=CGPointMake((self.frame.size.width/4)*3, (((self.frame.size.height/3)/2)+espacio+68)*(posicion-2));
         }
     }
     

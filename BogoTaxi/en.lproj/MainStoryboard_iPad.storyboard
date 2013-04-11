@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C3006" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
         <!--Main View Controller-->
@@ -16,26 +16,189 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-353" y="860"/>
+        </scene>
+        <!--Llamadas View Controller-->
+        <scene sceneID="MfF-Vd-dkh">
+            <objects>
+                <viewController storyboardIdentifier="Llamadas" id="I4M-ce-NDi" customClass="LlamadasViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5Tf-Vs-OIo">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cPg-TO-L7H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1365" y="-1461"/>
         </scene>
         <!--Taximetro Manual View Controller-->
-        <scene sceneID="otK-O2-fha">
+        <scene sceneID="Qlz-42-xaH">
             <objects>
-                <viewController storyboardIdentifier="Menu" id="VFp-gp-QgV" customClass="TaximetroManualViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="yoY-vG-JCU">
+                <viewController storyboardIdentifier="Menu" id="p3c-YA-jhU" customClass="TaximetroManualViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TBe-mE-uTc">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.49803921569999998" green="0.78823529410000004" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8a4-UR-lxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sUH-ns-Yj7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="833" y="-261"/>
+            <point key="canvasLocation" x="1365" y="-305"/>
+        </scene>
+        <!--Opciones View Controller-->
+        <scene sceneID="w6X-mr-Ug0">
+            <objects>
+                <viewController storyboardIdentifier="Opciones" id="MMH-Jk-pWD" customClass="OpcionesViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rX5-f2-yZ0">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PHc-yh-RGv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="501" y="860"/>
+        </scene>
+        <!--Estadisticas View Controller-->
+        <scene sceneID="ZDb-3t-DIP">
+            <objects>
+                <viewController storyboardIdentifier="Estadisticas" id="1ti-sQ-76O" customClass="EstadisticasViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NNU-Mp-2Ro">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U1e-v4-tJW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1353" y="860"/>
+        </scene>
+        <!--Panico View Controller-->
+        <scene sceneID="Tjg-UK-Lm9">
+            <objects>
+                <viewController storyboardIdentifier="Panico" id="MI5-kK-yxB" customClass="PanicoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ReV-yY-JVV">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j0a-sb-WPD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2164" y="860"/>
+        </scene>
+        <!--Acerca De View Controller-->
+        <scene sceneID="FQ0-wl-gWf">
+            <objects>
+                <viewController storyboardIdentifier="AcercaDe" id="EgM-pt-QbB" customClass="AcercaDeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5nO-Ak-tZ1">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pwm-Lh-rfk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2967" y="860"/>
+        </scene>
+        <!--Advertencia View Controller-->
+        <scene sceneID="Gfe-Mp-C80">
+            <objects>
+                <viewController storyboardIdentifier="Advertencia" id="YTc-NC-6cz" customClass="AdvertenciaViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="H1j-0F-Iif">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KZf-K7-JSw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3781" y="860"/>
+        </scene>
+        <!--Llamada De Emergencia View Controller-->
+        <scene sceneID="10R-Wm-tvJ">
+            <objects>
+                <viewController storyboardIdentifier="LlamadaEmergencia" id="NIJ-ek-Cd3" customClass="LlamadaDeEmergenciaViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TMo-HT-jOG">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DCJ-Ba-YUt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5411" y="860"/>
+        </scene>
+        <!--Detail Reporte View Controller-->
+        <scene sceneID="JbQ-vH-mxi">
+            <objects>
+                <viewController storyboardIdentifier="DetailReporte" id="ofK-pb-Fn0" customClass="DetailReporteViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="i3b-HW-J9V">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qqt-iQ-kJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4600" y="-288"/>
+        </scene>
+        <!--Consultar Placa View Controller-->
+        <scene sceneID="WGB-P6-uPz">
+            <objects>
+                <viewController storyboardIdentifier="ConsultarPlaca" id="vXm-IT-Yrj" customClass="ConsultarPlacaViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wAU-Fc-fR3">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S6f-dz-DpJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4600" y="860"/>
         </scene>
     </scenes>
     <classes>
+        <class className="AcercaDeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AcercaDeViewController.h"/>
+        </class>
+        <class className="AdvertenciaViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AdvertenciaViewController.h"/>
+        </class>
+        <class className="ConsultarPlacaViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ConsultarPlacaViewController.h"/>
+        </class>
+        <class className="DetailReporteViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailReporteViewController.h"/>
+        </class>
+        <class className="EstadisticasViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EstadisticasViewController.h"/>
+        </class>
+        <class className="LlamadaDeEmergenciaViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LlamadaDeEmergenciaViewController.h"/>
+        </class>
+        <class className="LlamadasViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LlamadasViewController.h"/>
+        </class>
         <class className="MainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
+        </class>
+        <class className="OpcionesViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OpcionesViewController.h"/>
+        </class>
+        <class className="PanicoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PanicoViewController.h"/>
         </class>
         <class className="TaximetroManualViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TaximetroManualViewController.h"/>

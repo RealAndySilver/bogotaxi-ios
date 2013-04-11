@@ -67,7 +67,7 @@
     [containerDinero addSubview:totalAprox];
     
     valueTotalAprox=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
-    [valueTotalAprox ponerTexto:@"$3400" fuente:[UIFont fontWithName:kFontType size:40] color:kDarkRedColor];
+    [valueTotalAprox ponerTexto:@"$0" fuente:[UIFont fontWithName:kFontType size:40] color:kDarkRedColor];
     valueTotalAprox.center=CGPointMake(25+containerDinero.frame.size.width/2+(containerDinero.frame.size.width/2)/2, (containerDinero.frame.size.height/2));
     
     [valueTotalAprox setOverlayOff:YES];
@@ -87,7 +87,7 @@
     [containerRecorrido addSubview:recorrido];
     
     valueRecorrido=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
-    [valueRecorrido ponerTexto:@"324.5 m" fuente:[UIFont fontWithName:kFontType size:36] color:kWhiteColor];
+    [valueRecorrido ponerTexto:@"0 Km" fuente:[UIFont fontWithName:kFontType size:36] color:kWhiteColor];
     valueRecorrido.center=CGPointMake(((containerRecorrido.frame.size.width/2)/2)+containerRecorrido.frame.size.width/2+25, containerRecorrido.frame.size.height/2);
     [valueRecorrido setOverlayOff:YES];
     //[valueRecorrido setCentrado:YES];
@@ -139,7 +139,7 @@
     [terminalSwitch addTarget:self action:@selector(switchChanged)];
     
     botonVolverAlMapa=[[CustomButton alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
-    botonVolverAlMapa.center=CGPointMake(self.frame.size.width-266, self.frame.size.height-(botonVolverAlMapa.frame.size.height/2)-8);
+    botonVolverAlMapa.center=CGPointMake(60, self.frame.size.height-(botonVolverAlMapa.frame.size.height/2)-8);
     [botonVolverAlMapa setTitle:@"Volver al Mapa" forState:UIControlStateNormal];
     [botonVolverAlMapa addTarget:self action:@selector(changeState) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:botonVolverAlMapa];

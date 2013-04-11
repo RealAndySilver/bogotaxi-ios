@@ -73,6 +73,9 @@
     if (deviceKind==2) {
         containerValores.frame=CGRectMake(0, self.view.frame.size.height-240-170, self.view.frame.size.width, 110);
     }
+    else if (deviceKind==3) {
+        containerValores.frame=CGRectMake(0, 200, self.view.frame.size.width, 110);
+    }
     containerValores.backgroundColor=kWhiteColor;
     [self.view addSubview:containerValores];
     UIView *containerPlata=[[UIView alloc]initWithFrame:CGRectMake(10, 10, (containerValores.frame.size.width/2)-10-1, 90)];
@@ -135,6 +138,9 @@
     if (deviceKind==2) {
         slider.frame=CGRectMake(10, self.view.frame.size.height-210-80, self.view.frame.size.width-20, 20);
     }
+    else if (deviceKind==3) {
+        slider.frame=CGRectMake(10, 460, self.view.frame.size.width-20, 20);
+    }
     [slider setMinimumTrackTintColor:kYellowColor];
     [slider setThumbTintColor:kDarkGrayColor];
     [slider setMaximumTrackTintColor:[UIColor whiteColor]];
@@ -145,6 +151,9 @@
     containerConfig=[[UIView alloc]initWithFrame:CGRectMake(5, self.view.frame.size.height-162-50, self.view.frame.size.width-10, 160)];
     if (deviceKind==2) {
         containerConfig.frame=CGRectMake(5, self.view.frame.size.height-162-100, self.view.frame.size.width-10, 160);
+    }
+    else if (deviceKind==3) {
+        containerConfig.frame=CGRectMake(5, 600, self.view.frame.size.width-10, 160);
     }
     containerConfig.backgroundColor=kDarkGrayColor;
     containerConfig.layer.cornerRadius=3;

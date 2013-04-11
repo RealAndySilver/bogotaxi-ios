@@ -63,17 +63,32 @@
     CGRect tfMailRect = CGRectMake(10, 50, 200, 30);
     CGRect tvRect = CGRectMake(85, 0, 200, 45);
     CGRect tvRectMail = CGRectMake(5, 0, 200, 45);
-    tf=[[UITextField alloc]initWithFrame:tfRect];
+    if (deviceKind==3) {
+        tf=[[UITextField alloc]initWithFrame:tfMailRect];
+    }
+    else{
+        tf=[[UITextField alloc]initWithFrame:tfRect];
+    }
     tfMail=[[UITextField alloc]initWithFrame:tfMailRect];
     tfMail.autocorrectionType=UITextAutocorrectionTypeNo;
-    tv=[[UITextView alloc]initWithFrame:tvRect];
+    if (deviceKind==3) {
+        tv=[[UITextView alloc]initWithFrame:tvRectMail];
+    }
+    else{
+        tv=[[UITextView alloc]initWithFrame:tvRect];
+    }
     tvMail=[[UITextView alloc]initWithFrame:tvRectMail];
     
-    redSocialLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
+    redSocialLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, 70, 24)];
     redSocialLabel.font=[UIFont fontWithName:kFontType size:24];
     redSocialLabel.textColor=kTitleBlueColor;
     redSocialLabel.overlayLabel.numberOfLines=4;
-    redSocialLabel.center=CGPointMake(190, self.view.frame.size.height-70);
+    if (deviceKind==3) {
+        redSocialLabel.center=CGPointMake(250, 650);
+    }
+    else{
+        redSocialLabel.center=CGPointMake(190, self.view.frame.size.height-70);
+    }
     [redSocialLabel setOverlayOff:YES];
     [self.view addSubview:redSocialLabel];
 
@@ -109,10 +124,16 @@
     labelMensajeUbicacion.numberOfLines = 2;
     labelMensajeUbicacion.overlayLabel.numberOfLines=2;
     labelMensajeUbicacion.center=CGPointMake(self.view.frame.size.width/2, 110);
+    if (deviceKind==3) {
+        labelMensajeUbicacion.center=CGPointMake(self.view.frame.size.width/2, 220);
+    }
     [labelMensajeUbicacion setOverlayOff:NO];
     [self.view addSubview:labelMensajeUbicacion];
     
     textFieldUbicacion = [[UITextField alloc] initWithFrame:CGRectMake(90, 112, 215, 30)];
+    if (deviceKind==3) {
+        textFieldUbicacion.frame=CGRectMake(400, 209, 350, 30);
+    }
     textFieldUbicacion.borderStyle = UITextBorderStyleRoundedRect;
     textFieldUbicacion.textColor = kTitleBlueColor;
     textFieldUbicacion.font = [UIFont fontWithName:kFontType size:22];
@@ -170,6 +191,10 @@
     labelMensaje.numberOfLines = 4;
     labelMensaje.overlayLabel.numberOfLines=4;
     labelMensaje.center=CGPointMake(self.view.frame.size.width/2, 180);
+    if (deviceKind==3) {
+        [labelMensaje ponerTexto:@"Si no ingresas ningún mensaje la aplicación pondra por defecto ''Mi ubicación actual es''. Tu mensaje siempre llevará una imagen del mapa con tu ubicación actual para que tus seguidores o a quién decidas enviar el mensaje lo pueda ver." fuente:[UIFont fontWithName:kFontType size:18] color:kTitleBlueColor];
+        labelMensaje.center=CGPointMake(self.view.frame.size.width/2, 280);
+    }
     [labelMensaje setOverlayOff:NO];
     [self.view addSubview:labelMensaje];
     
@@ -178,12 +203,18 @@
     labelTitulo.numberOfLines = 2;
     labelTitulo.overlayLabel.numberOfLines=2;
     labelTitulo.center=CGPointMake(self.view.frame.size.width/2, 230);
+    if (deviceKind==3) {
+        labelTitulo.center=CGPointMake(self.view.frame.size.width/2, 380);
+    }
     [labelTitulo setOverlayOff:NO];
     [labelTitulo setCentrado:YES];
     [self.view addSubview:labelTitulo];
     
     contentMensajeView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width)-10, 90)];
     contentMensajeView.center=CGPointMake(self.view.frame.size.width/2, (self.view.frame.size.height)-163);
+    if (deviceKind==3) {
+        contentMensajeView.center=CGPointMake(self.view.frame.size.width/2, 500);
+    }
     contentMensajeView.backgroundColor=kDarkGrayColor;
     [self.view addSubview:contentMensajeView];
     
@@ -237,40 +268,60 @@
     buttonTwitter=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 70)];
     buttonTwitter.backgroundColor=kBlueColor;
     buttonTwitter.center=CGPointMake((((contentMensajeView.frame.size.width/2)/2)/2)+5, contentMensajeView.frame.size.height/2);
+    if (deviceKind==3) {
+        buttonTwitter.center=CGPointMake((((contentMensajeView.frame.size.width/2)/2)/2)+85, contentMensajeView.frame.size.height/2);
+    }
     [buttonTwitter addTarget:self action:@selector(twitterTrigger) forControlEvents:UIControlEventTouchUpInside];
     [viewDesplazar addSubview:buttonTwitter];
     
     buttonFacebook=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 70)];
     buttonFacebook.backgroundColor=kGreenColor;
     buttonFacebook.center=CGPointMake((((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+40, contentMensajeView.frame.size.height/2);
+    if (deviceKind==3) {
+        buttonFacebook.center=CGPointMake((((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+125, contentMensajeView.frame.size.height/2);
+    }
     [buttonFacebook addTarget:self action:@selector(facebookTrigger) forControlEvents:UIControlEventTouchUpInside];
     [viewDesplazar addSubview:buttonFacebook];
     
     buttonMail=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 70)];
     buttonMail.backgroundColor=kYellowColor;
     buttonMail.center=CGPointMake((((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+75, contentMensajeView.frame.size.height/2);
+    if (deviceKind==3) {
+        buttonMail.center=CGPointMake((((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+160, contentMensajeView.frame.size.height/2);
+    }
     [buttonMail addTarget:self action:@selector(mailTrigger) forControlEvents:UIControlEventTouchUpInside];
     [viewDesplazar addSubview:buttonMail];
     
     buttonSms=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 70)];
     buttonSms.center=CGPointMake((((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+110, contentMensajeView.frame.size.height/2);
+    if (deviceKind==3) {
+        buttonSms.center=CGPointMake((((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+190, contentMensajeView.frame.size.height/2);
+    }
     buttonSms.backgroundColor=kBlueColor;
     [buttonSms addTarget:self action:@selector(smsTrigger) forControlEvents:UIControlEventTouchUpInside];
     [viewDesplazar addSubview:buttonSms];
     
-    CustomLabel *labelMensaje2=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width)-20, 40)];
+    CustomLabel *labelMensaje2=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width)-20, 50)];
     [labelMensaje2 ponerTexto:@"El servicio que escojas será el utilizado para enviar el mensaje de pánico. El servicio predeterminado es Twitter. Solo podrás elegir uno a la vez." fuente:[UIFont fontWithName:kFontType size:14] color:kTitleBlueColor];
     labelMensaje2.numberOfLines = 4;
     labelMensaje2.overlayLabel.numberOfLines=4;
     labelMensaje2.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-100);
+    if (deviceKind==3) {
+        labelMensaje2.center=CGPointMake(self.view.frame.size.width/2, 600);
+        [labelMensaje2 ponerTexto:@"El servicio que escojas será el utilizado para enviar el mensaje de pánico. El servicio predeterminado es Twitter. Solo podrás elegir uno a la vez." fuente:[UIFont fontWithName:kFontType size:20] color:kTitleBlueColor];
+    }
     [labelMensaje2 setOverlayOff:NO];
     [self.view addSubview:labelMensaje2];
     
-    CustomLabel *labelMensajeServicio=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width)-20, 16)];
+    CustomLabel *labelMensajeServicio=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width)-20, 24)];
     [labelMensajeServicio ponerTexto:@"Servicio actual seleccionado:" fuente:[UIFont fontWithName:kFontType size:18] color:kTitleBlueColor];
     labelMensajeServicio.numberOfLines = 4;
     labelMensajeServicio.overlayLabel.numberOfLines=4;
     labelMensajeServicio.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-70);
+    if (deviceKind==3) {
+        labelMensajeServicio.center=CGPointMake(self.view.frame.size.width/2, 650);
+        [labelMensajeServicio ponerTexto:@"Servicio actual seleccionado:" fuente:[UIFont fontWithName:kFontType size:24] color:kTitleBlueColor];
+    }
     [labelMensajeServicio setOverlayOff:NO];
     [self.view addSubview:labelMensajeServicio];
     
@@ -333,8 +384,13 @@
     [obj redSocialConNombre:@"Mail"];
     redSocialLabel.text=[obj obtenerNombreDeRedSocial];
     if (!banderaDesplazar) {
-        
-        CGRect myMapRect = CGRectMake(75, 0, contentMensajeView.frame.size.width, contentMensajeView.frame.size.height);
+        CGRect myMapRect;
+        if (deviceKind==3) {
+            myMapRect = CGRectMake(contentMensajeView.frame.size.width-490, 0, contentMensajeView.frame.size.width, contentMensajeView.frame.size.height);
+        }
+        else{
+            myMapRect = CGRectMake(72, 0, contentMensajeView.frame.size.width, contentMensajeView.frame.size.height);
+        }
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3];
         viewDesplazar.frame = myMapRect;
@@ -374,12 +430,19 @@
     redSocialLabel.text=[obj obtenerNombreDeRedSocial];
     NSLog(@"Red Social: %@",[obj obtenerNombreDeRedSocial]);
     if (!banderaDesplazar) {
-        
-        CGRect myMapRect = CGRectMake(-220, 0, contentMensajeView.frame.size.width, contentMensajeView.frame.size.height);
+        CGRect myMapRect;
+        if (deviceKind==3) {
+            myMapRect = CGRectMake(contentMensajeView.frame.size.width-615, 0, contentMensajeView.frame.size.width, contentMensajeView.frame.size.height);
+        }
+        else{
+            myMapRect = CGRectMake(-220, 0, contentMensajeView.frame.size.width, contentMensajeView.frame.size.height);
+        }
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.5];
         viewDesplazar.frame = myMapRect;
         buttonMail.alpha=0;
+        buttonTwitter.alpha=0;
+        buttonFacebook.alpha=0;
         [UIView commitAnimations];
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:1.0];
@@ -396,6 +459,8 @@
         [UIView setAnimationDuration:0.5];
         viewDesplazar.frame = myMapRect;
         buttonMail.alpha=1;
+        buttonTwitter.alpha=1;
+        buttonFacebook.alpha=1;
         [UIView commitAnimations];
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.2];

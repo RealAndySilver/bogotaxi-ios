@@ -107,6 +107,10 @@
         opcionesTaxi.frame=CGRectMake(0, 0, (containerView.frame.size.width)-20, (containerView.frame.size.height/2)-80);
         opcionesTaxi.center=CGPointMake((containerView.frame.size.width/2), ((containerView.frame.size.height/3)/2)+5);
     }
+    else if (deviceKind==3) {
+        opcionesTaxi.frame=CGRectMake(0, 0, (containerView.frame.size.width)-20, 250);
+        opcionesTaxi.center=CGPointMake((containerView.frame.size.width/2), ((containerView.frame.size.height/3)/2)+10);
+    }
     [opcionesTaxi addTarget:self action:@selector(callOpcionesTaxi) forControlEvents:UIControlEventTouchUpInside];
     [containerView addSubview:opcionesTaxi];
     
@@ -117,6 +121,10 @@
     if (deviceKind==2) {
         compartirGPS.frame=CGRectMake(0, 0, (containerView.frame.size.width)-20, (containerView.frame.size.height/2)-80);
         compartirGPS.center=CGPointMake((containerView.frame.size.width/2), opcionesTaxi.frame.size.height+80);
+    }
+    else if (deviceKind==3) {
+        compartirGPS.frame=CGRectMake(0, 0, (containerView.frame.size.width)-20, 250);
+        compartirGPS.center=CGPointMake((containerView.frame.size.width/2), opcionesTaxi.frame.size.height+160);
     }
     [compartirGPS addTarget:self action:@selector(callOpcionesCompartir) forControlEvents:UIControlEventTouchUpInside];
     [containerView addSubview:compartirGPS];
@@ -129,6 +137,10 @@
         contacto.frame=CGRectMake(0, 0, (containerView.frame.size.width)-20, (containerView.frame.size.height/2)-80);
         contacto.center=CGPointMake((containerView.frame.size.width/2), opcionesTaxi.frame.size.height+ compartirGPS.frame.size.height+97);
      }
+    else if (deviceKind==3) {
+        contacto.frame=CGRectMake(0, 0, (containerView.frame.size.width)-20, 250);
+        contacto.center=CGPointMake((containerView.frame.size.width/2), opcionesTaxi.frame.size.height+ compartirGPS.frame.size.height+175);
+    }
     [contacto addTarget:self action:@selector(callOpcionesContacto) forControlEvents:UIControlEventTouchUpInside];
     [containerView addSubview:contacto];
     

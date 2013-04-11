@@ -80,7 +80,16 @@
     
     UIView *viewLlamada123=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-10, 40)];
     viewLlamada123.backgroundColor=kDarkGrayColor;
-    viewLlamada123.center=CGPointMake(self.view.frame.size.width/2, 155);
+    if (deviceKind==3) {
+        viewLlamada123.center=CGPointMake(self.view.frame.size.width/2, 385);
+    }
+    else{
+        viewLlamada123.center=CGPointMake(self.view.frame.size.width/2, 135);
+    }
+    viewLlamada123.layer.shadowColor = [UIColor blackColor].CGColor;
+    viewLlamada123.layer.shadowOpacity = 0.8;
+    viewLlamada123.layer.shadowOffset = CGSizeMake(0,1);
+    viewLlamada123.layer.shadowRadius = 1;
     [self.view addSubview:viewLlamada123];
     
     CustomLabel *label123=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, viewLlamada123.frame.size.width/2, 30)];
@@ -97,7 +106,16 @@
     
     UIView *viewNumeroPerso=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-10, 40)];
     viewNumeroPerso.backgroundColor=kDarkGrayColor;
-    viewNumeroPerso.center=CGPointMake(self.view.frame.size.width/2, 200);
+    if (deviceKind==3) {
+        viewNumeroPerso.center=CGPointMake(self.view.frame.size.width/2, 430);
+    }
+    else{
+        viewNumeroPerso.center=CGPointMake(self.view.frame.size.width/2, 180);
+    }
+    viewNumeroPerso.layer.shadowColor = [UIColor blackColor].CGColor;
+    viewNumeroPerso.layer.shadowOpacity = 0.8;
+    viewNumeroPerso.layer.shadowOffset = CGSizeMake(0,1);
+    viewNumeroPerso.layer.shadowRadius = 1;
     [self.view addSubview:viewNumeroPerso];
     
     CustomLabel *labelNumeroUser=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, 50+(viewNumeroPerso.frame.size.width/2), 65)];
@@ -110,7 +128,7 @@
     textFieldNumero=[[UITextField alloc]initWithFrame:CGRectMake(0, 0, 130, 30)];
     textFieldNumero.center=CGPointMake(viewLlamada123.frame.size.width-72, viewNumeroPerso.frame.size.height/2);
     textFieldNumero.borderStyle = UITextBorderStyleRoundedRect;
-    textFieldNumero.textColor = kTitleBlueColor;
+    textFieldNumero.textColor = kDarkGrayColor;
     textFieldNumero.font = [UIFont fontWithName:kFontType size:22];
     textFieldNumero.placeholder = @"# Predeterminado";  //place holder
     textFieldNumero.backgroundColor = [UIColor whiteColor];
@@ -121,8 +139,17 @@
     textFieldNumero.textAlignment=UITextAlignmentRight;
     [viewNumeroPerso addSubview:textFieldNumero];
     
-    UILabel *labelMensaje=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-20, 100)];
-    //[self.view addSubview:labelMensaje];
+    CustomLabel *labelMensaje=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-20, 150)];
+    if (deviceKind==3) {
+        labelMensaje.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    }
+    else{
+        labelMensaje.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-150);
+    }
+    [labelMensaje ponerTexto:@"Personaliza el numero al que desees llamar en caso de alguna emergencia, este aparecera en la sección \"Taximetro GPS\" mientras hayas ingresado algún número. También puedes activar o desactivar el ícono de llamada al 123. Recuerda siempre guardar los cambios realizados. " fuente:[UIFont fontWithName:kFontType size:20] color:kTitleBlueColor];
+    labelMensaje.numberOfLines = 6;
+    labelMensaje.overlayLabel.numberOfLines=6;
+    [self.view addSubview:labelMensaje];
     
     if ([[guardar getNumeroEmergencia] isEqualToString:@"0"]) {
         textFieldNumero.text=nil;
