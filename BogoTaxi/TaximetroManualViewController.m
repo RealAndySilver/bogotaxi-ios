@@ -179,11 +179,11 @@
     [aeropuertoLabel ponerTexto:@"Aeropuerto" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
     [aeropuertoLabel setOverlayOff:YES];
     [containerConfig addSubview:aeropuertoLabel];
-
+    
     aeropuertoSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 46, 0, 0)];
     [containerConfig addSubview:aeropuertoSwitch];
     [aeropuertoSwitch addTarget:self action:@selector(switchChanged)];
-
+    
     puertaApuertaLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 88, 130, 30)];
     [puertaApuertaLabel ponerTexto:@"Puerta a puerta" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
     [puertaApuertaLabel setOverlayOff:YES];
@@ -192,7 +192,7 @@
     puertaApuertaSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 86, 0, 0)];
     [containerConfig addSubview:puertaApuertaSwitch];
     [puertaApuertaSwitch addTarget:self action:@selector(switchChanged)];
-
+    
     terminalLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 128, 130, 30)];
     [terminalLabel ponerTexto:@"Terminal" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
     [terminalLabel setOverlayOff:YES];

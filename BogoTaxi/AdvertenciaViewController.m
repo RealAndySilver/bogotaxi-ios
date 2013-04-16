@@ -49,6 +49,30 @@
     else if (self.view.frame.size.height>600){
         deviceKind=3;
     }
+    BannerView *bannerView=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-10, 0)];
+    [bannerView ponerTexto:@"ADVERTENCIA"];
+    bannerView.configBannerLabel.textColor=[UIColor colorWithRed:0.75390625 green:0.02734375 blue:0.02734375 alpha:1];
+    [bannerView.configBannerLabel setOverlayOff:NO];
+    [bannerView setBannerColor:[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1]];
+    bannerView.center=CGPointMake(self.view.frame.size.width/2, 55);
+    [self.view addSubview:bannerView];
+    
+    
+    UIView *containerMensaje=[[UIView alloc]initWithFrame:CGRectMake(0, 0 ,self.view.frame.size.width-10, 210)];
+    containerMensaje.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
+    containerMensaje.layer.cornerRadius=3;
+    containerMensaje.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    [self.view addSubview:containerMensaje];
+    
+    
+    CustomLabel *mensaje=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, containerMensaje.frame.size.width-20, 200)];
+    mensaje.center=CGPointMake(containerMensaje.frame.size.width/2, containerMensaje.frame.size.height/2);
+    [mensaje ponerTexto:@"Esta aplicación fue desarrollada como una ayuda para orientar al ciudadano y funciona con el sistema GPS de su dispositivo para poder calcular el recorrido. Este puede no ser del todo preciso y el resultado probablemente tendrá un margen de error. Cualquier duda escríbanos a support@iamstudio.co" fuente:[UIFont fontWithName:kFontType size:22] color:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1]];
+    mensaje.numberOfLines = 8;
+    mensaje.overlayLabel.numberOfLines=8;
+    [mensaje setOverlayOff:YES];
+    [containerMensaje addSubview:mensaje];
+    
     CustomButton *backButton=[[CustomButton alloc]initWithFrame:CGRectMake(10, self.view.frame.size.height-40, 50, 30)];
     backButton.backgroundColor=kYellowColor;
     [backButton setTitleColor:kGrayColor forState:UIControlStateNormal];

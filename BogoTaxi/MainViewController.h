@@ -27,8 +27,10 @@
 #import "Modelador.h"
 #import "iRate.h"
 #import "FileSaver.h"
+#import <FacebookSDK/FacebookSDK.h>
+#import <MessageUI/MessageUI.h>
 
-@interface MainViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate>{
+@interface MainViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate>{
     UIScrollView *mainScrollView;
     MenuView *menu;
     CalcularView *calcular;
@@ -55,6 +57,10 @@
     
     MKMapView *mapViewGPS;
     UIImageView *routeView2;
+    UIImage *alertButtonImage;
+    UIImage *callUserButtonImage;
+    UIImage *emergencytButtonImage;
+
     //Menú
     UIView *containerMenu;
     UIButton *menuButton;

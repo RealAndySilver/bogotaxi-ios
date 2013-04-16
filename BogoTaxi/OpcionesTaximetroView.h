@@ -12,6 +12,7 @@
 #import "CustomButton.h"
 #import "BannerView.h"
 #import "EstadisticasViewController.h"
+#import "Modelador.h"
 
 @interface OpcionesTaximetroView : UIView{
     CGRect myFrame;

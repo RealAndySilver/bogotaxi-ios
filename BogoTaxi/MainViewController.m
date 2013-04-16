@@ -108,19 +108,42 @@
     routeView2.userInteractionEnabled = NO;
     [mapViewGPS addSubview:routeView2];
     
-    buttonAlert=[[UIButton alloc]initWithFrame:CGRectMake(10, mapViewGPS.frame.size.height-60, 40, 40)];
-    buttonAlert.backgroundColor=kLiteRedColor;
+    alertButtonImage = [UIImage imageNamed:@"buttonPanic.png"];
+    callUserButtonImage = [UIImage imageNamed:@"buttonUser.png"];
+    emergencytButtonImage = [UIImage imageNamed:@"button123.png"];
+    
+    buttonAlert=[[UIButton alloc]initWithFrame:CGRectMake(mapViewGPS.frame.size.width-50, mapViewGPS.frame.size.height-60, 40, 40)];
+    [buttonAlert setBackgroundImage:alertButtonImage forState:UIControlStateNormal];
+    //buttonAlert.backgroundColor=kLiteRedColor;
+    buttonAlert.layer.shadowColor = [[UIColor colorWithWhite:0.1 alpha:1] CGColor];
+    buttonAlert.layer.shadowOffset = CGSizeMake(0.0f,1.0f);
+    buttonAlert.layer.shadowRadius = 1;
+    buttonAlert.layer.shadowOpacity = 0.8;
+    //buttonAlert.layer.cornerRadius=3;
     buttonAlert.layer.opacity=0;
+    [buttonAlert addTarget:self action:@selector(panicButtonTrigger) forControlEvents:UIControlEventTouchUpInside];
     [mapViewGPS addSubview:buttonAlert];
     
-    buttonCallUser=[[UIButton alloc]initWithFrame:CGRectMake(10, mapViewGPS.frame.size.height-110, 40, 40)];
-    buttonCallUser.backgroundColor=kGreenColor;
+    buttonCallUser=[[UIButton alloc]initWithFrame:CGRectMake(mapViewGPS.frame.size.width-50, mapViewGPS.frame.size.height-110, 40, 40)];
+    [buttonCallUser setBackgroundImage:callUserButtonImage forState:UIControlStateNormal];
+    //buttonCallUser.backgroundColor=kGreenColor;
+    buttonCallUser.layer.shadowColor = [[UIColor colorWithWhite:0.1 alpha:1] CGColor];
+    buttonCallUser.layer.shadowOffset = CGSizeMake(0.0f,1.0f);
+    buttonCallUser.layer.shadowRadius = 1;
+    buttonCallUser.layer.shadowOpacity = 0.8;
+    //buttonCallUser.layer.cornerRadius=3;
     buttonCallUser.layer.opacity=0;
     [buttonCallUser addTarget:self action:@selector(userCallTrigger) forControlEvents:UIControlEventTouchUpInside];
     [mapViewGPS addSubview:buttonCallUser];
     
-    buttonEmergencyCall=[[UIButton alloc]initWithFrame:CGRectMake(10, mapViewGPS.frame.size.height-160, 40, 40)];
-    buttonEmergencyCall.backgroundColor=kYellowColor;
+    buttonEmergencyCall=[[UIButton alloc]initWithFrame:CGRectMake(mapViewGPS.frame.size.width-50, mapViewGPS.frame.size.height-160, 40, 40)];
+    [buttonEmergencyCall setBackgroundImage:emergencytButtonImage forState:UIControlStateNormal];
+    //buttonEmergencyCall.backgroundColor=kYellowColor;
+    buttonEmergencyCall.layer.shadowColor = [[UIColor colorWithWhite:0.1 alpha:1] CGColor];
+    buttonEmergencyCall.layer.shadowOffset = CGSizeMake(0.0f,1.0f);
+    buttonEmergencyCall.layer.shadowRadius = 1;
+    buttonEmergencyCall.layer.shadowOpacity = 0.8;
+    //buttonEmergencyCall.layer.cornerRadius=3;
     buttonEmergencyCall.layer.opacity=0;
     [buttonEmergencyCall addTarget:self action:@selector(emergencyCallTrigger) forControlEvents:UIControlEventTouchUpInside];
     [mapViewGPS addSubview:buttonEmergencyCall];
@@ -285,6 +308,81 @@
     NSURL *theURL=[NSURL URLWithString:phoneNumber];
     [webview loadRequest:[NSURLRequest requestWithURL:theURL]];
     [self.view addSubview:webview];
+}
+-(void)panicButtonTrigger{
+    NSLog(@"panic button trigger");
+    Modelador *obj=[[Modelador alloc]init];
+    NSString *mensajePanico;
+    if ([[obj obtenerMensajeDePanico] isEqualToString:@" "]||[[obj obtenerMensajeDePanico] isEqualToString:@""]||[obj obtenerMensajeDePanico]==nil) {
+            mensajePanico=@"Mi Ubicación actual es ";
+    }
+    else{
+            mensajePanico=[obj obtenerMensajeDePanico];
+    }
+    double lat=zoomLocation.latitude;
+    double longi=zoomLocation.longitude;
+    NSString *ubicacion=[NSString stringWithFormat:@"%@ http://maps.google.com/maps?q=%f,%f",mensajePanico,lat,longi];
+    
+    if ([[obj obtenerNombreDeRedSocial] isEqualToString:@"SMS "]){
+        
+        MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+        if([MFMessageComposeViewController canSendText])
+        {
+            NSString *smsTel=@"";
+            if ([[obj getNumeroSMS] isEqualToString:@" "]||[[obj getNumeroSMS] isEqualToString:@""]||[obj getNumeroSMS]==nil
+                ||[[obj getNumeroSMS] isEqualToString:@"0"]) {
+                smsTel=@"";
+            }
+            else{
+                smsTel=[obj getNumeroSMS];
+            }
+            
+            controller.body = ubicacion;
+            controller.recipients = [NSArray arrayWithObjects:smsTel, nil];
+            controller.messageComposeDelegate = self;
+            [self presentModalViewController:controller animated:YES];
+        }
+        return;
+    }
+    
+    //SHKItem *item = [SHKItem text:contenido];
+    //SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
+    [self saveScreenshot];
+    NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Screenshot.jpg"];
+    
+    UIImage *image = [UIImage imageWithContentsOfFile:documentsDirectory];
+    //    NSString *ubicacion=[NSString stringWithFormat:@"Mi Ubicación en este momento es Lat<%.6f>, Long<%.6f>",lat,longi];
+    
+    //SHKItem *item = [SHKItem image:image title:ubicacion];
+    if ([[obj obtenerNombreDeRedSocial] isEqualToString:@"Twitter "]||
+        [[obj obtenerNombreDeRedSocial] isEqualToString:@"Twitter"]){
+        //[SHKTwitter shareItem:item];
+    }
+    if ([[obj obtenerNombreDeRedSocial] isEqualToString:@"Facebook "]||
+        [[obj obtenerNombreDeRedSocial] isEqualToString:@"Facebook"]){
+        //[SHKFacebook shareItem:item];
+    }
+    if ([[obj obtenerNombreDeRedSocial] isEqualToString:@"Mail "]||
+        [[obj obtenerNombreDeRedSocial] isEqualToString:@"Mail"]){
+        //[SHKMail shareItem:item];
+        NSString *correo;
+        if ([obj getMail]==nil) {
+            correo=@"";
+        }
+        else
+            correo=[obj getMail];
+        
+        NSData *imageAttachment = UIImageJPEGRepresentation(image,1);
+        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+		controller.mailComposeDelegate = self;
+        NSString *ubicacion=[NSString stringWithFormat:@"%@ http://maps.google.com/maps?q=%f,%f",mensajePanico,lat,longi];
+		[controller setSubject:mensajePanico];
+        [controller setToRecipients:[NSArray arrayWithObject:correo]];
+		[controller setMessageBody:ubicacion isHTML:YES];
+        [controller addAttachmentData:imageAttachment mimeType:@"image/jpeg" fileName:@"mapa.jpg"];
+		[self presentModalViewController:controller animated:YES];
+    }
+    
 }
 -(void)buttonPressed:(UIButton*)button{
     if (button.tag==3000) {
@@ -1145,8 +1243,6 @@ int counter=0;
             RegionAnnotationView *regionView = (RegionAnnotationView *)[mapaPaginaDos dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
             
             if (!regionView) {
-                NSLog(@"Entroo al 1");
-                NSLog(@"%f",touchMapCoordinate.latitude);
                 ptoA=[[CLLocation alloc] initWithLatitude:touchMapCoordinate.latitude longitude:touchMapCoordinate.longitude];
                 regionView = [[RegionAnnotationView alloc] initWithAnnotation:annotationA withcolor:MKPinAnnotationColorRed];
                 regionView.map = mapaPaginaDos;
@@ -1164,8 +1260,6 @@ int counter=0;
             RegionAnnotationView *regionView = (RegionAnnotationView *)[mapaPaginaDos dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
             
             if (!regionView) {
-                NSLog(@"Entroo al 2");
-                NSLog(@"%f",touchMapCoordinate.latitude);
                 ptoB=[[CLLocation alloc] initWithLatitude:touchMapCoordinate.latitude longitude:touchMapCoordinate.longitude];
                 regionView = [[RegionAnnotationView alloc] initWithAnnotation:annotationB withcolor:MKPinAnnotationColorGreen];
                 regionView.map = mapaPaginaDos;
@@ -1229,7 +1323,7 @@ int counter=0;
         
         CLLocation *pointALocation = [[CLLocation alloc] initWithLatitude:locationTwo.latitude longitude:locationTwo.longitude];
         CLLocation *pointBLocation = [[CLLocation alloc] initWithLatitude:locationOne.latitude longitude:locationOne.longitude];
-        distanciaMetros += [pointALocation getDistanceFrom:pointBLocation];
+        distanciaMetros += [pointALocation distanceFromLocation:pointBLocation];
         //NSLog(@"Distancia metros %f",distanciaMetros);
         
         locationPast.latitude=locationTwo.latitude;
@@ -1470,14 +1564,14 @@ int counter=0;
         //[self irAPaginaDeScroll:0];
         [self updateRouteView2];
         Modelador *obj=[[Modelador alloc]init];
-        /*if (![obj getAlertSwitchValue]) {
+        if (![obj getAlertSwitchValue]) {
             UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Total"
                                                               message:[self contarMetros]
                                                              delegate:self
                                                     cancelButtonTitle:@"OK"
                                                     otherButtonTitles:nil];
             [message show];
-        }*/
+        }
         routeView2.hidden = NO;
         [self guardarEstadisticas];
         [self clockStop];
@@ -1506,9 +1600,9 @@ int counter=0;
         CLLocation *pointALocation = [[CLLocation alloc] initWithLatitude:zoomLocation2.latitude longitude:zoomLocation2.longitude];
         CLLocation *pointBLocation = [[CLLocation alloc] initWithLatitude:zoomLocation.latitude longitude:zoomLocation.longitude];
         //double distanciaMetros = [pointALocation getDistanceFrom:pointBLocation];
-        double distanciaMetros = [pointALocation distanceFromLocation:pointBLocation];
+        double distMetros = [pointALocation distanceFromLocation:pointBLocation];
 
-        double distanciaKm=distanciaMetros/1000;
+        double distanciaKm=distMetros/1000;
         
         zoomLocationPast.latitude=zoomLocation2.latitude;
         zoomLocationPast.longitude=zoomLocation2.longitude;
@@ -1516,7 +1610,7 @@ int counter=0;
         zoomLocation.longitude=zoomLocationPast.longitude;
         
         if (distanciaKm>0.001) {
-            [arregloDePuntos addObject:[NSNumber numberWithDouble:distanciaMetros]];
+            [arregloDePuntos addObject:[NSNumber numberWithDouble:distMetros]];
             [coordenadasParaDibujar addObject:pointALocation];
             [coordenadasParaDibujar addObject:pointBLocation];
         }
@@ -1539,17 +1633,17 @@ int counter=0;
     [errorAlert show];
 }
 
-/*#pragma mark Guardar imagen
+#pragma mark Guardar imagen
 - (void)saveScreenshot {
     
     // Define the dimensions of the screenshot you want to take (the entire screen in this case)
     //CGSize size =  [[UIScreen mainScreen] bounds].size;
     
     // Create the screenshot
-    UIGraphicsBeginImageContextWithOptions(self.mapViewGPS.bounds.size, NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(mapViewGPS.bounds.size, NO, 0.0);
     
     // Put everything in the current view into the screenshot
-    [[self.mapViewGPS layer] renderInContext:UIGraphicsGetCurrentContext()];
+    [[mapViewGPS layer] renderInContext:UIGraphicsGetCurrentContext()];
     // Save the current image context info into a UIImage
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -1581,5 +1675,37 @@ int counter=0;
         NSLog(@"Guardada con éxito");
     }
 }
-int tf=0;*/
+int tf=0;
+#pragma mark delegates de mensajes
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+	switch (result) {
+		case MessageComposeResultCancelled:
+			break;
+		case MessageComposeResultFailed:
+			break;
+		case MessageComposeResultSent:
+            
+			break;
+		default:
+			break;
+	}
+    
+	[self dismissModalViewControllerAnimated:YES];
+}
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+	switch (result) {
+		case MFMailComposeResultCancelled:
+			break;
+		case MFMailComposeResultFailed:
+			break;
+		case MFMailComposeResultSent:
+            
+			break;
+		default:
+			break;
+	}
+    
+	[self dismissModalViewControllerAnimated:YES];
+}
+
 @end

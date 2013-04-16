@@ -10,6 +10,14 @@
 		331481DA16791E59006AB746 /* EstadisticasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 331481D916791E59006AB746 /* EstadisticasViewController.m */; };
 		331D618C1668132A00F02BD9 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 331D618B1668132A00F02BD9 /* CustomCell.m */; };
 		331D61901668154900F02BD9 /* LlamadasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 331D618F1668154900F02BD9 /* LlamadasViewController.m */; };
+		3320ACFC171C52C700A844F4 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3320ACFB171C52C700A844F4 /* Social.framework */; };
+		3320ACFE171C52F400A844F4 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3320ACFD171C52F400A844F4 /* FacebookSDK.framework */; };
+		3320AD00171C54D800A844F4 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3320ACFF171C54D800A844F4 /* Accounts.framework */; };
+		3320AD02171C54E800A844F4 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3320AD01171C54E800A844F4 /* AdSupport.framework */; };
+		3320AD06171C60A900A844F4 /* buttonPanic.png in Resources */ = {isa = PBXBuildFile; fileRef = 3320AD03171C60A900A844F4 /* buttonPanic.png */; };
+		3320AD07171C60A900A844F4 /* button123.png in Resources */ = {isa = PBXBuildFile; fileRef = 3320AD04171C60A900A844F4 /* button123.png */; };
+		3320AD08171C60A900A844F4 /* buttonUser.png in Resources */ = {isa = PBXBuildFile; fileRef = 3320AD05171C60A900A844F4 /* buttonUser.png */; };
+		3320AD0A171C624300A844F4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3320AD09171C624300A844F4 /* MessageUI.framework */; };
 		332AC87C167BD70E001A187B /* PanicoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 332AC87B167BD70E001A187B /* PanicoViewController.m */; };
 		333740FC166FA76300510C52 /* CalcularView.m in Sources */ = {isa = PBXBuildFile; fileRef = 333740FB166FA76300510C52 /* CalcularView.m */; };
 		33374100166FC25D00510C52 /* OpcionesTaximetroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 333740FF166FC25D00510C52 /* OpcionesTaximetroView.m */; };
@@ -40,6 +48,15 @@
 		335CA23516EE9FDD0078D488 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335CA23416EE9FDD0078D488 /* CoreTelephony.framework */; };
 		3368F00116F911950093C022 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3368F00016F911950093C022 /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3368F00716F912480093C022 /* libicucore.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3368F00616F912480093C022 /* libicucore.A.dylib */; };
+		33A712B1171CB3F0009DF61B /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A712B0171CB3F0009DF61B /* Default-Portrait@2x~ipad.png */; };
+		33A712B3171CB445009DF61B /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A712B2171CB445009DF61B /* Default-Portrait~ipad.png */; };
+		33A712B5171CB4CC009DF61B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A712B4171CB4CC009DF61B /* Default.png */; };
+		33A712B7171CB4D9009DF61B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A712B6171CB4D9009DF61B /* Default@2x.png */; };
+		33A712B9171CB4E4009DF61B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A712B8171CB4E4009DF61B /* Default-568h@2x.png */; };
+		33A712BB171CB632009DF61B /* iconIphone@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A712BA171CB632009DF61B /* iconIphone@x2.png */; };
+		33A712BD171CB66C009DF61B /* iconiPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A712BC171CB66C009DF61B /* iconiPhone.png */; };
+		33A712BF171CBBD4009DF61B /* iconiPad@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A712BE171CBBD4009DF61B /* iconiPad@x2.png */; };
+		33A712C1171CBBDC009DF61B /* iconiPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A712C0171CBBDC009DF61B /* iconiPad.png */; };
 		33BCB86016F929FE00354F2B /* Modelador.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BCB85F16F929FE00354F2B /* Modelador.m */; };
 		33C430B81714A1CF006749C0 /* LlamadaDeEmergenciaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C430B71714A1CF006749C0 /* LlamadaDeEmergenciaViewController.m */; };
 		33F0DBD2170E0B79009581CB /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F0DBD1170E0B79009581CB /* iRate.m */; };
@@ -51,7 +68,6 @@
 		7542BF0C165E82D2008A51B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7542BF0A165E82D2008A51B7 /* InfoPlist.strings */; };
 		7542BF0E165E82D2008A51B7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BF0D165E82D2008A51B7 /* main.m */; };
 		7542BF12165E82D2008A51B7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BF11165E82D2008A51B7 /* AppDelegate.m */; };
-		7542BF18165E82D2008A51B7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7542BF17165E82D2008A51B7 /* Default-568h@2x.png */; };
 		7542BF1B165E82D2008A51B7 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7542BF19165E82D2008A51B7 /* MainStoryboard_iPhone.storyboard */; };
 		7542BF1E165E82D2008A51B7 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7542BF1C165E82D2008A51B7 /* MainStoryboard_iPad.storyboard */; };
 		7542BF21165E82D2008A51B7 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BF20165E82D2008A51B7 /* MainViewController.m */; };
@@ -77,6 +93,14 @@
 		331D618B1668132A00F02BD9 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
 		331D618E1668154900F02BD9 /* LlamadasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LlamadasViewController.h; sourceTree = "<group>"; };
 		331D618F1668154900F02BD9 /* LlamadasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LlamadasViewController.m; sourceTree = "<group>"; };
+		3320ACFB171C52C700A844F4 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		3320ACFD171C52F400A844F4 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		3320ACFF171C54D800A844F4 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		3320AD01171C54E800A844F4 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		3320AD03171C60A900A844F4 /* buttonPanic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonPanic.png; sourceTree = "<group>"; };
+		3320AD04171C60A900A844F4 /* button123.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button123.png; sourceTree = "<group>"; };
+		3320AD05171C60A900A844F4 /* buttonUser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonUser.png; sourceTree = "<group>"; };
+		3320AD09171C624300A844F4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		332AC87A167BD70E001A187B /* PanicoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanicoViewController.h; sourceTree = "<group>"; };
 		332AC87B167BD70E001A187B /* PanicoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanicoViewController.m; sourceTree = "<group>"; };
 		333740FA166FA76300510C52 /* CalcularView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcularView.h; sourceTree = "<group>"; };
@@ -135,6 +159,15 @@
 		3368EFFF16F911950093C022 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		3368F00016F911950093C022 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		3368F00616F912480093C022 /* libicucore.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.A.dylib; path = usr/lib/libicucore.A.dylib; sourceTree = SDKROOT; };
+		33A712B0171CB3F0009DF61B /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		33A712B2171CB445009DF61B /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		33A712B4171CB4CC009DF61B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		33A712B6171CB4D9009DF61B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		33A712B8171CB4E4009DF61B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		33A712BA171CB632009DF61B /* iconIphone@x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconIphone@x2.png"; sourceTree = "<group>"; };
+		33A712BC171CB66C009DF61B /* iconiPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconiPhone.png; sourceTree = "<group>"; };
+		33A712BE171CBBD4009DF61B /* iconiPad@x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconiPad@x2.png"; sourceTree = "<group>"; };
+		33A712C0171CBBDC009DF61B /* iconiPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconiPad.png; sourceTree = "<group>"; };
 		33BCB85E16F929FE00354F2B /* Modelador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Modelador.h; sourceTree = "<group>"; };
 		33BCB85F16F929FE00354F2B /* Modelador.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Modelador.m; sourceTree = "<group>"; };
 		33C430B61714A1CE006749C0 /* LlamadaDeEmergenciaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LlamadaDeEmergenciaViewController.h; sourceTree = "<group>"; };
@@ -154,7 +187,6 @@
 		7542BF0F165E82D2008A51B7 /* BogoTaxi-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BogoTaxi-Prefix.pch"; sourceTree = "<group>"; };
 		7542BF10165E82D2008A51B7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7542BF11165E82D2008A51B7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		7542BF17165E82D2008A51B7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		7542BF1A165E82D2008A51B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		7542BF1D165E82D2008A51B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		7542BF1F165E82D2008A51B7 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -187,6 +219,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3320AD0A171C624300A844F4 /* MessageUI.framework in Frameworks */,
+				3320AD02171C54E800A844F4 /* AdSupport.framework in Frameworks */,
+				3320AD00171C54D800A844F4 /* Accounts.framework in Frameworks */,
+				3320ACFC171C52C700A844F4 /* Social.framework in Frameworks */,
 				33F0DBD4170E23D5009581CB /* StoreKit.framework in Frameworks */,
 				3368F00716F912480093C022 /* libicucore.A.dylib in Frameworks */,
 				335CA23516EE9FDD0078D488 /* CoreTelephony.framework in Frameworks */,
@@ -196,6 +232,7 @@
 				7542BF02165E82D2008A51B7 /* UIKit.framework in Frameworks */,
 				7542BF04165E82D2008A51B7 /* Foundation.framework in Frameworks */,
 				7542BF06165E82D2008A51B7 /* CoreGraphics.framework in Frameworks */,
+				3320ACFE171C52F400A844F4 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +242,20 @@
 		7542BEF2165E82D2008A51B7 = {
 			isa = PBXGroup;
 			children = (
+				33A712C0171CBBDC009DF61B /* iconiPad.png */,
+				33A712BE171CBBD4009DF61B /* iconiPad@x2.png */,
+				33A712BC171CB66C009DF61B /* iconiPhone.png */,
+				33A712BA171CB632009DF61B /* iconIphone@x2.png */,
+				33A712B8171CB4E4009DF61B /* Default-568h@2x.png */,
+				33A712B6171CB4D9009DF61B /* Default@2x.png */,
+				33A712B4171CB4CC009DF61B /* Default.png */,
+				33A712B2171CB445009DF61B /* Default-Portrait~ipad.png */,
+				33A712B0171CB3F0009DF61B /* Default-Portrait@2x~ipad.png */,
+				3320AD09171C624300A844F4 /* MessageUI.framework */,
+				3320AD01171C54E800A844F4 /* AdSupport.framework */,
+				3320ACFF171C54D800A844F4 /* Accounts.framework */,
+				3320ACFD171C52F400A844F4 /* FacebookSDK.framework */,
+				3320ACFB171C52C700A844F4 /* Social.framework */,
 				33F0DBD3170E23D5009581CB /* StoreKit.framework */,
 				3368F00616F912480093C022 /* libicucore.A.dylib */,
 				335CA23416EE9FDD0078D488 /* CoreTelephony.framework */,
@@ -238,6 +289,9 @@
 		7542BF07165E82D2008A51B7 /* BogoTaxi */ = {
 			isa = PBXGroup;
 			children = (
+				3320AD03171C60A900A844F4 /* buttonPanic.png */,
+				3320AD04171C60A900A844F4 /* button123.png */,
+				3320AD05171C60A900A844F4 /* buttonUser.png */,
 				75926D101665215A00B3CDD5 /* Objects */,
 				7542BF10165E82D2008A51B7 /* AppDelegate.h */,
 				7542BF11165E82D2008A51B7 /* AppDelegate.m */,
@@ -286,7 +340,6 @@
 				7542BF0A165E82D2008A51B7 /* InfoPlist.strings */,
 				7542BF0D165E82D2008A51B7 /* main.m */,
 				7542BF0F165E82D2008A51B7 /* BogoTaxi-Prefix.pch */,
-				7542BF17165E82D2008A51B7 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -417,11 +470,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				7542BF0C165E82D2008A51B7 /* InfoPlist.strings in Resources */,
-				7542BF18165E82D2008A51B7 /* Default-568h@2x.png in Resources */,
 				7542BF46165EA8BA008A51B7 /* league_gothic.ttf in Resources */,
 				7542BF1B165E82D2008A51B7 /* MainStoryboard_iPhone.storyboard in Resources */,
 				7542BF1E165E82D2008A51B7 /* MainStoryboard_iPad.storyboard in Resources */,
 				75E4F37B16697D7C007BE4C5 /* TelefonosTaxis.plist in Resources */,
+				3320AD06171C60A900A844F4 /* buttonPanic.png in Resources */,
+				3320AD07171C60A900A844F4 /* button123.png in Resources */,
+				3320AD08171C60A900A844F4 /* buttonUser.png in Resources */,
+				33A712B1171CB3F0009DF61B /* Default-Portrait@2x~ipad.png in Resources */,
+				33A712B3171CB445009DF61B /* Default-Portrait~ipad.png in Resources */,
+				33A712B5171CB4CC009DF61B /* Default.png in Resources */,
+				33A712B7171CB4D9009DF61B /* Default@2x.png in Resources */,
+				33A712B9171CB4E4009DF61B /* Default-568h@2x.png in Resources */,
+				33A712BB171CB632009DF61B /* iconIphone@x2.png in Resources */,
+				33A712BD171CB66C009DF61B /* iconiPhone.png in Resources */,
+				33A712BF171CBBD4009DF61B /* iconiPad@x2.png in Resources */,
+				33A712C1171CBBDC009DF61B /* iconiPad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,6 +632,10 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Nicolle Jimenez Vasquez (5MQFB67YC8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nicolle Jimenez Vasquez (5MQFB67YC8)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BogoTaxi/BogoTaxi-Prefix.pch";
 				GCC_VERSION = "";
@@ -585,6 +653,10 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Nicolle Jimenez Vasquez (5MQFB67YC8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nicolle Jimenez Vasquez (5MQFB67YC8)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BogoTaxi/BogoTaxi-Prefix.pch";
 				GCC_VERSION = "";

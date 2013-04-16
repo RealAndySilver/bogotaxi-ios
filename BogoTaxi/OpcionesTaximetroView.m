@@ -63,8 +63,17 @@
     [resumenViajeLabel setOverlayOff:YES];
     [containerOpciones addSubview:resumenViajeLabel];
     
+    Modelador *mod=[[Modelador alloc]init];
     switchResumen=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerOpciones.frame.size.width-70, bannerOpcionesTaxi.frame.size.height+20, 0, 0)];
     [containerOpciones addSubview:switchResumen];
+    [switchResumen addTarget:mod action:@selector(alertSwitch)];
+    
+    if (!mod.getAlertSwitchValue) {
+        [switchResumen onOff:YES];
+    }
+    else {
+        [switchResumen onOff:NO];
+    }
     
     estadisticas=[[CustomButton alloc]initWithFrame:CGRectMake(0, 0, containerOpciones.frame.size.width-20, 40)];
     [estadisticas setTitle:@"Estadísticas" forState:UIControlStateNormal];
@@ -91,7 +100,9 @@
         [UIView commitAnimations];
     }
 }
-
+/*-(void)alertSwitch{
+    
+}*/
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

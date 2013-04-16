@@ -39,7 +39,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.view.backgroundColor=kBlueColor;
+	self.view.backgroundColor=kYellowColor;
     if (self.view.frame.size.height<480) {
         deviceKind=1;
     }
@@ -49,9 +49,48 @@
     else if (self.view.frame.size.height>600){
         deviceKind=3;
     }
+    
+    BannerView *bannerView=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-10, 0)];
+    [bannerView ponerTexto:@"BogoTaxi"];
+    bannerView.configBannerLabel.textColor=[UIColor colorWithRed:0.75390625 green:0.02734375 blue:0.02734375 alpha:1];
+    [bannerView.configBannerLabel setOverlayOff:NO];
+    [bannerView setBannerColor:[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1]];
+    bannerView.center=CGPointMake(self.view.frame.size.width/2, 47);
+    [self.view addSubview:bannerView];
+    
+    
+    UIView *containerMensaje=[[UIView alloc]initWithFrame:CGRectMake(0, 0 ,self.view.frame.size.width-10, 300)];
+    containerMensaje.backgroundColor=kWhiteColor;
+    containerMensaje.layer.cornerRadius=3;
+    containerMensaje.layer.shadowColor = [[UIColor colorWithWhite:0.1 alpha:1] CGColor];
+    containerMensaje.layer.shadowOffset = CGSizeMake(0.0f,1.0f);
+    containerMensaje.layer.shadowRadius = 2;
+    containerMensaje.layer.shadowOpacity = 0.8;
+    if (deviceKind==3) {
+        containerMensaje.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    }
+    else{
+        containerMensaje.center=CGPointMake(self.view.frame.size.width/2, (self.view.frame.size.height/2)+20);
+    }
+    [self.view addSubview:containerMensaje];
+    
+    UIView *containerMensajeblue=[[UIView alloc]initWithFrame:CGRectMake(0, 0 ,containerMensaje.frame.size.width-10, 290)];
+    containerMensajeblue.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
+    containerMensajeblue.center=CGPointMake(containerMensaje.frame.size.width/2, containerMensaje.frame.size.height/2);
+    [containerMensaje addSubview:containerMensajeblue];
+    
+    CustomLabel *mensaje=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, containerMensaje.frame.size.width-20, 290)];
+    mensaje.center=CGPointMake(containerMensaje.frame.size.width/2, containerMensaje.frame.size.height/2);
+    
+    [mensaje ponerTexto:@"Esta aplicación fue creada con fines de entretenimiento, y no es un taximetro profesional. Las mediciones que este realice pueden no ser del todo exactas. Las llamadas realizadas al 123 son de total responsabilidad del usuario de BogoTaxi. iAm Studio SAS no se hace responsable del manejo unadecuado que el usuario de a los componentes de seguridad de la aplicación ni de los costos adicionales que puedan tener. Recuerda que esta es una herramienta que te puede orientar y ayudar en caso de emergencia. Utilízala con prudencia." fuente:[UIFont fontWithName:kFontType size:20] color:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1]];
+    mensaje.numberOfLines = 18;
+    mensaje.overlayLabel.numberOfLines=18;
+    [mensaje setOverlayOff:YES];
+    [containerMensaje addSubview:mensaje];
+    
     CustomButton *backButton=[[CustomButton alloc]initWithFrame:CGRectMake(10, self.view.frame.size.height-40, 50, 30)];
-    backButton.backgroundColor=kYellowColor;
-    [backButton setTitleColor:kGrayColor forState:UIControlStateNormal];
+    backButton.backgroundColor=kDarkRedColor;
+    [backButton setTitleColor:kWhiteColor forState:UIControlStateNormal];
     [backButton setTitle:@"Atrás" forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(dismissView) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
