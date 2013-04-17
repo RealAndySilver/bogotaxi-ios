@@ -53,6 +53,8 @@
 		33A712B5171CB4CC009DF61B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A712B4171CB4CC009DF61B /* Default.png */; };
 		33A712B7171CB4D9009DF61B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A712B6171CB4D9009DF61B /* Default@2x.png */; };
 		33A712B9171CB4E4009DF61B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A712B8171CB4E4009DF61B /* Default-568h@2x.png */; };
+		33A712BB171CB632009DF61B /* iconIphone@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A712BA171CB632009DF61B /* iconIphone@x2.png */; };
+		33A712BD171CB66C009DF61B /* iconiPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A712BC171CB66C009DF61B /* iconiPhone.png */; };
 		33A712BF171CBBD4009DF61B /* iconiPad@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A712BE171CBBD4009DF61B /* iconiPad@x2.png */; };
 		33A712C1171CBBDC009DF61B /* iconiPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A712C0171CBBDC009DF61B /* iconiPad.png */; };
 		33BCB86016F929FE00354F2B /* Modelador.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BCB85F16F929FE00354F2B /* Modelador.m */; };
@@ -82,8 +84,6 @@
 		75D6C68D1667F66600D90A0D /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D6C68C1667F66600D90A0D /* MenuView.m */; };
 		75E4F37B16697D7C007BE4C5 /* TelefonosTaxis.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75E4F37A16697D7C007BE4C5 /* TelefonosTaxis.plist */; };
 		75E4F37F1669819E007BE4C5 /* LLamadasObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E4F37E1669819E007BE4C5 /* LLamadasObject.m */; };
-		816D612E171DF2BA00058A27 /* iconiPhone@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 816D612D171DF2BA00058A27 /* iconiPhone@x2.png */; };
-		816D612F171DF2C600058A27 /* iconiPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A712BC171CB66C009DF61B /* iconiPhone.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -212,7 +212,6 @@
 		75E4F37A16697D7C007BE4C5 /* TelefonosTaxis.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TelefonosTaxis.plist; sourceTree = "<group>"; };
 		75E4F37D1669819E007BE4C5 /* LLamadasObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLamadasObject.h; sourceTree = "<group>"; };
 		75E4F37E1669819E007BE4C5 /* LLamadasObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLamadasObject.m; sourceTree = "<group>"; };
-		816D612D171DF2BA00058A27 /* iconiPhone@x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconiPhone@x2.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,7 +242,6 @@
 		7542BEF2165E82D2008A51B7 = {
 			isa = PBXGroup;
 			children = (
-				816D612D171DF2BA00058A27 /* iconiPhone@x2.png */,
 				33A712C0171CBBDC009DF61B /* iconiPad.png */,
 				33A712BE171CBBD4009DF61B /* iconiPad@x2.png */,
 				33A712BC171CB66C009DF61B /* iconiPhone.png */,
@@ -484,10 +482,10 @@
 				33A712B5171CB4CC009DF61B /* Default.png in Resources */,
 				33A712B7171CB4D9009DF61B /* Default@2x.png in Resources */,
 				33A712B9171CB4E4009DF61B /* Default-568h@2x.png in Resources */,
+				33A712BB171CB632009DF61B /* iconIphone@x2.png in Resources */,
+				33A712BD171CB66C009DF61B /* iconiPhone.png in Resources */,
 				33A712BF171CBBD4009DF61B /* iconiPad@x2.png in Resources */,
 				33A712C1171CBBDC009DF61B /* iconiPad.png in Resources */,
-				816D612E171DF2BA00058A27 /* iconiPhone@x2.png in Resources */,
-				816D612F171DF2C600058A27 /* iconiPhone.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
