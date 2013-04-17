@@ -27,7 +27,7 @@
 #import "Modelador.h"
 #import "iRate.h"
 #import "FileSaver.h"
-#import <FacebookSDK/FacebookSDK.h>
+//#import <FacebookSDK/FacebookSDK.h>
 #import <MessageUI/MessageUI.h>
 
 @interface MainViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate>{
