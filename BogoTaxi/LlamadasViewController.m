@@ -30,10 +30,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor=kBlueColor;
+    self.view.backgroundColor=kTitleBlueColor;
         
     tableViewLlamadas=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.height)-40)];
-    tableViewLlamadas.backgroundColor=kBlueColor;
+    tableViewLlamadas.backgroundColor=kTitleBlueColor;
     tableViewLlamadas.separatorStyle=NO;
     tableViewLlamadas.delegate=self;
     tableViewLlamadas.dataSource=self;
@@ -95,7 +95,7 @@
     static NSString *CellIdentifier = @"";
     CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier andWidth:self.view.frame.size.width];
     }
     //cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     //NSArray *arr=[[NSArray alloc]initWithArray:arrayTableView];

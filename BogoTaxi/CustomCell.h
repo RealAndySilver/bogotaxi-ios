@@ -17,5 +17,6 @@
 @property (nonatomic,retain) UIView *backgroundOverlay;
 @property (nonatomic,retain) UILabel *labelEmpresaTaxi;
 @property (nonatomic,retain) UIView *accessoryCell;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier andWidth:(float)width;
 
 @end

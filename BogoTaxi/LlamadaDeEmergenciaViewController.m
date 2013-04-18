@@ -39,7 +39,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor=kBlueColor;
+    self.view.backgroundColor=kTitleBlueColor;
 	// Do any additional setup after loading the view.
     recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(processTap:)];
     recognizer.delegate=self;

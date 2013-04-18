@@ -29,8 +29,10 @@
 #import "FileSaver.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <MessageUI/MessageUI.h>
+#import "MBProgressHud.h"
 
-@interface MainViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate>{
+
+@interface MainViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UIAccelerometerDelegate>{
     UIScrollView *mainScrollView;
     MenuView *menu;
     CalcularView *calcular;
@@ -68,7 +70,7 @@
     //Página Uno
     UIView *paginaUnoContainer;
     
-    CustomLabel *configTituloLabel;
+    BannerView *bannerViewPaginaUno;
     UIView *containerConfig;
     CustomLabel *nocDomFesLabel;
     CustomSwitch *nocDomFesSwitch;
@@ -118,6 +120,7 @@
     CLLocationCoordinate2D locationPast;
     RegionAnnotation *annotationA;
     RegionAnnotation *annotationB;
+    int seleccion;
     int seleccionarAB;
     CLLocation* ptoA;
     CLLocation* ptoB;
@@ -153,7 +156,7 @@
     BOOL banderaLocation;
     NSMutableArray *arregloDePuntos;
 
-
+    MBProgressHUD *hud;
 }
 @property (nonatomic, retain) UIAcceleration *lastAcceleration;
 @property BOOL shakeDetected;

@@ -68,7 +68,6 @@
     UITapGestureRecognizer *scrollTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     [mainScrollView addGestureRecognizer:scrollTap];
     
-    
     [self.view addSubview:mainScrollView];
     [self crearPaginaUno];
     [self crearPaginaDos];
@@ -88,6 +87,8 @@
     banderaSecs=YES;
     unidadesAjuste=0;
     unidadesAjusteTotal=0;
+    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / 40)];
+    [[UIAccelerometer sharedAccelerometer] setDelegate:self];
     tiempoQuieto=0;
     tiempoQuieto = 0;
     totalQuieto=0;
@@ -300,7 +301,6 @@
     [self.view addSubview:webview];
 }
 -(void)emergencyCallTrigger{
-    
     NSString *phoneNumber1=[NSString stringWithFormat:@"%.0f",taximetro.numeroDeEmergenciasLocal];
     NSLog(@" %@",phoneNumber1);
     NSString *phoneNumber = [@"tel://" stringByAppendingString:phoneNumber1];
@@ -412,7 +412,6 @@
     
     unidadesAjusteTotal=[Taximetro conversorSegundosAUnidades:totalQuieto :taximetro.segundosDeEspera]+unidadesAjuste;
     unidades=[Taximetro conversorMetrosAUnidades:metros paraElTaximetro:taximetro]+unidadesAjusteTotal;
-    
     /*if (unidades>299)unidades=299;*/
     float temp=[taximetro unidadesADinero:(int)unidades];
     //valorInputLabel.text=[NSString stringWithFormat:@"$%.0f",temp];
@@ -454,6 +453,7 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
             [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dejarDeMoverse) object:nil];
             Modelador *model = [[Modelador alloc]init];
             BOOL ok=[model getBackgroundResponse];
+            NSLog(@"se esta o no moviendo %d",ok);
             if (ok) {
                 [self performSelector:@selector(dejarDeMoverse) withObject:nil afterDelay:1];
             }
@@ -461,7 +461,8 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
                 [self performSelector:@selector(dejarDeMoverse) withObject:nil afterDelay:60];
                 
             }
-        } else if (shakeDetected && !IsDeviceShaking(lastAcceleration, acceleration, 0.035)) {
+        }
+        else if (shakeDetected && !IsDeviceShaking(lastAcceleration, acceleration, 0.035)) {
             shakeDetected = NO;
         }
     }
@@ -507,34 +508,18 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     paginaUnoContainer.backgroundColor=kYellowColor;
     [mainScrollView addSubview:paginaUnoContainer];
     
-    BannerView *bannerView=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, mainScrollView.frame.size.width-10, 0)];
-    [bannerView ponerTexto:@"CONFIGURACIÓN"];
-    bannerView.configBannerLabel.textColor=[UIColor colorWithRed:0.75390625 green:0.02734375 blue:0.02734375 alpha:1];
-    [bannerView.configBannerLabel setOverlayOff:NO];
-    [bannerView setBannerColor:[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1]];
-    bannerView.center=CGPointMake(self.view.frame.size.width/2, 50);
-    [paginaUnoContainer addSubview:bannerView];
+    bannerViewPaginaUno=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, mainScrollView.frame.size.width-10, 0)];
+    [bannerViewPaginaUno ponerTexto:@"CONFIGURACIÓN"];
+    bannerViewPaginaUno.configBannerLabel.textColor=[UIColor colorWithRed:0.75390625 green:0.02734375 blue:0.02734375 alpha:1];
+    [bannerViewPaginaUno.configBannerLabel setOverlayOff:NO];
+    [bannerViewPaginaUno setBannerColor:[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1]];
+    bannerViewPaginaUno.center=CGPointMake(self.view.frame.size.width/2, 50);
+    [paginaUnoContainer addSubview:bannerViewPaginaUno];
     
-    /*BannerView *bannerView=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, mainScrollView.frame.size.width-10, 0)];
-    [bannerView ponerTexto:@"CONFIGURACIÓN"];
-    bannerView.center=CGPointMake(mainScrollView.frame.size.width/2, 50);
-    [paginaUnoContainer addSubview:bannerView];*/
-    
-    /*configTituloLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-20, 30)];
-    
-    configTituloLabel.center=CGPointMake(paginaUnoContainer.frame.size.width/2, 104);
-    if (deviceKind==2) {
-        configTituloLabel.center=CGPointMake(paginaUnoContainer.frame.size.width/2, 124);
-    }
-    [configTituloLabel ponerTexto:@"CONFIGURA TU TAXÍMETRO" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor colorWithRed:0.75390625 green:0.57421875 blue:0.06640625 alpha:1]];
-    [configTituloLabel setCentrado:YES];
-    //[configTituloLabel setOverlayOff:YES];
-    [paginaUnoContainer addSubview:configTituloLabel];*/
-    
-    containerConfig=[[UIView alloc]initWithFrame:CGRectMake(5, bannerView.frame.size.height+15,paginaUnoContainer.frame.size.width-10, 165)];
+    containerConfig=[[UIView alloc]initWithFrame:CGRectMake(5, bannerViewPaginaUno.frame.size.height+15,paginaUnoContainer.frame.size.width-10, 165)];
     
     if (deviceKind==2) {
-        containerConfig.frame=CGRectMake(5, bannerView.frame.size.height+configTituloLabel.frame.size.height+45, paginaUnoContainer.frame.size.width-10, 160);
+        containerConfig.frame=CGRectMake(5, bannerViewPaginaUno.frame.size.height, paginaUnoContainer.frame.size.width-10, 160);
     }
     
     containerConfig.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
@@ -549,8 +534,8 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     
     nocDomFesSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 8, 0, 0)];
     
-    [nocDomFesSwitch addTarget:self action:@selector(animacionNoche:)];
-    [nocDomFesSwitch addTarget:self action:@selector(switchChanged)];
+    //[nocDomFesSwitch addTarget:self action:@selector(animacionNoche:)];
+    [nocDomFesSwitch addTarget:self action:@selector(switchChanged:)];
     
     [containerConfig addSubview:nocDomFesSwitch];
     
@@ -560,7 +545,7 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     [containerConfig addSubview:aeropuertoLabel];
     
     aeropuertoSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 48, 0, 0)];
-    [aeropuertoSwitch addTarget:self action:@selector(switchChanged)];
+    [aeropuertoSwitch addTarget:self action:@selector(switchChanged:)];
     [containerConfig addSubview:aeropuertoSwitch];
     
     puertaApuertaLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 90, 130, 30)];
@@ -569,7 +554,7 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     [containerConfig addSubview:puertaApuertaLabel];
     
     puertaApuertaSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 88, 0, 0)];
-    [puertaApuertaSwitch addTarget:self action:@selector(switchChanged)];
+    [puertaApuertaSwitch addTarget:self action:@selector(switchChanged:)];
     [containerConfig addSubview:puertaApuertaSwitch];
     
     terminalLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 130, 130, 30)];
@@ -578,12 +563,12 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     [containerConfig addSubview:terminalLabel];
     
     terminalSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 128, 0, 0)];
-    [terminalSwitch addTarget:self action:@selector(switchChanged)];
+    [terminalSwitch addTarget:self action:@selector(switchChanged:)];
     [containerConfig addSubview:terminalSwitch];
     
     UIView *containerValoresYTiempo=[[UIView alloc]initWithFrame:CGRectMake(0, 0, paginaUnoContainer.frame.size.width-20, 40)];
     containerValoresYTiempo.backgroundColor=[UIColor clearColor];
-    containerValoresYTiempo.center=CGPointMake(paginaUnoContainer.frame.size.width/2, (bannerView.frame.size.height+configTituloLabel.frame.size.height+containerConfig.frame.size.height+10)+(containerValoresYTiempo.frame.size.height/2));
+    containerValoresYTiempo.center=CGPointMake(paginaUnoContainer.frame.size.width/2, (bannerViewPaginaUno.frame.size.height+containerConfig.frame.size.height+10)+(containerValoresYTiempo.frame.size.height/2));
     [paginaUnoContainer addSubview:containerValoresYTiempo];
     
     CustomButton *botonEnviarPlaca=[[CustomButton alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
@@ -598,12 +583,13 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
 }
 #pragma mark - switch changed
 
--(void)switchChanged{
+-(void)switchChanged:(CustomSwitch*)switcht{
    /* NSLog(@"Estos son los metros: %f",metros);
     float temp=[taximetro unidadesADinero:metros];*/
     NSString *resultadoContarMetros=[self contarMetros];
     float temp=[resultadoContarMetros floatValue];
     [self agregarOquitarCargos:temp];
+    [self animacionNoche:switcht];
 }
 -(void)agregarOquitarCargos:(float)dinero{
     if (nocDomFesSwitch.isOn) {
@@ -730,7 +716,7 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
 	locationManager.distanceFilter = kCLLocationAccuracyHundredMeters;
 	locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     
-    mapaPaginaDos=[[MKMapView alloc]initWithFrame:CGRectMake(5, bannerPaginaDos.frame.size.height+configTituloLabel.frame.size.height+35, paginaUnoContainer.frame.size.width-10, 195)];
+    mapaPaginaDos=[[MKMapView alloc]initWithFrame:CGRectMake(5, bannerPaginaDos.frame.size.height+35, paginaUnoContainer.frame.size.width-10, 195)];
     if (deviceKind==3) {
         mapaPaginaDos.frame=CGRectMake(5, 120, paginaUnoContainer.frame.size.width-10, 670);
     }
@@ -855,22 +841,63 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
 }
 #pragma mark - animaciones
 -(void)animacionNoche:(CustomSwitch*)switch1{
+    NSLog(@"entree a la animación");
     if (switch1.isOn) {
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDelegate:self];
-        [UIView setAnimationDuration:0.5];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        self.view.backgroundColor=kNightColor;
-        configTituloLabel.textColor=kWhiteColor;
-        [UIView commitAnimations];
+        if (switch1==nocDomFesSwitch) {
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationDelegate:self];
+            [UIView setAnimationDuration:0.5];
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+            paginaUnoContainer.backgroundColor=kNightColor;
+            bannerViewPaginaUno.configBannerLabel.textColor=kYellowColor;
+            [bannerViewPaginaUno.configBannerLabel setOverlayOff:YES];
+            [bannerViewPaginaUno setBannerColor:kWhiteColor];
+            [UIView commitAnimations];
+        }
+        else if (switch1==aeropuertoSwitch) {
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationDelegate:self];
+            [UIView setAnimationDuration:0.5];
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+            paginaUnoContainer.backgroundColor=kBlueColor;
+            bannerViewPaginaUno.configBannerLabel.textColor=kYellowColor;
+            [bannerViewPaginaUno.configBannerLabel setOverlayOff:YES];
+            [bannerViewPaginaUno setBannerColor:kWhiteColor];
+            [UIView commitAnimations];
+        }
+        else if (switch1==puertaApuertaSwitch) {
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationDelegate:self];
+            [UIView setAnimationDuration:0.5];
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+            paginaUnoContainer.backgroundColor=kGrayColor;
+            bannerViewPaginaUno.configBannerLabel.textColor=kYellowColor;
+            [bannerViewPaginaUno.configBannerLabel setOverlayOff:YES];
+            [bannerViewPaginaUno setBannerColor:kWhiteColor];
+            [UIView commitAnimations];
+        }
+        else if (switch1==terminalSwitch) {
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationDelegate:self];
+            [UIView setAnimationDuration:0.5];
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+            paginaUnoContainer.backgroundColor=kLiteRedColor;
+            bannerViewPaginaUno.configBannerLabel.textColor=kYellowColor;
+            [bannerViewPaginaUno.configBannerLabel setOverlayOff:YES];
+            [bannerViewPaginaUno setBannerColor:kWhiteColor];
+            [UIView commitAnimations];
+        }
     }
     else{
+        
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDelegate:self];
         [UIView setAnimationDuration:0.5];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        self.view.backgroundColor=backgroundColor;
-        configTituloLabel.textColor=kTitleBlueColor;
+        paginaUnoContainer.backgroundColor=kYellowColor;
+        bannerViewPaginaUno.configBannerLabel.textColor=[UIColor colorWithRed:0.75390625 green:0.02734375 blue:0.02734375 alpha:1];
+        [bannerViewPaginaUno.configBannerLabel setOverlayOff:NO];
+        [bannerViewPaginaUno setBannerColor:[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1]];
         [UIView commitAnimations];
     }
 }
@@ -992,14 +1019,13 @@ int counter=0;
     if (!estaMoviendose) {
         Modelador *model=[[Modelador alloc]init];
         BOOL ok=[model getBackgroundResponse];
+        NSLog(@"esta moviendose %d",ok);
         if (ok) {
             tiempoQuieto++;
             totalQuieto++;
             NSLog(@"aumento tiempo quieto");
         }
         else if(!ok){
-            tiempoQuieto=tiempoQuieto;
-            totalQuieto=totalQuieto;
             NSLog(@"Sigo igual");
         }
     }
@@ -1048,6 +1074,13 @@ int counter=0;
 -(void)callAlert:(CustomButton*)button{
     [alert changeState];
     [self.view bringSubviewToFront:alert];
+    [self zoomMapView];
+    if (seleccionarAB==0) {
+        seleccion=button.tag;
+    }
+    else{
+        seleccion=seleccionarAB;
+    }
     if (button.tag==1) {
         seleccionarAB=1;
         [alert.buttonCancelar removeTarget:self action:@selector(backPaginados:) forControlEvents:UIControlEventTouchUpInside];
@@ -1076,10 +1109,10 @@ int counter=0;
 }
 -(void)backPaginados:(CustomButton*)button{
     NSLog(@"%i", button.tag);
-    if (button.tag==2000 && seleccionarAB==2) {
+    if (button.tag==2000 && seleccion==2) {
         seleccionarAB=2;
     }
-    else if (button.tag==2001 && seleccionarAB==1){
+    else if (button.tag==2001 && seleccion==1){
         seleccionarAB=1;
     }
     [alert changeState];
@@ -1229,7 +1262,6 @@ int counter=0;
 }
 
 - (void)tapGestureHandler:(UITapGestureRecognizer *)tgr{
-    NSLog(@"%i", seleccionarAB);
     CGPoint touchPoint = [tgr locationInView:mapaPaginaDos];
     CLLocationCoordinate2D touchMapCoordinate= [mapaPaginaDos convertPoint:touchPoint toCoordinateFromView:mapaPaginaDos];
     CLRegion *newRegion = [[CLRegion alloc] initCircularRegionWithCenter:touchMapCoordinate
@@ -1435,14 +1467,16 @@ int counter=0;
     tecladoUp=NO;
     [self animarViewPorTeclado];
 }
-/*-(void)zoomMapView{
+-(void)zoomMapView{
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDuration:0.3];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    mapaPaginaDos.frame=CGRectMake(0, 100, viewWidth, viewHeight);
+    mapaPaginaDos.frame=CGRectMake(5, 40, paginaDos.frame.size.width-10, paginaDos.frame.size.height-95 );
+    bannerPaginaDos.frame=CGRectMake(0, 0, 0,0);
+    containerBotonesPaginaDos.center=CGPointMake(paginaDos.frame.size.width/2, 20);
     [UIView commitAnimations];
-}*/
+}
 #pragma mark - textfield delegate
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     tecladoUp=YES;

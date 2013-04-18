@@ -24,29 +24,32 @@
 @implementation CustomCell
 @synthesize backgroundCell,backgroundOverlay,labelEmpresaTaxi,accessoryCell;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier andWidth:(float)width
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        backgroundCell=[[UIView alloc]initWithFrame:CGRectMake(5, 5, (self.frame.size.width)-10, 45)];
-        backgroundCell.backgroundColor=kTitleBlueColor;
-        backgroundCell.layer.cornerRadius=3;
+        backgroundCell=[[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 55)];
+        backgroundCell.backgroundColor=[UIColor colorWithRed:0.3484375 green:0.6765625 blue:0.7390625 alpha:1];
         [self addSubview:backgroundCell];
         
-        backgroundOverlay=[[UIView alloc]initWithFrame:CGRectMake(6, 6, (self.frame.size.width)-10, 45)];
-        backgroundOverlay.backgroundColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.1];
-        backgroundOverlay.layer.cornerRadius=3;
-        [self addSubview:backgroundOverlay];
+        backgroundOverlay=[[UIView alloc]initWithFrame:CGRectMake(0, 1, backgroundCell.frame.size.width, 54)];
+        backgroundOverlay.backgroundColor=kTitleBlueColor;
+        //backgroundOverlay.layer.cornerRadius=3;
+        [backgroundCell addSubview:backgroundOverlay];
+        
+        UIView *backgroundOverlay2=[[UIView alloc]initWithFrame:CGRectMake(0, 0, backgroundCell.frame.size.width, 53)];
+        backgroundOverlay2.backgroundColor=[UIColor colorWithRed:0.2484375 green:0.5765625 blue:0.6390625 alpha:1];
+        [backgroundOverlay addSubview:backgroundOverlay2];
         
         labelEmpresaTaxi=[[UILabel alloc]initWithFrame:CGRectMake(10, 5, (backgroundCell.frame.size.width)-25, (backgroundCell.frame.size.height)-10)];
         labelEmpresaTaxi.textColor=kWhiteColor;
-        labelEmpresaTaxi.font=[UIFont fontWithName:kFontType size:22];
+        labelEmpresaTaxi.font=[UIFont fontWithName:kFontType size:24];
         labelEmpresaTaxi.backgroundColor=[UIColor clearColor];
         [backgroundCell addSubview:labelEmpresaTaxi];
         
-        accessoryCell=[[UIView alloc]initWithFrame:CGRectMake((self.frame.size.width)-30, 22, 15, 15)];
+        accessoryCell=[[UIView alloc]initWithFrame:CGRectMake(width-30, 22, 15, 15)];
         accessoryCell.backgroundColor=kYellowColor;
         accessoryCell.layer.cornerRadius=accessoryCell.frame.size.width/2;
         [self addSubview:accessoryCell];

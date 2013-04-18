@@ -255,8 +255,8 @@
             bannerView.center=CGPointMake(self.view.frame.size.width/2, 50);
             [subview addSubview:bannerView];
             
-            viewLabelsReportes=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 35)];
-            viewLabelsReportes.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+35);
+            viewLabelsReportes=[[UIView alloc]initWithFrame:CGRectMake(0, 0, subview.frame.size.width, 35)];
+            viewLabelsReportes.center=CGPointMake(self.view.frame.size.width/2, subview.frame.size.height+35);
             [subview addSubview:viewLabelsReportes];
             
             
@@ -563,7 +563,7 @@
 }
 -(void)reportarPlacaConsultada:(id)sender{
     textFieldPlacaReportar.text=textFieldPlaca.text;
-    [self animarView:labelPositivo ConPosicion:CGRectMake(215, 0, 0, 35)];
+    [self animarView:labelPositivo ConPosicion:CGRectMake(self.view.frame.size.width-105, 0, 0, 35)];
     [self animarView:labelNegativo ConPosicion:CGRectMake(5, 0, 0, 35)];
     [self animarCentroView:viewReporteWrapper ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+200)];
     [self animarCentroView:contentViewReporta ConCentro:CGPointMake(self.view.frame.size.width/2, 150)];
@@ -706,7 +706,7 @@
         [self animarCentroView:mensajeReporte ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+100)];
         [self animarCentroView:mensajeReporte2 ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+100)];
         [self animarCentroView:viewLabelsReportes ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+35)];
-        [self animarView:labelPositivo ConPosicion:CGRectMake(215, 0, 0, 35)];
+        [self animarView:labelPositivo ConPosicion:CGRectMake(self.view.frame.size.width-105, 0, 0, 35)];
         [self animarView:labelNegativo ConPosicion:CGRectMake(5, 0, 0, 35)];
         [self animarCentroView:containerTipo ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+82)];
         [self animarCentroView:viewReporteWrapper ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+200)];
@@ -741,7 +741,7 @@
         else{
             if (deviceKind==3) {
                 [self animarCentroView:containerTipo ConCentro:CGPointMake(self.view.frame.size.width/2, 390)];
-                [self animarCentroView:viewLabelsReportes ConCentro:CGPointMake((self.view.frame.size.width/2)/2, 390)];
+                [self animarCentroView:viewLabelsReportes ConCentro:CGPointMake(self.view.frame.size.width/2, 390)];
                 [self animarCentroView:mensajeReporte2 ConCentro:CGPointMake(self.view.frame.size.width/2, 660)];
             }
             else {
@@ -1000,7 +1000,7 @@
     
     [self animarCentroView:mensajeReporte2 ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+100)];
     [self animarCentroView:containerTipo ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+82)];
-    [self animarView:labelPositivo ConPosicion:CGRectMake(215, 0, 0, 35)];
+    [self animarView:labelPositivo ConPosicion:CGRectMake(self.view.frame.size.width-105, 0, 0, 35)];
     [self animarView:labelNegativo ConPosicion:CGRectMake(5, 0, 0, 35)];
     [self animarCentroView:viewLabelsReportes ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+35)];
     [self animarCentroView:viewReporteWrapper ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+200)];
@@ -1012,12 +1012,12 @@
     tipoReporte=@"negativo";
     [self animarComentarioHaciaAbajo];
     [self animarView:labelNegativo ConPosicion:CGRectMake(5, 0, 100, 35)];
-    [self animarView:labelPositivo ConPosicion:CGRectMake(215, 0, 0, 35)];
+    [self animarView:labelPositivo ConPosicion:CGRectMake(self.view.frame.size.width-105, 0, 0, 35)];
 }
 -(void)reporteBueno: (UIButton*) sender{
     tipoReporte=@"positivo";
     [self animarComentarioHaciaAbajo];
-    [self animarView:labelPositivo ConPosicion:CGRectMake(215, 0, 100, 35)];
+    [self animarView:labelPositivo ConPosicion:CGRectMake(self.view.frame.size.width-105, 0, 100, 35)];
     [self animarView:labelNegativo ConPosicion:CGRectMake(5, 0, 0, 35)];
 }
 -(void)topMalos: (UIButton*) sender{

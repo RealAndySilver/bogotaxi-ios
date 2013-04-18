@@ -84,6 +84,7 @@
 		75D6C68D1667F66600D90A0D /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D6C68C1667F66600D90A0D /* MenuView.m */; };
 		75E4F37B16697D7C007BE4C5 /* TelefonosTaxis.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75E4F37A16697D7C007BE4C5 /* TelefonosTaxis.plist */; };
 		75E4F37F1669819E007BE4C5 /* LLamadasObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E4F37E1669819E007BE4C5 /* LLamadasObject.m */; };
+		810645D6171F56A500B1F6E6 /* iconiPhone@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 810645D5171F56A500B1F6E6 /* iconiPhone@x2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -212,6 +213,7 @@
 		75E4F37A16697D7C007BE4C5 /* TelefonosTaxis.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TelefonosTaxis.plist; sourceTree = "<group>"; };
 		75E4F37D1669819E007BE4C5 /* LLamadasObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLamadasObject.h; sourceTree = "<group>"; };
 		75E4F37E1669819E007BE4C5 /* LLamadasObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLamadasObject.m; sourceTree = "<group>"; };
+		810645D5171F56A500B1F6E6 /* iconiPhone@x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconiPhone@x2.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +244,7 @@
 		7542BEF2165E82D2008A51B7 = {
 			isa = PBXGroup;
 			children = (
+				810645D5171F56A500B1F6E6 /* iconiPhone@x2.png */,
 				33A712C0171CBBDC009DF61B /* iconiPad.png */,
 				33A712BE171CBBD4009DF61B /* iconiPad@x2.png */,
 				33A712BC171CB66C009DF61B /* iconiPhone.png */,
@@ -486,6 +489,7 @@
 				33A712BD171CB66C009DF61B /* iconiPhone.png in Resources */,
 				33A712BF171CBBD4009DF61B /* iconiPad@x2.png in Resources */,
 				33A712C1171CBBDC009DF61B /* iconiPad.png in Resources */,
+				810645D6171F56A500B1F6E6 /* iconiPhone@x2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
