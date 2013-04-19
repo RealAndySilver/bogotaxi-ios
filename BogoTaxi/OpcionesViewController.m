@@ -177,6 +177,8 @@
     [opcionesContactoeInformacion changeState];
     [opcionesContactoeInformacion.advertencia addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
     [opcionesContactoeInformacion.acercaDeBogoTaxi addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
+    [opcionesContactoeInformacion.contactanos addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
+    [opcionesContactoeInformacion.cuentaleaUnAmigo addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)goTo:(CustomButton*)button{
@@ -211,6 +213,55 @@
         aVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:aVC animated:YES];
     }
+    else if ([button.titleLabel.text isEqualToString:@"Contáctanos"]) {
+        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+		controller.mailComposeDelegate = self;
+		[controller setToRecipients:[NSArray arrayWithObject:@"support@iamstudio.co"]];
+		[controller setSubject:@"BogoTaxi"];
+		[self presentModalViewController:controller animated:YES];
+    }
+    else if ([button.titleLabel.text isEqualToString:@"Cuéntale a un Amigo"]) {
+        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+		controller.mailComposeDelegate = self;
+		[controller setSubject:@"Prueba BogoTaxi"];
+		[controller setMessageBody:@"Con BogoTaxi podrás medir tu trayectoria, conocer el valor a pagar aproximado, y postear la placa y lugar donde cogiste tu Taxi en la red social que elijas." isHTML:NO];
+		[self presentModalViewController:controller animated:YES];
+	}
+    else if ([button.titleLabel.text isEqualToString:@"Me encanta esta App!"]) {
+        /*NSString *iRateMacAppStoreURLFormat = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=474509867";
+        NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:iRateMacAppStoreURLFormat]];
+		[[UIApplication sharedApplication] openURL:url];*/
+    }
 }
-
+#pragma mark delegates de mensajes
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+	switch (result) {
+		case MessageComposeResultCancelled:
+			break;
+		case MessageComposeResultFailed:
+			break;
+		case MessageComposeResultSent:
+            
+			break;
+		default:
+			break;
+	}
+    
+	[self dismissModalViewControllerAnimated:YES];
+}
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+	switch (result) {
+		case MFMailComposeResultCancelled:
+			break;
+		case MFMailComposeResultFailed:
+			break;
+		case MFMailComposeResultSent:
+            
+			break;
+		default:
+			break;
+	}
+    
+	[self dismissModalViewControllerAnimated:YES];
+}
 @end

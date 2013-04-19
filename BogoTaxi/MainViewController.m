@@ -40,7 +40,8 @@
 @end
 
 @implementation MainViewController
-@synthesize lastAcceleration, shakeDetected;
+@synthesize lastAcceleration, shakeDetected, geoCoder;
+
 #pragma mark - lifecycle
 - (void)viewDidLoad
 {
@@ -87,14 +88,13 @@
     banderaSecs=YES;
     unidadesAjuste=0;
     unidadesAjusteTotal=0;
-    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / 40)];
-    [[UIAccelerometer sharedAccelerometer] setDelegate:self];
+    //[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / 40)];
+    //[[UIAccelerometer sharedAccelerometer] setDelegate:self];
     tiempoQuieto=0;
     tiempoQuieto = 0;
     totalQuieto=0;
     estaMoviendose = NO;
 }
-
 -(void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
 }
@@ -356,11 +356,13 @@
     //SHKItem *item = [SHKItem image:image title:ubicacion];
     if ([[obj obtenerNombreDeRedSocial] isEqualToString:@"Twitter "]||
         [[obj obtenerNombreDeRedSocial] isEqualToString:@"Twitter"]){
-        //[SHKTwitter shareItem:item];
+        NSString *ubicacion=[NSString stringWithFormat:@"%@ http://maps.google.com/maps?q=%f,%f",mensajePanico,lat,longi];
+        [self publicarEnTwttConMensaje:ubicacion];
     }
     if ([[obj obtenerNombreDeRedSocial] isEqualToString:@"Facebook "]||
         [[obj obtenerNombreDeRedSocial] isEqualToString:@"Facebook"]){
-        //[SHKFacebook shareItem:item];
+        NSString *ubicacion=[NSString stringWithFormat:@"%@ http://maps.google.com/maps?q=%f,%f",mensajePanico,lat,longi];
+        [self publicarEnFbConMensaje:ubicacion];
     }
     if ([[obj obtenerNombreDeRedSocial] isEqualToString:@"Mail "]||
         [[obj obtenerNombreDeRedSocial] isEqualToString:@"Mail"]){
@@ -453,7 +455,7 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
             [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dejarDeMoverse) object:nil];
             Modelador *model = [[Modelador alloc]init];
             BOOL ok=[model getBackgroundResponse];
-            NSLog(@"se esta o no moviendo %d",ok);
+            //NSLog(@"se esta o no moviendo %d",ok);
             if (ok) {
                 [self performSelector:@selector(dejarDeMoverse) withObject:nil afterDelay:1];
             }
@@ -1074,7 +1076,6 @@ int counter=0;
 -(void)callAlert:(CustomButton*)button{
     [alert changeState];
     [self.view bringSubviewToFront:alert];
-    [self zoomMapView];
     if (seleccionarAB==0) {
         seleccion=button.tag;
     }
@@ -1284,6 +1285,22 @@ int counter=0;
                 [mapaPaginaDos addAnnotation:annotationA];
             }
             [locationManager stopMonitoringForRegion:newRegion];
+            /*//Geocoding Block
+            [geoCoder reverseGeocodeLocation: ptoA completionHandler:^(NSArray *placemarks, NSError *error) {
+                 
+                 //Get nearby address
+                 CLPlacemark *placemark = [placemarks objectAtIndex:0];
+                 
+                 //String to hold address
+                 NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+                 
+                 //Print the location to console
+                 NSLog(@"I am currently at %@",locatedAt);
+                 
+                 //Set the label text to current location
+                 //[locationLabel setText:locatedAt];
+                 
+             }];*/
         }
     }
     else if (seleccionarAB==2){
@@ -1467,7 +1484,7 @@ int counter=0;
     tecladoUp=NO;
     [self animarViewPorTeclado];
 }
--(void)zoomMapView{
+/*-(void)zoomMapView{
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDuration:0.3];
@@ -1476,7 +1493,7 @@ int counter=0;
     bannerPaginaDos.frame=CGRectMake(0, 0, 0,0);
     containerBotonesPaginaDos.center=CGPointMake(paginaDos.frame.size.width/2, 20);
     [UIView commitAnimations];
-}
+}*/
 #pragma mark - textfield delegate
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     tecladoUp=YES;
@@ -1599,12 +1616,20 @@ int counter=0;
         [self updateRouteView2];
         Modelador *obj=[[Modelador alloc]init];
         if (![obj getAlertSwitchValue]) {
-            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Total"
+            
+            [alertMessage changeState];
+            [self.view bringSubviewToFront:alertMessage];
+            NSString *resumenUnidades=labelUnidades.text;
+            NSString *resumenValorViaje=valorInputLabel.text;
+            NSString *resumenTiempo=tiempoInputLabel.text;
+            NSString *resumen=[NSString stringWithFormat:@"Total \n Total unidades: %@ \n Total dinero: %@ \n Total tiempo: %@",resumenUnidades,resumenValorViaje, resumenTiempo];
+            [alertMessage.labelMensaje ponerTexto:resumen fuente:[UIFont fontWithName:kFontType size:24] color:kWhiteColor];
+            /*UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Total"
                                                               message:[self contarMetros]
                                                              delegate:self
                                                     cancelButtonTitle:@"OK"
                                                     otherButtonTitles:nil];
-            [message show];
+            [message show];*/
         }
         routeView2.hidden = NO;
         [self guardarEstadisticas];
@@ -1619,7 +1644,7 @@ int counter=0;
     if (switchEncender.isOn) {
         zoomLocation.latitude = location.coordinate.latitude;
         zoomLocation.longitude = location.coordinate.longitude;
-        if (banderaLocation) {
+        if (banderaU) {
             zoomLocation.latitude=zoomLocationPast.latitude;
             zoomLocation.longitude=zoomLocationPast.longitude;
         }
@@ -1631,6 +1656,7 @@ int counter=0;
                                                                            0.5*METERS_PER_MILE);
         MKCoordinateRegion adjustedRegion = [mapViewGPS regionThatFits:viewRegion];
         [mapViewGPS setRegion:adjustedRegion animated:YES];
+        
         CLLocation *pointALocation = [[CLLocation alloc] initWithLatitude:zoomLocation2.latitude longitude:zoomLocation2.longitude];
         CLLocation *pointBLocation = [[CLLocation alloc] initWithLatitude:zoomLocation.latitude longitude:zoomLocation.longitude];
         //double distanciaMetros = [pointALocation getDistanceFrom:pointBLocation];
@@ -1648,8 +1674,7 @@ int counter=0;
             [coordenadasParaDibujar addObject:pointALocation];
             [coordenadasParaDibujar addObject:pointBLocation];
         }
-        
-        banderaLocation = YES;
+        banderaU = YES;
         [self contarMetros];
     }
     else{
@@ -1666,7 +1691,6 @@ int counter=0;
                                initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [errorAlert show];
 }
-
 #pragma mark Guardar imagen
 - (void)saveScreenshot {
     
@@ -1709,7 +1733,6 @@ int counter=0;
         NSLog(@"Guardada con éxito");
     }
 }
-int tf=0;
 #pragma mark delegates de mensajes
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
 	switch (result) {
@@ -1741,5 +1764,53 @@ int tf=0;
     
 	[self dismissModalViewControllerAnimated:YES];
 }
-
+-(void)publicarEnFbConMensaje:(NSString*)mensaje{
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]){
+        SLComposeViewController *controller=[SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        SLComposeViewControllerCompletionHandler block=^(SLComposeViewControllerResult result){
+            if (result == SLComposeViewControllerResultCancelled) {
+                NSLog(@"Paila cancelado");
+            }
+            else{
+                NSLog(@"Listo parcero");
+            }
+            [controller dismissViewControllerAnimated:YES completion:nil];
+        };
+        controller.completionHandler=block;
+        [controller setInitialText:mensaje];
+        [self saveScreenshot];
+        NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Screenshot.jpg"];
+        UIImage *image = [UIImage imageWithContentsOfFile:documentsDirectory];
+        NSData *imageAttachment = UIImageJPEGRepresentation(image,1);
+        [controller addImage:[UIImage imageWithData:imageAttachment]];
+        [self presentViewController:controller animated:YES completion:nil];
+        
+    }
+    else{
+        NSLog(@"Paila mono, esto no sirve en este iOS");
+    }
+}
+-(void)publicarEnTwttConMensaje:(NSString*)mensaje{
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
+    {
+        SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        [tweetSheet setInitialText:mensaje];
+        [self saveScreenshot];
+        NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Screenshot.jpg"];
+        UIImage *image = [UIImage imageWithContentsOfFile:documentsDirectory];
+        NSData *imageAttachment = UIImageJPEGRepresentation(image,1);
+        [tweetSheet addImage:[UIImage imageWithData:imageAttachment]];
+        [self presentModalViewController:tweetSheet animated:NO];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc]
+                                  initWithTitle:@"Sorry"
+                                  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"
+                                  delegate:self
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+}
 @end

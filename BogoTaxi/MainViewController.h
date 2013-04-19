@@ -27,9 +27,10 @@
 #import "Modelador.h"
 #import "iRate.h"
 #import "FileSaver.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import <MessageUI/MessageUI.h>
 #import "MBProgressHud.h"
+#import "AppDelegate.h"
+#import <Social/Social.h>
 
 
 @interface MainViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UIAccelerometerDelegate>{
@@ -159,6 +160,7 @@
     MBProgressHUD *hud;
 }
 @property (nonatomic, retain) UIAcceleration *lastAcceleration;
+@property (strong, nonatomic) CLGeocoder *geoCoder;
 @property BOOL shakeDetected;
 
 @end

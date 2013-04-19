@@ -114,6 +114,7 @@
     [bannerView setBannerColor:kDarkGrayColor];
     bannerView.center=CGPointMake(self.view.frame.size.width/2, 45);
     [self.view addSubview:bannerView];
+    redSocial=@"";
     
     [self crearContainer];
     
@@ -144,7 +145,7 @@
     textFieldUbicacion.returnKeyType = UIReturnKeyDone;
     textFieldUbicacion.clearButtonMode = UITextFieldViewModeWhileEditing;
     [textFieldUbicacion addTarget:self action:@selector(actualizarMensaje) forControlEvents:UIControlEventEditingChanged];
-    [textFieldUbicacion addTarget:self action:@selector(enviarMensaje) forControlEvents:UIControlEventEditingDidEndOnExit];
+    //[textFieldUbicacion addTarget:self action:@selector(enviarMensaje) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.view addSubview:textFieldUbicacion];
     textFieldUbicacion.delegate = self;
     textFieldUbicacion.tag=3000;
@@ -265,8 +266,10 @@
     tvMail.scrollEnabled=YES;
     [contentMensajeView addSubview:tvMail];
     
+    UIImage *twitterButtonImage = [UIImage imageNamed:@"buttonTwitter.png"];
+    
     buttonTwitter=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 70)];
-    buttonTwitter.backgroundColor=kBlueColor;
+    [buttonTwitter setBackgroundImage:twitterButtonImage forState:UIControlStateNormal];
     buttonTwitter.center=CGPointMake((((contentMensajeView.frame.size.width/2)/2)/2)+5, contentMensajeView.frame.size.height/2);
     if (deviceKind==3) {
         buttonTwitter.center=CGPointMake((((contentMensajeView.frame.size.width/2)/2)/2)+85, contentMensajeView.frame.size.height/2);
@@ -274,8 +277,10 @@
     [buttonTwitter addTarget:self action:@selector(twitterTrigger) forControlEvents:UIControlEventTouchUpInside];
     [viewDesplazar addSubview:buttonTwitter];
     
+    UIImage *fbButtonImage = [UIImage imageNamed:@"buttonFB.png"];
+    
     buttonFacebook=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 70)];
-    buttonFacebook.backgroundColor=kGreenColor;
+    [buttonFacebook setBackgroundImage:fbButtonImage forState:UIControlStateNormal];
     buttonFacebook.center=CGPointMake((((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+40, contentMensajeView.frame.size.height/2);
     if (deviceKind==3) {
         buttonFacebook.center=CGPointMake((((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+125, contentMensajeView.frame.size.height/2);
@@ -283,8 +288,9 @@
     [buttonFacebook addTarget:self action:@selector(facebookTrigger) forControlEvents:UIControlEventTouchUpInside];
     [viewDesplazar addSubview:buttonFacebook];
     
+    UIImage *mailButtonImage = [UIImage imageNamed:@"buttonMail.png"];
     buttonMail=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 70)];
-    buttonMail.backgroundColor=kYellowColor;
+    [buttonMail setBackgroundImage:mailButtonImage forState:UIControlStateNormal];
     buttonMail.center=CGPointMake((((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+75, contentMensajeView.frame.size.height/2);
     if (deviceKind==3) {
         buttonMail.center=CGPointMake((((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+160, contentMensajeView.frame.size.height/2);
@@ -292,12 +298,13 @@
     [buttonMail addTarget:self action:@selector(mailTrigger) forControlEvents:UIControlEventTouchUpInside];
     [viewDesplazar addSubview:buttonMail];
     
+    UIImage *smsButtonImage = [UIImage imageNamed:@"buttonSMS.png"];
     buttonSms=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 70)];
     buttonSms.center=CGPointMake((((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+110, contentMensajeView.frame.size.height/2);
     if (deviceKind==3) {
         buttonSms.center=CGPointMake((((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+190, contentMensajeView.frame.size.height/2);
     }
-    buttonSms.backgroundColor=kBlueColor;
+    [buttonSms setBackgroundImage:smsButtonImage forState:UIControlStateNormal];
     [buttonSms addTarget:self action:@selector(smsTrigger) forControlEvents:UIControlEventTouchUpInside];
     [viewDesplazar addSubview:buttonSms];
     
@@ -367,7 +374,7 @@
     double numeroDouble = [numeroString doubleValue];
     [msj setNumeroSMS:numeroDouble];
     [msj setMail:correo];
-    [self dismissView];
+    [self dismissModalViewControllerAnimated:YES];
 }
 -(void)twitterTrigger{
     Modelador *obj=[[Modelador alloc]init];

@@ -40,6 +40,8 @@
     CGFloat viewHeight;
     BOOL tecladoUp;
     UITapGestureRecognizer *recognizer;
+    
+    NSString *redSocial;
    
 }
 -(NSString *)actualizarMensaje;

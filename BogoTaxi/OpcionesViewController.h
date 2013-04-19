@@ -17,8 +17,9 @@
 #import "AdvertenciaViewController.h"
 #import "AcercaDeViewController.h"
 #import "LlamadaDeEmergenciaViewController.h"
+#import <MessageUI/MessageUI.h>
 
-@interface OpcionesViewController : UIViewController{
+@interface OpcionesViewController : UIViewController<MFMailComposeViewControllerDelegate>{
     int deviceKind;
     CustomLabel *configTituloLabel;
     UIView *containerView;
