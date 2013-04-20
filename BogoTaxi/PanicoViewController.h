@@ -42,6 +42,7 @@
     UITapGestureRecognizer *recognizer;
     
     NSString *redSocial;
+    Modelador *objeto;
    
 }
 -(NSString *)actualizarMensaje;

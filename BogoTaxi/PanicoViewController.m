@@ -114,7 +114,8 @@
     [bannerView setBannerColor:kDarkGrayColor];
     bannerView.center=CGPointMake(self.view.frame.size.width/2, 45);
     [self.view addSubview:bannerView];
-    redSocial=@"";
+    objeto=[[Modelador alloc]init];
+    redSocial=[objeto obtenerNombreDeRedSocial];
     
     [self crearContainer];
     
@@ -374,22 +375,30 @@
     double numeroDouble = [numeroString doubleValue];
     [msj setNumeroSMS:numeroDouble];
     [msj setMail:correo];
+    [objeto redSocialConNombre:redSocial];
     [self dismissModalViewControllerAnimated:YES];
 }
 -(void)twitterTrigger{
-    Modelador *obj=[[Modelador alloc]init];
+    /*Modelador *obj=[[Modelador alloc]init];
     [obj redSocialConNombre:@"Twitter"];
-    redSocialLabel.text=[obj obtenerNombreDeRedSocial];
+    redSocialLabel.text=[obj obtenerNombreDeRedSocial];*/
+    redSocial=@"Twitter";
+    redSocialLabel.text=redSocial;
 }
 -(void)facebookTrigger{
-    Modelador *obj=[[Modelador alloc]init];
+    /*Modelador *obj=[[Modelador alloc]init];
     [obj redSocialConNombre:@"Facebook"];
-    redSocialLabel.text=[obj obtenerNombreDeRedSocial];
+    redSocialLabel.text=[obj obtenerNombreDeRedSocial];*/
+    redSocial=@"Facebook";
+    redSocialLabel.text=redSocial;
 }
 -(void)mailTrigger{
-    Modelador *obj=[[Modelador alloc]init];
+    /*Modelador *obj=[[Modelador alloc]init];
     [obj redSocialConNombre:@"Mail"];
-    redSocialLabel.text=[obj obtenerNombreDeRedSocial];
+    redSocialLabel.text=[obj obtenerNombreDeRedSocial];*/
+    redSocial=@"Mail";
+    redSocialLabel.text=redSocial;
+
     if (!banderaDesplazar) {
         CGRect myMapRect;
         if (deviceKind==3) {
@@ -432,10 +441,12 @@
     }
 }
 -(void)smsTrigger{
-    Modelador *obj=[[Modelador alloc]init];
+    /*Modelador *obj=[[Modelador alloc]init];
     [obj redSocialConNombre:@"SMS"];
     redSocialLabel.text=[obj obtenerNombreDeRedSocial];
-    NSLog(@"Red Social: %@",[obj obtenerNombreDeRedSocial]);
+    NSLog(@"Red Social: %@",[obj obtenerNombreDeRedSocial]);*/
+    redSocial=@"SMS";
+    redSocialLabel.text=redSocial;
     if (!banderaDesplazar) {
         CGRect myMapRect;
         if (deviceKind==3) {
