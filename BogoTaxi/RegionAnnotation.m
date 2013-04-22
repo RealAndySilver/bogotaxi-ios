@@ -74,6 +74,22 @@
 }
 
 - (NSString *)subtitle {
-	return [NSString stringWithFormat: @"Lat: %.4F, Lon: %.4F", coordinate.latitude, coordinate.longitude];
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        NSLog(@"reverseGeocodeLocation:completionHandler: Completion Handler called!");
+        if (error){
+            NSLog(@"Geocode failed with error: %@", error);
+            return;
+        }
+        CLPlacemark *placemark = [placemarks objectAtIndex:0];
+        locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+        //Print the location to console
+        NSLog(@"I am currently at %@",locatedAt);
+    }];
+    
+	//return [NSString stringWithFormat: @"Lat: %.4F, Lon: %.4F", coordinate.latitude, coordinate.longitude];
+    return locatedAt;
+
 }
  @end

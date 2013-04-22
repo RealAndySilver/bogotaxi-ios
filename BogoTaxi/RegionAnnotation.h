@@ -50,6 +50,7 @@
 #import <MapKit/MapKit.h>
 
 @interface RegionAnnotation : NSObject<MKAnnotation> {
+    NSString *locatedAt;
     
 }
 

@@ -39,7 +39,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor=kTitleBlueColor;
+    self.view.backgroundColor=kBlueColor;
 	// Do any additional setup after loading the view.
     recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(processTap:)];
     recognizer.delegate=self;
@@ -83,6 +83,9 @@
     if (deviceKind==3) {
         viewLlamada123.center=CGPointMake(self.view.frame.size.width/2, 385);
     }
+    else if(deviceKind==2){
+        viewLlamada123.center=CGPointMake(self.view.frame.size.width/2, 155);
+    }
     else{
         viewLlamada123.center=CGPointMake(self.view.frame.size.width/2, 135);
     }
@@ -108,6 +111,9 @@
     viewNumeroPerso.backgroundColor=kDarkGrayColor;
     if (deviceKind==3) {
         viewNumeroPerso.center=CGPointMake(self.view.frame.size.width/2, 430);
+    }
+    else if(deviceKind==2){
+        viewNumeroPerso.center=CGPointMake(self.view.frame.size.width/2, 220);
     }
     else{
         viewNumeroPerso.center=CGPointMake(self.view.frame.size.width/2, 180);
@@ -142,6 +148,9 @@
     CustomLabel *labelMensaje=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-20, 150)];
     if (deviceKind==3) {
         labelMensaje.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    }
+    else if(deviceKind==2){
+        labelMensaje.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-190);
     }
     else{
         labelMensaje.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-150);

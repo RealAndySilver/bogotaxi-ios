@@ -179,6 +179,7 @@
     [opcionesContactoeInformacion.acercaDeBogoTaxi addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
     [opcionesContactoeInformacion.contactanos addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
     [opcionesContactoeInformacion.cuentaleaUnAmigo addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
+    [opcionesContactoeInformacion.meEncanta addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)goTo:(CustomButton*)button{
@@ -201,7 +202,6 @@
         [self presentModalViewController:lVC animated:YES];
     }
     else if ([button.titleLabel.text isEqualToString:@"Advertencia"]) {
-        NSLog(@"entreee");
         AdvertenciaViewController *adVC=[[AdvertenciaViewController alloc]init];
         adVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Advertencia"];
         adVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -228,9 +228,9 @@
 		[self presentModalViewController:controller animated:YES];
 	}
     else if ([button.titleLabel.text isEqualToString:@"Me encanta esta App!"]) {
-        /*NSString *iRateMacAppStoreURLFormat = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=474509867";
+        NSString *iRateMacAppStoreURLFormat = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=474509867";
         NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:iRateMacAppStoreURLFormat]];
-		[[UIApplication sharedApplication] openURL:url];*/
+		[[UIApplication sharedApplication] openURL:url];
     }
 }
 #pragma mark delegates de mensajes

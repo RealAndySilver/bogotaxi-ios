@@ -93,6 +93,16 @@
 	[self guardar];
 }
 
+-(NSString*)getUserFirstTime:(NSString*)name{
+        return [datos objectForKey:name];
+}
+-(void)setUserFirstTime:(NSString*)name{
+    NSMutableDictionary *newData = [datos mutableCopy];
+    [newData setObject:name forKey:name];
+	datos = newData;
+	[self guardar];
+}
+
 -(NSString *)getUpdateFile:(int)tag{
     NSString *string=[NSString stringWithFormat:@"%i",tag];
     NSString *date=[datos objectForKey:string];

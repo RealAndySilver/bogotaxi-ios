@@ -112,6 +112,18 @@
     [alert crearView];
     [self.view addSubview:alert];
     
+    [self animarCentroView:contentViewReporta ConCentro:CGPointMake(self.view.frame.size.width/2, 150)];
+    if (deviceKind==3) {
+        [self animarCentroView:containerTipo ConCentro:CGPointMake(self.view.frame.size.width/2, 390)];
+        [self animarCentroView:viewLabelsReportes ConCentro:CGPointMake(self.view.frame.size.width/2, 390)];
+        [self animarCentroView:mensajeReporte2 ConCentro:CGPointMake(self.view.frame.size.width/2, 660)];
+    }
+    else {
+        [self animarCentroView:containerTipo ConCentro:CGPointMake(self.view.frame.size.width/2, 215)];
+        [self animarCentroView:viewLabelsReportes ConCentro:CGPointMake(self.view.frame.size.width/2, 215)];
+        [self animarCentroView:mensajeReporte2 ConCentro:CGPointMake(self.view.frame.size.width/2, 315)];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -149,7 +161,7 @@
             contentViewConsulta.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
             [subview addSubview:contentViewConsulta];
             
-            buttonInformacion=[UIButton buttonWithType:UIButtonTypeInfoLight];
+            buttonInformacion=[UIButton buttonWithType:UIButtonTypeInfoDark];
             buttonInformacion.frame=CGRectMake(contentViewConsulta.frame.size.width-60, contentViewConsulta.frame.size.height-32, 40, 40);
             buttonInformacion.alpha=0;
             [buttonInformacion addTarget:self action:@selector(informacionTaxista:) forControlEvents:UIControlEventTouchUpInside];
@@ -311,6 +323,7 @@
             textFieldPlacaReportar.tag=3001;
             textFieldPlacaReportar.backgroundColor=[UIColor clearColor];
             textFieldPlacaReportar.placeholder=@"#PLACA";
+            textFieldPlacaReportar.text=textFieldPlaca.text;
             textFieldPlacaReportar.delegate=self;
             textFieldPlacaReportar.font=[UIFont fontWithName:kFontType size:70];
             textFieldPlacaReportar.textAlignment=UITextAlignmentCenter;
@@ -746,7 +759,6 @@
             }
             else {
                 [self animarCentroView:containerTipo ConCentro:CGPointMake(self.view.frame.size.width/2, 215)];
-                
                 [self animarCentroView:viewLabelsReportes ConCentro:CGPointMake(self.view.frame.size.width/2, 215)];
                 [self animarCentroView:mensajeReporte2 ConCentro:CGPointMake(self.view.frame.size.width/2, 315)];
             }

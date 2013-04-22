@@ -16,6 +16,10 @@
 -(void)setLastUserName:(NSString*)name andPassword:(NSString*)password;
 -(NSDictionary*)getLastUserNameAndPassword;
 
+-(void)setUserFirstTime:(NSString*)name;
+-(NSString*)getUserFirstTime:(NSString*)name;
+
+
 -(NSString*)getNombre;
 -(NSString*)getPassword;
 

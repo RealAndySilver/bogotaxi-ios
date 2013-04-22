@@ -25,7 +25,6 @@
 		33462743167F947200578B79 /* AdvertenciaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33462742167F947200578B79 /* AdvertenciaViewController.m */; };
 		3348559116F7901F00929946 /* RegionAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3348558E16F7901F00929946 /* RegionAnnotation.m */; };
 		3348559216F7901F00929946 /* RegionAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3348559016F7901F00929946 /* RegionAnnotationView.m */; };
-		3348559516F7904300929946 /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3348559416F7904300929946 /* Annotation.m */; };
 		334AC8BE167A967600F077A0 /* AlertMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334AC8BD167A967600F077A0 /* AlertMessageView.m */; };
 		334E2A00167103F2005D1E9C /* OpcionesCompartirView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334E29FF167103F2005D1E9C /* OpcionesCompartirView.m */; };
 		334E2A04167141B0005D1E9C /* OpcionesContactoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334E2A03167141AF005D1E9C /* OpcionesContactoView.m */; };
@@ -122,8 +121,6 @@
 		3348558E16F7901F00929946 /* RegionAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegionAnnotation.m; sourceTree = "<group>"; };
 		3348558F16F7901F00929946 /* RegionAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionAnnotationView.h; sourceTree = "<group>"; };
 		3348559016F7901F00929946 /* RegionAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegionAnnotationView.m; sourceTree = "<group>"; };
-		3348559316F7904300929946 /* Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Annotation.h; sourceTree = "<group>"; };
-		3348559416F7904300929946 /* Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Annotation.m; sourceTree = "<group>"; };
 		334AC8BC167A967600F077A0 /* AlertMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertMessageView.h; sourceTree = "<group>"; };
 		334AC8BD167A967600F077A0 /* AlertMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertMessageView.m; sourceTree = "<group>"; };
 		334E29FE167103F2005D1E9C /* OpcionesCompartirView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpcionesCompartirView.h; sourceTree = "<group>"; };
@@ -423,8 +420,6 @@
 				3348558E16F7901F00929946 /* RegionAnnotation.m */,
 				3348558F16F7901F00929946 /* RegionAnnotationView.h */,
 				3348559016F7901F00929946 /* RegionAnnotationView.m */,
-				3348559316F7904300929946 /* Annotation.h */,
-				3348559416F7904300929946 /* Annotation.m */,
 				33BCB85E16F929FE00354F2B /* Modelador.h */,
 				33BCB85F16F929FE00354F2B /* Modelador.m */,
 				33F0DBD0170E0B79009581CB /* iRate.h */,
@@ -558,7 +553,6 @@
 				335CA23316EE9F440078D488 /* DetailReporteViewController.m in Sources */,
 				3348559116F7901F00929946 /* RegionAnnotation.m in Sources */,
 				3348559216F7901F00929946 /* RegionAnnotationView.m in Sources */,
-				3348559516F7904300929946 /* Annotation.m in Sources */,
 				3368F00116F911950093C022 /* RegexKitLite.m in Sources */,
 				33BCB86016F929FE00354F2B /* Modelador.m in Sources */,
 				33F0DBD2170E0B79009581CB /* iRate.m in Sources */,

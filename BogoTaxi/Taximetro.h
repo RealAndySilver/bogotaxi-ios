@@ -37,5 +37,4 @@
 -(void)resetToCero;
 +(int)conversorSegundosAUnidades:(int)tiempoquieto :(int)cantidadADividir;
 +(int)conversorMetrosAUnidades:(float)totalMetros paraElTaximetro:(Taximetro*)objeto;
-+(int)unidadesADinero:(int)unidades paraLaCiudad:(NSString*)ciudad;
 @end

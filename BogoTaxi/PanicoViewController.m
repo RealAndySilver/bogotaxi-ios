@@ -82,12 +82,14 @@
     redSocialLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, 70, 24)];
     redSocialLabel.font=[UIFont fontWithName:kFontType size:24];
     redSocialLabel.textColor=kTitleBlueColor;
-    redSocialLabel.overlayLabel.numberOfLines=4;
     if (deviceKind==3) {
         redSocialLabel.center=CGPointMake(250, 650);
     }
+    else if (deviceKind==2){
+        redSocialLabel.center=CGPointMake(195, self.view.frame.size.height-90);
+    }
     else{
-        redSocialLabel.center=CGPointMake(190, self.view.frame.size.height-70);
+        redSocialLabel.center=CGPointMake(195, self.view.frame.size.height-70);
     }
     [redSocialLabel setOverlayOff:YES];
     [self.view addSubview:redSocialLabel];
@@ -197,6 +199,10 @@
         [labelMensaje ponerTexto:@"Si no ingresas ningún mensaje la aplicación pondra por defecto ''Mi ubicación actual es''. Tu mensaje siempre llevará una imagen del mapa con tu ubicación actual para que tus seguidores o a quién decidas enviar el mensaje lo pueda ver." fuente:[UIFont fontWithName:kFontType size:18] color:kTitleBlueColor];
         labelMensaje.center=CGPointMake(self.view.frame.size.width/2, 280);
     }
+    else if (deviceKind==2) {
+        labelMensaje.center=CGPointMake(self.view.frame.size.width/2, 190);
+    }
+
     [labelMensaje setOverlayOff:NO];
     [self.view addSubview:labelMensaje];
     
@@ -208,6 +214,9 @@
     if (deviceKind==3) {
         labelTitulo.center=CGPointMake(self.view.frame.size.width/2, 380);
     }
+    else if (deviceKind==2){
+        labelTitulo.center=CGPointMake(self.view.frame.size.width/2, 260);
+    }
     [labelTitulo setOverlayOff:NO];
     [labelTitulo setCentrado:YES];
     [self.view addSubview:labelTitulo];
@@ -216,6 +225,9 @@
     contentMensajeView.center=CGPointMake(self.view.frame.size.width/2, (self.view.frame.size.height)-163);
     if (deviceKind==3) {
         contentMensajeView.center=CGPointMake(self.view.frame.size.width/2, 500);
+    }
+    else if(deviceKind==2){
+        contentMensajeView.center=CGPointMake(self.view.frame.size.width/2, (self.view.frame.size.height)-203);
     }
     contentMensajeView.backgroundColor=kDarkGrayColor;
     [self.view addSubview:contentMensajeView];
@@ -318,6 +330,9 @@
         labelMensaje2.center=CGPointMake(self.view.frame.size.width/2, 600);
         [labelMensaje2 ponerTexto:@"El servicio que escojas será el utilizado para enviar el mensaje de pánico. El servicio predeterminado es Twitter. Solo podrás elegir uno a la vez." fuente:[UIFont fontWithName:kFontType size:20] color:kTitleBlueColor];
     }
+    else if(deviceKind==2){
+        labelMensaje2.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-120);
+    }
     [labelMensaje2 setOverlayOff:NO];
     [self.view addSubview:labelMensaje2];
     
@@ -329,6 +344,9 @@
     if (deviceKind==3) {
         labelMensajeServicio.center=CGPointMake(self.view.frame.size.width/2, 650);
         [labelMensajeServicio ponerTexto:@"Servicio actual seleccionado:" fuente:[UIFont fontWithName:kFontType size:24] color:kTitleBlueColor];
+    }
+    else if (deviceKind==2){
+        labelMensajeServicio.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-90);
     }
     [labelMensajeServicio setOverlayOff:NO];
     [self.view addSubview:labelMensajeServicio];
@@ -379,23 +397,14 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 -(void)twitterTrigger{
-    /*Modelador *obj=[[Modelador alloc]init];
-    [obj redSocialConNombre:@"Twitter"];
-    redSocialLabel.text=[obj obtenerNombreDeRedSocial];*/
     redSocial=@"Twitter";
     redSocialLabel.text=redSocial;
 }
 -(void)facebookTrigger{
-    /*Modelador *obj=[[Modelador alloc]init];
-    [obj redSocialConNombre:@"Facebook"];
-    redSocialLabel.text=[obj obtenerNombreDeRedSocial];*/
     redSocial=@"Facebook";
     redSocialLabel.text=redSocial;
 }
 -(void)mailTrigger{
-    /*Modelador *obj=[[Modelador alloc]init];
-    [obj redSocialConNombre:@"Mail"];
-    redSocialLabel.text=[obj obtenerNombreDeRedSocial];*/
     redSocial=@"Mail";
     redSocialLabel.text=redSocial;
 
@@ -441,10 +450,6 @@
     }
 }
 -(void)smsTrigger{
-    /*Modelador *obj=[[Modelador alloc]init];
-    [obj redSocialConNombre:@"SMS"];
-    redSocialLabel.text=[obj obtenerNombreDeRedSocial];
-    NSLog(@"Red Social: %@",[obj obtenerNombreDeRedSocial]);*/
     redSocial=@"SMS";
     redSocialLabel.text=redSocial;
     if (!banderaDesplazar) {

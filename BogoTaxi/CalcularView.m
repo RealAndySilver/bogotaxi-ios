@@ -160,11 +160,17 @@
         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
         self.alpha=0;
         [UIView commitAnimations];
+        BOOL off=NO;
+        [nocDomFesSwitch onOff:off];
+        [aeropuertoSwitch onOff:off];
+        [puertaApuertaSwitch onOff:off];
+        [terminalSwitch onOff:off];
     }
 }
 -(void)switchChanged{
-    NSLog(@"Estos son los metros: %f",metros);
-    float temp=[taximetro unidadesADinero:metros];
+    int unidades =[Taximetro conversorMetrosAUnidades:metros paraElTaximetro:taximetro];
+    float temp=[taximetro unidadesADinero:unidades];
+    //float temp=[taximetro unidadesADinero:metros];
     [self agregarOquitarCargos:temp];
 }
 -(void)agregarOquitarCargos:(float)dinero{
@@ -180,6 +186,7 @@
     if (terminalSwitch.isOn) {
         dinero+=taximetro.costoTerm;
     }
+    //float totalDinero=[valueTotalAprox float];
     valueTotalAprox.text=[NSString stringWithFormat:@"$%.0f",dinero];
 }
 

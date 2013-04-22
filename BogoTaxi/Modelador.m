@@ -230,6 +230,16 @@
     
 }
 
+-(NSString*)getUserFirstTime{
+    return [datosConf objectForKey:@"VariableEntrada"];
+}
+-(void)setUserFirstTime:(NSString*)name{
+    NSString* variableEntro = name;
+	NSMutableDictionary *newData = [datosConf mutableCopy];
+	[newData setObject:[NSString stringWithFormat:@"%@",variableEntro] forKey:@"VariableEntrada"];
+	datosConf = newData;
+	[self guardarConf];
+}
 -(NSString*)getNumeroEmergencia{
     return [[datosConf objectForKey:@"NumeroEmergencia"] stringValue];
 }
@@ -301,92 +311,6 @@
 		return NO;
 	}
 }
-
-+(float)medidorDeMetrosRecorridos:(NSMutableArray*)puntos{
-    float suma=0;
-    float value=0;
-    for (int i = 0; i < [puntos count]; i++) {
-        value = [[puntos objectAtIndex: i] floatValue];
-		suma = suma + value;
-	}
-    return suma;    
-}
-+(int)unidadesADinero:(int)unidades paraLaCiudad:(NSString*)ciudad{
-    int unidadesRecibidas=unidades;
-    NSString* nombreCiudad=ciudad;
-    if ([nombreCiudad isEqual:@"Bogota"]||[nombreCiudad isEqual:@"Bogota "]||[nombreCiudad isEqual:@""]) {
-        if (unidadesRecibidas<52) {
-            return 3300;
-        }
-        else{
-            float res1=UNIDADBOGOTA*unidadesRecibidas;
-            float res =100*floor((res1/100)+0.5);
-            int res3=res;
-            return res3;
-        }
-    }
-    else if ([nombreCiudad isEqual:@"Medellin"]) {
-        if (unidadesRecibidas<32) {
-            return 2400;
-        }
-        else{
-            float res1=UNIDADMEDELLIN*unidadesRecibidas;
-            float res =100*floor((res1/100)+0.5);
-            int res3=res;
-            NSLog(@"Unidades Medellin %i", unidadesRecibidas);
-            return res3;
-        }
-    }
-    else
-        return 0;
-    
-}
-+(int)unidadesAPesos:(int)unidades{
-    if (unidades<300) {
-        NSString *varUnidades=[NSString stringWithFormat:@"%i", unidades];
-        NSString *dataPath = [[NSBundle mainBundle] pathForResource:@"UnidadesBogota" ofType:@"plist"];
-        NSArray *data=[[NSArray alloc]init];
-        data=[NSArray arrayWithContentsOfFile:dataPath];
-        NSDictionary *tempData = [data objectAtIndex:0];
-        int res =[[tempData objectForKey:varUnidades]intValue];
-        return res;
-    }
-    else{
-        int res = 20000;
-        return res;
-    }
-}
-
-
-
-/*+(int)conversorMetrosAUnidades:(float)totalMetros paraElTaximetro:(Taximetro*)objeto{
-    int unidades = totalMetros/objeto.metrosParaCambio;
-    return unidades+objeto.unidadesDeArranque;
-}*/
-+(int)unidadesADinero:(int)unidades paraElTaximetro:(Taximetro *)objeto{
-    /*if (unidades<objeto.unidadesCarreraMinima) {
-     return objeto.carreraMinima;
-     }
-     else{*/
-    float res1=objeto.costoUnidad*unidades;
-    float res =100*floor((res1/100)+0.5);
-    int res3=res;
-    return res3;
-    //}
-}
-+(float)unidadesADineroFloat:(int)unidades paraElTaximetro:(Taximetro *)objeto{
-    
-    if (unidades<objeto.unidadesCarreraMinima) {
-        return objeto.carreraMinimaFloat;
-    }
-    else{
-        float res1=objeto.costoUnidadFloat*unidades;
-        return res1;
-    }
-    
-}
-
-
 
 -(int)firstTimeSecond{
 	return [[datosConf objectForKey:@"firstTimeSecond"] intValue];

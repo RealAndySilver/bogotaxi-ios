@@ -31,6 +31,7 @@
 #import "MBProgressHud.h"
 #import "AppDelegate.h"
 #import <Social/Social.h>
+#import "AdvertenciaViewController.h"
 
 
 @interface MainViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UIAccelerometerDelegate>{
@@ -126,6 +127,7 @@
     CLLocation* ptoA;
     CLLocation* ptoB;
     BOOL banderaU;
+    BOOL banderaCalcular;
     double distanciaMetros;
     NSArray* routes;
     UIImageView *routeView;
@@ -158,6 +160,7 @@
     NSMutableArray *arregloDePuntos;
 
     MBProgressHUD *hud;
+    FileSaver *saverObj;
 }
 @property (nonatomic, retain) UIAcceleration *lastAcceleration;
 @property (strong, nonatomic) CLGeocoder *geoCoder;

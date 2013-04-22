@@ -32,7 +32,7 @@
     [super viewDidLoad];
     self.view.backgroundColor=kTitleBlueColor;
         
-    tableViewLlamadas=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.height)-40)];
+    tableViewLlamadas=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.height)-44)];
     tableViewLlamadas.backgroundColor=kTitleBlueColor;
     tableViewLlamadas.separatorStyle=NO;
     tableViewLlamadas.delegate=self;
@@ -43,9 +43,16 @@
     diccionarioDeLlamadas=[LLamadasObject traerDiccionarioConNumerosDeTaxis];
     arrayDeNumeros=[[NSMutableArray alloc]initWithArray:[diccionarioDeLlamadas allKeys]];
     arrayDeNumeros=[arrayDeNumeros sortedArrayUsingSelector:@selector(compare:)];
-    NSLog(@"Diccionario es %@",diccionarioDeLlamadas);
     
-   
+    UIView *barraAbajo=[[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height-44, self.view.frame.size.width, 44)];
+    barraAbajo.backgroundColor=[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1];
+    [self.view addSubview:barraAbajo];
+    UIView *barraAbajoOver1=[[UIView alloc]initWithFrame:CGRectMake(0, 1, barraAbajo.frame.size.width, 43)];
+    barraAbajoOver1.backgroundColor=[UIColor colorWithRed:0.3 green:0.3 blue:0.3 alpha:1];
+    [barraAbajo addSubview:barraAbajoOver1];
+    UIView *barraAbajoOver2=[[UIView alloc]initWithFrame:CGRectMake(0, 2, barraAbajo.frame.size.width, 42)];
+    barraAbajoOver2.backgroundColor=[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1];
+    [barraAbajo addSubview:barraAbajoOver2];
     
     CustomButton *backButton=[[CustomButton alloc]initWithFrame:CGRectMake(5, self.view.frame.size.height-35, 50, 30)];
     backButton.backgroundColor=kYellowColor;
@@ -130,7 +137,7 @@
     
     return headerView;
 }
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+/*-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
     [footerView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7]];
     UILabel *titleFooter=[[UILabel alloc]initWithFrame:CGRectMake(10, 0, 300, 20)];
@@ -145,7 +152,7 @@
     [footerView addSubview:titleFooter];
     
     return footerView;
-}
+}*/
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView.tag==100) {
         NSArray *temp=[temporal allKeys];

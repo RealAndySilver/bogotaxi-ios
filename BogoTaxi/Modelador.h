@@ -66,18 +66,12 @@
 -(void)resetEstadistica;
 
 
-#pragma mark ClassMethods
-+(float)medidorDeMetrosRecorridos:(NSMutableArray*)puntos;
-+(int)conversorMetrosAUnidades:(float)totalMetros paraLaCiudad:(NSString*)ciudad;
-+(int)unidadesADinero:(int)unidades paraLaCiudad:(NSString*)ciudad;
-+(int)unidadesAPesos:(int)unidades;
-
-+(int)unidadesADinero:(int)unidades paraElTaximetro:(Taximetro*)objeto;
-+(float)unidadesADineroFloat:(int)unidades paraElTaximetro:(Taximetro *)objeto;
-
 #pragma mark compras in app
 -(int)getPackPurchaseWithID:(int)ID;
 -(void)setPackPurchaseWithID:(int)ID;
+
+-(void)setUserFirstTime:(NSString*)name;
+-(NSString*)getUserFirstTime;
 
 
 @property (readonly) BOOL onShake;

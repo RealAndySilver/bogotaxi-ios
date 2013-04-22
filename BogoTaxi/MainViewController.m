@@ -42,7 +42,25 @@
 @implementation MainViewController
 @synthesize lastAcceleration, shakeDetected, geoCoder;
 
-#pragma mark - lifecycle
+-(void)viewWillAppear:(BOOL)animated {
+    Modelador *obj=[[Modelador alloc]init];
+    
+    if ([[obj getNumeroEmergencia] length]>2) {
+        [self animarView:buttonCallUser ConOpacidad:1];
+    }
+    else{
+        [self animarView:buttonCallUser ConOpacidad:0];
+    }
+    if (![obj getNumero123]) {
+        [obj setNumero123:1];
+    }
+    else if ([[obj getNumero123] isEqualToString:@"1"]) {
+        [self animarView:buttonEmergencyCall ConOpacidad:1];
+    }
+    else if([[obj getNumero123] isEqualToString:@"0"]){
+        [self animarView:buttonEmergencyCall ConOpacidad:0];
+    }
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -59,13 +77,15 @@
     else if (self.view.frame.size.height>600){
         deviceKind=3;
     }
+    [self performSelector:@selector(callAdvertencia) withObject:nil afterDelay:0.1];
+    
     mainScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 126, self.view.frame.size.width, self.view.frame.size.height-126)];
     mainScrollView.backgroundColor=[UIColor clearColor];
     mainScrollView.contentSize=CGSizeMake(mainScrollView.frame.size.width*3, mainScrollView.frame.size.height);
     [mainScrollView setShowsHorizontalScrollIndicator:NO];
     [mainScrollView setPagingEnabled:YES];
     mainScrollView.delegate=self;
-    [mainScrollView setScrollEnabled:NO];
+    [mainScrollView setScrollEnabled:YES];
     UITapGestureRecognizer *scrollTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     [mainScrollView addGestureRecognizer:scrollTap];
     
@@ -94,6 +114,20 @@
     tiempoQuieto = 0;
     totalQuieto=0;
     estaMoviendose = NO;
+}
+-(void)callAdvertencia{
+    saverObj=[[FileSaver alloc]init];
+    if (![saverObj getUserFirstTime:@"entre"]) {
+        [saverObj  setUserFirstTime:@"entre"];
+        NSLog(@"holaaa %@", [saverObj getUserFirstTime:@"entre"]);
+        AdvertenciaViewController *adVC=[[AdvertenciaViewController alloc]init];
+        adVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Advertencia"];
+        adVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:adVC animated:YES];
+    }
+    else{
+        NSLog(@"Ya existe");
+    }
 }
 -(void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
@@ -279,6 +313,7 @@
     [labelUnidades ponerTexto:@"25" fuente:[UIFont fontWithName:kFontType size:50] color:kDarkRedColor];
     [labelUnidades setOverlayOff:YES];
     [containerUnidades addSubview:labelUnidades];
+    [self startAnimationSequence];
 }
 #pragma mark Acciones botones de llamada
 -(void)userCallTrigger{
@@ -521,7 +556,7 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     containerConfig=[[UIView alloc]initWithFrame:CGRectMake(5, bannerViewPaginaUno.frame.size.height+15,paginaUnoContainer.frame.size.width-10, 165)];
     
     if (deviceKind==2) {
-        containerConfig.frame=CGRectMake(5, bannerViewPaginaUno.frame.size.height, paginaUnoContainer.frame.size.width-10, 160);
+        containerConfig.frame=CGRectMake(5, bannerViewPaginaUno.frame.size.height+40, paginaUnoContainer.frame.size.width-10, 165);
     }
     
     containerConfig.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
@@ -722,6 +757,9 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     if (deviceKind==3) {
         mapaPaginaDos.frame=CGRectMake(5, 120, paginaUnoContainer.frame.size.width-10, 670);
     }
+    else if(deviceKind==2){
+        mapaPaginaDos.frame=CGRectMake(5, bannerPaginaDos.frame.size.height+35, paginaUnoContainer.frame.size.width-10, 280);
+    }
     mapaPaginaDos.delegate=self;
     mapaPaginaDos.layer.cornerRadius=3;
     mapaPaginaDos.tag=1001;
@@ -772,10 +810,12 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     bannerView.center=CGPointMake(self.view.frame.size.width/2, 50);
     [paginaTres addSubview:bannerView];
     
-    containerPlacaPaginaTres=[[UIView alloc]initWithFrame:CGRectMake(5, bannerView.frame.size.height+20,paginaTres.frame.size.width-10, 190)];
-    
+    containerPlacaPaginaTres=[[UIView alloc]init];
     if (deviceKind==2) {
-        containerPlacaPaginaTres.frame=CGRectMake(5, bannerPaginaTres.frame.size.height+45, paginaTres.frame.size.width-10, 190);
+        containerPlacaPaginaTres.frame=CGRectMake(5, bannerView.frame.size.height+25, paginaTres.frame.size.width-10, 190);
+    }
+    else{
+        containerPlacaPaginaTres.frame=CGRectMake(5, bannerView.frame.size.height+20,paginaTres.frame.size.width-10, 190);
     }
     containerPlacaPaginaTres.backgroundColor=[UIColor clearColor];
     [paginaTres addSubview:containerPlacaPaginaTres];
@@ -1062,10 +1102,9 @@ int counter=0;
      else{
      routeView.Hidden=YES;
      }
-    calcular.metros=distanciaMetros/1000;
+    calcular.metros=distanciaMetros;
     int unidades =[Taximetro conversorMetrosAUnidades:distanciaMetros paraElTaximetro:taximetro];
     float temp=[taximetro unidadesADinero:unidades];
-    NSLog(@"Este es el valor %f",temp);
     calcular.valueTotalAprox.text=[NSString stringWithFormat:@"$%.0f",temp];
     calcular.valueRecorrido.text=[NSString stringWithFormat:@"%.2f Km",distanciaMetros/1000];
     [calcular changeState];
@@ -1192,6 +1231,7 @@ int counter=0;
 			UIButton *removeRegionButton = [UIButton buttonWithType:UIButtonTypeCustom];
             removeRegionButton.backgroundColor=kLiteRedColor;
             [removeRegionButton setTitle:@"x" forState:UIControlStateNormal];
+            removeRegionButton.titleLabel.font=[UIFont fontWithName:kFontType size:30];
 			[removeRegionButton setFrame:CGRectMake(0., 0., 25., 25.)];
 			
 			regionView.leftCalloutAccessoryView = removeRegionButton;
@@ -1285,22 +1325,6 @@ int counter=0;
                 [mapaPaginaDos addAnnotation:annotationA];
             }
             [locationManager stopMonitoringForRegion:newRegion];
-            /*//Geocoding Block
-            [geoCoder reverseGeocodeLocation: ptoA completionHandler:^(NSArray *placemarks, NSError *error) {
-                 
-                 //Get nearby address
-                 CLPlacemark *placemark = [placemarks objectAtIndex:0];
-                 
-                 //String to hold address
-                 NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
-                 
-                 //Print the location to console
-                 NSLog(@"I am currently at %@",locatedAt);
-                 
-                 //Set the label text to current location
-                 //[locationLabel setText:locatedAt];
-                 
-             }];*/
         }
     }
     else if (seleccionarAB==2){
@@ -1333,7 +1357,7 @@ int counter=0;
 	NSMutableArray *array = [[NSMutableArray alloc] init];
 	NSInteger lat=0;
 	NSInteger lng=0;
-    banderaU = NO;
+    banderaCalcular = NO;
     distanciaMetros = 0;
 	while (index < len) {
 		NSInteger b;
@@ -1362,7 +1386,7 @@ int counter=0;
         ////////
         locationOne.latitude = loc.coordinate.latitude;
         locationOne.longitude = loc.coordinate.longitude;
-        if (banderaU) {
+        if (banderaCalcular) {
             locationOne.latitude= locationPast.latitude;
             locationOne.longitude= locationPast.longitude;
         }
@@ -1379,7 +1403,7 @@ int counter=0;
         locationPast.longitude=locationTwo.longitude;
         locationOne.latitude=locationPast.latitude;
         locationOne.longitude=locationPast.longitude;
-        banderaU = YES;
+        banderaCalcular = YES;
 		[array addObject:loc];
 	}
 	return array;
@@ -1645,8 +1669,8 @@ int counter=0;
         zoomLocation.latitude = location.coordinate.latitude;
         zoomLocation.longitude = location.coordinate.longitude;
         if (banderaU) {
-            zoomLocation.latitude=zoomLocationPast.latitude;
-            zoomLocation.longitude=zoomLocationPast.longitude;
+            zoomLocation.latitude=oldLocation.coordinate.latitude;
+            zoomLocation.longitude=oldLocation.coordinate.longitude;
         }
         zoomLocation2.latitude = location.coordinate.latitude;
         zoomLocation2.longitude = location.coordinate.longitude;
@@ -1683,6 +1707,7 @@ int counter=0;
     
 
 }
+
 #pragma mark - CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
