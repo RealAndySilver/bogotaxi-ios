@@ -41,6 +41,7 @@
 }*/
 -(void)crearView{
     counter=0;
+    self.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
     animationFinished=NO;
     contentView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width-40, 200)];
     contentView.center=CGPointMake(self.frame.size.width/2, -100);

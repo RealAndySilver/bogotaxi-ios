@@ -81,7 +81,7 @@
     
     mainScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 126, self.view.frame.size.width, self.view.frame.size.height-126)];
     mainScrollView.backgroundColor=[UIColor clearColor];
-    mainScrollView.contentSize=CGSizeMake(mainScrollView.frame.size.width*3, mainScrollView.frame.size.height);
+    mainScrollView.contentSize=CGSizeMake(mainScrollView.frame.size.width*4, mainScrollView.frame.size.height);
     [mainScrollView setShowsHorizontalScrollIndicator:NO];
     [mainScrollView setPagingEnabled:YES];
     mainScrollView.delegate=self;
@@ -94,6 +94,7 @@
     [self crearPaginaDos];
     [self crearViewCalcular];
     [self crearPaginaTres];
+    [self crearPaginaCuatro];
     [self crearInterfazSuperior];
     backgroundColor=self.view.backgroundColor;
     [paginaUnoContainer bringSubviewToFront:containerConfig];
@@ -108,10 +109,9 @@
     banderaSecs=YES;
     unidadesAjuste=0;
     unidadesAjusteTotal=0;
-    //[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / 40)];
-    //[[UIAccelerometer sharedAccelerometer] setDelegate:self];
+    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / 40)];
+    [[UIAccelerometer sharedAccelerometer] setDelegate:self];
     tiempoQuieto=0;
-    tiempoQuieto = 0;
     totalQuieto=0;
     estaMoviendose = NO;
 }
@@ -290,7 +290,7 @@
     UIButton *botonMenos=[UIButton buttonWithType:UIButtonTypeCustom];
     botonMenos.frame=CGRectMake(0, 0, (containerBotonesUnidades.frame.size.width/2)-0.5, containerBotonesUnidades.frame.size.height);
     [botonMenos setTitle:@"-" forState:UIControlStateNormal];
-    botonMenos.titleLabel.font=[UIFont  boldSystemFontOfSize:15];
+    botonMenos.titleLabel.font=[UIFont  boldSystemFontOfSize:22];
     botonMenos.tag=3000;
     botonMenos.backgroundColor=kDarkGrayColor;
     [botonMenos addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -299,7 +299,7 @@
     UIButton *botonMas=[UIButton buttonWithType:UIButtonTypeCustom];
     botonMas.frame=CGRectMake((containerBotonesUnidades.frame.size.width/2)+0.5, 0, (containerBotonesUnidades.frame.size.width/2)-0.5, containerBotonesUnidades.frame.size.height);
     [botonMas setTitle:@"+" forState:UIControlStateNormal];
-    botonMas.titleLabel.font=[UIFont  boldSystemFontOfSize:15];
+    botonMas.titleLabel.font=[UIFont  boldSystemFontOfSize:22];
     botonMas.tag=3001;
     botonMas.backgroundColor=kDarkGrayColor;
     [botonMas addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -458,11 +458,12 @@
 }
 #pragma mark método de movimiento
 -(void) empezoAMoverse {
-    
+    NSLog(@"empezoAMoverse");
 }
 -(void) dejarDeMoverse {    
     tiempoQuieto = 0;
     estaMoviendose = NO;
+    NSLog(@"dejarDeMoverse");
     
 }
 #pragma mark método de aceleración
@@ -881,6 +882,42 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     }
    
 }
+#pragma mark - pagina cuatro
+-(void)crearPaginaCuatro{
+    paginaCuatro=[[UIView alloc]initWithFrame:CGRectMake(mainScrollView.frame.size.width*3, 0, mainScrollView.frame.size.width, mainScrollView.frame.size.height)];
+    paginaCuatro.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
+    [mainScrollView addSubview:paginaCuatro];
+    
+    BannerView *bannerViewPaginaCuatro=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, mainScrollView.frame.size.width-10, 0)];
+    [bannerViewPaginaCuatro ponerTexto:@"SÍGUENOS"];
+    bannerViewPaginaCuatro.configBannerLabel.textColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
+    [bannerViewPaginaCuatro.configBannerLabel setOverlayOff:NO];
+    [bannerViewPaginaCuatro setBannerColor:kYellowColor];
+    bannerViewPaginaCuatro.center=CGPointMake(self.view.frame.size.width/2, 50);
+    [paginaCuatro addSubview:bannerViewPaginaCuatro];
+    
+    UIView *viewContentSiguenos=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-10, 45)];
+    if (deviceKind==3) {
+        viewContentSiguenos.center=CGPointMake(self.view.frame.size.width/2, 480);
+    }
+    else{
+        viewContentSiguenos.center=CGPointMake(self.view.frame.size.width/2, 200);
+    }
+    viewContentSiguenos.backgroundColor=kGrayColor;
+    [paginaCuatro addSubview:viewContentSiguenos];
+    
+    UILabel *labelSiguenos=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 155, 30)];
+    labelSiguenos.center=CGPointMake((viewContentSiguenos.frame.size.width/4)+10, viewContentSiguenos.frame.size.height/2);
+    labelSiguenos.font=[UIFont fontWithName:kFontType size:28];
+    labelSiguenos.backgroundColor=[UIColor clearColor];
+    labelSiguenos.textColor=kWhiteColor;
+    labelSiguenos.text=@"Síguenos en twitter";
+    [viewContentSiguenos addSubview:labelSiguenos];
+    
+    
+    FollowMeButton *buttonTwitter=[[FollowMeButton alloc]initWithTwitterAccount:@"@BogoTaxiReporta" atOrigin:CGPointMake((viewContentSiguenos.frame.size.width/2)+(viewContentSiguenos.frame.size.width/5), 7) isSmallButton:NO];
+    [viewContentSiguenos addSubview:buttonTwitter];
+}
 #pragma mark - animaciones
 -(void)animacionNoche:(CustomSwitch*)switch1{
     NSLog(@"entree a la animación");
@@ -1094,21 +1131,30 @@ int counter=0;
 #pragma mark Calcular
 -(void)callCalcular{
     //double distanciaPreliminar;
-    CLLocationDistance distanciaPreliminar=[ptoA distanceFromLocation:ptoB];
-    routes =[self calculateRoutesFrom:ptoA.coordinate to:ptoB.coordinate];
-    if (distanciaPreliminar<120000) {
-        [self updateRouteView];
-     }
-     else{
-     routeView.Hidden=YES;
-     }
-    calcular.metros=distanciaMetros;
-    int unidades =[Taximetro conversorMetrosAUnidades:distanciaMetros paraElTaximetro:taximetro];
-    float temp=[taximetro unidadesADinero:unidades];
-    calcular.valueTotalAprox.text=[NSString stringWithFormat:@"$%.0f",temp];
-    calcular.valueRecorrido.text=[NSString stringWithFormat:@"%.2f Km",distanciaMetros/1000];
-    [calcular changeState];
-    [self.view bringSubviewToFront:calcular];
+    if (ptoA && ptoB) {
+        CLLocationDistance distanciaPreliminar=[ptoA distanceFromLocation:ptoB];
+        routes =[self calculateRoutesFrom:ptoA.coordinate to:ptoB.coordinate];
+        if (distanciaPreliminar<120000) {
+            [self updateRouteView];
+        }
+        else{
+            routeView.Hidden=YES;
+        }
+        calcular.metros=distanciaMetros;
+        int unidades =[Taximetro conversorMetrosAUnidades:distanciaMetros paraElTaximetro:taximetro];
+        float temp=[taximetro unidadesADinero:unidades];
+        calcular.valueTotalAprox.text=[NSString stringWithFormat:@"$%.0f",temp];
+        calcular.valueRecorrido.text=[NSString stringWithFormat:@"%.2f Km",distanciaMetros/1000];
+        [calcular changeState];
+        [self.view bringSubviewToFront:calcular];
+    }
+    else{
+        [alertMessage changeState];
+        [self.view bringSubviewToFront:alertMessage];
+        [alertMessage.labelMensaje ponerTexto:@"Por favor selecciona un punto de Salida y un punto de Destino en el mapa." fuente:[UIFont fontWithName:kFontType size:32] color:kWhiteColor];
+
+    }
+    
 }
 
 #pragma mark Alert

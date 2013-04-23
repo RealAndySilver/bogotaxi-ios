@@ -46,6 +46,11 @@
 		335CA23516EE9FDD0078D488 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335CA23416EE9FDD0078D488 /* CoreTelephony.framework */; };
 		3368F00116F911950093C022 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 3368F00016F911950093C022 /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3368F00716F912480093C022 /* libicucore.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3368F00616F912480093C022 /* libicucore.A.dylib */; };
+		336EB07F1727281100855E25 /* follow-me-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 336EB0791727281000855E25 /* follow-me-small.png */; };
+		336EB0801727281100855E25 /* follow-me-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 336EB07A1727281000855E25 /* follow-me-small@2x.png */; };
+		336EB0811727281100855E25 /* follow-me.png in Resources */ = {isa = PBXBuildFile; fileRef = 336EB07B1727281100855E25 /* follow-me.png */; };
+		336EB0821727281100855E25 /* follow-me@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 336EB07C1727281100855E25 /* follow-me@2x.png */; };
+		336EB0831727281100855E25 /* FollowMeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 336EB07E1727281100855E25 /* FollowMeButton.m */; };
 		3385C6911721F5FB0061F414 /* buttonTwitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3385C6901721F5FB0061F414 /* buttonTwitter.png */; };
 		3385C6931721F8CC0061F414 /* buttonFB.png in Resources */ = {isa = PBXBuildFile; fileRef = 3385C6921721F8CC0061F414 /* buttonFB.png */; };
 		3385C6971721FB470061F414 /* buttonMail.png in Resources */ = {isa = PBXBuildFile; fileRef = 3385C6961721FB470061F414 /* buttonMail.png */; };
@@ -161,6 +166,12 @@
 		3368EFFF16F911950093C022 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		3368F00016F911950093C022 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		3368F00616F912480093C022 /* libicucore.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.A.dylib; path = usr/lib/libicucore.A.dylib; sourceTree = SDKROOT; };
+		336EB0791727281000855E25 /* follow-me-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "follow-me-small.png"; sourceTree = "<group>"; };
+		336EB07A1727281000855E25 /* follow-me-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "follow-me-small@2x.png"; sourceTree = "<group>"; };
+		336EB07B1727281100855E25 /* follow-me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "follow-me.png"; sourceTree = "<group>"; };
+		336EB07C1727281100855E25 /* follow-me@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "follow-me@2x.png"; sourceTree = "<group>"; };
+		336EB07D1727281100855E25 /* FollowMeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowMeButton.h; sourceTree = "<group>"; };
+		336EB07E1727281100855E25 /* FollowMeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowMeButton.m; sourceTree = "<group>"; };
 		3385C6901721F5FB0061F414 /* buttonTwitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonTwitter.png; sourceTree = "<group>"; };
 		3385C6921721F8CC0061F414 /* buttonFB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonFB.png; sourceTree = "<group>"; };
 		3385C6961721FB470061F414 /* buttonMail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonMail.png; sourceTree = "<group>"; };
@@ -426,6 +437,12 @@
 				33F0DBD1170E0B79009581CB /* iRate.m */,
 				33F0DBD5170E3001009581CB /* FileSaver.h */,
 				33F0DBD6170E3001009581CB /* FileSaver.m */,
+				336EB0791727281000855E25 /* follow-me-small.png */,
+				336EB07A1727281000855E25 /* follow-me-small@2x.png */,
+				336EB07B1727281100855E25 /* follow-me.png */,
+				336EB07C1727281100855E25 /* follow-me@2x.png */,
+				336EB07D1727281100855E25 /* FollowMeButton.h */,
+				336EB07E1727281100855E25 /* FollowMeButton.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -503,6 +520,10 @@
 				3385C6931721F8CC0061F414 /* buttonFB.png in Resources */,
 				3385C6971721FB470061F414 /* buttonMail.png in Resources */,
 				3385C6991721FD8F0061F414 /* buttonSMS.png in Resources */,
+				336EB07F1727281100855E25 /* follow-me-small.png in Resources */,
+				336EB0801727281100855E25 /* follow-me-small@2x.png in Resources */,
+				336EB0811727281100855E25 /* follow-me.png in Resources */,
+				336EB0821727281100855E25 /* follow-me@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +579,7 @@
 				33F0DBD2170E0B79009581CB /* iRate.m in Sources */,
 				33F0DBD7170E3001009581CB /* FileSaver.m in Sources */,
 				33C430B81714A1CF006749C0 /* LlamadaDeEmergenciaViewController.m in Sources */,
+				336EB0831727281100855E25 /* FollowMeButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

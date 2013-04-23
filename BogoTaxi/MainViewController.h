@@ -32,6 +32,7 @@
 #import "AppDelegate.h"
 #import <Social/Social.h>
 #import "AdvertenciaViewController.h"
+#import "FollowMeButton.h"
 
 
 @interface MainViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UIAccelerometerDelegate>{
@@ -120,8 +121,8 @@
     CLLocationCoordinate2D locationOne;
     CLLocationCoordinate2D locationTwo;
     CLLocationCoordinate2D locationPast;
-    RegionAnnotation *annotationA;
-    RegionAnnotation *annotationB;
+    __strong RegionAnnotation *annotationA;
+    __strong RegionAnnotation *annotationB;
     int seleccion;
     int seleccionarAB;
     CLLocation* ptoA;
@@ -145,6 +146,9 @@
     UILabel *footer;
     
     BOOL tecladoUp;
+    
+    //Pagina cuatro
+    UIView *paginaCuatro;
     
     //Timer
     NSTimer *vTimer;

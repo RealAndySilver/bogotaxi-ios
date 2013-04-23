@@ -112,6 +112,10 @@
     [alert crearView];
     [self.view addSubview:alert];
     
+    alertReporta=[[AlertView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [alertReporta crearView];
+    [self.view addSubview:alertReporta];
+    
     [self animarCentroView:contentViewReporta ConCentro:CGPointMake(self.view.frame.size.width/2, 150)];
     if (deviceKind==3) {
         [self animarCentroView:containerTipo ConCentro:CGPointMake(self.view.frame.size.width/2, 390)];
@@ -1002,7 +1006,11 @@
     [self animarView:contentViewInformacion ConOpacidad:1];
 }
 -(void)reportar: (UIButton*) sender{
-    ServerCommunicator *server=[[ServerCommunicator alloc]init];
+    [alertReporta changeState];
+    [self.view bringSubviewToFront:alertReporta];
+    //[alertReporta.buttonCancelar removeTarget:self action:@selector(backScrollContent) forControlEvents:UIControlEventTouchUpInside];
+    [alertReporta.labelMensaje ponerTexto:@"Estas seguro que deseas enviar este reporte?" fuente:[UIFont fontWithName:kFontType size:32] color:kWhiteColor];
+   /* ServerCommunicator *server=[[ServerCommunicator alloc]init];
     server.caller=self;
     server.methodName=@"Reportar";
     NSString *parameters=[NSString stringWithFormat:@"placa=%@&tipo=%@&comentarios=%@&usuario=%@&token=%@&secret=%@&peticion=%@",textFieldPlacaReportar.text,tipoReporte,textViewComentarioReportar.text,[DeviceInfo getMacAddress],[DeviceInfo getDeviceName], [DeviceInfo getModel],@"iOS"];
@@ -1018,7 +1026,7 @@
     [self animarCentroView:viewReporteWrapper ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+200)];
     mensajeReporte.text=@"Tu reporte se ha ingresado correctamente.";
     [self animarCentroView:mensajeReporte ConCentro:CGPointMake(self.view.frame.size.width/2, 280)];
-    [self animarCentroView:buttonVerMasReportes ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-80)];
+    [self animarCentroView:buttonVerMasReportes ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-80)];*/
 }
 -(void)reporteMalo: (UIButton*) sender{
     tipoReporte=@"negativo";
@@ -1204,5 +1212,12 @@
     return YES;
 }
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSLog(@"Content offset %.0f",scrollView.contentOffset.x);
+    if (scrollView.contentOffset.x<=-50) {
+        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
 
 @end

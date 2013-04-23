@@ -50,14 +50,15 @@
 #import <MapKit/MapKit.h>
 
 @interface RegionAnnotation : NSObject<MKAnnotation> {
-    NSString *locatedAt;
-    
+    //NSString *locatedAt;
 }
 
 @property (nonatomic, retain) CLRegion *region;
 @property (nonatomic, readwrite) CLLocationCoordinate2D coordinate;
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *subtitle;
+@property (nonatomic, retain) __block NSString *locatedAt;
+@property(nonatomic)BOOL finishedTouching;
 
 - (id)initWithCLRegion:(CLRegion *)newRegion;
 

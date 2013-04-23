@@ -21,12 +21,13 @@
 #import "MBProgressHud.h"
 #import "DeviceInfo.h"
 #import "ViewInformacion.h"
-//#import "AlertView.h"
+#import "AlertView.h"
 #import "AlertMessageView.h"
 
 @interface ConsultarPlacaViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource,UIGestureRecognizerDelegate, UITextViewDelegate>{
     
     AlertMessageView *alert;
+    AlertView *alertReporta;
     
     UIScrollView *scrollViewContent;
     

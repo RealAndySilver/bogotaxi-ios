@@ -49,12 +49,13 @@
 
 @implementation RegionAnnotation
 
-@synthesize region, coordinate, title, subtitle;
+@synthesize region, coordinate, title, subtitle,locatedAt;
 
 - (id)init {
 	self = [super init];
 	if (self != nil) {
 		self.title = @"Monitored Region";
+        _finishedTouching=NO;
 	}
 	
 	return self;
@@ -76,20 +77,37 @@
 - (NSString *)subtitle {
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+    if (!_finishedTouching) {
+        _finishedTouching=YES;
+    __block int ii=0;
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
         NSLog(@"reverseGeocodeLocation:completionHandler: Completion Handler called!");
         if (error){
             NSLog(@"Geocode failed with error: %@", error);
+            ii=1;
+            locatedAt=@"";
             return;
         }
+        else{
         CLPlacemark *placemark = [placemarks objectAtIndex:0];
         locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
         //Print the location to console
         NSLog(@"I am currently at %@",locatedAt);
-    }];
+            ii=1;
+        //NSLog(@"Lat: %.4F, Lon: %.4F",coordinate.latitude, coordinate.longitude);
+        }
+        
+    }] ;
     
-	//return [NSString stringWithFormat: @"Lat: %.4F, Lon: %.4F", coordinate.latitude, coordinate.longitude];
-    return locatedAt;
-
+    while (ii==0) {
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
+    }
+    NSLog(@"Block finished");
+        _finishedTouching=NO;
+        return locatedAt;
+    }
+    else{
+        return @"";
+    }
 }
  @end
