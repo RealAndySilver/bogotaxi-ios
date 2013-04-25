@@ -93,6 +93,7 @@
 		75E4F37B16697D7C007BE4C5 /* TelefonosTaxis.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75E4F37A16697D7C007BE4C5 /* TelefonosTaxis.plist */; };
 		75E4F37F1669819E007BE4C5 /* LLamadasObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E4F37E1669819E007BE4C5 /* LLamadasObject.m */; };
 		810645D6171F56A500B1F6E6 /* iconiPhone@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 810645D5171F56A500B1F6E6 /* iconiPhone@x2.png */; };
+		81F6B6DD1728E4DC00150D51 /* AlertViewReporta.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F6B6DC1728E4DC00150D51 /* AlertViewReporta.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -231,6 +232,8 @@
 		75E4F37D1669819E007BE4C5 /* LLamadasObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLamadasObject.h; sourceTree = "<group>"; };
 		75E4F37E1669819E007BE4C5 /* LLamadasObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLamadasObject.m; sourceTree = "<group>"; };
 		810645D5171F56A500B1F6E6 /* iconiPhone@x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconiPhone@x2.png"; sourceTree = "<group>"; };
+		81F6B6DB1728E4DC00150D51 /* AlertViewReporta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViewReporta.h; sourceTree = "<group>"; };
+		81F6B6DC1728E4DC00150D51 /* AlertViewReporta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViewReporta.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -404,6 +407,8 @@
 				334E2A03167141AF005D1E9C /* OpcionesContactoView.m */,
 				334E2A0516714B5D005D1E9C /* AlertView.h */,
 				334E2A0616714B5D005D1E9C /* AlertView.m */,
+				81F6B6DB1728E4DC00150D51 /* AlertViewReporta.h */,
+				81F6B6DC1728E4DC00150D51 /* AlertViewReporta.m */,
 				334AC8BC167A967600F077A0 /* AlertMessageView.h */,
 				334AC8BD167A967600F077A0 /* AlertMessageView.m */,
 				3368EFFF16F911950093C022 /* RegexKitLite.h */,
@@ -580,6 +585,7 @@
 				33F0DBD7170E3001009581CB /* FileSaver.m in Sources */,
 				33C430B81714A1CF006749C0 /* LlamadaDeEmergenciaViewController.m in Sources */,
 				336EB0831727281100855E25 /* FollowMeButton.m in Sources */,
+				81F6B6DD1728E4DC00150D51 /* AlertViewReporta.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

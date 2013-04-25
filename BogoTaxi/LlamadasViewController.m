@@ -45,13 +45,13 @@
     arrayDeNumeros=[arrayDeNumeros sortedArrayUsingSelector:@selector(compare:)];
     
     UIView *barraAbajo=[[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height-44, self.view.frame.size.width, 44)];
-    barraAbajo.backgroundColor=[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1];
+    barraAbajo.backgroundColor=[UIColor colorWithRed:0.0484375 green:0.3765625 blue:0.4390625 alpha:1];
     [self.view addSubview:barraAbajo];
     UIView *barraAbajoOver1=[[UIView alloc]initWithFrame:CGRectMake(0, 1, barraAbajo.frame.size.width, 43)];
-    barraAbajoOver1.backgroundColor=[UIColor colorWithRed:0.3 green:0.3 blue:0.3 alpha:1];
+    barraAbajoOver1.backgroundColor=[UIColor colorWithRed:0.2484375 green:0.5765625 blue:0.6390625 alpha:1];
     [barraAbajo addSubview:barraAbajoOver1];
     UIView *barraAbajoOver2=[[UIView alloc]initWithFrame:CGRectMake(0, 2, barraAbajo.frame.size.width, 42)];
-    barraAbajoOver2.backgroundColor=[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1];
+    barraAbajoOver2.backgroundColor=[UIColor colorWithRed:0.1484375 green:0.4765625 blue:0.5390625 alpha:1];
     [barraAbajo addSubview:barraAbajoOver2];
     
     CustomButton *backButton=[[CustomButton alloc]initWithFrame:CGRectMake(5, self.view.frame.size.height-35, 50, 30)];

@@ -112,7 +112,7 @@
     [alert crearView];
     [self.view addSubview:alert];
     
-    alertReporta=[[AlertView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    alertReporta=[[AlertViewReporta alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [alertReporta crearView];
     [self.view addSubview:alertReporta];
     
@@ -909,12 +909,10 @@
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [alert changeState];
     [self.view bringSubviewToFront:alert];
-    //[alert.buttonCancelar removeTarget:self action:@selector(backScrollContent) forControlEvents:UIControlEventTouchUpInside];
     [alert.labelMensaje ponerTexto:@"No tienes conexion a internet, por favor conectate a una red" fuente:[UIFont fontWithName:kFontType size:32] color:kWhiteColor];
-    //[alert.buttonOK addTarget:self action:@selector(backScrollContent) forControlEvents:UIControlEventTouchUpInside];
 }
 -(void)backScrollContent{
-    [alert changeState];
+    [alertReporta changeState];
 }
 #pragma mark - Animaciones
 -(void)animarView:(UIView*)view ConPosicion:(CGRect)posicion{
@@ -1008,25 +1006,29 @@
 -(void)reportar: (UIButton*) sender{
     [alertReporta changeState];
     [self.view bringSubviewToFront:alertReporta];
-    //[alertReporta.buttonCancelar removeTarget:self action:@selector(backScrollContent) forControlEvents:UIControlEventTouchUpInside];
-    [alertReporta.labelMensaje ponerTexto:@"Estas seguro que deseas enviar este reporte?" fuente:[UIFont fontWithName:kFontType size:32] color:kWhiteColor];
-   /* ServerCommunicator *server=[[ServerCommunicator alloc]init];
-    server.caller=self;
-    server.methodName=@"Reportar";
-    NSString *parameters=[NSString stringWithFormat:@"placa=%@&tipo=%@&comentarios=%@&usuario=%@&token=%@&secret=%@&peticion=%@",textFieldPlacaReportar.text,tipoReporte,textViewComentarioReportar.text,[DeviceInfo getMacAddress],[DeviceInfo getDeviceName], [DeviceInfo getModel],@"iOS"];
-    [server callServerWithMethod:server.methodName andParameter:parameters];
-    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Creando Reporte";
-    
-    [self animarCentroView:mensajeReporte2 ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+100)];
-    [self animarCentroView:containerTipo ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+82)];
-    [self animarView:labelPositivo ConPosicion:CGRectMake(self.view.frame.size.width-105, 0, 0, 35)];
-    [self animarView:labelNegativo ConPosicion:CGRectMake(5, 0, 0, 35)];
-    [self animarCentroView:viewLabelsReportes ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+35)];
-    [self animarCentroView:viewReporteWrapper ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+200)];
-    mensajeReporte.text=@"Tu reporte se ha ingresado correctamente.";
-    [self animarCentroView:mensajeReporte ConCentro:CGPointMake(self.view.frame.size.width/2, 280)];
-    [self animarCentroView:buttonVerMasReportes ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-80)];*/
+    [alertReporta.buttonNo addTarget:self action:@selector(backScrollContent) forControlEvents:UIControlEventTouchUpInside];
+    [alertReporta.buttonSi addTarget:self action:@selector(siReporta) forControlEvents:UIControlEventTouchUpInside];
+    [alertReporta.labelMensaje ponerTexto:@"¿Estas seguro que deseas enviar este reporte?" fuente:[UIFont fontWithName:kFontType size:32] color:kWhiteColor];
+}
+-(void)siReporta{
+    [alertReporta changeState];
+     ServerCommunicator *server=[[ServerCommunicator alloc]init];
+     server.caller=self;
+     server.methodName=@"Reportar";
+     NSString *parameters=[NSString stringWithFormat:@"placa=%@&tipo=%@&comentarios=%@&usuario=%@&token=%@&secret=%@&peticion=%@",textFieldPlacaReportar.text,tipoReporte,textViewComentarioReportar.text,[DeviceInfo getMacAddress],[DeviceInfo getDeviceName], [DeviceInfo getModel],@"iOS"];
+     [server callServerWithMethod:server.methodName andParameter:parameters];
+     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+     hud.labelText = @"Creando Reporte";
+     
+     [self animarCentroView:mensajeReporte2 ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+100)];
+     [self animarCentroView:containerTipo ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+82)];
+     [self animarView:labelPositivo ConPosicion:CGRectMake(self.view.frame.size.width-105, 0, 0, 35)];
+     [self animarView:labelNegativo ConPosicion:CGRectMake(5, 0, 0, 35)];
+     [self animarCentroView:viewLabelsReportes ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+35)];
+     [self animarCentroView:viewReporteWrapper ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+200)];
+     mensajeReporte.text=@"Tu reporte se ha ingresado correctamente.";
+     [self animarCentroView:mensajeReporte ConCentro:CGPointMake(self.view.frame.size.width/2, 280)];
+     [self animarCentroView:buttonVerMasReportes ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-80)];
 }
 -(void)reporteMalo: (UIButton*) sender{
     tipoReporte=@"negativo";
