@@ -23,7 +23,9 @@
 -(void)callServerWithMethod:(NSString*)method
                andParameter:(NSString*)parameter{
     parameter=[parameter stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://bogo-taxi.com/service?event=%@&%@",method,parameter]];
+    NSString *dateUTC=[self dateString];
+    NSString *hash=[IAmCoder hash256:dateUTC];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://bogo-taxi.com/service?event=%@&%@&time=%@&hash=%@&os=ios",method,parameter,dateUTC,hash]];
     methodName=method;
     NSLog(@"url %@",url);
 	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url];
@@ -64,9 +66,27 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
     resDic=[NSJSONSerialization JSONObjectWithData:webData options:0 error:nil];
     NSLog(@"Todos los datos recibidos %@",resDic);
+    NSString *str=[[NSString alloc]initWithData:webData encoding:NSUTF8StringEncoding];
+    NSLog(@"PlainString %@",str);
+
     if ([caller respondsToSelector:@selector(receivedDataFromServer:)]) {
         [caller performSelector:@selector(receivedDataFromServer:) withObject:self];
     }
+}
+-(NSString*)dateString{
+    
+    NSDateFormatter *formatter=[[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyyMMdd-HHmmss"];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    [formatter setTimeZone:timeZone];
+    NSDate *now = [[NSDate alloc] init];
+    NSString *date=[formatter stringFromDate:now];
+    NSDate *date2=[formatter dateFromString:date];
+    NSTimeInterval seconds = [date2 timeIntervalSince1970];
+    NSString *date3=[NSString stringWithFormat:@"%.0f",seconds];
+    NSLog(@"segundos entre fechas %@",date3);
+    return date3;
+    
 }
 
 @end

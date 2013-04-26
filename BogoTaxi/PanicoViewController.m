@@ -118,7 +118,6 @@
     [self.view addSubview:bannerView];
     objeto=[[Modelador alloc]init];
     redSocial=[objeto obtenerNombreDeRedSocial];
-    
     [self crearContainer];
     
 }
@@ -148,7 +147,6 @@
     textFieldUbicacion.returnKeyType = UIReturnKeyDone;
     textFieldUbicacion.clearButtonMode = UITextFieldViewModeWhileEditing;
     [textFieldUbicacion addTarget:self action:@selector(actualizarMensaje) forControlEvents:UIControlEventEditingChanged];
-    //[textFieldUbicacion addTarget:self action:@selector(enviarMensaje) forControlEvents:UIControlEventEditingDidEndOnExit];
     [self.view addSubview:textFieldUbicacion];
     textFieldUbicacion.delegate = self;
     textFieldUbicacion.tag=3000;
@@ -156,7 +154,7 @@
     NSString *mensajePanico;
     NSString *numeroSMS;
     NSString *correo;
-    
+    NSLog(@"objeto get numero SMS %@",[obj getNumeroSMS]);
     if ([[obj obtenerMensajeDePanico] isEqualToString:@" "]||[[obj obtenerMensajeDePanico] isEqualToString:@""]||[obj obtenerMensajeDePanico]==nil) {
         mensajePanico=@"Mi Ubicación actual es ";
     }
@@ -169,6 +167,7 @@
         
     }
     else{
+        NSLog(@"nomeroo SMS string %@",numeroSMS);
         numeroSMS=[obj getNumeroSMS];
         tf.text=numeroSMS;
     }
@@ -389,9 +388,20 @@
       objectAtIndex:3] setBadgeValue:nil];
     [self.navigationController popViewControllerAnimated:YES];
     NSString *numeroString=tf.text;
+    NSLog(@"tf numeroo %@", numeroString);
     NSString *correo=tfMail.text;
-    double numeroDouble = [numeroString doubleValue];
-    [msj setNumeroSMS:numeroDouble];
+    
+    double numeroDouble = [tf.text doubleValue];
+    if ([tf.text length]>2) {
+        [msj setNumeroSMS:numeroDouble];
+        NSLog(@"getNumeroSMS %@", [msj getNumeroSMS]);
+    }
+    else if ([tf.text isEqualToString:@""]) {
+        [msj setNumeroSMS:0];
+    }
+    //double numeroDouble = [numeroString doubleValue];
+    //[msj setNumeroSMS:numeroDouble];
+    
     [msj setMail:correo];
     [objeto redSocialConNombre:redSocial];
     [self dismissModalViewControllerAnimated:YES];

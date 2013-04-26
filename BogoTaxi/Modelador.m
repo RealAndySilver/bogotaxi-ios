@@ -105,16 +105,6 @@
 	datosConf = newData;
 	[self guardarConf];  
 }
--(NSString*)getNumeroSMS{
-    return [[datosConf objectForKey:@"NumeroSMS"] stringValue];
-}
--(void)setNumeroSMS:(double)numero{
-    double number = numero;
-	NSMutableDictionary *newData = [datosConf mutableCopy];
-	[newData setObject:[NSNumber numberWithDouble:number] forKey:@"NumeroSMS"];
-	datosConf = newData;
-	[self guardarConf];
-}
 -(NSString*)getMail{
     return [datosConf objectForKey:@"Correo"];
 }
@@ -246,6 +236,15 @@
 -(void)setNumeroEmergencia:(double)numero{
 	NSMutableDictionary *newData = [datosConf mutableCopy];
 	[newData setObject:[NSNumber numberWithDouble:numero] forKey:@"NumeroEmergencia"];
+	datosConf = newData;
+	[self guardarConf];
+}
+-(NSString*)getNumeroSMS{
+    return [[datosConf objectForKey:@"NumeroSMS"] stringValue];
+}
+-(void)setNumeroSMS:(double)numero{
+	NSMutableDictionary *newData = [datosConf mutableCopy];
+	[newData setObject:[NSNumber numberWithDouble:numero] forKey:@"NumeroSMS"];
 	datosConf = newData;
 	[self guardarConf];
 }

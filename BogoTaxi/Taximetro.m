@@ -14,8 +14,24 @@
 #define UNIDADMEDELLIN 77
 
 @implementation Taximetro
-@synthesize costoUnidad,unidadesCarreraMinima,costoAero,costoNoc,costoPuerta,costoTerm,segundosDeEspera,unidadesDeArranque,metrosParaCambio, medicionEnPrecio,costoArranque,costoUnidadFloat,carreraMinimaFloat,aeropuertoAnula, numeroDeEmergenciasLocal;
+@synthesize costoUnidad,unidadesCarreraMinima,costoAero,costoNoc,costoPuerta,costoTerm,segundosDeEspera,unidadesDeArranque,metrosParaCambio, medicionEnPrecio,costoArranque,costoUnidadFloat,carreraMinimaFloat, numeroDeEmergenciasLocal;
 
+
+-(id)leerTaxistaConDiccionario:(NSDictionary*)diccionario{
+    costoUnidad=[[diccionario objectForKey:@"CostoUnidad"]floatValue];
+    unidadesCarreraMinima=[[diccionario objectForKey:@"UnidadesCarreraMinima"]floatValue];
+    unidadesDeArranque=[[diccionario objectForKey:@"UnidadesDeArranque"]floatValue];
+    costoAero=[[diccionario objectForKey:@"CostoAero"]floatValue];
+    costoNoc=[[diccionario objectForKey:@"CostoNoc"]floatValue];
+    costoTerm=[[diccionario objectForKey:@"CostoTerm"]floatValue];
+    costoPuerta=[[diccionario objectForKey:@"CostoPuerta"]floatValue];
+    segundosDeEspera=[[diccionario objectForKey:@"SegundosDeEspera"]floatValue];
+    metrosParaCambio=[[diccionario objectForKey:@"MetrosParaCambio"]floatValue];
+    costoUnidad=[[diccionario objectForKey:@"CostoUnidad"]floatValue];
+    carreraMinimaFloat=[[diccionario objectForKey:@"CarreraMinima"]floatValue];
+    numeroDeEmergenciasLocal=[[diccionario objectForKey:@"NumeroDeEmergenciasLocal"]floatValue];
+    return self;
+}
 -(float)unidadesADinero:(int)unidades{
     if (unidades<unidadesCarreraMinima) {
         float res1=self.costoUnidad*unidadesCarreraMinima;
@@ -45,7 +61,7 @@
         metrosParaCambio=100;
         costoUnidad=70;
         carreraMinimaFloat=3500;
-        aeropuertoAnula=NO;
+
         medicionEnPrecio=NO;
         numeroDeEmergenciasLocal=123;
     }
@@ -58,7 +74,6 @@
     costoUnidadFloat=0;
     carreraMinimaFloat=0;
     segundosDeEspera=0;
-    aeropuertoAnula=0;
     medicionEnPrecio=0;
     costoAero=0;
     costoNoc=0;
@@ -66,7 +81,6 @@
     costoPuerta=0;
     
     medicionEnPrecio=NO;
-    aeropuertoAnula=NO;
     //decimales=NO;
 }
 +(float)medidorDeMetrosRecorridos:(NSMutableArray*)puntos{

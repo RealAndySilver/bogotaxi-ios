@@ -54,6 +54,7 @@
     recognizer.delegate=self;
     [self.view setUserInteractionEnabled:YES];
     [self.view addGestureRecognizer:recognizer];
+    hud=[[MBProgressHUD alloc]init];
     
     [DeviceInfo getDeviceName];
     [DeviceInfo getModel];
@@ -741,6 +742,7 @@
         tecladoUp=NO;
         [self animarViewPorTeclado];
         [scrollViewContent setScrollEnabled:YES];
+        textFieldPlacaReportar.text=textFieldPlaca.text;
     }
     else if (textField.tag==3001){
         tecladoUp=NO;
@@ -1187,6 +1189,18 @@
         TopTaxi *topMalo=[arrayTiposMalos objectAtIndex:indexPath.row];
         textFieldPlaca.text=topMalo.placa;
         [self consutar];
+        textFieldPlacaReportar.text=textFieldPlaca.text;
+        [self animarCentroView:mensajeReporte ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+100)];
+        if (deviceKind==3) {
+            [self animarCentroView:containerTipo ConCentro:CGPointMake(self.view.frame.size.width/2, 390)];
+            [self animarCentroView:viewLabelsReportes ConCentro:CGPointMake(self.view.frame.size.width/2, 390)];
+            [self animarCentroView:mensajeReporte2 ConCentro:CGPointMake(self.view.frame.size.width/2, 660)];
+        }
+        else {
+            [self animarCentroView:containerTipo ConCentro:CGPointMake(self.view.frame.size.width/2, 215)];
+            [self animarCentroView:viewLabelsReportes ConCentro:CGPointMake(self.view.frame.size.width/2, 215)];
+            [self animarCentroView:mensajeReporte2 ConCentro:CGPointMake(self.view.frame.size.width/2, 315)];
+        }
     }
     else {
         [scrollViewContent setContentOffset:CGPointMake(scrollViewContent.frame.size.width * 0, 0.0f) animated:YES];
@@ -1194,6 +1208,19 @@
         TopTaxi *topMalo=[arrayTiposBuenos objectAtIndex:indexPath.row];
         textFieldPlaca.text=topMalo.placa;
         [self consutar];
+        textFieldPlacaReportar.text=textFieldPlaca.text;
+        [self animarCentroView:mensajeReporte ConCentro:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height+100)];
+        if (deviceKind==3) {
+            [self animarCentroView:containerTipo ConCentro:CGPointMake(self.view.frame.size.width/2, 390)];
+            [self animarCentroView:viewLabelsReportes ConCentro:CGPointMake(self.view.frame.size.width/2, 390)];
+            [self animarCentroView:mensajeReporte2 ConCentro:CGPointMake(self.view.frame.size.width/2, 660)];
+        }
+        else {
+            [self animarCentroView:containerTipo ConCentro:CGPointMake(self.view.frame.size.width/2, 215)];
+            [self animarCentroView:viewLabelsReportes ConCentro:CGPointMake(self.view.frame.size.width/2, 215)];
+            [self animarCentroView:mensajeReporte2 ConCentro:CGPointMake(self.view.frame.size.width/2, 315)];
+        }
+        
         
     }
 }

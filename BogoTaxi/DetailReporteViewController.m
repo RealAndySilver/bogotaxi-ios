@@ -181,7 +181,11 @@
     }
     fecha.backgroundColor=[UIColor clearColor];
     fecha.text=reporte.fecha;
-    [viewMessage addSubview:fecha]; 
+    [viewMessage addSubview:fecha];
+    
+    UISwipeGestureRecognizer *swipeGesture=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(back)];
+    [swipeGesture setDirection:UISwipeGestureRecognizerDirectionRight];
+    [self.view addGestureRecognizer:swipeGesture];
 }
 
 - (void)didReceiveMemoryWarning
@@ -192,4 +196,5 @@
 -(void)back{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 @end

@@ -112,7 +112,7 @@
     [botonMenos addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     botonMenos.frame=CGRectMake(0, 0, (containerBotonesUnidades.frame.size.width/2)-0.5, containerBotonesUnidades.frame.size.height);
     [botonMenos setTitle:@"-" forState:UIControlStateNormal];
-    botonMenos.titleLabel.font=[UIFont  boldSystemFontOfSize:15];
+    botonMenos.titleLabel.font=[UIFont  boldSystemFontOfSize:22];
     botonMenos.backgroundColor=[UIColor grayColor];
     [containerBotonesUnidades addSubview:botonMenos];
     
@@ -121,7 +121,7 @@
     [botonMas addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     botonMas.frame=CGRectMake((containerBotonesUnidades.frame.size.width/2)+0.5, 0, (containerBotonesUnidades.frame.size.width/2)-0.5, containerBotonesUnidades.frame.size.height);
     [botonMas setTitle:@"+" forState:UIControlStateNormal];
-    botonMas.titleLabel.font=[UIFont  boldSystemFontOfSize:15];
+    botonMas.titleLabel.font=[UIFont  boldSystemFontOfSize:22];
     botonMas.backgroundColor=[UIColor grayColor];
     [containerBotonesUnidades addSubview:botonMas];
     

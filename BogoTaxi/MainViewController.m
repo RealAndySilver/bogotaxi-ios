@@ -79,6 +79,8 @@
     }
     [self performSelector:@selector(callAdvertencia) withObject:nil afterDelay:0.1];
     
+    hud=[[MBProgressHUD alloc]init];
+    
     mainScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 126, self.view.frame.size.width, self.view.frame.size.height-126)];
     mainScrollView.backgroundColor=[UIColor clearColor];
     mainScrollView.contentSize=CGSizeMake(mainScrollView.frame.size.width*4, mainScrollView.frame.size.height);
@@ -450,6 +452,7 @@
     unidadesAjusteTotal=[Taximetro conversorSegundosAUnidades:totalQuieto :taximetro.segundosDeEspera]+unidadesAjuste;
     unidades=[Taximetro conversorMetrosAUnidades:metros paraElTaximetro:taximetro]+unidadesAjusteTotal;
     /*if (unidades>299)unidades=299;*/
+    NSLog(@"unidades ajuestetotal %i", unidadesAjusteTotal);
     float temp=[taximetro unidadesADinero:(int)unidades];
     //valorInputLabel.text=[NSString stringWithFormat:@"$%.0f",temp];
     labelUnidades.text= [NSString stringWithFormat:@"%i",unidades];
@@ -496,7 +499,7 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
                 [self performSelector:@selector(dejarDeMoverse) withObject:nil afterDelay:1];
             }
             else if(!ok){
-                [self performSelector:@selector(dejarDeMoverse) withObject:nil afterDelay:60];
+                [self performSelector:@selector(dejarDeMoverse) withObject:nil afterDelay:30];
                 
             }
         }
@@ -1102,7 +1105,8 @@ int counter=0;
         if (ok) {
             tiempoQuieto++;
             totalQuieto++;
-            NSLog(@"aumento tiempo quieto");
+            NSLog(@"aumento tiempo quieto %i", totalQuieto);
+            [self contarMetros];
         }
         else if(!ok){
             NSLog(@"Sigo igual");
@@ -1134,6 +1138,8 @@ int counter=0;
     if (ptoA && ptoB) {
         CLLocationDistance distanciaPreliminar=[ptoA distanceFromLocation:ptoB];
         routes =[self calculateRoutesFrom:ptoA.coordinate to:ptoB.coordinate];
+        hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = @"Calculando";
         if (distanciaPreliminar<120000) {
             [self updateRouteView];
         }
@@ -1147,6 +1153,7 @@ int counter=0;
         calcular.valueRecorrido.text=[NSString stringWithFormat:@"%.2f Km",distanciaMetros/1000];
         [calcular changeState];
         [self.view bringSubviewToFront:calcular];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }
     else{
         [alertMessage changeState];
@@ -1276,8 +1283,9 @@ int counter=0;
 			// Create a button for the left callout accessory view of each annotation to remove the annotation and region being monitored.
 			UIButton *removeRegionButton = [UIButton buttonWithType:UIButtonTypeCustom];
             removeRegionButton.backgroundColor=kLiteRedColor;
+            removeRegionButton.layer.cornerRadius=5;
             [removeRegionButton setTitle:@"x" forState:UIControlStateNormal];
-            removeRegionButton.titleLabel.font=[UIFont fontWithName:kFontType size:30];
+            removeRegionButton.titleLabel.font=[UIFont fontWithName:@"helvetica" size:25];
 			[removeRegionButton setFrame:CGRectMake(0., 0., 25., 25.)];
 			
 			regionView.leftCalloutAccessoryView = removeRegionButton;
@@ -1365,6 +1373,7 @@ int counter=0;
                 ptoA=[[CLLocation alloc] initWithLatitude:touchMapCoordinate.latitude longitude:touchMapCoordinate.longitude];
                 regionView = [[RegionAnnotationView alloc] initWithAnnotation:annotationA withcolor:MKPinAnnotationColorRed];
                 regionView.map = mapaPaginaDos;
+                annotationA.title=@"Salida";
                 [mapaPaginaDos removeAnnotation:annotationA];
                 [annotationA setRegion:newRegion];
                 [annotationA setCoordinate:newRegion.center];
@@ -1382,6 +1391,7 @@ int counter=0;
                 ptoB=[[CLLocation alloc] initWithLatitude:touchMapCoordinate.latitude longitude:touchMapCoordinate.longitude];
                 regionView = [[RegionAnnotationView alloc] initWithAnnotation:annotationB withcolor:MKPinAnnotationColorGreen];
                 regionView.map = mapaPaginaDos;
+                annotationB.title=@"Destino";
                 [mapaPaginaDos removeAnnotation:annotationB];
                 [annotationB setRegion:newRegion];
                 [annotationB setCoordinate:newRegion.center];
@@ -1514,6 +1524,8 @@ int counter=0;
 	
 	routeView.image = img;
 	CGContextRelease(context);
+    //hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //hud.labelText = @"Calculando";
 }
 -(void) updateRouteView2{
     CGContextRef context = 	CGBitmapContextCreate(nil,
@@ -1680,8 +1692,8 @@ int counter=0;
         labelEncender.text=@"Encender";
         [locManager stopUpdatingLocation];
         [self animarView:buttonAlert ConOpacidad:0];
-        [self animarView:buttonCallUser ConOpacidad:0];
-        [self animarView:buttonEmergencyCall ConOpacidad:0];
+        [self animarView:buttonCallUser ConOpacidad:1];
+        [self animarView:buttonEmergencyCall ConOpacidad:1];
         //[self irAPaginaDeScroll:0];
         [self updateRouteView2];
         Modelador *obj=[[Modelador alloc]init];
@@ -1694,12 +1706,6 @@ int counter=0;
             NSString *resumenTiempo=tiempoInputLabel.text;
             NSString *resumen=[NSString stringWithFormat:@"Total \n Total unidades: %@ \n Total dinero: %@ \n Total tiempo: %@",resumenUnidades,resumenValorViaje, resumenTiempo];
             [alertMessage.labelMensaje ponerTexto:resumen fuente:[UIFont fontWithName:kFontType size:24] color:kWhiteColor];
-            /*UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Total"
-                                                              message:[self contarMetros]
-                                                             delegate:self
-                                                    cancelButtonTitle:@"OK"
-                                                    otherButtonTitles:nil];
-            [message show];*/
         }
         routeView2.hidden = NO;
         [self guardarEstadisticas];
@@ -1840,10 +1846,10 @@ int counter=0;
         SLComposeViewController *controller=[SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         SLComposeViewControllerCompletionHandler block=^(SLComposeViewControllerResult result){
             if (result == SLComposeViewControllerResultCancelled) {
-                NSLog(@"Paila cancelado");
+               // NSLog(@"Paila cancelado");
             }
             else{
-                NSLog(@"Listo parcero");
+                //NSLog(@"Listo parcero");
             }
             [controller dismissViewControllerAnimated:YES completion:nil];
         };
@@ -1858,7 +1864,9 @@ int counter=0;
         
     }
     else{
-        NSLog(@"Paila mono, esto no sirve en este iOS");
+        [alertMessage changeState];
+        [self.view bringSubviewToFront:alertMessage];
+        [alertMessage.labelMensaje ponerTexto:@"Tu mensaje no puede ser enviado en este momento, asegúrate que tienes conexión a internet y que tienes regitrada al menos una cuenta de facebook en tu dispositivo (Ajustes->facebook)." fuente:[UIFont fontWithName:kFontType size:24] color:kWhiteColor];
     }
 }
 -(void)publicarEnTwttConMensaje:(NSString*)mensaje{
@@ -1875,13 +1883,9 @@ int counter=0;
     }
     else
     {
-        UIAlertView *alertView = [[UIAlertView alloc]
-                                  initWithTitle:@"Sorry"
-                                  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"
-                                  delegate:self
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];
-        [alertView show];
+        [alertMessage changeState];
+        [self.view bringSubviewToFront:alertMessage];
+        [alertMessage.labelMensaje ponerTexto:@"Tu mensaje no puede ser enviado en este momento, asegúrate que tienes conexión a internet y que tienes regitrada al menos una cuenta de twitter en tu dispositivo (Ajustes->twitter)." fuente:[UIFont fontWithName:kFontType size:24] color:kWhiteColor];
     }
 }
 @end

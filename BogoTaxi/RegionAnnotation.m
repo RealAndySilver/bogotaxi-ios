@@ -54,7 +54,7 @@
 - (id)init {
 	self = [super init];
 	if (self != nil) {
-		self.title = @"Monitored Region";
+		//self.title = @"Monitored Region";
         _finishedTouching=NO;
 	}
 	
@@ -68,14 +68,14 @@
 	if (self != nil) {
 		self.region = newRegion;
 		self.coordinate = region.center;
-		self.title = @"Monitored Region";
+		//self.title = @"Monitored Region";
 	}
     
 	return self;
 }
 
 - (NSString *)subtitle {
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    /*CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
     if (!_finishedTouching) {
         _finishedTouching=YES;
@@ -108,6 +108,7 @@
     }
     else{
         return @"";
-    }
+    }*/
+    return [NSString stringWithFormat:@"Lat: %.4F, Lon: %.4F",coordinate.latitude, coordinate.longitude];
 }
  @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Modelador.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
