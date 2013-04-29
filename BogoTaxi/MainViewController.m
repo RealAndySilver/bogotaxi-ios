@@ -64,6 +64,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.view.backgroundColor=kBlueColor;
+    CustomLabel *labelHechoPor=[[CustomLabel alloc]initWithFrame:CGRectMake(0,0, 100, 30)];
+    labelHechoPor.center=CGPointMake(15, self.view.frame.size.height/2);
+    [labelHechoPor ponerTexto:@"Creado por" fuente:[UIFont fontWithName:kFontType size:24] color:kTitleBlueColor];
+    CGAffineTransform rotarLabelHechoPor = CGAffineTransformMakeRotation(-1.591);
+    labelHechoPor.transform = rotarLabelHechoPor;
+    [self.view addSubview:labelHechoPor];
+    
     viewFrame=self.view.frame;
     viewWidth=self.view.frame.size.width;
     viewHeight=self.view.frame.size.height;
@@ -90,8 +99,8 @@
     [mainScrollView setScrollEnabled:YES];
     UITapGestureRecognizer *scrollTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     [mainScrollView addGestureRecognizer:scrollTap];
-    
     [self.view addSubview:mainScrollView];
+    
     [self crearPaginaUno];
     [self crearPaginaDos];
     [self crearViewCalcular];
@@ -1607,6 +1616,10 @@ int counter=0;
     }
     return YES;
     
+}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    return (newLength > 6) ? NO : YES;
 }
 
 #pragma mark - scroll delegate
