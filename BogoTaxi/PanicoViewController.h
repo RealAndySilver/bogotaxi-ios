@@ -20,7 +20,9 @@
     CustomLabel *labelTitulo;
     UIView *contentMensajeView;
     UIButton *buttonTwitter;
+    UILabel *labelTwitter;
     UIButton *buttonFacebook;
+    UILabel *labelFacebook;
     UIButton *buttonMail;
     UIButton *buttonSms;
     UIView *viewDesplazar;

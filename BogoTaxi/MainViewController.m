@@ -3,7 +3,7 @@
 //  BogoTaxi
 //
 //  Created by Andres Abril on 22/11/12.
-//  Copyright (c) 2012 Andres Abril. All rights reserved.
+//  Copyright (c) 2013 iAmStudio. All rights reserved.
 //
 
 #import "MainViewController.h"
@@ -44,34 +44,66 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     Modelador *obj=[[Modelador alloc]init];
-    
-    if ([[obj getNumeroEmergencia] length]>2) {
-        [self animarView:buttonCallUser ConOpacidad:1];
+    if (deviceKind==1 || deviceKind==2) {
+        
+        if ([[obj getNumeroEmergencia] length]>2) {
+            [self animarView:buttonCallUser ConOpacidad:1];
+        }
+        else{
+            [self animarView:buttonCallUser ConOpacidad:0];
+        }
+        if (![obj getNumero123]) {
+            [obj setNumero123:1];
+        }
+        else if ([[obj getNumero123] isEqualToString:@"1"]) {
+            [self animarView:buttonEmergencyCall ConOpacidad:1];
+        }
+        else if([[obj getNumero123] isEqualToString:@"0"]){
+            [self animarView:buttonEmergencyCall ConOpacidad:0];
+        }
     }
     else{
         [self animarView:buttonCallUser ConOpacidad:0];
-    }
-    if (![obj getNumero123]) {
-        [obj setNumero123:1];
-    }
-    else if ([[obj getNumero123] isEqualToString:@"1"]) {
-        [self animarView:buttonEmergencyCall ConOpacidad:1];
-    }
-    else if([[obj getNumero123] isEqualToString:@"0"]){
         [self animarView:buttonEmergencyCall ConOpacidad:0];
     }
+    
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor=kBlueColor;
-    CustomLabel *labelHechoPor=[[CustomLabel alloc]initWithFrame:CGRectMake(0,0, 100, 30)];
-    labelHechoPor.center=CGPointMake(15, self.view.frame.size.height/2);
-    [labelHechoPor ponerTexto:@"Creado por" fuente:[UIFont fontWithName:kFontType size:24] color:kTitleBlueColor];
-    CGAffineTransform rotarLabelHechoPor = CGAffineTransformMakeRotation(-1.591);
-    labelHechoPor.transform = rotarLabelHechoPor;
-    [self.view addSubview:labelHechoPor];
+    self.view.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
+    
+    UIView *viewContentHechoPor=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 166, 50)];
+    viewContentHechoPor.center=CGPointMake(30, (self.view.frame.size.height/2)+50);
+    CGAffineTransform rotarViewHechoPor = CGAffineTransformMakeRotation(-1.572);
+    viewContentHechoPor.transform = rotarViewHechoPor;
+    [self.view addSubview:viewContentHechoPor];
+    CustomLabel *labelHechoPor=[[CustomLabel alloc]initWithFrame:CGRectMake(10,5, 80, 30)];
+    [labelHechoPor ponerTexto:@"Creado por" fuente:[UIFont fontWithName:kFontType size:24] color:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1]];
+    [labelHechoPor setOverlayOff:YES];
+    [viewContentHechoPor addSubview:labelHechoPor];
+    UIView *viewImage=[[UIView alloc]initWithFrame:CGRectMake(90, 5, 76, 30)];
+    [viewContentHechoPor addSubview:viewImage];
+    UIImageView *LogoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 76, 30)];
+    LogoImage.image = [UIImage imageNamed:@"logoiAmAboutBW.png"];
+    [viewImage addSubview:LogoImage];
+    
+    
+    UIView *viewContentHechoPor2=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 166, 50)];
+    viewContentHechoPor2.center=CGPointMake(self.view.frame.size.width-25, (self.view.frame.size.height/2)+50);
+    CGAffineTransform rotarViewHechoPor2 = CGAffineTransformMakeRotation(-1.572);
+    viewContentHechoPor2.transform = rotarViewHechoPor2;
+    [self.view addSubview:viewContentHechoPor2];
+    CustomLabel *labelHechoPor2=[[CustomLabel alloc]initWithFrame:CGRectMake(10,5, 80, 30)];
+    [labelHechoPor2 ponerTexto:@"Creado por" fuente:[UIFont fontWithName:kFontType size:24] color:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1]];
+    [labelHechoPor2 setOverlayOff:YES];
+    [viewContentHechoPor2 addSubview:labelHechoPor2];
+    UIView *viewImage2=[[UIView alloc]initWithFrame:CGRectMake(90, 5, 76, 30)];
+    [viewContentHechoPor2 addSubview:viewImage2];
+    UIImageView *LogoImage2 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 76, 30)];
+    LogoImage2.image = [UIImage imageNamed:@"logoiAmAboutBW.png"];
+    [viewImage2 addSubview:LogoImage2];
     
     viewFrame=self.view.frame;
     viewWidth=self.view.frame.size.width;
@@ -125,16 +157,157 @@
     tiempoQuieto=0;
     totalQuieto=0;
     estaMoviendose = NO;
+    
+    landScapeView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    landScapeView.backgroundColor=kGreenColor;
+    landScapeView.alpha=0;
+    [self.view addSubview:landScapeView];
+    
+    landScapeViewContainer=[[UIView alloc]initWithFrame:CGRectMake(0, 0, landScapeView.frame.size.height, landScapeView.frame.size.width)];
+    landScapeViewContainer.center=CGPointMake(landScapeView.frame.size.width/2, landScapeView.frame.size.height/2);
+    landScapeViewContainer.backgroundColor=kWhiteColor;
+    CGAffineTransform rotarContainer = CGAffineTransformMakeRotation(M_PI * 90/180);
+    landScapeViewContainer.transform = rotarContainer;
+    [landScapeView addSubview:landScapeViewContainer];
+    
+    containerInfoTaximetroLS=[[UIView alloc]initWithFrame:CGRectMake(5, 5, landScapeViewContainer.frame.size.height*0.475, landScapeViewContainer.frame.size.width-10)];
+    containerInfoTaximetroLS.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
+    [landScapeViewContainer addSubview:containerInfoTaximetroLS];
+    
+    UIView *infoTaximetroOverlayLSType3=[[UIView alloc]initWithFrame:CGRectMake(3, 3, containerInfoTaximetroLS.frame.size.width-6, containerInfoTaximetroLS.frame.size.height*0.68)];
+    infoTaximetroOverlayLSType3.backgroundColor=[UIColor whiteColor];
+    infoTaximetroOverlayLSType3.alpha=0.08;
+    [containerInfoTaximetroLS addSubview:infoTaximetroOverlayLSType3];
+    
+    UIView *infoTaximetroOverlayInferiorLS=[[UIView alloc]initWithFrame:CGRectMake(3, infoTaximetroOverlayLSType3.frame.size.height+6, containerInfoTaximetroLS.frame.size.width-6, containerInfoTaximetroLS.frame.size.height*0.293)];
+    infoTaximetroOverlayInferiorLS.backgroundColor=[UIColor whiteColor];
+    infoTaximetroOverlayInferiorLS.alpha=0.08;
+    [containerInfoTaximetroLS addSubview:infoTaximetroOverlayInferiorLS];
+    
+    labelRecorridoLS=[[CustomLabel alloc]init];
+    [labelRecorridoLS setCentrado:YES];
+    [labelRecorridoLS setOverlayOff:YES];
+    [containerInfoTaximetroLS addSubview:labelRecorridoLS];
+    
+    labelMetrosLS=[[CustomLabel alloc]init];
+    labelMetrosLS.adjustsFontSizeToFitWidth = YES;
+    [labelMetrosLS setCentrado:YES];
+    [labelMetrosLS setOverlayOff:YES];
+    [containerInfoTaximetroLS addSubview:labelMetrosLS];
+    
+    tiempoLabelLS=[[CustomLabel alloc]init];
+    [tiempoLabelLS setCentrado:YES];
+    [tiempoLabelLS setOverlayOff:YES];
+    [containerInfoTaximetroLS addSubview:tiempoLabelLS];
+    
+    tiempoInputLabelLS=[[CustomLabel alloc]init];
+    [tiempoInputLabelLS setCentrado:YES];
+    [tiempoInputLabelLS setOverlayOff:YES];
+    [containerInfoTaximetroLS addSubview:tiempoInputLabelLS];
+    
+    valorLabelLS=[[CustomLabel alloc]init];
+    [valorLabelLS setOverlayOff:YES];
+    [containerInfoTaximetroLS addSubview:valorLabelLS];
+    
+    valorInputLabelLS=[[CustomLabel alloc]init];
+    valorInputLabelLS.adjustsFontSizeToFitWidth = YES;
+    [valorInputLabelLS setOverlayOff:YES];
+    [containerInfoTaximetroLS addSubview:valorInputLabelLS];
+    
+    labelEncenderLS=[[CustomLabel alloc]init];
+    [labelEncenderLS setOverlayOff:YES];
+    [containerInfoTaximetroLS addSubview:labelEncenderLS];
+    
+    switchEncenderLS=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerInfoTaximetro.frame.size.width-15, 265, 0, 0)];
+    [switchEncenderLS addTarget:self action:@selector(apagarTaximetro:)];
+    //switchEncenderLS.center=CGPointMake(100, 100);
+    [containerInfoTaximetroLS addSubview:switchEncenderLS];
+    
+    containerUnidadesLS=[[UIView alloc]init];
+    containerUnidadesLS.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
+    [landScapeViewContainer addSubview:containerUnidadesLS];
+    
+    UIView *containerBotonesUnidadesLS=[[UIView alloc]init];
+    containerBotonesUnidadesLS.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
+    [containerUnidadesLS addSubview:containerBotonesUnidadesLS];
+    
+    /*if(deviceKind==3){
+        labelRecorridoLS.frame=CGRectMake(0, 100, containerInfoTaximetroLS.frame.size.width, 70);
+        [labelRecorridoLS ponerTexto:@"Recorrido" fuente:[UIFont fontWithName:kFontType size:70] color:kYellowColor];
+        labelMetrosLS.frame=CGRectMake(0, 165, containerInfoTaximetroLS.frame.size.width, 70);
+        [labelMetrosLS ponerTexto:@"0.0 m" fuente:[UIFont fontWithName:kFontType size:70] color:[UIColor whiteColor]];
+        tiempoLabelLS.frame=CGRectMake(0, containerInfoTaximetroLS.frame.size.height-250, containerInfoTaximetroLS.frame.size.width, 70);
+        [tiempoLabelLS ponerTexto:@"Tiempo" fuente:[UIFont fontWithName:kFontType size:70] color:kYellowColor];
+        tiempoInputLabelLS.frame=CGRectMake(0, containerInfoTaximetroLS.frame.size.height-170, containerInfoTaximetroLS.frame.size.width, 70);
+        [tiempoInputLabelLS ponerTexto:@"00:00" fuente:[UIFont fontWithName:kFontType size:70] color:[UIColor whiteColor]];
+        
+        containerUnidadesLS.frame=CGRectMake(containerInfoTaximetroLS.frame.size.width+6+containerTiempoLS.frame.size.width+1, 5, landScapeViewContainer.frame.size.height*0.51, landScapeViewContainer.frame.size.width-10);
+        containerBotonesUnidadesLS.frame=CGRectMake(0, containerUnidadesLS.frame.size.height-100, containerUnidadesLS.frame.size.width, 100);
+    }*/
+   // else{
+        labelRecorridoLS.frame=CGRectMake(0, 20, containerInfoTaximetroLS.frame.size.width, 40);
+        [labelRecorridoLS ponerTexto:@"Recorrido" fuente:[UIFont fontWithName:kFontType size:42] color:kYellowColor];
+        labelMetrosLS.frame=CGRectMake(0, 65, containerInfoTaximetroLS.frame.size.width, 40);
+        [labelMetrosLS ponerTexto:@"0.0 m" fuente:[UIFont fontWithName:kFontType size:42] color:[UIColor whiteColor]];
+        tiempoLabelLS.frame =CGRectMake(0, 110, containerInfoTaximetroLS.frame.size.width, 40);
+        [tiempoLabelLS ponerTexto:@"Tiempo" fuente:[UIFont fontWithName:kFontType size:42] color:kYellowColor];
+        tiempoInputLabelLS.frame=CGRectMake(0, 155, containerInfoTaximetroLS.frame.size.width, 40);
+        [tiempoInputLabelLS ponerTexto:@"00:00" fuente:[UIFont fontWithName:kFontType size:42] color:[UIColor whiteColor]];
+        
+        valorLabelLS.frame=CGRectMake(10, 220, 110, 36);
+        [valorLabelLS ponerTexto:@"Valor total" fuente:[UIFont fontWithName:kFontType size:36] color:kYellowColor];
+        valorInputLabelLS.frame=CGRectMake(125, 220, 87, 36);
+        [valorInputLabelLS ponerTexto:@"$3500" fuente:[UIFont fontWithName:kFontType size:36] color:kDarkRedColor];
+        
+        labelEncenderLS.frame=CGRectMake(10, 260, 110, 38);
+        [labelEncenderLS ponerTexto:@"Apagar" fuente:[UIFont fontWithName:kFontType size:36] color:kYellowColor];
+        
+        containerUnidadesLS.frame=CGRectMake(containerInfoTaximetroLS.frame.size.width+6+containerTiempoLS.frame.size.width+1, 5, landScapeViewContainer.frame.size.height*0.5, landScapeViewContainer.frame.size.width-10);
+        containerBotonesUnidadesLS.frame=CGRectMake(0, containerUnidadesLS.frame.size.height-60, containerUnidadesLS.frame.size.width, 60);
+    //}
+    
+    labelUnidadesLS=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, containerUnidadesLS.frame.size.width-10, containerUnidadesLS.frame.size.height-20)];
+    labelUnidadesLS.center=CGPointMake(containerUnidadesLS.frame.size.width/2, (containerUnidadesLS.frame.size.height/2)-13);
+    labelUnidadesLS.textAlignment=ALIGN_CENTER;
+    if(deviceKind==3){
+        [labelUnidadesLS ponerTexto:@"25" fuente:[UIFont fontWithName:kFontType size:300] color:kDarkRedColor];
+    }
+    else{
+        [labelUnidadesLS ponerTexto:@"25" fuente:[UIFont fontWithName:kFontType size:200] color:kDarkRedColor];
+    }
+    labelUnidadesLS.adjustsFontSizeToFitWidth = YES;
+    [labelUnidadesLS setOverlayOff:YES];
+    [containerUnidadesLS addSubview:labelUnidadesLS];
+    
+    UIButton *botonMenosLS=[UIButton buttonWithType:UIButtonTypeCustom];
+    botonMenosLS.frame=CGRectMake(0, 0, (containerBotonesUnidadesLS.frame.size.width/2)-0.5, containerBotonesUnidadesLS.frame.size.height);
+    [botonMenosLS setTitle:@"-" forState:UIControlStateNormal];
+    botonMenosLS.titleLabel.font=[UIFont  boldSystemFontOfSize:42];
+    botonMenosLS.tag=3000;
+    botonMenosLS.backgroundColor=kDarkGrayColor;
+    [botonMenosLS addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [containerBotonesUnidadesLS addSubview:botonMenosLS];
+    
+    UIButton *botonMasLS=[UIButton buttonWithType:UIButtonTypeCustom];
+    botonMasLS.frame=CGRectMake((containerBotonesUnidadesLS.frame.size.width/2)+0.5, 0, (containerBotonesUnidadesLS.frame.size.width/2)-0.5, containerBotonesUnidadesLS.frame.size.height);
+    [botonMasLS setTitle:@"+" forState:UIControlStateNormal];
+    botonMasLS.titleLabel.font=[UIFont  boldSystemFontOfSize:42];
+    botonMasLS.tag=3001;
+    botonMasLS.backgroundColor=kDarkGrayColor;
+    [botonMasLS addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [containerBotonesUnidadesLS addSubview:botonMasLS];
 }
 -(void)callAdvertencia{
     saverObj=[[FileSaver alloc]init];
     if (![saverObj getUserFirstTime:@"entre"]) {
         [saverObj  setUserFirstTime:@"entre"];
-        NSLog(@"holaaa %@", [saverObj getUserFirstTime:@"entre"]);
         AdvertenciaViewController *adVC=[[AdvertenciaViewController alloc]init];
         adVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Advertencia"];
         adVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:adVC animated:YES];
+        Modelador *objeto=[[Modelador alloc]init];
+        [objeto redSocialConNombre:@"Twitter"];
+        
     }
     else{
         NSLog(@"Ya existe");
@@ -274,11 +447,11 @@
     [labelRecorrido setOverlayOff:YES];
     [containerInfoTaximetro addSubview:labelRecorrido];
     
-    switchEncender=[[CustomSwitch alloc]initWithFrame:CGRectMake(70, 10, 0, 0)];
+    switchEncender=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerInfoTaximetro.frame.size.width-65, 10, 0, 0)];
     [switchEncender addTarget:self action:@selector(encenderTaximetro:)];
     [containerInfoTaximetro addSubview:switchEncender];
     
-    labelMetros=[[CustomLabel alloc]initWithFrame:CGRectMake(78, 46, 50, 20)];
+    labelMetros=[[CustomLabel alloc]initWithFrame:CGRectMake(containerInfoTaximetro.frame.size.width-62, 46, 50, 20)];
     [labelMetros ponerTexto:@"0.0 m" fuente:[UIFont fontWithName:kFontType size:22] color:[UIColor whiteColor]];
     labelMetros.adjustsFontSizeToFitWidth = YES;
     [labelMetros setOverlayOff:YES];
@@ -442,12 +615,14 @@
         }
         
         labelUnidades.text=[NSString stringWithFormat:@"%i",unidadesAjuste+25];
+        labelUnidadesLS.text=[NSString stringWithFormat:@"%i",unidadesAjuste+25];
         [self contarMetros];
         
     }
     else if (button.tag==3001){
         unidadesAjuste+=1;
         labelUnidades.text=[NSString stringWithFormat:@"%i",unidadesAjuste+25];
+        labelUnidadesLS.text=[NSString stringWithFormat:@"%i",unidadesAjuste+25];
         [self contarMetros];
     }
 }
@@ -457,6 +632,7 @@
     //float adicional=0;
     metros=[Taximetro medidorDeMetrosRecorridos:arregloDePuntos];
     labelMetros.text= [NSString stringWithFormat:@"%.1f m",metros];
+    labelMetrosLS.text= [NSString stringWithFormat:@"%.1f m",metros];
     
     unidadesAjusteTotal=[Taximetro conversorSegundosAUnidades:totalQuieto :taximetro.segundosDeEspera]+unidadesAjuste;
     unidades=[Taximetro conversorMetrosAUnidades:metros paraElTaximetro:taximetro]+unidadesAjusteTotal;
@@ -465,6 +641,7 @@
     float temp=[taximetro unidadesADinero:(int)unidades];
     //valorInputLabel.text=[NSString stringWithFormat:@"$%.0f",temp];
     labelUnidades.text= [NSString stringWithFormat:@"%i",unidades];
+    labelUnidadesLS.text= [NSString stringWithFormat:@"%i",unidades];
     [self agregarOquitarCargos:temp];
     return [NSString stringWithFormat:@"%.0f",temp];
 }
@@ -520,36 +697,222 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
 }
 #pragma mark - boton menu
 -(void)crearMenu{
-    menu=[[MenuView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [menu construirMenuConDeviceKind:deviceKind];
-    [self.view addSubview:menu];
-    [menu.taximetroManual addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
-    [menu.taximetroGps addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
-    [menu.calcular addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
-    [menu.placa addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
-    [menu.llamadas addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
-    [menu.opciones addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
-    
-    containerMenu=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 120, 100)];
-    containerMenu.backgroundColor=kDarkRedColor;
-    containerMenu.layer.shouldRasterize=YES;
-    containerMenu.center=CGPointMake(0, self.view.frame.size.height);
-    CGAffineTransform rotarCuadrado = CGAffineTransformMakeRotation(1.57079633/2.1);
-    containerMenu.transform = rotarCuadrado;
-    
+    UIImage *menuButtonImage = [UIImage imageNamed:@"menuButton.png"];
     menuButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [menuButton setMultipleTouchEnabled:NO];
     [menuButton addTarget:self action:@selector(callMenu) forControlEvents:UIControlEventTouchUpInside];
-    [menuButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [menuButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    [menuButton setBackgroundImage:menuButtonImage forState:UIControlStateNormal];
     menuButton.titleLabel.layer.shouldRasterize=YES;
-    
-    menuButton.frame=CGRectMake(0, self.view.frame.size.height-30, 50, 30);
+    menuButton.frame=CGRectMake(-15, self.view.frame.size.height-80, 120, 100);
     menuButton.titleLabel.font=[UIFont fontWithName:kFontType size:25];
-    //menuButton.center=CGPointMake(containerMenu.frame.size.width/2-(menuButton.frame.size.width/2), menuButton.frame.size.height/2);
-    [menuButton setTitle:@"Menú" forState:UIControlStateNormal];
-    
-    [self.view addSubview:containerMenu];
     [self.view addSubview:menuButton];
+    
+    CGAffineTransform rotarLabel = CGAffineTransformMakeRotation(-1.572);
+    
+    UILabel *labelTaximetroGps=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 130, 30)];
+    labelTaximetroGps.transform=rotarLabel;
+    labelTaximetroGps.center = CGPointMake( (((self.view.frame.size.width-50)/6)*0+10)+15 , -100);
+    labelTaximetroGps.text=@"  Configuración";
+    labelTaximetroGps.backgroundColor=[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1];
+    labelTaximetroGps.textColor=[UIColor whiteColor];
+    labelTaximetroGps.font=[UIFont fontWithName:kFontType size:24];
+    labelTaximetroGps.tag=5000;
+    [labelTaximetroGps setUserInteractionEnabled:YES];
+    
+
+    UIButton *taximetroGpsButtonMenu=[UIButton buttonWithType:UIButtonTypeCustom];
+    taximetroGpsButtonMenu.frame=CGRectMake(0, 0, 40, 40);
+    taximetroGpsButtonMenu.backgroundColor=[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1];
+    taximetroGpsButtonMenu.layer.shadowColor = [[UIColor blackColor] CGColor];
+    taximetroGpsButtonMenu.layer.shadowOffset = CGSizeMake(0,1);
+    taximetroGpsButtonMenu.layer.shadowRadius = 1;
+    taximetroGpsButtonMenu.layer.shadowOpacity = 0.8;
+    //[taximetroGpsButtonMenu setTitle:@"TG" forState:UIControlStateNormal];
+    taximetroGpsButtonMenu.tag=4000;
+    
+    
+    UILabel *labelCalcular=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 130, 30)];
+    labelCalcular.transform=rotarLabel;
+    labelCalcular.center = CGPointMake( (((self.view.frame.size.width-50)/6)*1+10)+15 , -100);
+    labelCalcular.text=@"  Calcular";
+    labelCalcular.backgroundColor=kYellowColor;
+    labelCalcular.textColor=[UIColor whiteColor];
+    labelCalcular.font=[UIFont fontWithName:kFontType size:24];
+    labelCalcular.tag=5001;
+    [labelCalcular setUserInteractionEnabled:YES];
+    
+    
+    //UIImage *calcularButtonImage = [UIImage imageNamed:@"calcularButton.png"];
+    UIButton *calcularButtonMenu=[UIButton buttonWithType:UIButtonTypeCustom];
+    calcularButtonMenu.frame=CGRectMake(0, 0, 40, 40);
+    //[calcularButtonMenu setBackgroundImage:calcularButtonImage forState:UIControlStateNormal];
+    calcularButtonMenu.backgroundColor=kYellowColor;
+    calcularButtonMenu.layer.shadowColor = [[UIColor blackColor] CGColor];
+    calcularButtonMenu.layer.shadowOffset = CGSizeMake(0,1);
+    calcularButtonMenu.layer.shadowRadius = 1;
+    calcularButtonMenu.layer.shadowOpacity = 0.8;
+    calcularButtonMenu.tag=4001;
+    
+    UILabel *labelPlaca=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 130, 30)];
+    labelPlaca.transform=rotarLabel;
+    labelPlaca.center = CGPointMake( (((self.view.frame.size.width-50)/6)*2+10)+15 , -100);
+    labelPlaca.text=@"  Consultar placa";
+    labelPlaca.backgroundColor=kLiteRedColor;
+    labelPlaca.textColor=[UIColor whiteColor];
+    labelPlaca.font=[UIFont fontWithName:kFontType size:24];
+    labelPlaca.tag=5002;
+    [labelPlaca setUserInteractionEnabled:YES];
+    
+
+    //UIImage *placaButtonImage = [UIImage imageNamed:@"placaButton.png"];
+    UIButton *placaButtonMenu=[UIButton buttonWithType:UIButtonTypeCustom];
+    placaButtonMenu.frame=CGRectMake(0, 0, 40, 40);
+    //[placaButtonMenu setBackgroundImage:placaButtonImage forState:UIControlStateNormal];
+    placaButtonMenu.backgroundColor=kLiteRedColor;
+    placaButtonMenu.layer.shadowColor = [[UIColor blackColor] CGColor];
+    placaButtonMenu.layer.shadowOffset = CGSizeMake(0,1);
+    placaButtonMenu.layer.shadowRadius = 1;
+    placaButtonMenu.layer.shadowOpacity = 0.8;
+    placaButtonMenu.tag=4002;
+    
+    UILabel *labelLlamadas=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 130, 30)];
+    labelLlamadas.transform=rotarLabel;
+    labelLlamadas.center = CGPointMake( (((self.view.frame.size.width-50)/6)*5+10)+15 , -100);
+    labelLlamadas.text=@"  Llamadas";
+    labelLlamadas.backgroundColor=kGreenColor;
+    labelLlamadas.textColor=[UIColor whiteColor];
+    labelLlamadas.font=[UIFont fontWithName:kFontType size:24];
+    labelLlamadas.tag=5003;
+    [labelLlamadas setUserInteractionEnabled:YES];
+    
+    //UIImage *llamadasButtonImage = [UIImage imageNamed:@"llamadasButton.png"];
+    UIButton *llamadasButtonMenu=[UIButton buttonWithType:UIButtonTypeCustom];
+    llamadasButtonMenu.frame=CGRectMake(0, 0, 40, 40);
+    //[llamadasButtonMenu setBackgroundImage:llamadasButtonImage forState:UIControlStateNormal];
+    llamadasButtonMenu.backgroundColor=kGreenColor;
+    llamadasButtonMenu.layer.shadowColor = [[UIColor blackColor] CGColor];
+    llamadasButtonMenu.layer.shadowOffset = CGSizeMake(0,1);
+    llamadasButtonMenu.layer.shadowRadius = 1;
+    llamadasButtonMenu.layer.shadowOpacity = 0.8;
+    llamadasButtonMenu.tag=4003;
+    
+    UILabel *labelTaximetroManual=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 130, 30)];
+    labelTaximetroManual.transform=rotarLabel;
+    labelTaximetroManual.center = CGPointMake( (((self.view.frame.size.width-50)/6)*4+10)+15 , -100);
+    labelTaximetroManual.text=@"  Taximetro manual";
+    labelTaximetroManual.backgroundColor=kGrayColor;
+    labelTaximetroManual.textColor=[UIColor whiteColor];
+    labelTaximetroManual.font=[UIFont fontWithName:kFontType size:24];
+    labelTaximetroManual.tag=5004;
+    [labelTaximetroManual setUserInteractionEnabled:YES];
+    
+    
+    //UIImage *tMButtonImage = [UIImage imageNamed:@"taximetroManualButton.png"];
+    UIButton *taximetroManualButtonMenu=[UIButton buttonWithType:UIButtonTypeCustom];
+    taximetroManualButtonMenu.frame=CGRectMake(0, 0, 40, 40);
+    //[taximetroManualButtonMenu setBackgroundImage:tMButtonImage forState:UIControlStateNormal];
+    taximetroManualButtonMenu.backgroundColor=[UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1];
+    taximetroManualButtonMenu.layer.shadowColor = [[UIColor blackColor] CGColor];
+    taximetroManualButtonMenu.layer.shadowOffset = CGSizeMake(0,1);
+    taximetroManualButtonMenu.layer.shadowRadius = 1;
+    taximetroManualButtonMenu.layer.shadowOpacity = 0.8;
+    taximetroManualButtonMenu.tag=4004;
+    
+    UILabel *labelOpciones=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 130, 30)];
+    labelOpciones.transform=rotarLabel;
+    labelOpciones.center = CGPointMake( (((self.view.frame.size.width-50)/6)*6+10)+15 , -100);
+    labelOpciones.text=@"  Opciones";
+    labelOpciones.backgroundColor=kWhiteColor;
+    labelOpciones.textColor=kDarkGrayColor;
+    labelOpciones.font=[UIFont fontWithName:kFontType size:24];
+    labelOpciones.tag=5005;
+    [labelOpciones setUserInteractionEnabled:YES];
+    
+    
+    //UIImage *opcionesButtonImage = [UIImage imageNamed:@"opcionesButton.png"];
+    UIButton *opcionesButtonMenu=[UIButton buttonWithType:UIButtonTypeCustom];
+    opcionesButtonMenu.frame=CGRectMake(0, 0, 40, 40);
+    //[opcionesButtonMenu setBackgroundImage:opcionesButtonImage forState:UIControlStateNormal];
+    opcionesButtonMenu.backgroundColor=kWhiteColor;
+    opcionesButtonMenu.layer.shadowColor = [[UIColor blackColor] CGColor];
+    opcionesButtonMenu.layer.shadowOffset = CGSizeMake(0,1);
+    opcionesButtonMenu.layer.shadowRadius = 1;
+    opcionesButtonMenu.layer.shadowOpacity = 0.8;
+    opcionesButtonMenu.tag=4005;
+    
+    UILabel *labelFollow=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 130, 30)];
+    labelFollow.transform=rotarLabel;
+    labelFollow.center = CGPointMake( (((self.view.frame.size.width-50)/6)*3+10)+15 , -100);
+    labelFollow.text=@"  Siguenos";
+    labelFollow.backgroundColor=kBlueColor;
+    labelFollow.textColor=[UIColor whiteColor];
+    labelFollow.font=[UIFont fontWithName:kFontType size:24];
+    labelFollow.tag=5006;
+    [labelFollow setUserInteractionEnabled:YES];
+    
+    
+    //UIImage *followButtonImage = [UIImage imageNamed:@"followButton2.png"];
+    UIButton *followButtonMenu=[UIButton buttonWithType:UIButtonTypeCustom];
+    followButtonMenu.frame=CGRectMake(0, 0, 40, 40);
+    //[followButtonMenu setBackgroundImage:followButtonImage forState:UIControlStateNormal];
+    followButtonMenu.backgroundColor=kBlueColor;
+    followButtonMenu.layer.shadowColor = [[UIColor blackColor] CGColor];
+    followButtonMenu.layer.shadowOffset = CGSizeMake(0,1);
+    followButtonMenu.layer.shadowRadius = 1;
+    followButtonMenu.layer.shadowOpacity = 0.8;
+    followButtonMenu.tag=4006;
+    
+    NSArray *labels = [NSArray arrayWithObjects: labelTaximetroGps, labelCalcular, labelPlaca, labelFollow, labelTaximetroManual, labelLlamadas, labelOpciones, nil];
+    NSArray *buttons = [NSArray arrayWithObjects: taximetroGpsButtonMenu, calcularButtonMenu, placaButtonMenu, followButtonMenu, taximetroManualButtonMenu, llamadasButtonMenu, opcionesButtonMenu, nil];
+    
+    menu=[[MenuView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
+                              menuItems:buttons mainButton:menuButton
+                                VCWidth:self.view.frame.size.width
+                               VCHeigth:self.view.frame.size.height
+                      andMenuItemsLabes:labels];
+
+    [self.view addSubview:menu];
+    
+    [menu addSubview:labelPlaca];
+    [menu addSubview:labelLlamadas];
+    [menu addSubview:labelTaximetroManual];
+    [menu addSubview:labelOpciones];
+    [menu addSubview:labelFollow];
+    [menu addSubview:labelCalcular];
+    [menu addSubview:labelTaximetroGps];
+    
+    [menu addSubview:taximetroGpsButtonMenu];
+    [menu addSubview:calcularButtonMenu];
+    [menu addSubview:placaButtonMenu];
+    [menu addSubview:llamadasButtonMenu];
+    [menu addSubview:taximetroManualButtonMenu];
+    [menu addSubview:opcionesButtonMenu];
+    [menu addSubview:followButtonMenu];
+    
+    UITapGestureRecognizer *tapRecognizer1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goToLabel:)];
+    UITapGestureRecognizer *tapRecognizer2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goToLabel:)];
+    UITapGestureRecognizer *tapRecognizer3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goToLabel:)];
+    UITapGestureRecognizer *tapRecognizer4=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goToLabel:)];
+    UITapGestureRecognizer *tapRecognizer5=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goToLabel:)];
+    UITapGestureRecognizer *tapRecognizer6=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goToLabel:)];
+    UITapGestureRecognizer *tapRecognizer7=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goToLabel:)];
+    
+    [labelPlaca addGestureRecognizer:tapRecognizer1];
+    [labelLlamadas addGestureRecognizer:tapRecognizer2];
+    [labelTaximetroManual addGestureRecognizer:tapRecognizer3];
+    [labelOpciones addGestureRecognizer:tapRecognizer4];
+    [labelFollow addGestureRecognizer:tapRecognizer5];
+    [labelCalcular addGestureRecognizer:tapRecognizer6];
+    [labelTaximetroGps addGestureRecognizer:tapRecognizer7];
+    
+    [taximetroManualButtonMenu addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
+    [taximetroGpsButtonMenu addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
+    [calcularButtonMenu addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
+    [placaButtonMenu addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
+    [followButtonMenu addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
+    [llamadasButtonMenu addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
+    [opcionesButtonMenu addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 #pragma mark - pagina uno
 
@@ -655,6 +1018,7 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
         dinero+=taximetro.costoTerm;
     }
     valorInputLabel.text=[NSString stringWithFormat:@"$%.0f",dinero];
+    valorInputLabelLS.text=[NSString stringWithFormat:@"$%.0f",dinero];
 }
 #pragma mark guardar estadisticas
 -(void)guardarEstadisticas{
@@ -897,7 +1261,7 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
 #pragma mark - pagina cuatro
 -(void)crearPaginaCuatro{
     paginaCuatro=[[UIView alloc]initWithFrame:CGRectMake(mainScrollView.frame.size.width*3, 0, mainScrollView.frame.size.width, mainScrollView.frame.size.height)];
-    paginaCuatro.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
+    paginaCuatro.backgroundColor=[UIColor colorWithRed:0.3 green:0.3 blue:0.3 alpha:1];
     [mainScrollView addSubview:paginaCuatro];
     
     BannerView *bannerViewPaginaCuatro=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, mainScrollView.frame.size.width-10, 0)];
@@ -915,14 +1279,14 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     else{
         viewContentSiguenos.center=CGPointMake(self.view.frame.size.width/2, 200);
     }
-    viewContentSiguenos.backgroundColor=kGrayColor;
+    viewContentSiguenos.backgroundColor=kWhiteColor;
     [paginaCuatro addSubview:viewContentSiguenos];
     
     UILabel *labelSiguenos=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 155, 30)];
     labelSiguenos.center=CGPointMake((viewContentSiguenos.frame.size.width/4)+10, viewContentSiguenos.frame.size.height/2);
     labelSiguenos.font=[UIFont fontWithName:kFontType size:28];
     labelSiguenos.backgroundColor=[UIColor clearColor];
-    labelSiguenos.textColor=kWhiteColor;
+    labelSiguenos.textColor=kDarkGrayColor;
     labelSiguenos.text=@"Síguenos en twitter";
     [viewContentSiguenos addSubview:labelSiguenos];
     
@@ -1060,7 +1424,7 @@ int counter=0;
         else if (counter==4){
             containerSuperior.frame=CGRectMake(0,self.view.frame.size.height-126, self.view.frame.size.width, 126);
             mapViewGPS.frame=CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height-126);
-            [botonBarraSuperior setTitle:@"Esconder" forState:UIControlStateNormal];
+            [botonBarraSuperior setTitle:@"Atrás" forState:UIControlStateNormal];
             animationFinished=YES;
             [self.view setUserInteractionEnabled:YES];
         }
@@ -1106,6 +1470,7 @@ int counter=0;
         Seconds=[NSString stringWithFormat:@"%i",seconds%60];
     
     tiempoInputLabel.text = [NSString stringWithFormat:@"%@:%@",Minutes,Seconds];
+    tiempoInputLabelLS.text = [NSString stringWithFormat:@"%@:%@",Minutes,Seconds];
     
     if (!estaMoviendose) {
         Modelador *model=[[Modelador alloc]init];
@@ -1125,8 +1490,9 @@ int counter=0;
 #pragma mark - menu principal
 -(void)callMenu{
     [self.view bringSubviewToFront:menu];
-    [self.view bringSubviewToFront:containerMenu];
+    [self.view bringSubviewToFront:mapViewGPS];
     [self.view bringSubviewToFront:menuButton];
+    
     [menu changeState];
 }
 -(void)irAPlaca{
@@ -1628,39 +1994,91 @@ int counter=0;
 }
 #pragma mark - actions
 -(void)goTo:(CustomButton*)button{
-    if ([button.titleLabel.text isEqualToString:@"Taxímetro Manual"]) {
+    if (button.tag == 4004) {
         TaximetroManualViewController *mVC=[[TaximetroManualViewController alloc]init];
         mVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
         mVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:mVC animated:YES];
-        //[menu changeState];
+        [menu changeState];
     }
-    else if ([button.titleLabel.text isEqualToString:@"Taxímetro GPS"]){
+    else if (button.tag == 4000){
         [self irAPaginaDeScroll:0];
         [menu changeState];
     }
-    else if ([button.titleLabel.text isEqualToString:@"Calcular"]){
+    else if (button.tag == 4001){
         [self irAPaginaDeScroll:1];
         [menu changeState];
     }
-    else if ([button.titleLabel.text isEqualToString:@"Enviar Placa"]){
+    else if (button.tag == 4002){
         [self irAPaginaDeScroll:2];
         [menu changeState];
     }
-    else if ([button.titleLabel.text isEqualToString:@"Llamadas"]) {
+    else if (button.tag == 4003) {
         LlamadasViewController *lVC=[[LlamadasViewController alloc]init];
         lVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Llamadas"];
         lVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:lVC animated:YES];
-        //[menu changeState];
+        [menu changeState];
     }
-    else if ([button.titleLabel.text isEqualToString:@"Opciones"]) {
+    else if (button.tag == 4005) {
         OpcionesViewController *oVC=[[OpcionesViewController alloc]init];
         oVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Opciones"];
         oVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:oVC animated:YES];
-        //[menu changeState];
+        [menu changeState];
     }
+    else if (button.tag == 4006) {
+        [self irAPaginaDeScroll:3];
+        [menu changeState];
+    }
+    
+    /*if( menu.expanded ) {
+        [menu collapse];
+    }*/
+}
+-(void)goToLabel:(UITapGestureRecognizer*)gestureRecognizer{
+    NSLog(@"Entreee a go TOLabel con tag %i",gestureRecognizer.view.tag);
+    if (gestureRecognizer.view.tag == 5004) {
+        TaximetroManualViewController *mVC=[[TaximetroManualViewController alloc]init];
+        mVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
+        mVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:mVC animated:YES];
+        [menu changeState];
+    }
+    else if (gestureRecognizer.view.tag == 5000){
+        [self irAPaginaDeScroll:0];
+        [menu changeState];
+    }
+    else if (gestureRecognizer.view.tag == 5001){
+        [self irAPaginaDeScroll:1];
+        [menu changeState];
+    }
+    else if (gestureRecognizer.view.tag == 5002){
+        [self irAPaginaDeScroll:2];
+        [menu changeState];
+    }
+    else if (gestureRecognizer.view.tag == 5003) {
+        LlamadasViewController *lVC=[[LlamadasViewController alloc]init];
+        lVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Llamadas"];
+        lVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:lVC animated:YES];
+        [menu changeState];
+    }
+    else if (gestureRecognizer.view.tag == 5005) {
+        OpcionesViewController *oVC=[[OpcionesViewController alloc]init];
+        oVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Opciones"];
+        oVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:oVC animated:YES];
+        [menu changeState];
+    }
+    else if (gestureRecognizer.view.tag == 5006) {
+        [self irAPaginaDeScroll:3];
+        [menu changeState];
+    }
+    
+    /*if( menu.expanded ) {
+     [menu collapse];
+     }*/
 }
 -(void)encenderTaximetro:(CustomSwitch*)customSwitch{
     if (customSwitch.isOn) {
@@ -1669,6 +2087,7 @@ int counter=0;
         int emergencyCallAlpha;
         routeView2.hidden = YES;
         tiempoInputLabel.text=@"00:00";
+        tiempoInputLabelLS.text=@"00:00";
         labelEncender.text=@"Apagar";
         [arregloDePuntos removeAllObjects];
         arregloDePuntos=nil;
@@ -1687,8 +2106,15 @@ int counter=0;
         else if([[obj getNumero123] isEqualToString:@"0"]){
             emergencyCallAlpha=0;
         }
-        [self animarView:buttonCallUser ConOpacidad:userCallAlpha];
-        [self animarView:buttonEmergencyCall ConOpacidad:emergencyCallAlpha];
+        if (deviceKind==3) {
+            [self animarView:buttonCallUser ConOpacidad:0];
+            [self animarView:buttonEmergencyCall ConOpacidad:0];
+        }
+        else{
+            [self animarView:buttonCallUser ConOpacidad:userCallAlpha];
+            [self animarView:buttonEmergencyCall ConOpacidad:emergencyCallAlpha];
+        }
+        
         //[self irAPaginaDeScroll:2];
         [self clockStart];
         if (banderaSecs) {
@@ -1705,11 +2131,21 @@ int counter=0;
         labelEncender.text=@"Encender";
         [locManager stopUpdatingLocation];
         [self animarView:buttonAlert ConOpacidad:0];
-        [self animarView:buttonCallUser ConOpacidad:1];
-        [self animarView:buttonEmergencyCall ConOpacidad:1];
+        Modelador *obj=[[Modelador alloc]init];
+        if (deviceKind==3) {
+            
+        }
+        else{
+            if ([[obj getNumeroEmergencia] length]>2) {
+                [self animarView:buttonCallUser ConOpacidad:1];
+            }
+            else{
+                [self animarView:buttonCallUser ConOpacidad:0];
+            }
+            [self animarView:buttonEmergencyCall ConOpacidad:1];
+        }
         //[self irAPaginaDeScroll:0];
         [self updateRouteView2];
-        Modelador *obj=[[Modelador alloc]init];
         if (![obj getAlertSwitchValue]) {
             
             [alertMessage changeState];
@@ -1726,6 +2162,9 @@ int counter=0;
         banderaSecs=YES;
         banderaU = NO;
     }
+}
+-(void)apagarTaximetro:(CustomSwitch*)customSwitch{
+    NSLog(@"apagado");
 }
 #pragma mark location
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)location fromLocation:(CLLocation *)oldLocation{
@@ -1776,10 +2215,10 @@ int counter=0;
 #pragma mark - CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    NSLog(@"didFailWithError: %@", error);
+    /*NSLog(@"didFailWithError: %@", error);
     UIAlertView *errorAlert = [[UIAlertView alloc]
                                initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [errorAlert show];
+    //[errorAlert show];*/
 }
 #pragma mark Guardar imagen
 - (void)saveScreenshot {
@@ -1900,5 +2339,56 @@ int counter=0;
         [self.view bringSubviewToFront:alertMessage];
         [alertMessage.labelMensaje ponerTexto:@"Tu mensaje no puede ser enviado en este momento, asegúrate que tienes conexión a internet y que tienes regitrada al menos una cuenta de twitter en tu dispositivo (Ajustes->twitter)." fuente:[UIFont fontWithName:kFontType size:24] color:kWhiteColor];
     }
+}
+-(NSUInteger)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
+-(BOOL)shouldAutorotate{
+    int type = [[UIDevice currentDevice] orientation];
+    NSLog(@"Type %i",type);
+    if (switchEncender.isOn) {
+        if (type==3) {
+            NSLog(@"Typooo 3");
+            CGAffineTransform rotarContainer = CGAffineTransformMakeRotation(M_PI * 90/180);
+            landScapeViewContainer.transform = rotarContainer;
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationDelegate:self];
+            [UIView setAnimationDuration:0.5];
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+            landScapeView.alpha=1;
+            [UIView commitAnimations];
+            [self.view bringSubviewToFront:landScapeView];
+            
+        }
+        else if (type==4){
+            CGAffineTransform rotarContainer = CGAffineTransformMakeRotation(M_PI * -90/180);
+            landScapeViewContainer.transform = rotarContainer;
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationDelegate:self];
+            [UIView setAnimationDuration:0.5];
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+            landScapeView.alpha=1;
+            [UIView commitAnimations];
+            [self.view bringSubviewToFront:landScapeView];
+        }
+        else if (type==1){
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationDelegate:self];
+            [UIView setAnimationDuration:0.5];
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+            landScapeView.alpha=0;
+            [UIView commitAnimations];
+        }
+        else if (type==2){
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationDelegate:self];
+            [UIView setAnimationDuration:0.5];
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+            landScapeView.alpha=0;
+            [UIView commitAnimations];
+        }
+    }
+    //NSLog(@"rotating");
+    return NO;
 }
 @end

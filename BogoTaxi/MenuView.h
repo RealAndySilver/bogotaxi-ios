@@ -8,22 +8,29 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomButton.h"
-@interface MenuView : UIView{
-    CustomButton *taximetroGps;
-    CustomButton *calcular;
-    CustomButton *placa;
-    CustomButton *taximetroManual;
-    CustomButton *llamadas;
-    CustomButton *opciones;
-    CGRect myFrame;
 
+@interface MenuView : UIView{
+
+    CGRect myFrame;
+    
+    float widthFrame;
+    float heigthFrame;
+    BOOL animationFinished;
 }
-@property(nonatomic,retain)CustomButton *taximetroGps;
-@property(nonatomic,retain)CustomButton *calcular;
-@property(nonatomic,retain)CustomButton *placa;
-@property(nonatomic,retain)CustomButton *taximetroManual;
-@property(nonatomic,retain)CustomButton *llamadas;
-@property(nonatomic,retain)CustomButton *opciones;
+@property(nonatomic,retain)NSArray *arrayLabels;
+@property (retain) UIButton *mainButton;
+@property (retain) NSArray *menuItems;
+@property CGFloat radius;
+@property CGFloat speed;
+@property CGFloat bounce;
+@property CGFloat bounceSpeed;
+@property (readonly) BOOL expanded;
+@property (readonly) BOOL transition;
+
+- (id)initWithFrame:(CGRect)frame menuItems:(NSArray*) menuItems mainButton:(UIButton*) mainButton VCWidth:(float)width VCHeigth:(float)heigth andMenuItemsLabes:(NSArray*) menuItemsLabels;
+- (void) expand;
+- (void) collapse;
+
+
 -(void)changeState;
--(void)construirMenuConDeviceKind:(int)deviceKind;
 @end

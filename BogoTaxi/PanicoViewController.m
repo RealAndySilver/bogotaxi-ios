@@ -119,7 +119,6 @@
     objeto=[[Modelador alloc]init];
     redSocial=[objeto obtenerNombreDeRedSocial];
     [self crearContainer];
-    
 }
 -(void)crearContainer{
     labelMensajeUbicacion=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width)-20, 70)];
@@ -150,43 +149,40 @@
     [self.view addSubview:textFieldUbicacion];
     textFieldUbicacion.delegate = self;
     textFieldUbicacion.tag=3000;
-    Modelador *obj=[[Modelador alloc]init];
-    NSString *mensajePanico;
-    NSString *numeroSMS;
-    NSString *correo;
-    NSLog(@"objeto get numero SMS %@",[obj getNumeroSMS]);
-    if ([[obj obtenerMensajeDePanico] isEqualToString:@" "]||[[obj obtenerMensajeDePanico] isEqualToString:@""]||[obj obtenerMensajeDePanico]==nil) {
+    //Modelador *obj=[[Modelador alloc]init];
+    NSString *mensajePanico=@"";
+    NSString *numeroSMS=@"";
+    NSString *correo=@"";
+    if ([[objeto obtenerMensajeDePanico] isEqualToString:@" "]||[[objeto obtenerMensajeDePanico] isEqualToString:@""]||[objeto obtenerMensajeDePanico]==nil) {
         mensajePanico=@"Mi Ubicación actual es ";
     }
     else{
-        mensajePanico=[obj obtenerMensajeDePanico];
+        mensajePanico=[objeto obtenerMensajeDePanico];
     }
-    if ([[obj getNumeroSMS] isEqualToString:@" "]||[[obj getNumeroSMS] isEqualToString:@""]||[obj getNumeroSMS]==nil
-        ||[[obj getNumeroSMS] isEqualToString:@"0"]) {
+    if ([[objeto getNumeroSMS] isEqualToString:@" "]||[[objeto getNumeroSMS] isEqualToString:@""]||[objeto getNumeroSMS]==nil
+        ||[[objeto getNumeroSMS] isEqualToString:@"0"]) {
         tf.placeholder=@"# Predeterminado";
         
     }
     else{
-        NSLog(@"nomeroo SMS string %@",numeroSMS);
-        numeroSMS=[obj getNumeroSMS];
+        numeroSMS=[objeto getNumeroSMS];
         tf.text=numeroSMS;
     }
-    if ([[obj getMail] isEqualToString:@" "]||[[obj getMail] isEqualToString:@""]||[obj getMail]==nil
-        ||[[obj getMail] isEqualToString:@"0"]) {
+    if ([[objeto getMail] isEqualToString:@" "]||[[objeto getMail] isEqualToString:@""]||[objeto getMail]==nil
+        ||[[objeto getMail] isEqualToString:@"0"]) {
         tfMail.placeholder=@"Correo";
         
     }
     else{
-        correo=[obj getMail];
+        correo=[objeto getMail];
         tfMail.text=correo;
     }
     textFieldUbicacion.text=mensajePanico;
     
-    NSString *redSocialName=[obj obtenerNombreDeRedSocial];
-    NSLog(@"red sociaal %@",[obj obtenerNombreDeRedSocial]);
+    NSString *redSocialName=[objeto obtenerNombreDeRedSocial];
     if ([redSocialName isEqualToString:@""]||[redSocialName isEqualToString:@" "]||redSocialName ==nil) {
-        [obj redSocialConNombre:@"Twitter"];
-        redSocialLabel.text=[obj obtenerNombreDeRedSocial];
+        [objeto redSocialConNombre:@"Twitter"];
+        redSocialLabel.text=[objeto obtenerNombreDeRedSocial];
     }
     
     labelMensaje=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width)-20, 80)];
@@ -289,8 +285,17 @@
     [buttonTwitter addTarget:self action:@selector(twitterTrigger) forControlEvents:UIControlEventTouchUpInside];
     [viewDesplazar addSubview:buttonTwitter];
     
-    UIImage *fbButtonImage = [UIImage imageNamed:@"buttonFB.png"];
+    //Label Twitter//////////////////////////////
+    labelTwitter=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 30)];
+    labelTwitter.center=CGPointMake(120, contentMensajeView.frame.size.height/2);
+    labelTwitter.text=@"Has selccionado twitter.";
+    labelTwitter.textColor=[UIColor whiteColor];
+    labelTwitter.backgroundColor=[UIColor clearColor];
+    labelTwitter.font=[UIFont fontWithName:kFontType size:24];
+    labelTwitter.alpha=0;
+    [contentMensajeView addSubview:labelTwitter];
     
+    UIImage *fbButtonImage = [UIImage imageNamed:@"buttonFB.png"];
     buttonFacebook=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 70)];
     [buttonFacebook setBackgroundImage:fbButtonImage forState:UIControlStateNormal];
     buttonFacebook.center=CGPointMake((((contentMensajeView.frame.size.width/2)/2)/2)+(((contentMensajeView.frame.size.width/2)/2)/2)+40, contentMensajeView.frame.size.height/2);
@@ -299,6 +304,16 @@
     }
     [buttonFacebook addTarget:self action:@selector(facebookTrigger) forControlEvents:UIControlEventTouchUpInside];
     [viewDesplazar addSubview:buttonFacebook];
+    
+    //Label Facebook//////////////////////////////
+    labelFacebook=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 30)];
+    labelFacebook.center=CGPointMake(contentMensajeView.frame.size.width-110, contentMensajeView.frame.size.height/2);
+    labelFacebook.text=@"Has selccionado facebook.";
+    labelFacebook.textColor=[UIColor whiteColor];
+    labelFacebook.backgroundColor=[UIColor clearColor];
+    labelFacebook.font=[UIFont fontWithName:kFontType size:24];
+    labelFacebook.alpha=0;
+    [contentMensajeView addSubview:labelFacebook];
     
     UIImage *mailButtonImage = [UIImage imageNamed:@"buttonMail.png"];
     buttonMail=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 70)];
@@ -360,15 +375,15 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)viewDidAppear: (BOOL)animated {
-    Modelador *obj=[[Modelador alloc]init];
-    NSString *redSocialName=[obj obtenerNombreDeRedSocial];
+    //Modelador *obj=[[Modelador alloc]init];
+    NSString *redSocialName=[objeto obtenerNombreDeRedSocial];
     if ([redSocialName isEqualToString:@""]||[redSocialName isEqualToString:@" "]||redSocialName ==nil) {
-        [obj redSocialConNombre:@"Twitter"];
-        redSocialLabel.text=[obj obtenerNombreDeRedSocial];
+        [objeto redSocialConNombre:@"Twitter"];
+        redSocialLabel.text=[objeto obtenerNombreDeRedSocial];
     }
     else
-        redSocialLabel.text=[obj obtenerNombreDeRedSocial];
-    banderaInfo=YES;
+        redSocialLabel.text=[objeto obtenerNombreDeRedSocial];
+        banderaInfo=YES;
 }
 -(NSString*)actualizarMensaje{
     if ([textFieldUbicacion.text isEqualToString:@""]) {
@@ -381,38 +396,111 @@
 }
 -(void)enviarMensaje{
     [textFieldUbicacion resignFirstResponder];
-    NSLog(@"Mensaje: %@",[self actualizarMensaje]);
-    Modelador *msj=[[Modelador alloc]init];
-    [msj mensajeConInput:[self actualizarMensaje]];
+    [objeto mensajeConInput:[self actualizarMensaje]];
     [[[[[self tabBarController] tabBar] items]
       objectAtIndex:3] setBadgeValue:nil];
     [self.navigationController popViewControllerAnimated:YES];
-    NSString *numeroString=tf.text;
-    NSLog(@"tf numeroo %@", numeroString);
     NSString *correo=tfMail.text;
-    
     double numeroDouble = [tf.text doubleValue];
     if ([tf.text length]>2) {
-        [msj setNumeroSMS:numeroDouble];
-        NSLog(@"getNumeroSMS %@", [msj getNumeroSMS]);
+        [objeto setNumeroSMS:numeroDouble];
     }
     else if ([tf.text isEqualToString:@""]) {
-        [msj setNumeroSMS:0];
+        [objeto setNumeroSMS:0];
     }
-    //double numeroDouble = [numeroString doubleValue];
-    //[msj setNumeroSMS:numeroDouble];
-    
-    [msj setMail:correo];
+    [objeto setMail:correo];
     [objeto redSocialConNombre:redSocial];
     [self dismissModalViewControllerAnimated:YES];
 }
 -(void)twitterTrigger{
     redSocial=@"Twitter";
     redSocialLabel.text=redSocial;
+    if (!banderaDesplazar) {
+        CGRect myMapRect;
+        if (deviceKind==3) {
+            myMapRect = CGRectMake(contentMensajeView.frame.size.width-227, 0, contentMensajeView.frame.size.width, contentMensajeView.frame.size.height);
+        }
+        else{
+            myMapRect = CGRectMake(220, 0, contentMensajeView.frame.size.width, contentMensajeView.frame.size.height);
+        }
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.5];
+        viewDesplazar.frame = myMapRect;
+        buttonMail.alpha=0;
+        buttonFacebook.alpha=0;
+        buttonSms.alpha=0;
+        [UIView commitAnimations];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:1.0];
+        viewDesplazar.frame = myMapRect;
+        labelTwitter.alpha=1;
+        [UIView commitAnimations];
+        banderaDesplazar=YES;
+        return;
+    }
+    else{
+        CGRect myMapRect = CGRectMake(0, 0, contentMensajeView.frame.size.width, contentMensajeView.frame.size.height);
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.5];
+        viewDesplazar.frame = myMapRect;
+        buttonMail.alpha=1;
+        buttonFacebook.alpha=1;
+        buttonSms.alpha=1;
+        [UIView commitAnimations];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.2];
+        viewDesplazar.frame = myMapRect;
+        labelTwitter.alpha=0;
+        [UIView commitAnimations];
+        banderaDesplazar=NO;
+        return;
+    }
 }
 -(void)facebookTrigger{
     redSocial=@"Facebook";
     redSocialLabel.text=redSocial;
+    
+    if (!banderaDesplazar) {
+        CGRect myMapRect;
+        if (deviceKind==3) {
+            myMapRect = CGRectMake(contentMensajeView.frame.size.width-1027, 0, contentMensajeView.frame.size.width, contentMensajeView.frame.size.height);
+        }
+        else{
+            myMapRect = CGRectMake(-73, 0, contentMensajeView.frame.size.width, contentMensajeView.frame.size.height);
+        }
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.5];
+        viewDesplazar.frame = myMapRect;
+        buttonMail.alpha=0;
+        buttonTwitter.alpha=0;
+        buttonSms.alpha=0;
+        [UIView commitAnimations];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:1.0];
+        viewDesplazar.frame = myMapRect;
+        labelFacebook.alpha=1;
+        [UIView commitAnimations];
+        banderaDesplazar=YES;
+        return;
+    }
+    else{
+        CGRect myMapRect = CGRectMake(0, 0, contentMensajeView.frame.size.width, contentMensajeView.frame.size.height);
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.5];
+        viewDesplazar.frame = myMapRect;
+        buttonMail.alpha=1;
+        buttonTwitter.alpha=1;
+        buttonSms.alpha=1;
+        [UIView commitAnimations];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.2];
+        viewDesplazar.frame = myMapRect;
+        labelFacebook.alpha=0;
+        [UIView commitAnimations];
+        banderaDesplazar=NO;
+        return;
+    }
+
 }
 -(void)mailTrigger{
     redSocial=@"Mail";

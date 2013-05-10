@@ -105,16 +105,6 @@
 	datosConf = newData;
 	[self guardarConf];  
 }
--(NSString*)getMail{
-    return [datosConf objectForKey:@"Correo"];
-}
--(void)setMail:(NSString*)mail{
-    NSString* correo = mail;
-	NSMutableDictionary *newData = [datosConf mutableCopy];
-	[newData setObject:[NSString stringWithFormat:@"%@ ",correo] forKey:@"Correo"];
-	datosConf = newData;
-	[self guardarConf];
-}
 -(BOOL) firstTime {
 	return [[datosConf objectForKey:@"firstTime"] boolValue];
 }
@@ -227,6 +217,15 @@
     NSString* variableEntro = name;
 	NSMutableDictionary *newData = [datosConf mutableCopy];
 	[newData setObject:[NSString stringWithFormat:@"%@",variableEntro] forKey:@"VariableEntrada"];
+	datosConf = newData;
+	[self guardarConf];
+}
+-(NSString*)getMail{
+    return [datosConf objectForKey:@"Correo"];
+}
+-(void)setMail:(NSString*)mail{
+	NSMutableDictionary *newData = [datosConf mutableCopy];
+	[newData setObject:[NSString stringWithFormat:@"%@ ",mail] forKey:@"Correo"];
 	datosConf = newData;
 	[self guardarConf];
 }

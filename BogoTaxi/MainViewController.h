@@ -3,7 +3,7 @@
 //  BogoTaxi
 //
 //  Created by Andres Abril on 22/11/12.
-//  Copyright (c) 2012 Andres Abril. All rights reserved.
+//  Copyright (c) 2013 iAmStudio. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -33,7 +33,6 @@
 #import <Social/Social.h>
 #import "AdvertenciaViewController.h"
 #import "FollowMeButton.h"
-
 
 @interface MainViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UIAccelerometerDelegate>{
     UIScrollView *mainScrollView;
@@ -165,6 +164,22 @@
 
     MBProgressHUD *hud;
     FileSaver *saverObj;
+    
+    //landScape
+    UIView *landScapeView;
+    UIView *landScapeViewContainer;
+    UIView *containerInfoTaximetroLS;
+    UIView *containerTiempoLS;
+    UIView *containerUnidadesLS;
+    CustomLabel *labelRecorridoLS;
+    CustomLabel *labelMetrosLS;
+    CustomLabel *labelUnidadesLS;
+    CustomLabel *tiempoLabelLS;
+    CustomLabel *tiempoInputLabelLS;
+    CustomLabel *labelEncenderLS;
+    CustomSwitch *switchEncenderLS;
+    CustomLabel *valorLabelLS;
+    CustomLabel *valorInputLabelLS;
 }
 @property (nonatomic, retain) UIAcceleration *lastAcceleration;
 @property (strong, nonatomic) CLGeocoder *geoCoder;

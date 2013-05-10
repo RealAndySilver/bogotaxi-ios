@@ -3,7 +3,7 @@
 //  BogoTaxi
 //
 //  Created by Development on 11/03/13.
-//  Copyright (c) 2013 Andres Abril. All rights reserved.
+//  Copyright (c) 2013 iAmStudio. All rights reserved.
 //
 
 #import "ConsultarPlacaViewController.h"
@@ -830,6 +830,7 @@
         if (arrayTax.count) {
             [self animarView:buttonInformacion ConOpacidad:1];
             UIScrollView *scrollViewInformacion=[[UIScrollView alloc]init];
+            [scrollViewInformacion setAlwaysBounceVertical:YES];
             scrollViewInformacion.frame=CGRectMake(3, 3, viewMessageContent.frame.size.width-6, viewMessageContent.frame.size.height-6);
             scrollViewInformacion.backgroundColor=[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1];
             scrollViewInformacion.showsHorizontalScrollIndicator=NO;

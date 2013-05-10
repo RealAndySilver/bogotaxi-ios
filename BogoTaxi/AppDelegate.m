@@ -3,7 +3,7 @@
 //  BogoTaxi
 //
 //  Created by Andres Abril on 22/11/12.
-//  Copyright (c) 2012 Andres Abril. All rights reserved.
+//  Copyright (c) 2013 iAmStudio. All rights reserved.
 //
 
 #import "AppDelegate.h"

@@ -50,6 +50,8 @@
         deviceKind=3;
     }
     
+    
+    
     BannerView *bannerView=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-10, 0)];
     [bannerView ponerTexto:@"BogoTaxi"];
     bannerView.configBannerLabel.textColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
@@ -94,6 +96,19 @@
     [backButton setTitle:@"Atrás" forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(dismissView) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
+    
+    UIView *viewContentHechoPor=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width-255, self.view.frame.size.height-40, 250, 30)];
+    //viewContentHechoPor.backgroundColor=kGreenColor;
+    [self.view addSubview:viewContentHechoPor];
+    CustomLabel *labelHechoPor=[[CustomLabel alloc]initWithFrame:CGRectMake(5,5, 179, 20)];
+    [labelHechoPor ponerTexto:@"Copyright (c) 2013 iAmStudio. All rights reserved." fuente:[UIFont fontWithName:kFontType size:12] color:kWhiteColor];
+    [labelHechoPor setOverlayOff:YES];
+    [viewContentHechoPor addSubview:labelHechoPor];
+    UIView *viewImage=[[UIView alloc]initWithFrame:CGRectMake(175, 0, 76, 30)];
+    [viewContentHechoPor addSubview:viewImage];
+    UIImageView *LogoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 76, 30)];
+    LogoImage.image = [UIImage imageNamed:@"logoiAmAbout.png"];
+    [viewImage addSubview:LogoImage];
 }
 -(void)dismissView{
     [self dismissModalViewControllerAnimated:YES];

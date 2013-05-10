@@ -12,8 +12,6 @@
 @class RegionAnnotation;
 
 @interface RegionAnnotationView : MKPinAnnotationView{
-   /* MKCircle *radiusOverlay;
-	BOOL isRadiusUpdated;*/
 }
 
 @property (nonatomic, assign) MKMapView *map;

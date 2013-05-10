@@ -7,6 +7,7 @@
 //
 
 #import "MenuView.h"
+#define kFontType @"LeagueGothic"
 #define kYellowColor [UIColor colorWithRed:0.984375 green:0.828125 blue:0.390625 alpha:1]
 #define kLiteRedColor [UIColor colorWithHue:0 saturation:0.53 brightness:0.95 alpha:1]
 #define kDarkRedColor [UIColor colorWithHue:0 saturation:0.67 brightness:0.94 alpha:1]
@@ -20,114 +21,239 @@
 #define kGrayColor [UIColor grayColor]
 #define kWhiteColor [UIColor whiteColor]
 @implementation MenuView
-@synthesize taximetroGps,taximetroManual,calcular,llamadas,opciones,placa;
-- (id)initWithFrame:(CGRect)frame
-{
+@synthesize radius = _radius, speed, bounce, bounceSpeed, expanded, transition;
+@synthesize mainButton = _mainButton;
+@synthesize menuItems = _menuItems;
+@synthesize arrayLabels= _arrayLabels;
+
+- (id)initWithFrame:(CGRect)frame menuItems:(NSArray*) menuItems mainButton:(UIButton*) mainButton VCWidth:(float)width VCHeigth:(float)heigth andMenuItemsLabes:(NSArray*) menuItemsLabels{
     self = [super initWithFrame:frame];
     if (self) {
         self.alpha=0;
         myFrame=frame;
         UITapGestureRecognizer *tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changeState)];
         [self addGestureRecognizer:tapRecognizer];
+        
+        UIView *background=[[UIView alloc]initWithFrame:myFrame];
+        background.backgroundColor=[UIColor blackColor];
+        background.alpha=0.7;
+        [self addSubview:background];
+        
+        animationFinished=NO;
+        widthFrame=width;
+        heigthFrame=heigth;
+        self.arrayLabels=menuItemsLabels;
+        self.menuItems = menuItems;
+        self.mainButton = mainButton;
+        self.speed = 0.03;
+        self.bounce = 0.225;
+        self.bounceSpeed = 0.1;
+        expanded = NO;
+        transition = NO;
+        
+        if( self.mainButton != nil ) {
+            for (UIView* view in self.menuItems) {
+                
+                view.center = CGPointMake(-30, heigth-30);
+            }
+        }
+
     }
+    
+    
     return self;
 }
--(void)construirMenuConDeviceKind:(int)deviceKind{
-    UIView *background=[[UIView alloc]initWithFrame:myFrame];
-    background.backgroundColor=[UIColor blackColor];
-    background.alpha=0.9;
-    [self addSubview:background];
-    taximetroGps=[self crearBotonEnPosicion:0 conNombre:@"Taxímetro GPS" yTipo:deviceKind];
-    [self addSubview:taximetroGps];
-    calcular=[self crearBotonEnPosicion:1 conNombre:@"Calcular" yTipo:deviceKind];
-    [self addSubview:calcular];
-    placa=[self crearBotonEnPosicion:2 conNombre:@"Enviar Placa" yTipo:deviceKind];
-    [self addSubview:placa];
-    llamadas=[self crearBotonEnPosicion:3 conNombre:@"Llamadas" yTipo:deviceKind];
-    [self addSubview:llamadas];
-    taximetroManual=[self crearBotonEnPosicion:4 conNombre:@"Taxímetro Manual" yTipo:deviceKind];
-    [self addSubview:taximetroManual];
-    opciones=[self crearBotonEnPosicion:5 conNombre:@"Opciones" yTipo:deviceKind];
-    [self addSubview:opciones];
+- (id)init {
+    // calling the default init method is not allowed, this will raise an exception if it is called.
+    if( self = [super init] ) {
+        [self doesNotRecognizeSelector:_cmd];
+    }
+    return nil;
 }
--(CustomButton*)crearBotonEnPosicion:(int)posicion conNombre:(NSString*)nombre yTipo:(int)tipo{
-    CustomButton *temp=[[CustomButton alloc]init];
-    int espacio=30;
-    if (tipo==2) {
-        espacio=20;
-    }
-    temp.tag=posicion+300;
-    temp.frame=CGRectMake(0, 0, (self.frame.size.width/2)-40, (self.frame.size.height/3)-60);
-    if (posicion==0) {
-        
-        temp.center=CGPointMake((self.frame.size.width/2)/2, (((self.frame.size.height/3)/2)+espacio)*(posicion+1));
-        
-    }
-    else if (posicion==2){
-        temp.center=CGPointMake((self.frame.size.width/2)/2, (((self.frame.size.height/3)/2)+espacio)*(posicion));
-        if (tipo==2) {
-            temp.center=CGPointMake((self.frame.size.width/2)/2, (((self.frame.size.height/3)/2)+espacio+20)*(posicion));
-        }
-        else if (tipo==3){
-            temp.center=CGPointMake((self.frame.size.width/2)/2, (((self.frame.size.height/3)/2)+espacio+50)*(posicion));
-        }
-    }
-    else if (posicion==4){
-        temp.center=CGPointMake((self.frame.size.width/2)/2, (((self.frame.size.height/3)/2)+espacio)*(posicion-1));
-        if (tipo==2) {
-            temp.center=CGPointMake((self.frame.size.width/2)/2, (((self.frame.size.height/3)/2)+espacio+27.5)*(posicion-1));
-        }
-        else if (tipo==3){
-            temp.center=CGPointMake((self.frame.size.width/2)/2, (((self.frame.size.height/3)/2)+espacio+68)*(posicion-1));
-        }
-    }
+- (void) expand {
+    transition = YES;
     
-    else if (posicion==1){
-        temp.center=CGPointMake((self.frame.size.width/4)*3, (((self.frame.size.height/3)/2)+espacio)*(posicion));
-    }
-    else if (posicion==3){
-        temp.center=CGPointMake((self.frame.size.width/4)*3, (((self.frame.size.height/3)/2)+espacio)*(posicion-1));
-        if (tipo==2) {
-            temp.center=CGPointMake((self.frame.size.width/4)*3, (((self.frame.size.height/3)/2)+espacio+20)*(posicion-1));
-        }
-        else if (tipo==3){
-            temp.center=CGPointMake((self.frame.size.width/4)*3, (((self.frame.size.height/3)/2)+espacio+50)*(posicion-1));
-        }
-    }
-    else if (posicion==5){
-        
-        temp.center=CGPointMake((self.frame.size.width/4)*3, (((self.frame.size.height/3)/2)+espacio)*(posicion-2));
-        if (tipo==2) {
-            temp.center=CGPointMake((self.frame.size.width/4)*3, (((self.frame.size.height/3)/2)+espacio+27.5)*(posicion-2));
-        }
-        else if (tipo==3){
-            temp.center=CGPointMake((self.frame.size.width/4)*3, (((self.frame.size.height/3)/2)+espacio+68)*(posicion-2));
-        }
-    }
+    [UIView animateWithDuration:0.5 animations:^{
+     self.mainButton.frame=CGRectMake(-120, self.frame.size.height, 120, 100);
+     }];
     
-    [temp setTitle:nombre forState:UIControlStateNormal];
-    [temp setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    [temp setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-    
-    return temp;
+    for (UIView* view in self.menuItems) {
+        int index = [self.menuItems indexOfObject:view];
+        CGPoint center = CGPointMake( (((widthFrame-50)/6)*index+20)+15 , heigthFrame-30);
+        [UIView animateWithDuration: self.speed
+                              delay: self.speed * (self.menuItems.count-index)
+                            options: UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             view.center = center;
+                         }
+                         completion:^(BOOL finished){
+                             [UIView animateWithDuration:self.bounceSpeed
+                                              animations:^{
+                                                  CGPoint center = CGPointMake( (((widthFrame-50)/6)*index)+15 , heigthFrame-30);
+                                                  view.center = center;
+                                                  
+                                              }
+                                              completion:^(BOOL finished){
+                                                  [UIView animateWithDuration:self.bounceSpeed
+                                                                   animations:^{
+                                                                       CGPoint center = CGPointMake( (((widthFrame-50)/6)*index+15)+15 , heigthFrame-30);
+                                                                       view.center = center;
+                                                                       
+                                                                   }
+                                                                   completion:^(BOOL finished){
+                                                                       [UIView animateWithDuration:self.bounceSpeed
+                                                                                        animations:^{
+                                                                                            CGPoint center = CGPointMake( (((widthFrame-50)/6)*index+5)+15 , heigthFrame-30);
+                                                                                            view.center = center;
+                                                                                            
+                                                                                        }
+                                                                                        completion:^(BOOL finished){
+                                                                                            [UIView animateWithDuration:self.bounceSpeed
+                                                                                                             animations:^{
+                                                                                                                 CGPoint center = CGPointMake( (((widthFrame-50)/6)*index+10)+15 , heigthFrame-30);
+                                                                                                                 view.center = center;
+                                                                                                                 
+                                                                                                                 
+                                                                                                                 
+                                                                                                             }];
+                                                                                            if( view == self.menuItems.lastObject ) {
+                                                                                                expanded = YES;
+                                                                                                transition = NO;
+                                                                                            }
+                                                                                        }];
+                                                                   }];
+                                                  
+                                              }];
+                         }];
+    }
+    for (UIView* view in self.arrayLabels) {
+        int index = [self.arrayLabels indexOfObject:view];
+        [UIView animateWithDuration:self.speed +0.1
+                              delay:self.speed * (self.arrayLabels.count-index)
+                            options:UIViewAnimationOptionCurveEaseIn
+                         animations:^ {
+                            view.center=CGPointMake( (((widthFrame-50)/6)*index+10)+15 , heigthFrame-115);
+                         }
+                         completion:^(BOOL finished){
+                             [UIView animateWithDuration:self.bounceSpeed
+                                              animations:^{
+                                                 view.center=CGPointMake( (((widthFrame-50)/6)*index+10)+15 , heigthFrame-140);
+                                                  }
+                                              completion:^(BOOL finished){
+                                                  [UIView animateWithDuration:self.bounceSpeed
+                                                                   animations:^{
+                                                                      view.center=CGPointMake( (((widthFrame-50)/6)*index+10)+15 , heigthFrame-115);
+                                                                       
+                                                                   }];
+                                                  if( view == self.arrayLabels.lastObject ) {
+                                                      expanded = YES;
+                                                      transition = NO;
+                                                  }
+                                    
+                                              }];
+                             
+                         }];
+    }
 }
+
+- (void) collapse {
+    transition = YES;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.mainButton.frame=CGRectMake(-15, self.frame.size.height-80, 120, 100);
+    }];
+    
+    for (UIView* view in self.menuItems) {
+        int index = [self.menuItems indexOfObject:view];
+        //CGFloat oneOverCount = self.menuItems.count<=1?1.0:(1.0/(self.menuItems.count-1));
+        [UIView animateWithDuration:self.speed
+                              delay:self.speed * index
+                            options: UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             view.center = CGPointMake((((widthFrame-50)/6)*index+20)+15 , heigthFrame-30);
+                         }
+                         completion:^(BOOL finished){
+                             [UIView animateWithDuration:self.bounceSpeed
+                                              animations:^{
+                                                  CGPoint center = CGPointMake((((widthFrame-50)/6)*index)+15 , heigthFrame-30);
+                                                  view.center = center;
+                                                  
+                                              }
+                                              completion:^(BOOL finished){
+                                                  [UIView animateWithDuration:self.bounceSpeed
+                                                                   animations:^{
+                                                                       CGPoint center = CGPointMake((((widthFrame-50)/6)*index+10)+15 , heigthFrame-30);
+                                                                       view.center = center;
+                                                                       
+                                                                       
+                                                                   }
+                                                                   completion:^(BOOL finished){
+                                                                       [UIView animateWithDuration:self.bounceSpeed
+                                                                                        animations:^{
+                                                                                            CGPoint center = CGPointMake(-30 , heigthFrame-30);
+                                                                                            view.center = center;
+                                                                                            
+                                                                                            
+                                                                                        }];
+                                                                       if( view == self.menuItems.lastObject ) {
+                                                                           expanded = NO;
+                                                                           transition = NO;
+                                                                       }
+                                                                   }];
+                                              }];
+                         }];
+    }
+    for (UIView* view in self.arrayLabels) {
+        int index = [self.arrayLabels indexOfObject:view];
+
+        [UIView animateWithDuration:self.speed
+                              delay:self.speed * index
+                            options:UIViewAnimationOptionCurveEaseIn
+                         animations:^ {
+                            view.center=CGPointMake( (((widthFrame-50)/6)*index+10)+15 , heigthFrame-100);
+                         }
+                         completion:^(BOOL finished){
+                             [UIView animateWithDuration:self.bounceSpeed
+                                              animations:^{
+                                                  view.center=CGPointMake( (((widthFrame-50)/6)*index+10)+15 , heigthFrame-130);
+                                              }
+                                              completion:^(BOOL finished){
+                                                  [UIView animateWithDuration:self.bounceSpeed
+                                                                   animations:^{
+                                                                      view.center=CGPointMake( (((widthFrame-50)/6)*index+10)+15 , -100);
+                                                                   }];
+                                                  if( view == self.arrayLabels.lastObject ) {
+                                                      expanded = YES;
+                                                      transition = NO;
+                                                  }
+                                                  
+                                              }];
+                             
+                         }];
+    }
+}
+
 -(void)changeState{
+    [self setUserInteractionEnabled:NO];
     if (self.alpha<1) {
+        
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDelegate:self];
-        [UIView setAnimationDuration:0.5];
+        [UIView setAnimationDuration:0.2];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationDidStopSelector:@selector(turnOnTouchesAgain)];
         self.alpha=1;
         [UIView commitAnimations];
+        [self expand];
+        
     }
     else{
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDelegate:self];
-        [UIView setAnimationDuration:0.5];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        self.alpha=0;
-        [UIView commitAnimations];
+        [self collapse];
+        [UIView animateWithDuration:0.5 delay:0.03*6 options:UIViewAnimationCurveEaseIn animations:^{self.alpha=0;} completion:^(BOOL finished){}];
     }
+}
+-(void)turnOnTouchesAgain{
+    [self setUserInteractionEnabled:YES];
 }
 
 @end
