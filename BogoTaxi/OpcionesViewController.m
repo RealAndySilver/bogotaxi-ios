@@ -49,6 +49,11 @@
         deviceKind=3;
     }
     self.view.backgroundColor=kBlueColor;
+   
+    alertMessage=[[AlertMessageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [alertMessage crearView];
+    [self.view addSubview:alertMessage];
+    
     CustomButton *backButton=[[CustomButton alloc]initWithFrame:CGRectMake(10, self.view.frame.size.height-40, 50, 30)];
     backButton.backgroundColor=kYellowColor;
     [backButton setTitleColor:kGrayColor forState:UIControlStateNormal];
@@ -196,10 +201,17 @@
         [self presentModalViewController:pVC animated:YES];
     }
     else if ([button.titleLabel.text isEqualToString:@"Llamada de emergencia"]) {
-        LlamadaDeEmergenciaViewController *lVC=[[LlamadaDeEmergenciaViewController alloc]init];
-        lVC=[self.storyboard instantiateViewControllerWithIdentifier:@"LlamadaEmergencia"];
-        lVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [self presentModalViewController:lVC animated:YES];
+        if (deviceKind==3) {
+            [self.view bringSubviewToFront:alertMessage];
+            [alertMessage changeState];
+            [alertMessage.labelMensaje ponerTexto:@"Opción válida solo para iPhone." fuente:[UIFont fontWithName:kFontType size:32] color:kWhiteColor];
+        }
+        else{
+            LlamadaDeEmergenciaViewController *lVC=[[LlamadaDeEmergenciaViewController alloc]init];
+            lVC=[self.storyboard instantiateViewControllerWithIdentifier:@"LlamadaEmergencia"];
+            lVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            [self presentModalViewController:lVC animated:YES];
+        }
     }
     else if ([button.titleLabel.text isEqualToString:@"Advertencia"]) {
         AdvertenciaViewController *adVC=[[AdvertenciaViewController alloc]init];

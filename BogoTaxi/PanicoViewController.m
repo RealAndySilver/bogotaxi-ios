@@ -79,16 +79,18 @@
     }
     tvMail=[[UITextView alloc]initWithFrame:tvRectMail];
     
-    redSocialLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, 70, 24)];
-    redSocialLabel.font=[UIFont fontWithName:kFontType size:24];
+    redSocialLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
     redSocialLabel.textColor=kTitleBlueColor;
     if (deviceKind==3) {
-        redSocialLabel.center=CGPointMake(250, 650);
+        redSocialLabel.font=[UIFont fontWithName:kFontType size:40];
+        redSocialLabel.center=CGPointMake(350, 690);
     }
     else if (deviceKind==2){
+        redSocialLabel.font=[UIFont fontWithName:kFontType size:24];
         redSocialLabel.center=CGPointMake(195, self.view.frame.size.height-90);
     }
     else{
+        redSocialLabel.font=[UIFont fontWithName:kFontType size:24];
         redSocialLabel.center=CGPointMake(195, self.view.frame.size.height-70);
     }
     [redSocialLabel setOverlayOff:YES];
@@ -127,14 +129,14 @@
     labelMensajeUbicacion.overlayLabel.numberOfLines=2;
     labelMensajeUbicacion.center=CGPointMake(self.view.frame.size.width/2, 110);
     if (deviceKind==3) {
-        labelMensajeUbicacion.center=CGPointMake(self.view.frame.size.width/2, 220);
+        labelMensajeUbicacion.center=CGPointMake(self.view.frame.size.width/2, 200);
     }
     [labelMensajeUbicacion setOverlayOff:NO];
     [self.view addSubview:labelMensajeUbicacion];
     
     textFieldUbicacion = [[UITextField alloc] initWithFrame:CGRectMake(90, 112, 215, 30)];
     if (deviceKind==3) {
-        textFieldUbicacion.frame=CGRectMake(400, 209, 350, 30);
+        textFieldUbicacion.frame=CGRectMake(400, 189, 350, 30);
     }
     textFieldUbicacion.borderStyle = UITextBorderStyleRoundedRect;
     textFieldUbicacion.textColor = kTitleBlueColor;
@@ -185,13 +187,13 @@
         redSocialLabel.text=[objeto obtenerNombreDeRedSocial];
     }
     
-    labelMensaje=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width)-20, 80)];
+    labelMensaje=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width)-20, 100)];
     [labelMensaje ponerTexto:@"Si no ingresas ningún mensaje la aplicación pondra por defecto ''Mi ubicación actual es''. Tu mensaje siempre llevará una imagen del mapa con tu ubicación actual para que tus seguidores o a quién decidas enviar el mensaje lo pueda ver." fuente:[UIFont fontWithName:kFontType size:14] color:kTitleBlueColor];
     labelMensaje.numberOfLines = 4;
     labelMensaje.overlayLabel.numberOfLines=4;
     labelMensaje.center=CGPointMake(self.view.frame.size.width/2, 180);
     if (deviceKind==3) {
-        [labelMensaje ponerTexto:@"Si no ingresas ningún mensaje la aplicación pondra por defecto ''Mi ubicación actual es''. Tu mensaje siempre llevará una imagen del mapa con tu ubicación actual para que tus seguidores o a quién decidas enviar el mensaje lo pueda ver." fuente:[UIFont fontWithName:kFontType size:18] color:kTitleBlueColor];
+        [labelMensaje ponerTexto:@"Si no ingresas ningún mensaje la aplicación pondra por defecto ''Mi ubicación actual es''. Tu mensaje siempre llevará una imagen del mapa con tu ubicación actual para que tus seguidores o a quién decidas enviar el mensaje lo pueda ver." fuente:[UIFont fontWithName:kFontType size:28] color:kTitleBlueColor];
         labelMensaje.center=CGPointMake(self.view.frame.size.width/2, 280);
     }
     else if (deviceKind==2) {
@@ -207,7 +209,7 @@
     labelTitulo.overlayLabel.numberOfLines=2;
     labelTitulo.center=CGPointMake(self.view.frame.size.width/2, 230);
     if (deviceKind==3) {
-        labelTitulo.center=CGPointMake(self.view.frame.size.width/2, 380);
+        labelTitulo.center=CGPointMake(self.view.frame.size.width/2, 390);
     }
     else if (deviceKind==2){
         labelTitulo.center=CGPointMake(self.view.frame.size.width/2, 260);
@@ -335,14 +337,14 @@
     [buttonSms addTarget:self action:@selector(smsTrigger) forControlEvents:UIControlEventTouchUpInside];
     [viewDesplazar addSubview:buttonSms];
     
-    CustomLabel *labelMensaje2=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width)-20, 50)];
+    CustomLabel *labelMensaje2=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width)-20, 160)];
     [labelMensaje2 ponerTexto:@"El servicio que escojas será el utilizado para enviar el mensaje de pánico. El servicio predeterminado es Twitter. Solo podrás elegir uno a la vez." fuente:[UIFont fontWithName:kFontType size:14] color:kTitleBlueColor];
     labelMensaje2.numberOfLines = 4;
     labelMensaje2.overlayLabel.numberOfLines=4;
     labelMensaje2.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-100);
     if (deviceKind==3) {
         labelMensaje2.center=CGPointMake(self.view.frame.size.width/2, 600);
-        [labelMensaje2 ponerTexto:@"El servicio que escojas será el utilizado para enviar el mensaje de pánico. El servicio predeterminado es Twitter. Solo podrás elegir uno a la vez." fuente:[UIFont fontWithName:kFontType size:20] color:kTitleBlueColor];
+        [labelMensaje2 ponerTexto:@"El servicio que escojas será el utilizado para enviar el mensaje de pánico. El servicio predeterminado es Twitter. Solo podrás elegir uno a la vez." fuente:[UIFont fontWithName:kFontType size:30] color:kTitleBlueColor];
     }
     else if(deviceKind==2){
         labelMensaje2.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-120);
@@ -350,14 +352,14 @@
     [labelMensaje2 setOverlayOff:NO];
     [self.view addSubview:labelMensaje2];
     
-    CustomLabel *labelMensajeServicio=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width)-20, 24)];
+    CustomLabel *labelMensajeServicio=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, (self.view.frame.size.width)-20, 30)];
     [labelMensajeServicio ponerTexto:@"Servicio actual seleccionado:" fuente:[UIFont fontWithName:kFontType size:18] color:kTitleBlueColor];
     labelMensajeServicio.numberOfLines = 4;
     labelMensajeServicio.overlayLabel.numberOfLines=4;
     labelMensajeServicio.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-70);
     if (deviceKind==3) {
-        labelMensajeServicio.center=CGPointMake(self.view.frame.size.width/2, 650);
-        [labelMensajeServicio ponerTexto:@"Servicio actual seleccionado:" fuente:[UIFont fontWithName:kFontType size:24] color:kTitleBlueColor];
+        labelMensajeServicio.center=CGPointMake(self.view.frame.size.width/2, 690);
+        [labelMensajeServicio ponerTexto:@"Servicio actual seleccionado:" fuente:[UIFont fontWithName:kFontType size:34] color:kTitleBlueColor];
     }
     else if (deviceKind==2){
         labelMensajeServicio.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-90);

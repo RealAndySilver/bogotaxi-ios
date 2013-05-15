@@ -138,10 +138,10 @@
     [self crearViewCalcular];
     [self crearPaginaTres];
     [self crearPaginaCuatro];
+    [self crearMenu];
     [self crearInterfazSuperior];
     backgroundColor=self.view.backgroundColor;
     [paginaUnoContainer bringSubviewToFront:containerConfig];
-    [self crearMenu];
     [self crearViewAlert];
     [self crearViewAlertMessage];
     locManager=[[CLLocationManager alloc]init];
@@ -180,6 +180,12 @@
     [containerInfoTaximetroLS addSubview:infoTaximetroOverlayLSType3];
     
     UIView *infoTaximetroOverlayInferiorLS=[[UIView alloc]initWithFrame:CGRectMake(3, infoTaximetroOverlayLSType3.frame.size.height+6, containerInfoTaximetroLS.frame.size.width-6, containerInfoTaximetroLS.frame.size.height*0.293)];
+    if (deviceKind==3) {
+        infoTaximetroOverlayInferiorLS.frame=CGRectMake(3, infoTaximetroOverlayLSType3.frame.size.height+6, containerInfoTaximetroLS.frame.size.width-6, containerInfoTaximetroLS.frame.size.height*0.293+11);
+    }
+    else{
+        
+    }
     infoTaximetroOverlayInferiorLS.backgroundColor=[UIColor whiteColor];
     infoTaximetroOverlayInferiorLS.alpha=0.08;
     [containerInfoTaximetroLS addSubview:infoTaximetroOverlayInferiorLS];
@@ -214,14 +220,13 @@
     [valorInputLabelLS setOverlayOff:YES];
     [containerInfoTaximetroLS addSubview:valorInputLabelLS];
     
-    labelEncenderLS=[[CustomLabel alloc]init];
+    /*labelEncenderLS=[[CustomLabel alloc]init];
     [labelEncenderLS setOverlayOff:YES];
     [containerInfoTaximetroLS addSubview:labelEncenderLS];
     
     switchEncenderLS=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerInfoTaximetro.frame.size.width-15, 265, 0, 0)];
     [switchEncenderLS addTarget:self action:@selector(apagarTaximetro:)];
-    //switchEncenderLS.center=CGPointMake(100, 100);
-    [containerInfoTaximetroLS addSubview:switchEncenderLS];
+    [containerInfoTaximetroLS addSubview:switchEncenderLS];*/
     
     containerUnidadesLS=[[UIView alloc]init];
     containerUnidadesLS.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
@@ -231,20 +236,29 @@
     containerBotonesUnidadesLS.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
     [containerUnidadesLS addSubview:containerBotonesUnidadesLS];
     
-    /*if(deviceKind==3){
-        labelRecorridoLS.frame=CGRectMake(0, 100, containerInfoTaximetroLS.frame.size.width, 70);
+    if(deviceKind==3){
+        labelRecorridoLS.frame=CGRectMake(0, 90, containerInfoTaximetroLS.frame.size.width, 70);
         [labelRecorridoLS ponerTexto:@"Recorrido" fuente:[UIFont fontWithName:kFontType size:70] color:kYellowColor];
-        labelMetrosLS.frame=CGRectMake(0, 165, containerInfoTaximetroLS.frame.size.width, 70);
+        labelMetrosLS.frame=CGRectMake(0, 155, containerInfoTaximetroLS.frame.size.width, 70);
         [labelMetrosLS ponerTexto:@"0.0 m" fuente:[UIFont fontWithName:kFontType size:70] color:[UIColor whiteColor]];
-        tiempoLabelLS.frame=CGRectMake(0, containerInfoTaximetroLS.frame.size.height-250, containerInfoTaximetroLS.frame.size.width, 70);
+        tiempoLabelLS.frame=CGRectMake(0, 245, containerInfoTaximetroLS.frame.size.width, 70);
         [tiempoLabelLS ponerTexto:@"Tiempo" fuente:[UIFont fontWithName:kFontType size:70] color:kYellowColor];
-        tiempoInputLabelLS.frame=CGRectMake(0, containerInfoTaximetroLS.frame.size.height-170, containerInfoTaximetroLS.frame.size.width, 70);
+        tiempoInputLabelLS.frame=CGRectMake(0, 325, containerInfoTaximetroLS.frame.size.width, 70);
         [tiempoInputLabelLS ponerTexto:@"00:00" fuente:[UIFont fontWithName:kFontType size:70] color:[UIColor whiteColor]];
+        
+        valorLabelLS.frame=CGRectMake(20, 610, 210, 70);
+        [valorLabelLS ponerTexto:@"Valor total" fuente:[UIFont fontWithName:kFontType size:70] color:kYellowColor];
+        valorInputLabelLS.frame=CGRectMake(265, 610, 187, 70);
+        [valorInputLabelLS ponerTexto:@"$3500" fuente:[UIFont fontWithName:kFontType size:70] color:kDarkRedColor];
+        
+        //labelEncenderLS.frame=CGRectMake(20, 630, 210, 75);
+        //[labelEncenderLS ponerTexto:@"Apagar" fuente:[UIFont fontWithName:kFontType size:70] color:kYellowColor];
+        //switchEncenderLS.center=CGPointMake(containerInfoTaximetroLS.frame.size.width-170, containerInfoTaximetroLS.frame.size.height-90);
         
         containerUnidadesLS.frame=CGRectMake(containerInfoTaximetroLS.frame.size.width+6+containerTiempoLS.frame.size.width+1, 5, landScapeViewContainer.frame.size.height*0.51, landScapeViewContainer.frame.size.width-10);
         containerBotonesUnidadesLS.frame=CGRectMake(0, containerUnidadesLS.frame.size.height-100, containerUnidadesLS.frame.size.width, 100);
-    }*/
-   // else{
+    }
+   else{
         labelRecorridoLS.frame=CGRectMake(0, 20, containerInfoTaximetroLS.frame.size.width, 40);
         [labelRecorridoLS ponerTexto:@"Recorrido" fuente:[UIFont fontWithName:kFontType size:42] color:kYellowColor];
         labelMetrosLS.frame=CGRectMake(0, 65, containerInfoTaximetroLS.frame.size.width, 40);
@@ -254,23 +268,26 @@
         tiempoInputLabelLS.frame=CGRectMake(0, 155, containerInfoTaximetroLS.frame.size.width, 40);
         [tiempoInputLabelLS ponerTexto:@"00:00" fuente:[UIFont fontWithName:kFontType size:42] color:[UIColor whiteColor]];
         
-        valorLabelLS.frame=CGRectMake(10, 220, 110, 36);
+        valorLabelLS.frame=CGRectMake(10, 250, 110, 36);
         [valorLabelLS ponerTexto:@"Valor total" fuente:[UIFont fontWithName:kFontType size:36] color:kYellowColor];
-        valorInputLabelLS.frame=CGRectMake(125, 220, 87, 36);
+        valorInputLabelLS.frame=CGRectMake(125, 250, 87, 36);
         [valorInputLabelLS ponerTexto:@"$3500" fuente:[UIFont fontWithName:kFontType size:36] color:kDarkRedColor];
         
-        labelEncenderLS.frame=CGRectMake(10, 260, 110, 38);
-        [labelEncenderLS ponerTexto:@"Apagar" fuente:[UIFont fontWithName:kFontType size:36] color:kYellowColor];
-        
+       //labelEncenderLS.frame=CGRectMake(10, 260, 110, 38);
+       //[labelEncenderLS ponerTexto:@"Apagar" fuente:[UIFont fontWithName:kFontType size:36] color:kYellowColor];
+       //labelEncenderLS.backgroundColor=kBlueColor;
+       //[self.view bringSubviewToFront:switchEncenderLS];
+       //switchEncenderLS.center=CGPointMake(containerInfoTaximetroLS.frame.size.width-60, containerInfoTaximetroLS.frame.size.height-30);
+       
         containerUnidadesLS.frame=CGRectMake(containerInfoTaximetroLS.frame.size.width+6+containerTiempoLS.frame.size.width+1, 5, landScapeViewContainer.frame.size.height*0.5, landScapeViewContainer.frame.size.width-10);
         containerBotonesUnidadesLS.frame=CGRectMake(0, containerUnidadesLS.frame.size.height-60, containerUnidadesLS.frame.size.width, 60);
-    //}
+    }
     
     labelUnidadesLS=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, containerUnidadesLS.frame.size.width-10, containerUnidadesLS.frame.size.height-20)];
     labelUnidadesLS.center=CGPointMake(containerUnidadesLS.frame.size.width/2, (containerUnidadesLS.frame.size.height/2)-13);
     labelUnidadesLS.textAlignment=ALIGN_CENTER;
     if(deviceKind==3){
-        [labelUnidadesLS ponerTexto:@"25" fuente:[UIFont fontWithName:kFontType size:300] color:kDarkRedColor];
+        [labelUnidadesLS ponerTexto:@"25" fuente:[UIFont fontWithName:kFontType size:350] color:kDarkRedColor];
     }
     else{
         [labelUnidadesLS ponerTexto:@"25" fuente:[UIFont fontWithName:kFontType size:200] color:kDarkRedColor];
@@ -767,7 +784,6 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     //UIImage *placaButtonImage = [UIImage imageNamed:@"placaButton.png"];
     UIButton *placaButtonMenu=[UIButton buttonWithType:UIButtonTypeCustom];
     placaButtonMenu.frame=CGRectMake(0, 0, 40, 40);
-    //[placaButtonMenu setBackgroundImage:placaButtonImage forState:UIControlStateNormal];
     placaButtonMenu.backgroundColor=kLiteRedColor;
     placaButtonMenu.layer.shadowColor = [[UIColor blackColor] CGColor];
     placaButtonMenu.layer.shadowOffset = CGSizeMake(0,1);
@@ -933,6 +949,9 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     
     if (deviceKind==2) {
         containerConfig.frame=CGRectMake(5, bannerViewPaginaUno.frame.size.height+40, paginaUnoContainer.frame.size.width-10, 165);
+    }
+    else if (deviceKind==3) {
+        containerConfig.frame=CGRectMake(5, (self.view.frame.size.height/2) - bannerViewPaginaUno.frame.size.height-60, paginaUnoContainer.frame.size.width-10, 165);
     }
     
     containerConfig.backgroundColor=[UIColor colorWithRed:0.21484375 green:0.21484375 blue:0.21484375 alpha:1];
@@ -1191,8 +1210,11 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     if (deviceKind==2) {
         containerPlacaPaginaTres.frame=CGRectMake(5, bannerView.frame.size.height+25, paginaTres.frame.size.width-10, 190);
     }
-    else{
+    else if(deviceKind==1){
         containerPlacaPaginaTres.frame=CGRectMake(5, bannerView.frame.size.height+20,paginaTres.frame.size.width-10, 190);
+    }
+    else if(deviceKind==3){
+        containerPlacaPaginaTres.frame=CGRectMake(5,(self.view.frame.size.height/2) - bannerView.frame.size.height-40,paginaTres.frame.size.width-10, 190);
     }
     containerPlacaPaginaTres.backgroundColor=[UIColor clearColor];
     [paginaTres addSubview:containerPlacaPaginaTres];
@@ -1274,7 +1296,7 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     
     UIView *viewContentSiguenos=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-10, 45)];
     if (deviceKind==3) {
-        viewContentSiguenos.center=CGPointMake(self.view.frame.size.width/2, 480);
+        viewContentSiguenos.center=CGPointMake(self.view.frame.size.width/2, 480-50);
     }
     else{
         viewContentSiguenos.center=CGPointMake(self.view.frame.size.width/2, 200);
@@ -2014,11 +2036,18 @@ int counter=0;
         [menu changeState];
     }
     else if (button.tag == 4003) {
-        LlamadasViewController *lVC=[[LlamadasViewController alloc]init];
-        lVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Llamadas"];
-        lVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [self presentModalViewController:lVC animated:YES];
-        [menu changeState];
+        if (deviceKind==3) {
+            [self.view bringSubviewToFront:alertMessage];
+            [alertMessage changeState];
+            [alertMessage.labelMensaje ponerTexto:@"Opción válida solo para iPhone." fuente:[UIFont fontWithName:kFontType size:32] color:kWhiteColor];
+        }
+        else{
+            LlamadasViewController *lVC=[[LlamadasViewController alloc]init];
+            lVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Llamadas"];
+            lVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            [self presentModalViewController:lVC animated:YES];
+            [menu changeState];
+        }
     }
     else if (button.tag == 4005) {
         OpcionesViewController *oVC=[[OpcionesViewController alloc]init];
@@ -2058,11 +2087,18 @@ int counter=0;
         [menu changeState];
     }
     else if (gestureRecognizer.view.tag == 5003) {
-        LlamadasViewController *lVC=[[LlamadasViewController alloc]init];
-        lVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Llamadas"];
-        lVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [self presentModalViewController:lVC animated:YES];
-        [menu changeState];
+        if (deviceKind==3) {
+            [self.view bringSubviewToFront:alertMessage];
+            [alertMessage changeState];
+            [alertMessage.labelMensaje ponerTexto:@"Opción válida solo para iPhone." fuente:[UIFont fontWithName:kFontType size:32] color:kWhiteColor];
+        }
+        else{
+            LlamadasViewController *lVC=[[LlamadasViewController alloc]init];
+            lVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Llamadas"];
+            lVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            [self presentModalViewController:lVC animated:YES];
+            [menu changeState];
+        }
     }
     else if (gestureRecognizer.view.tag == 5005) {
         OpcionesViewController *oVC=[[OpcionesViewController alloc]init];
@@ -2082,6 +2118,7 @@ int counter=0;
 }
 -(void)encenderTaximetro:(CustomSwitch*)customSwitch{
     if (customSwitch.isOn) {
+        [switchEncenderLS onOff:YES];
         Modelador *obj=[[Modelador alloc]init];
         int userCallAlpha;
         int emergencyCallAlpha;
@@ -2164,7 +2201,21 @@ int counter=0;
     }
 }
 -(void)apagarTaximetro:(CustomSwitch*)customSwitch{
-    NSLog(@"apagado");
+    if (switchEncenderLS.isOn) {
+        NSLog(@"apagado");
+        [switchEncender onOff:NO];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDuration:0.5];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        landScapeView.alpha=0;
+        [UIView commitAnimations];
+        [self encenderTaximetro:switchEncender];
+    }
+    else{
+        
+    }
+    
 }
 #pragma mark location
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)location fromLocation:(CLLocation *)oldLocation{
