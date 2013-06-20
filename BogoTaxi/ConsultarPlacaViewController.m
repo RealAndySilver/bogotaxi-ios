@@ -21,6 +21,12 @@
 #define kGrayColor [UIColor grayColor]
 #define kWhiteColor [UIColor whiteColor]
 
+#ifdef NSTextAlignmentCenter
+#define ALIGN_CENTER NSTextAlignmentCenter
+#else
+#define ALIGN_CENTER UITextAlignmentCenter
+#endif
+
 @interface ConsultarPlacaViewController ()
 
 @end
