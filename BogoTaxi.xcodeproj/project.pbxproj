@@ -99,6 +99,8 @@
 		7542BF7116600379008A51B7 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7542BF7016600378008A51B7 /* CustomButton.m */; };
 		75926D141665217000B3CDD5 /* Taximetro.m in Sources */ = {isa = PBXBuildFile; fileRef = 75926D131665217000B3CDD5 /* Taximetro.m */; };
 		75A959FE166D4A0F0012CFA5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75A959FD166D4A0F0012CFA5 /* CoreLocation.framework */; };
+		75BBBB3E17445AFA00AA9C96 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BBBB3D17445AFA00AA9C96 /* libFlurry.a */; };
+		75BBBB4017445C1800AA9C96 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BBBB3F17445C1800AA9C96 /* SystemConfiguration.framework */; };
 		75D52B141660351100EAC142 /* TaximetroManualViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D52B131660351100EAC142 /* TaximetroManualViewController.m */; };
 		75D6C68D1667F66600D90A0D /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D6C68C1667F66600D90A0D /* MenuView.m */; };
 		75E4F37B16697D7C007BE4C5 /* TelefonosTaxis.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75E4F37A16697D7C007BE4C5 /* TelefonosTaxis.plist */; };
@@ -246,6 +248,9 @@
 		75926D121665217000B3CDD5 /* Taximetro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Taximetro.h; sourceTree = "<group>"; };
 		75926D131665217000B3CDD5 /* Taximetro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Taximetro.m; sourceTree = "<group>"; };
 		75A959FD166D4A0F0012CFA5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		75BBBB3C17445AFA00AA9C96 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		75BBBB3D17445AFA00AA9C96 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
+		75BBBB3F17445C1800AA9C96 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		75D52B121660351100EAC142 /* TaximetroManualViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaximetroManualViewController.h; sourceTree = "<group>"; };
 		75D52B131660351100EAC142 /* TaximetroManualViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaximetroManualViewController.m; sourceTree = "<group>"; };
 		75D6C68B1667F66600D90A0D /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
@@ -263,6 +268,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75BBBB4017445C1800AA9C96 /* SystemConfiguration.framework in Frameworks */,
 				33C3E7971720B4300015F960 /* AddressBook.framework in Frameworks */,
 				3320AD0A171C624300A844F4 /* MessageUI.framework in Frameworks */,
 				3320AD02171C54E800A844F4 /* AdSupport.framework in Frameworks */,
@@ -277,6 +283,7 @@
 				7542BF02165E82D2008A51B7 /* UIKit.framework in Frameworks */,
 				7542BF04165E82D2008A51B7 /* Foundation.framework in Frameworks */,
 				7542BF06165E82D2008A51B7 /* CoreGraphics.framework in Frameworks */,
+				75BBBB3E17445AFA00AA9C96 /* libFlurry.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,8 +293,10 @@
 		7542BEF2165E82D2008A51B7 = {
 			isa = PBXGroup;
 			children = (
+				75BBBB3F17445C1800AA9C96 /* SystemConfiguration.framework */,
 				333F5EEB1721D433000FC5B6 /* Twitter.framework */,
 				33C3E7961720B4300015F960 /* AddressBook.framework */,
+				75BBBB3B17445AFA00AA9C96 /* Flurry */,
 				810645D5171F56A500B1F6E6 /* iconiPhone@x2.png */,
 				33A712C0171CBBDC009DF61B /* iconiPad.png */,
 				33A712BE171CBBD4009DF61B /* iconiPad@x2.png */,
@@ -483,6 +492,15 @@
 				336EB07E1727281100855E25 /* FollowMeButton.m */,
 			);
 			name = Objects;
+			sourceTree = "<group>";
+		};
+		75BBBB3B17445AFA00AA9C96 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				75BBBB3C17445AFA00AA9C96 /* Flurry.h */,
+				75BBBB3D17445AFA00AA9C96 /* libFlurry.a */,
+			);
+			path = Flurry;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -718,8 +736,8 @@
 		7542BF25165E82D2008A51B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Nicolle Jimenez Vasquez (5MQFB67YC8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nicolle Jimenez Vasquez (5MQFB67YC8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andres Abril (B5HW87Q346)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andres Abril (B5HW87Q346)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -729,9 +747,13 @@
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "BogoTaxi/BogoTaxi-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Flurry\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "52453942-F3FA-4ACF-A9DF-E31858EE6293";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "52453942-F3FA-4ACF-A9DF-E31858EE6293";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A21910EC-9546-434C-BF70-9FAE5A790393";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -739,8 +761,8 @@
 		7542BF26165E82D2008A51B7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Nicolle Jimenez Vasquez (5MQFB67YC8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nicolle Jimenez Vasquez (5MQFB67YC8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Andres Abril (B5HW87Q346)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andres Abril (B5HW87Q346)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -750,9 +772,13 @@
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "BogoTaxi/BogoTaxi-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Flurry\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "52453942-F3FA-4ACF-A9DF-E31858EE6293";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "52453942-F3FA-4ACF-A9DF-E31858EE6293";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A21910EC-9546-434C-BF70-9FAE5A790393";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

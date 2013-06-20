@@ -56,7 +56,7 @@
     labelMensaje.backgroundColor=[UIColor colorWithHue:0 saturation:0 brightness:0 alpha:0.1];
     //contentLabel.layer.cornerRadius=6;
     [labelMensaje setCentrado:YES];
-    labelMensaje.numberOfLines = 4;
+    labelMensaje.numberOfLines = 5;
     [labelMensaje setOverlayOff:YES];
     [contentView addSubview:labelMensaje];
     

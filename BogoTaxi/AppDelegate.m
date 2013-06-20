@@ -7,12 +7,14 @@
 //
 
 #import "AppDelegate.h"
-
+#import "Flurry.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    [Flurry startSession:@"384XW6P5B2GSZ7MQYC96"];
     return YES;
 }
 							

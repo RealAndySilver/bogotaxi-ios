@@ -180,6 +180,8 @@
     CustomSwitch *switchEncenderLS;
     CustomLabel *valorLabelLS;
     CustomLabel *valorInputLabelLS;
+    
+    UILabel *labelMovimiento;
 }
 @property (nonatomic, retain) UIAcceleration *lastAcceleration;
 @property (strong, nonatomic) CLGeocoder *geoCoder;

@@ -340,6 +340,22 @@
     mapViewGPS.tag=1000;
     [self.view addSubview:mapViewGPS];
     
+    //Este es el label que dice cuando el taxi está quieto
+    labelMovimiento =[[UILabel alloc]init];
+    labelMovimiento.frame=CGRectMake(0, 0, 150, 30);
+    labelMovimiento.center=CGPointMake(mapViewGPS.frame.size.width/2, mapViewGPS.frame.size.height-(labelMovimiento.frame.size.height/2)-5);
+    labelMovimiento.text=@"El taxi está quieto";
+    labelMovimiento.font=[UIFont fontWithName:kFontType size:18];
+    labelMovimiento.layer.cornerRadius=15;
+    labelMovimiento.textAlignment=UITextAlignmentCenter;
+    labelMovimiento.textAlignment=NSTextAlignmentCenter;
+    labelMovimiento.backgroundColor=[UIColor colorWithWhite:0 alpha:0.5];
+    labelMovimiento.textColor=[UIColor whiteColor];
+    labelMovimiento.alpha=0;
+    [mapViewGPS addSubview:labelMovimiento];
+    /////////////////////////////////////
+    
+    
     routeView2 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, mapViewGPS.frame.size.width, mapViewGPS.frame.size.height)];
     routeView2.userInteractionEnabled = NO;
     [mapViewGPS addSubview:routeView2];
@@ -664,13 +680,30 @@
 }
 #pragma mark método de movimiento
 -(void) empezoAMoverse {
-    NSLog(@"empezoAMoverse");
+    //NSLog(@"empezoAMoverse");
+    if (switchEncender.isOn) {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDuration:0.5];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        labelMovimiento.alpha=0;   
+        [UIView commitAnimations];
+        NSLog(@"empezoAMoverse");
+    }
 }
--(void) dejarDeMoverse {    
+-(void) dejarDeMoverse {
     tiempoQuieto = 0;
     estaMoviendose = NO;
-    NSLog(@"dejarDeMoverse");
-    
+    if (switchEncender.isOn) {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDuration:0.5];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        labelMovimiento.alpha=1;
+        [UIView commitAnimations];
+        NSLog(@"dejarDeMoverse");
+    }
+    //NSLog(@"dejarDeMoverse");
 }
 #pragma mark método de aceleración
 static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, double threshold) {
@@ -683,9 +716,9 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
 }
 
 -(void) accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
-    
+    float treshold=0.05;
 	if (self.lastAcceleration) {
-        if (!shakeDetected && IsDeviceShaking(self.lastAcceleration, acceleration, 0.035)) {
+        if (!shakeDetected && IsDeviceShaking(self.lastAcceleration, acceleration, treshold)) {
             shakeDetected = YES;
             //NSLog(@"unidades de secs %i", [self conversorSegundosAUnidades:seconds]);
             
@@ -706,7 +739,7 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
                 
             }
         }
-        else if (shakeDetected && !IsDeviceShaking(lastAcceleration, acceleration, 0.035)) {
+        else if (shakeDetected && !IsDeviceShaking(lastAcceleration, acceleration, treshold)) {
             shakeDetected = NO;
         }
     }
@@ -794,7 +827,7 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     UILabel *labelLlamadas=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 130, 30)];
     labelLlamadas.transform=rotarLabel;
     labelLlamadas.center = CGPointMake( (((self.view.frame.size.width-50)/6)*5+10)+15 , -100);
-    labelLlamadas.text=@"  Llamadas";
+    labelLlamadas.text=@"  Llamar";
     labelLlamadas.backgroundColor=kGreenColor;
     labelLlamadas.textColor=[UIColor whiteColor];
     labelLlamadas.font=[UIFont fontWithName:kFontType size:24];
@@ -1532,11 +1565,15 @@ int counter=0;
 #pragma mark Calcular
 -(void)callCalcular{
     //double distanciaPreliminar;
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Calculando";
+    [self performSelectorInBackground:@selector(secondThreadCallCalcular) withObject:nil];
+}
+-(void)secondThreadCallCalcular{
     if (ptoA && ptoB) {
         CLLocationDistance distanciaPreliminar=[ptoA distanceFromLocation:ptoB];
         routes =[self calculateRoutesFrom:ptoA.coordinate to:ptoB.coordinate];
-        hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.labelText = @"Calculando";
+        
         if (distanciaPreliminar<120000) {
             [self updateRouteView];
         }
@@ -1550,15 +1587,13 @@ int counter=0;
         calcular.valueRecorrido.text=[NSString stringWithFormat:@"%.2f Km",distanciaMetros/1000];
         [calcular changeState];
         [self.view bringSubviewToFront:calcular];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }
     else{
         [alertMessage changeState];
         [self.view bringSubviewToFront:alertMessage];
         [alertMessage.labelMensaje ponerTexto:@"Por favor selecciona un punto de Salida y un punto de Destino en el mapa." fuente:[UIFont fontWithName:kFontType size:32] color:kWhiteColor];
-
     }
-    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 #pragma mark Alert
@@ -2163,6 +2198,9 @@ int counter=0;
         banderaSecs = NO;
         totalQuieto=0;
         unidadesAjuste=0;
+        if (!estaMoviendose) {
+            labelMovimiento.alpha=1;
+        }
     }
     else{
         labelEncender.text=@"Encender";
@@ -2198,6 +2236,7 @@ int counter=0;
         [self clockStop];
         banderaSecs=YES;
         banderaU = NO;
+        labelMovimiento.alpha=0;
     }
 }
 -(void)apagarTaximetro:(CustomSwitch*)customSwitch{
@@ -2369,7 +2408,7 @@ int counter=0;
     else{
         [alertMessage changeState];
         [self.view bringSubviewToFront:alertMessage];
-        [alertMessage.labelMensaje ponerTexto:@"Tu mensaje no puede ser enviado en este momento, asegúrate que tienes conexión a internet y que tienes regitrada al menos una cuenta de facebook en tu dispositivo (Ajustes->facebook)." fuente:[UIFont fontWithName:kFontType size:24] color:kWhiteColor];
+        [alertMessage.labelMensaje ponerTexto:@"Tu mensaje no puede ser enviado en este momento, asegúrate que tienes conexión a internet y que tienes registrada al menos una cuenta de facebook en tu dispositivo (Ajustes->facebook)." fuente:[UIFont fontWithName:kFontType size:21] color:kWhiteColor];
     }
 }
 -(void)publicarEnTwttConMensaje:(NSString*)mensaje{
@@ -2388,7 +2427,7 @@ int counter=0;
     {
         [alertMessage changeState];
         [self.view bringSubviewToFront:alertMessage];
-        [alertMessage.labelMensaje ponerTexto:@"Tu mensaje no puede ser enviado en este momento, asegúrate que tienes conexión a internet y que tienes regitrada al menos una cuenta de twitter en tu dispositivo (Ajustes->twitter)." fuente:[UIFont fontWithName:kFontType size:24] color:kWhiteColor];
+        [alertMessage.labelMensaje ponerTexto:@"Tu mensaje no puede ser enviado en este momento, asegúrate que tienes conexión a internet y que tienes registrada al menos una cuenta de twitter en tu dispositivo (Ajustes->twitter)." fuente:[UIFont fontWithName:kFontType size:21] color:kWhiteColor];
     }
 }
 -(NSUInteger)supportedInterfaceOrientations{

@@ -84,7 +84,7 @@
     CustomLabel *mensaje=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, containerMensaje.frame.size.width-20, 290)];
     mensaje.center=CGPointMake(containerMensaje.frame.size.width/2, containerMensaje.frame.size.height/2);
     
-    [mensaje ponerTexto:@"Esta aplicación fue creada con fines de entretenimiento, y no es un taximetro profesional. Las mediciones que este realice pueden no ser del todo exactas. Las llamadas realizadas al 123 son de total responsabilidad del usuario de BogoTaxi. iAm Studio SAS no se hace responsable del manejo inadecuado que el usuario de a los componentes de seguridad de la aplicación ni de los costos adicionales que puedan tener. Recuerda que esta es una herramienta que te puede orientar y ayudar en caso de emergencia. Utilízala con prudencia." fuente:[UIFont fontWithName:kFontType size:20] color:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1]];
+    [mensaje ponerTexto:@"Esta aplicación fue creada con fines de entretenimiento, y no es un taximetro profesional. Las mediciones que este realice pueden no ser del todo exactas. Las llamadas realizadas al 123 son de total responsabilidad del usuario de BogoTaxi. iAm Studio SAS no se hace responsable del manejo inadecuado que el usuario de a los componentes de seguridad de la aplicación ni de los costos adicionales que puedan tener. Recuerde que esta es una herramienta que l@ puede orientar y ayudar en caso de emergencia. Utilícela con prudencia." fuente:[UIFont fontWithName:kFontType size:20] color:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1]];
     mensaje.numberOfLines = 18;
     mensaje.overlayLabel.numberOfLines=18;
     [mensaje setOverlayOff:NO];

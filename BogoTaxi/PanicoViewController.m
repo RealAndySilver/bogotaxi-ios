@@ -87,11 +87,11 @@
     }
     else if (deviceKind==2){
         redSocialLabel.font=[UIFont fontWithName:kFontType size:24];
-        redSocialLabel.center=CGPointMake(195, self.view.frame.size.height-90);
+        redSocialLabel.center=CGPointMake(210, self.view.frame.size.height-90);
     }
     else{
         redSocialLabel.font=[UIFont fontWithName:kFontType size:24];
-        redSocialLabel.center=CGPointMake(195, self.view.frame.size.height-70);
+        redSocialLabel.center=CGPointMake(210, self.view.frame.size.height-70);
     }
     [redSocialLabel setOverlayOff:YES];
     [self.view addSubview:redSocialLabel];
