@@ -892,7 +892,7 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     UILabel *labelFollow=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 130, 30)];
     labelFollow.transform=rotarLabel;
     labelFollow.center = CGPointMake( (((self.view.frame.size.width-50)/6)*3+10)+15 , -100);
-    labelFollow.text=@"  Siguenos";
+    labelFollow.text=@"  Síguenos";
     labelFollow.backgroundColor=kBlueColor;
     labelFollow.textColor=[UIColor whiteColor];
     labelFollow.font=[UIFont fontWithName:kFontType size:24];
@@ -1253,12 +1253,23 @@ static BOOL IsDeviceShaking(UIAcceleration* last, UIAcceleration* current, doubl
     [paginaTres addSubview:containerPlacaPaginaTres];
     
     UIButton *buttonConsultar=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 90, 40)];
-    buttonConsultar.center=CGPointMake(self.view.frame.size.width/2, 130);
+    buttonConsultar.center=CGPointMake(self.view.frame.size.width/4, 130);
     buttonConsultar.titleLabel.font=[UIFont fontWithName:kFontType size:24];
     [buttonConsultar setTitle:@"Consultar" forState:UIControlStateNormal];
     buttonConsultar.backgroundColor=kDarkRedColor;
     [buttonConsultar addTarget:self action:@selector(consultar) forControlEvents:UIControlEventTouchUpInside];
     [containerPlacaPaginaTres addSubview:buttonConsultar];
+    
+    //Este botón activa un action sheet que permite elejir el medio de envío de la placa
+    //Sin embargo estará deshabilitado en la versión Lite
+                UIButton *botonEnviar=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 90, 40)];
+                botonEnviar.center=CGPointMake(self.view.frame.size.width/1.38, 130);
+                botonEnviar.titleLabel.font=[UIFont fontWithName:kFontType size:24];
+                [botonEnviar setTitle:@"Enviar" forState:UIControlStateNormal];
+                botonEnviar.backgroundColor=kDarkRedColor;
+                [botonEnviar addTarget:self action:@selector(callActionSheet) forControlEvents:UIControlEventTouchUpInside];
+                [containerPlacaPaginaTres addSubview:botonEnviar];
+    /////////////////////////////////////////
     
     UIView *placaContainer=[[UIView alloc]initWithFrame:CGRectMake(30, 20, containerPlacaPaginaTres.frame.size.width-60, 90)];
     placaContainer.backgroundColor=kWhiteColor;
@@ -2268,7 +2279,7 @@ int counter=0;
         }
         zoomLocation2.latitude = location.coordinate.latitude;
         zoomLocation2.longitude = location.coordinate.longitude;
-        
+        mapViewGPS.showsUserLocation = YES;
         MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation,
                                                                            0.5*METERS_PER_MILE,
                                                                            0.5*METERS_PER_MILE);
@@ -2481,4 +2492,102 @@ int counter=0;
     //NSLog(@"rotating");
     return NO;
 }
+#pragma mark action sheet action
+-(void)callActionSheet{
+    [placa resignFirstResponder];
+    UIActionSheet *actionSheet=[[UIActionSheet alloc]initWithTitle:@"Selecciona el medio para enviar la placa:" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Cancelar" otherButtonTitles:@"Facebook",@"Twitter",@"Mail",@"SMS/iMessage", nil];
+    actionSheet.actionSheetStyle=UIActionSheetStyleBlackTranslucent;
+    [actionSheet showInView:containerPlacaPaginaTres];
+}
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    Modelador *obj=[[Modelador alloc]init];
+    NSString *textoParaElMensaje=[NSString stringWithFormat:@"Voy en un Taxi de placas %@ (Enviado desde BogoTaxi Pro).", placa.text];
+    if (buttonIndex==0) {
+        NSLog(@"Dismiss");
+    }
+    else if (buttonIndex==1){
+        NSLog(@"Facebook");
+        [self compartirPlacaEnFbConMensaje:textoParaElMensaje];
+    }
+    else if (buttonIndex==2){
+        NSLog(@"Twitter");
+        [self compartirPlacaEnTwttConMensaje:textoParaElMensaje];
+    }
+    else if (buttonIndex==3){
+        NSLog(@"Mail");
+        NSString *correo;
+        if ([obj getMail]==nil) {
+            correo=@"";
+        }
+        else
+            correo=[obj getMail];
+        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+		controller.mailComposeDelegate = self;
+		[controller setSubject:@"Aviso de BogoTaxi"];
+        [controller setToRecipients:[NSArray arrayWithObject:correo]];
+		[controller setMessageBody:textoParaElMensaje isHTML:YES];
+		[self presentModalViewController:controller animated:YES];
+    }
+    else if (buttonIndex==4){
+        NSLog(@"SMS");
+
+        MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+        if([MFMessageComposeViewController canSendText])
+        {
+            NSString *smsTel=@"";
+            if ([[obj getNumeroSMS] isEqualToString:@" "]||[[obj getNumeroSMS] isEqualToString:@""]||[obj getNumeroSMS]==nil
+                ||[[obj getNumeroSMS] isEqualToString:@"0"]) {
+                smsTel=@"";
+            }
+            else{
+                smsTel=[obj getNumeroSMS];
+            }
+            
+            NSLog(@"Número %@",smsTel);
+            controller.body = textoParaElMensaje;
+            controller.recipients = [NSArray arrayWithObjects:smsTel, nil];
+            controller.messageComposeDelegate = self;
+            [self presentModalViewController:controller animated:YES];
+        }
+    }
+}
+#pragma mark action sheet actions
+-(void)compartirPlacaEnFbConMensaje:(NSString*)mensaje{
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]){
+        SLComposeViewController *controller=[SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        SLComposeViewControllerCompletionHandler block=^(SLComposeViewControllerResult result){
+            if (result == SLComposeViewControllerResultCancelled) {
+                // NSLog(@"Paila cancelado");
+            }
+            else{
+                //NSLog(@"Listo parcero");
+            }
+            [controller dismissViewControllerAnimated:YES completion:nil];
+        };
+        controller.completionHandler=block;
+        [controller setInitialText:mensaje];
+        [self presentViewController:controller animated:YES completion:nil];
+
+    }
+    else{
+        [alertMessage changeState];
+        [self.view bringSubviewToFront:alertMessage];
+        [alertMessage.labelMensaje ponerTexto:@"Tu placa no puede ser enviada en este momento, asegúrate que tienes conexión a internet y que tienes registrada al menos una cuenta de facebook en tu dispositivo (Ajustes->facebook)." fuente:[UIFont fontWithName:kFontType size:21] color:kWhiteColor];
+    }
+}
+-(void)compartirPlacaEnTwttConMensaje:(NSString*)mensaje{
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
+    {
+        SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        [tweetSheet setInitialText:mensaje];
+        [self presentModalViewController:tweetSheet animated:NO];
+    }
+    else
+    {
+        [alertMessage changeState];
+        [self.view bringSubviewToFront:alertMessage];
+        [alertMessage.labelMensaje ponerTexto:@"Tu placa no puede ser enviada en este momento, asegúrate que tienes conexión a internet y que tienes registrada al menos una cuenta de Twitter en tu dispositivo (Ajustes->Twitter)." fuente:[UIFont fontWithName:kFontType size:21] color:kWhiteColor];
+    }
+}
+
 @end

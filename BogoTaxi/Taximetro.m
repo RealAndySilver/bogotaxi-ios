@@ -50,18 +50,16 @@
 }
 -(void)iniciarConCiudad:(NSString*)ciudad{
     if ([ciudad isEqualToString:@"bogota"]) {
-        costoUnidad=68;
         unidadesCarreraMinima=50;
         unidadesDeArranque=25;
-        costoAero=3400;
-        costoNoc=1600;
+        costoAero=3500;
+        costoNoc=1700;
         costoTerm=500;
         costoPuerta=600;
         segundosDeEspera=30;
         metrosParaCambio=100;
         costoUnidad=70;
         carreraMinimaFloat=3500;
-
         medicionEnPrecio=NO;
         numeroDeEmergenciasLocal=123;
     }

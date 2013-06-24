@@ -34,7 +34,7 @@
 #import "AdvertenciaViewController.h"
 #import "FollowMeButton.h"
 
-@interface MainViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UIAccelerometerDelegate>{
+@interface MainViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UIAccelerometerDelegate,UIActionSheetDelegate>{
     UIScrollView *mainScrollView;
     MenuView *menu;
     CalcularView *calcular;

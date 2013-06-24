@@ -138,6 +138,14 @@
     [containerConfig addSubview:terminalSwitch];
     [terminalSwitch addTarget:self action:@selector(switchChanged)];
     
+    UILabel *disclosureLabel=[[UILabel alloc]initWithFrame:CGRectMake(margenLabels, contenedorCalcular.frame.origin.y-60, self.frame.size.width-20, 50)];
+    disclosureLabel.numberOfLines=2;
+    disclosureLabel.font=[UIFont fontWithName:kFontType size:15];
+    disclosureLabel.backgroundColor=[UIColor clearColor];
+    disclosureLabel.textColor= kWhiteColor;
+    disclosureLabel.text=@"Recuerda que este valor es aproximado. Puede variar de acuerdo al tráfico y al tiempo de espera en el vehículo.";
+    [self addSubview:disclosureLabel];
+    
     botonVolverAlMapa=[[CustomButton alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
     botonVolverAlMapa.center=CGPointMake(60, self.frame.size.height-(botonVolverAlMapa.frame.size.height/2)-8);
     [botonVolverAlMapa setTitle:@"Volver al Mapa" forState:UIControlStateNormal];

@@ -918,7 +918,7 @@
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [alert changeState];
     [self.view bringSubviewToFront:alert];
-    [alert.labelMensaje ponerTexto:@"No tienes conexion a internet, por favor conectate a una red" fuente:[UIFont fontWithName:kFontType size:32] color:kWhiteColor];
+    [alert.labelMensaje ponerTexto:@"No tienes conexión a internet, por favor conéctate a una red" fuente:[UIFont fontWithName:kFontType size:32] color:kWhiteColor];
 }
 -(void)backScrollContent{
     [alertReporta changeState];
