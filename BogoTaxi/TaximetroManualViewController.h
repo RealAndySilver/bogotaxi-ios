@@ -12,10 +12,11 @@
 #import "CustomLabel.h"
 #import "BannerView.h"
 #import "Taximetro.h"
+#import "FileSaver.h"
 
 @interface TaximetroManualViewController : UIViewController{
     int deviceKind;//1=iphone4, 2=iphone5, 3=ipad.
-
+    
     CustomLabel *configTituloLabel;
     UIView *containerConfig;
     CustomLabel *nocDomFesLabel;
@@ -31,6 +32,13 @@
     CustomLabel *valorInputLabel;
     Taximetro *taximetro;
     UISlider *slider;
+    
+    NSMutableArray *arrayViews;
+    //int unidades;
+    //UIView *viewNocDomFesLabel;
+    //UIView *viewAero;
+    //UIView *viewPuerta;
+    //UIView *viewTerm;
 }
 
 @end

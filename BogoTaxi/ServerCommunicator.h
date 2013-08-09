@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "IAmCoder.h"
+#import "FileSaver.h"
 
 @interface ServerCommunicator : NSObject<UITextFieldDelegate,NSXMLParserDelegate>{
     id caller;

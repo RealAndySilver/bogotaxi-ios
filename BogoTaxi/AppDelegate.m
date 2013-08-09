@@ -15,6 +15,35 @@
     // Override point for customization after application launch.
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     [Flurry startSession:@"384XW6P5B2GSZ7MQYC96"];
+    FileSaver *file=[[FileSaver alloc]init];
+    NSString *ciudad=[file getLastCity];
+    NSString *ciudadName=[file getLastNameCity];
+    if ([ciudad isEqualToString:@""]||[ciudad isEqualToString:@" "]||ciudad ==nil) {
+        [file setLastCity:@"med"];
+    }
+    if ([ciudadName isEqualToString:@""]||[ciudadName isEqualToString:@" "]||ciudadName ==nil) {
+        [file setLastNameCity:@"Medellín"];
+    }
+    if (![file getDictionary:@"taximetromed"]) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"taximetroMedellin" ofType:@"plist"];
+        NSMutableDictionary *resultado=[[NSMutableDictionary alloc]initWithContentsOfFile:path];
+        [file setDictionary:resultado withKey:@"taximetromed"];
+    }
+    if (![file getDictionary:@"taximetrocal"]) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"taximetroCali" ofType:@"plist"];
+        NSMutableDictionary *resultado=[[NSMutableDictionary alloc]initWithContentsOfFile:path];
+        [file setDictionary:resultado withKey:@"taximetrocal"];
+    }
+    if (![file getDictionary:@"taximetrobog"]) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"taximetroBogota" ofType:@"plist"];
+        NSMutableDictionary *resultado=[[NSMutableDictionary alloc]initWithContentsOfFile:path];
+        [file setDictionary:resultado withKey:@"taximetrobog"];
+    }
+    if (![file getDictionary:@"ciudades"]) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"Ciudades" ofType:@"plist"];
+        NSMutableDictionary *resultado=[[NSMutableDictionary alloc]initWithContentsOfFile:path];
+        [file setDictionary:resultado withKey:@"ciudades"];
+    }
     return YES;
 }
 							

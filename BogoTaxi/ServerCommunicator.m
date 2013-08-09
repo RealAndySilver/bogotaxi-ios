@@ -22,10 +22,11 @@
 }
 -(void)callServerWithMethod:(NSString*)method
                andParameter:(NSString*)parameter{
+    FileSaver *file=[[FileSaver alloc]init];
     parameter=[parameter stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *dateUTC=[self dateString];
     NSString *hash=[IAmCoder hash256:dateUTC];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://bogo-taxi.com/service?event=%@&%@&time=%@&hash=%@&os=ios",method,parameter,dateUTC,hash]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://bogo-taxi.com/service?event=%@&%@&time=%@&hash=%@&os=ios&ciudad=%@",method,parameter,dateUTC,hash,[file getLastCity]]];
     methodName=method;
     NSLog(@"url %@",url);
 	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url];
@@ -68,7 +69,7 @@
     NSLog(@"Todos los datos recibidos %@",resDic);
     NSString *str=[[NSString alloc]initWithData:webData encoding:NSUTF8StringEncoding];
     NSLog(@"PlainString %@",str);
-
+    
     if ([caller respondsToSelector:@selector(receivedDataFromServer:)]) {
         [caller performSelector:@selector(receivedDataFromServer:) withObject:self];
     }

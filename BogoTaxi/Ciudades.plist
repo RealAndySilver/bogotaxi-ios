@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>array</key>
+	<array>
+		<dict>
+			<key>Acr</key>
+			<string>bog</string>
+			<key>Nombre</key>
+			<string>Bogotá</string>
+		</dict>
+		<dict>
+			<key>Acr</key>
+			<string>med</string>
+			<key>Nombre</key>
+			<string>Medellín</string>
+		</dict>
+		<dict>
+			<key>Acr</key>
+			<string>cal</string>
+			<key>Nombre</key>
+			<string>Cali</string>
+		</dict>
+	</array>
+</dict>
+</plist>

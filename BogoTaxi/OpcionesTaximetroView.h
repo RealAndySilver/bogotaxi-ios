@@ -21,9 +21,10 @@
     UIView *contenidoOpcionesView;
     CustomLabel *resumenViajeLabel;
     CustomSwitch *switchResumen;
-    CustomButton *estadisticas;
+    
 }
 @property(nonatomic,retain) CustomButton *estadisticas;
+@property(nonatomic,retain) CustomButton *ciudades;
 -(void)changeState;
 -(void)construirMenuConDeviceKind:(int)deviceKind;
 

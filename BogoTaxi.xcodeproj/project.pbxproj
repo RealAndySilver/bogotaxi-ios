@@ -27,6 +27,14 @@
 		3348559216F7901F00929946 /* RegionAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3348559016F7901F00929946 /* RegionAnnotationView.m */; };
 		3349BEA8172EDC7800EBAF8E /* logoiAmAboutBW.png in Resources */ = {isa = PBXBuildFile; fileRef = 3349BEA7172EDC7800EBAF8E /* logoiAmAboutBW.png */; };
 		334AC8BE167A967600F077A0 /* AlertMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334AC8BD167A967600F077A0 /* AlertMessageView.m */; };
+		334BCB0817B5501E00FC5B3E /* ActualizarTaximetroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 334BCB0517B5501E00FC5B3E /* ActualizarTaximetroViewController.m */; };
+		334BCB0917B5501E00FC5B3E /* OpcionesCiudadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 334BCB0717B5501E00FC5B3E /* OpcionesCiudadViewController.m */; };
+		334BCB0C17B5510300FC5B3E /* CustomCellCiudades.m in Sources */ = {isa = PBXBuildFile; fileRef = 334BCB0B17B5510300FC5B3E /* CustomCellCiudades.m */; };
+		334BCB1017B5536300FC5B3E /* Ciudad.m in Sources */ = {isa = PBXBuildFile; fileRef = 334BCB0F17B5536200FC5B3E /* Ciudad.m */; };
+		334BCB1217B553A900FC5B3E /* Ciudades.plist in Resources */ = {isa = PBXBuildFile; fileRef = 334BCB1117B553A900FC5B3E /* Ciudades.plist */; };
+		334BCB1617B553BA00FC5B3E /* taximetroMedellin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 334BCB1317B553BA00FC5B3E /* taximetroMedellin.plist */; };
+		334BCB1717B553BA00FC5B3E /* taximetroCali.plist in Resources */ = {isa = PBXBuildFile; fileRef = 334BCB1417B553BA00FC5B3E /* taximetroCali.plist */; };
+		334BCB1817B553BA00FC5B3E /* taximetroBogota.plist in Resources */ = {isa = PBXBuildFile; fileRef = 334BCB1517B553BA00FC5B3E /* taximetroBogota.plist */; };
 		334CC2FA173967FC00A5C839 /* followButton2.png in Resources */ = {isa = PBXBuildFile; fileRef = 334CC2F9173967FC00A5C839 /* followButton2.png */; };
 		334E2A00167103F2005D1E9C /* OpcionesCompartirView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334E29FF167103F2005D1E9C /* OpcionesCompartirView.m */; };
 		334E2A04167141B0005D1E9C /* OpcionesContactoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334E2A03167141AF005D1E9C /* OpcionesContactoView.m */; };
@@ -142,6 +150,18 @@
 		3349BEA7172EDC7800EBAF8E /* logoiAmAboutBW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoiAmAboutBW.png; sourceTree = "<group>"; };
 		334AC8BC167A967600F077A0 /* AlertMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertMessageView.h; sourceTree = "<group>"; };
 		334AC8BD167A967600F077A0 /* AlertMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertMessageView.m; sourceTree = "<group>"; };
+		334BCB0417B5501E00FC5B3E /* ActualizarTaximetroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActualizarTaximetroViewController.h; sourceTree = "<group>"; };
+		334BCB0517B5501E00FC5B3E /* ActualizarTaximetroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActualizarTaximetroViewController.m; sourceTree = "<group>"; };
+		334BCB0617B5501E00FC5B3E /* OpcionesCiudadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpcionesCiudadViewController.h; sourceTree = "<group>"; };
+		334BCB0717B5501E00FC5B3E /* OpcionesCiudadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpcionesCiudadViewController.m; sourceTree = "<group>"; };
+		334BCB0A17B5510300FC5B3E /* CustomCellCiudades.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCellCiudades.h; sourceTree = "<group>"; };
+		334BCB0B17B5510300FC5B3E /* CustomCellCiudades.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCellCiudades.m; sourceTree = "<group>"; };
+		334BCB0E17B5536200FC5B3E /* Ciudad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ciudad.h; sourceTree = "<group>"; };
+		334BCB0F17B5536200FC5B3E /* Ciudad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ciudad.m; sourceTree = "<group>"; };
+		334BCB1117B553A900FC5B3E /* Ciudades.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Ciudades.plist; sourceTree = "<group>"; };
+		334BCB1317B553BA00FC5B3E /* taximetroMedellin.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = taximetroMedellin.plist; sourceTree = "<group>"; };
+		334BCB1417B553BA00FC5B3E /* taximetroCali.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = taximetroCali.plist; sourceTree = "<group>"; };
+		334BCB1517B553BA00FC5B3E /* taximetroBogota.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = taximetroBogota.plist; sourceTree = "<group>"; };
 		334CC2F9173967FC00A5C839 /* followButton2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = followButton2.png; sourceTree = "<group>"; };
 		334E29FE167103F2005D1E9C /* OpcionesCompartirView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpcionesCompartirView.h; sourceTree = "<group>"; };
 		334E29FF167103F2005D1E9C /* OpcionesCompartirView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpcionesCompartirView.m; sourceTree = "<group>"; };
@@ -288,6 +308,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		334BCB0D17B5516300FC5B3E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7542BF1F165E82D2008A51B7 /* MainViewController.h */,
+				7542BF20165E82D2008A51B7 /* MainViewController.m */,
+				335CA21316EE9C450078D488 /* ConsultarPlacaViewController.h */,
+				335CA21416EE9C450078D488 /* ConsultarPlacaViewController.m */,
+				335CA23116EE9F440078D488 /* DetailReporteViewController.h */,
+				335CA23216EE9F440078D488 /* DetailReporteViewController.m */,
+				75D52B121660351100EAC142 /* TaximetroManualViewController.h */,
+				75D52B131660351100EAC142 /* TaximetroManualViewController.m */,
+				331D618E1668154900F02BD9 /* LlamadasViewController.h */,
+				331D618F1668154900F02BD9 /* LlamadasViewController.m */,
+				334ED8A2166E6D7E001DD624 /* OpcionesViewController.h */,
+				334ED8A3166E6D7E001DD624 /* OpcionesViewController.m */,
+				331481D816791E59006AB746 /* EstadisticasViewController.h */,
+				331481D916791E59006AB746 /* EstadisticasViewController.m */,
+				332AC87A167BD70E001A187B /* PanicoViewController.h */,
+				332AC87B167BD70E001A187B /* PanicoViewController.m */,
+				33C430B61714A1CE006749C0 /* LlamadaDeEmergenciaViewController.h */,
+				33C430B71714A1CF006749C0 /* LlamadaDeEmergenciaViewController.m */,
+				33462741167F947200578B79 /* AdvertenciaViewController.h */,
+				33462742167F947200578B79 /* AdvertenciaViewController.m */,
+				3346273D167F81D900578B79 /* AcercaDeViewController.h */,
+				3346273E167F81D900578B79 /* AcercaDeViewController.m */,
+				334BCB0417B5501E00FC5B3E /* ActualizarTaximetroViewController.h */,
+				334BCB0517B5501E00FC5B3E /* ActualizarTaximetroViewController.m */,
+				334BCB0617B5501E00FC5B3E /* OpcionesCiudadViewController.h */,
+				334BCB0717B5501E00FC5B3E /* OpcionesCiudadViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		7542BEF2165E82D2008A51B7 = {
 			isa = PBXGroup;
 			children = (
@@ -305,13 +358,6 @@
 				33A712B2171CB445009DF61B /* Default-Portrait~ipad.png */,
 				33A712B0171CB3F0009DF61B /* Default-Portrait@2x~ipad.png */,
 				7552BC961773D3D400BFCC5B /* Icons */,
-				3320AD09171C624300A844F4 /* MessageUI.framework */,
-				3320AD01171C54E800A844F4 /* AdSupport.framework */,
-				3320ACFF171C54D800A844F4 /* Accounts.framework */,
-				3320ACFB171C52C700A844F4 /* Social.framework */,
-				33F0DBD3170E23D5009581CB /* StoreKit.framework */,
-				3368F00616F912480093C022 /* libicucore.A.dylib */,
-				335CA23416EE9FDD0078D488 /* CoreTelephony.framework */,
 				7542BF07165E82D2008A51B7 /* BogoTaxi */,
 				7542BF00165E82D2008A51B7 /* Frameworks */,
 				7542BEFE165E82D2008A51B7 /* Products */,
@@ -329,6 +375,13 @@
 		7542BF00165E82D2008A51B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3320AD09171C624300A844F4 /* MessageUI.framework */,
+				3320AD01171C54E800A844F4 /* AdSupport.framework */,
+				3320ACFF171C54D800A844F4 /* Accounts.framework */,
+				3320ACFB171C52C700A844F4 /* Social.framework */,
+				33F0DBD3170E23D5009581CB /* StoreKit.framework */,
+				3368F00616F912480093C022 /* libicucore.A.dylib */,
+				335CA23416EE9FDD0078D488 /* CoreTelephony.framework */,
 				75A959FD166D4A0F0012CFA5 /* CoreLocation.framework */,
 				7542BF4E165EDC7B008A51B7 /* MapKit.framework */,
 				7542BF30165E917E008A51B7 /* QuartzCore.framework */,
@@ -365,34 +418,7 @@
 				7542BF11165E82D2008A51B7 /* AppDelegate.m */,
 				7542BF19165E82D2008A51B7 /* MainStoryboard_iPhone.storyboard */,
 				7542BF1C165E82D2008A51B7 /* MainStoryboard_iPad.storyboard */,
-				335CA22E16EE9F1D0078D488 /* MBProgressHud.h */,
-				335CA22F16EE9F1D0078D488 /* MBProgressHud.m */,
-				335CA21016EE9B9A0078D488 /* IAmCoder.h */,
-				335CA21116EE9B9A0078D488 /* IAmCoder.m */,
-				335CA20D16EE9B820078D488 /* ServerCommunicator.h */,
-				335CA20E16EE9B820078D488 /* ServerCommunicator.m */,
-				7542BF1F165E82D2008A51B7 /* MainViewController.h */,
-				7542BF20165E82D2008A51B7 /* MainViewController.m */,
-				335CA21316EE9C450078D488 /* ConsultarPlacaViewController.h */,
-				335CA21416EE9C450078D488 /* ConsultarPlacaViewController.m */,
-				335CA23116EE9F440078D488 /* DetailReporteViewController.h */,
-				335CA23216EE9F440078D488 /* DetailReporteViewController.m */,
-				75D52B121660351100EAC142 /* TaximetroManualViewController.h */,
-				75D52B131660351100EAC142 /* TaximetroManualViewController.m */,
-				331D618E1668154900F02BD9 /* LlamadasViewController.h */,
-				331D618F1668154900F02BD9 /* LlamadasViewController.m */,
-				334ED8A2166E6D7E001DD624 /* OpcionesViewController.h */,
-				334ED8A3166E6D7E001DD624 /* OpcionesViewController.m */,
-				331481D816791E59006AB746 /* EstadisticasViewController.h */,
-				331481D916791E59006AB746 /* EstadisticasViewController.m */,
-				332AC87A167BD70E001A187B /* PanicoViewController.h */,
-				332AC87B167BD70E001A187B /* PanicoViewController.m */,
-				33C430B61714A1CE006749C0 /* LlamadaDeEmergenciaViewController.h */,
-				33C430B71714A1CF006749C0 /* LlamadaDeEmergenciaViewController.m */,
-				33462741167F947200578B79 /* AdvertenciaViewController.h */,
-				33462742167F947200578B79 /* AdvertenciaViewController.m */,
-				3346273D167F81D900578B79 /* AcercaDeViewController.h */,
-				3346273E167F81D900578B79 /* AcercaDeViewController.m */,
+				334BCB0D17B5516300FC5B3E /* ViewControllers */,
 				7542BF2C165E8D92008A51B7 /* SubViews */,
 				7542BF08165E82D2008A51B7 /* Supporting Files */,
 			);
@@ -405,6 +431,10 @@
 				75E4F37A16697D7C007BE4C5 /* TelefonosTaxis.plist */,
 				7542BF45165EA75F008A51B7 /* league_gothic.ttf */,
 				7542BF09165E82D2008A51B7 /* BogoTaxi-Info.plist */,
+				334BCB1117B553A900FC5B3E /* Ciudades.plist */,
+				334BCB1317B553BA00FC5B3E /* taximetroMedellin.plist */,
+				334BCB1417B553BA00FC5B3E /* taximetroCali.plist */,
+				334BCB1517B553BA00FC5B3E /* taximetroBogota.plist */,
 				7542BF0A165E82D2008A51B7 /* InfoPlist.strings */,
 				7542BF0D165E82D2008A51B7 /* main.m */,
 				7542BF0F165E82D2008A51B7 /* BogoTaxi-Prefix.pch */,
@@ -435,6 +465,8 @@
 				335CA21916EE9DE70078D488 /* CustomCellReporteUno.m */,
 				335CA21C16EE9E250078D488 /* CustomCellTop.h */,
 				335CA21D16EE9E250078D488 /* CustomCellTop.m */,
+				334BCB0A17B5510300FC5B3E /* CustomCellCiudades.h */,
+				334BCB0B17B5510300FC5B3E /* CustomCellCiudades.m */,
 				33459DA91669073E001B7DBF /* InformacionLlamadaView.h */,
 				33459DAA1669073E001B7DBF /* InformacionLlamadaView.m */,
 				333740FA166FA76300510C52 /* CalcularView.h */,
@@ -467,10 +499,18 @@
 		75926D101665215A00B3CDD5 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				335CA22E16EE9F1D0078D488 /* MBProgressHud.h */,
+				335CA22F16EE9F1D0078D488 /* MBProgressHud.m */,
+				335CA21016EE9B9A0078D488 /* IAmCoder.h */,
+				335CA21116EE9B9A0078D488 /* IAmCoder.m */,
+				335CA20D16EE9B820078D488 /* ServerCommunicator.h */,
+				335CA20E16EE9B820078D488 /* ServerCommunicator.m */,
 				335CA22816EE9EB90078D488 /* DeviceInfo.h */,
 				335CA22916EE9EB90078D488 /* DeviceInfo.m */,
 				335CA22216EE9E6A0078D488 /* Reportes.h */,
 				335CA22316EE9E6B0078D488 /* Reportes.m */,
+				334BCB0E17B5536200FC5B3E /* Ciudad.h */,
+				334BCB0F17B5536200FC5B3E /* Ciudad.m */,
 				335CA22516EE9E980078D488 /* TopTaxi.h */,
 				335CA22616EE9E980078D488 /* TopTaxi.m */,
 				335CA21F16EE9E520078D488 /* Taxista.h */,
@@ -595,6 +635,10 @@
 				75F36FF51774DABC00581DC0 /* iconiPhone@x2.png in Resources */,
 				75F36FF71774DAC900581DC0 /* iconiPad.png in Resources */,
 				75F36FF91774DACB00581DC0 /* iconiPad@x2.png in Resources */,
+				334BCB1217B553A900FC5B3E /* Ciudades.plist in Resources */,
+				334BCB1617B553BA00FC5B3E /* taximetroMedellin.plist in Resources */,
+				334BCB1717B553BA00FC5B3E /* taximetroCali.plist in Resources */,
+				334BCB1817B553BA00FC5B3E /* taximetroBogota.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,6 +696,10 @@
 				33C430B81714A1CF006749C0 /* LlamadaDeEmergenciaViewController.m in Sources */,
 				336EB0831727281100855E25 /* FollowMeButton.m in Sources */,
 				81F6B6DD1728E4DC00150D51 /* AlertViewReporta.m in Sources */,
+				334BCB0817B5501E00FC5B3E /* ActualizarTaximetroViewController.m in Sources */,
+				334BCB0917B5501E00FC5B3E /* OpcionesCiudadViewController.m in Sources */,
+				334BCB0C17B5510300FC5B3E /* CustomCellCiudades.m in Sources */,
+				334BCB1017B5536300FC5B3E /* Ciudad.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

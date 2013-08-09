@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>version</key>
+	<string>0.1</string>
+	<key>unidadesCarreraMinima</key>
+	<integer>56</integer>
+	<key>unidadesDeArranque</key>
+	<integer>33</integer>
+	<key>costoAero</key>
+	<integer>57000</integer>
+	<key>costoNoc</key>
+	<integer>0</integer>
+	<key>costoTerm</key>
+	<integer>0</integer>
+	<key>costoPuerta</key>
+	<integer>0</integer>
+	<key>segundosDeEspera</key>
+	<integer>60</integer>
+	<key>metrosParaCambio</key>
+	<integer>78</integer>
+	<key>costoUnidad</key>
+	<integer>79</integer>
+	<key>carreraMinima</key>
+	<integer>4400</integer>
+	<key>costoArranque</key>
+	<integer>2600</integer>
+	<key>medicionEnPrecio</key>
+	<true/>
+	<key>numeroDeEmergenciasLocal</key>
+	<integer>123</integer>
+	<key>aeropuertoAnula</key>
+	<true/>
+</dict>
+</plist>

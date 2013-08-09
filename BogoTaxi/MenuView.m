@@ -2,13 +2,12 @@
 //  MenuView.m
 //  BogoTaxi
 //
-//  Created by Andres Abril on 29/11/12.
-//  Copyright (c) 2012 Andres Abril. All rights reserved.
+//  Copyright (c) 2012 iAmStudio S.A.S. All rights reserved.
 //
 
 #import "MenuView.h"
 #define kFontType @"LeagueGothic"
-#define kYellowColor [UIColor colorWithRed:0.984375 green:0.828125 blue:0.390625 alpha:1]
+#define kYellowColor [UIColor colorWithRed:0.30078125 green:0.65234375 blue:0.3984375 alpha:1]
 #define kLiteRedColor [UIColor colorWithHue:0 saturation:0.53 brightness:0.95 alpha:1]
 #define kDarkRedColor [UIColor colorWithHue:0 saturation:0.67 brightness:0.94 alpha:1]
 #define kNightColor [UIColor colorWithRed:0.2265625 green:0.28515625 blue:0.3515625 alpha:1]
@@ -57,7 +56,7 @@
                 view.center = CGPointMake(-30, heigth-30);
             }
         }
-
+        
     }
     
     
@@ -74,12 +73,14 @@
     transition = YES;
     
     [UIView animateWithDuration:0.5 animations:^{
-     self.mainButton.frame=CGRectMake(-120, self.frame.size.height, 120, 100);
-     }];
+        self.mainButton.frame=CGRectMake(-120, self.frame.size.height, 120, 100);
+    }];
     
     for (UIView* view in self.menuItems) {
+        int objects = self.menuItems.count-1;
+        NSLog(@"objects %i",objects);
         int index = [self.menuItems indexOfObject:view];
-        CGPoint center = CGPointMake( (((widthFrame-50)/6)*index+20)+15 , heigthFrame-30);
+        CGPoint center = CGPointMake( (((widthFrame-50)/objects)*index+20)+15 , heigthFrame-30);
         [UIView animateWithDuration: self.speed
                               delay: self.speed * (self.menuItems.count-index)
                             options: UIViewAnimationOptionCurveEaseIn
@@ -89,28 +90,28 @@
                          completion:^(BOOL finished){
                              [UIView animateWithDuration:self.bounceSpeed
                                               animations:^{
-                                                  CGPoint center = CGPointMake( (((widthFrame-50)/6)*index)+15 , heigthFrame-30);
+                                                  CGPoint center = CGPointMake( (((widthFrame-50)/objects)*index)+15 , heigthFrame-30);
                                                   view.center = center;
                                                   
                                               }
                                               completion:^(BOOL finished){
                                                   [UIView animateWithDuration:self.bounceSpeed
                                                                    animations:^{
-                                                                       CGPoint center = CGPointMake( (((widthFrame-50)/6)*index+15)+15 , heigthFrame-30);
+                                                                       CGPoint center = CGPointMake( (((widthFrame-50)/objects)*index+15)+15 , heigthFrame-30);
                                                                        view.center = center;
                                                                        
                                                                    }
                                                                    completion:^(BOOL finished){
                                                                        [UIView animateWithDuration:self.bounceSpeed
                                                                                         animations:^{
-                                                                                            CGPoint center = CGPointMake( (((widthFrame-50)/6)*index+5)+15 , heigthFrame-30);
+                                                                                            CGPoint center = CGPointMake( (((widthFrame-50)/objects)*index+5)+15 , heigthFrame-30);
                                                                                             view.center = center;
                                                                                             
                                                                                         }
                                                                                         completion:^(BOOL finished){
                                                                                             [UIView animateWithDuration:self.bounceSpeed
                                                                                                              animations:^{
-                                                                                                                 CGPoint center = CGPointMake( (((widthFrame-50)/6)*index+10)+15 , heigthFrame-30);
+                                                                                                                 CGPoint center = CGPointMake( (((widthFrame-50)/objects)*index+10)+15 , heigthFrame-30);
                                                                                                                  view.center = center;
                                                                                                                  
                                                                                                                  
@@ -127,29 +128,30 @@
                          }];
     }
     for (UIView* view in self.arrayLabels) {
+        int objects=self.arrayLabels.count-1;
         int index = [self.arrayLabels indexOfObject:view];
         [UIView animateWithDuration:self.speed +0.1
                               delay:self.speed * (self.arrayLabels.count-index)
                             options:UIViewAnimationOptionCurveEaseIn
                          animations:^ {
-                            view.center=CGPointMake( (((widthFrame-50)/6)*index+10)+15 , heigthFrame-115);
+                             view.center=CGPointMake( (((widthFrame-50)/objects)*index+10)+15 , heigthFrame-115);
                          }
                          completion:^(BOOL finished){
                              [UIView animateWithDuration:self.bounceSpeed
                                               animations:^{
-                                                 view.center=CGPointMake( (((widthFrame-50)/6)*index+10)+15 , heigthFrame-140);
-                                                  }
+                                                  view.center=CGPointMake( (((widthFrame-50)/objects)*index+10)+15 , heigthFrame-140);
+                                              }
                                               completion:^(BOOL finished){
                                                   [UIView animateWithDuration:self.bounceSpeed
                                                                    animations:^{
-                                                                      view.center=CGPointMake( (((widthFrame-50)/6)*index+10)+15 , heigthFrame-115);
+                                                                       view.center=CGPointMake( (((widthFrame-50)/objects)*index+10)+15 , heigthFrame-115);
                                                                        
                                                                    }];
                                                   if( view == self.arrayLabels.lastObject ) {
                                                       expanded = YES;
                                                       transition = NO;
                                                   }
-                                    
+                                                  
                                               }];
                              
                          }];
@@ -164,25 +166,26 @@
     }];
     
     for (UIView* view in self.menuItems) {
+        int objects = self.menuItems.count-1;
         int index = [self.menuItems indexOfObject:view];
         //CGFloat oneOverCount = self.menuItems.count<=1?1.0:(1.0/(self.menuItems.count-1));
         [UIView animateWithDuration:self.speed
                               delay:self.speed * index
                             options: UIViewAnimationOptionCurveEaseIn
                          animations:^{
-                             view.center = CGPointMake((((widthFrame-50)/6)*index+20)+15 , heigthFrame-30);
+                             view.center = CGPointMake((((widthFrame-50)/objects)*index+20)+15 , heigthFrame-30);
                          }
                          completion:^(BOOL finished){
                              [UIView animateWithDuration:self.bounceSpeed
                                               animations:^{
-                                                  CGPoint center = CGPointMake((((widthFrame-50)/6)*index)+15 , heigthFrame-30);
+                                                  CGPoint center = CGPointMake((((widthFrame-50)/objects)*index)+15 , heigthFrame-30);
                                                   view.center = center;
                                                   
                                               }
                                               completion:^(BOOL finished){
                                                   [UIView animateWithDuration:self.bounceSpeed
                                                                    animations:^{
-                                                                       CGPoint center = CGPointMake((((widthFrame-50)/6)*index+10)+15 , heigthFrame-30);
+                                                                       CGPoint center = CGPointMake((((widthFrame-50)/objects)*index+10)+15 , heigthFrame-30);
                                                                        view.center = center;
                                                                        
                                                                        
@@ -204,23 +207,24 @@
                          }];
     }
     for (UIView* view in self.arrayLabels) {
+        int objects=self.arrayLabels.count-1;
         int index = [self.arrayLabels indexOfObject:view];
-
+        
         [UIView animateWithDuration:self.speed
                               delay:self.speed * index
                             options:UIViewAnimationOptionCurveEaseIn
                          animations:^ {
-                            view.center=CGPointMake( (((widthFrame-50)/6)*index+10)+15 , heigthFrame-100);
+                             view.center=CGPointMake( (((widthFrame-50)/objects)*index+10)+15 , heigthFrame-100);
                          }
                          completion:^(BOOL finished){
                              [UIView animateWithDuration:self.bounceSpeed
                                               animations:^{
-                                                  view.center=CGPointMake( (((widthFrame-50)/6)*index+10)+15 , heigthFrame-130);
+                                                  view.center=CGPointMake( (((widthFrame-50)/objects)*index+10)+15 , heigthFrame-130);
                                               }
                                               completion:^(BOOL finished){
                                                   [UIView animateWithDuration:self.bounceSpeed
                                                                    animations:^{
-                                                                      view.center=CGPointMake( (((widthFrame-50)/6)*index+10)+15 , -100);
+                                                                       view.center=CGPointMake( (((widthFrame-50)/objects)*index+10)+15 , -100);
                                                                    }];
                                                   if( view == self.arrayLabels.lastObject ) {
                                                       expanded = YES;
@@ -249,7 +253,7 @@
     }
     else{
         [self collapse];
-        [UIView animateWithDuration:0.5 delay:0.03*6 options:UIViewAnimationCurveEaseIn animations:^{self.alpha=0;} completion:^(BOOL finished){}];
+        [UIView animateWithDuration:0.5 delay:0.03*6 options:UIViewAnimationOptionCurveEaseIn animations:^{self.alpha=0;} completion:^(BOOL finished){}];
     }
 }
 -(void)turnOnTouchesAgain{

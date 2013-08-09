@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "ServerCommunicator.h"
-
+#import "FileSaver.h"
 @interface Taximetro : NSObject
 
+@property(nonatomic)NSString *version;
 @property (nonatomic)int unidadesDeArranque;
 @property (nonatomic)int metrosParaCambio;
 @property (nonatomic)int carreraMinima;
@@ -18,6 +19,7 @@
 @property (nonatomic)float costoUnidadFloat;
 @property (nonatomic)float carreraMinimaFloat;
 @property (nonatomic)BOOL medicionEnPrecio;
+@property (nonatomic)BOOL aeropuertoAnula;
 @property (nonatomic)double numeroDeEmergenciasLocal;
 
 @property(nonatomic)float costoUnidad;

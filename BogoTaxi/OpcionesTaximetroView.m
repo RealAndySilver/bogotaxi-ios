@@ -23,7 +23,7 @@
 
 
 @implementation OpcionesTaximetroView
-@synthesize estadisticas;
+@synthesize estadisticas, ciudades;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -41,8 +41,8 @@
     UITapGestureRecognizer *tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changeState)];
     [background addGestureRecognizer:tapRecognizer];
     [self addSubview:background];
-
-    containerOpciones=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width-10, 185)];
+    
+    containerOpciones=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width-10, 235)];
     containerOpciones.center=CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
     containerOpciones.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:1];
     [self addSubview:containerOpciones];
@@ -67,19 +67,25 @@
     switchResumen=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerOpciones.frame.size.width-70, bannerOpcionesTaxi.frame.size.height+20, 0, 0)];
     [containerOpciones addSubview:switchResumen];
     [switchResumen addTarget:mod action:@selector(alertSwitch)];
-    
-    if (!mod.getAlertSwitchValue) {
-        [switchResumen onOff:YES];
-    }
-    else {
-        [switchResumen onOff:NO];
-    }
+    [switchResumen onOff:YES];
+    /*if (!mod.getAlertSwitchValue) {
+     [switchResumen onOff:YES];
+     }
+     else {
+     [switchResumen onOff:NO];
+     }*/
     
     estadisticas=[[CustomButton alloc]initWithFrame:CGRectMake(0, 0, containerOpciones.frame.size.width-20, 40)];
     [estadisticas setTitle:@"Estadísticas" forState:UIControlStateNormal];
     estadisticas.titleLabel.font=[UIFont fontWithName:kFontType size:24];
     estadisticas.center=CGPointMake((containerOpciones.frame.size.width/2), bannerOpcionesTaxi.frame.size.height+resumenViajeLabel.frame.size.height+60);
     [containerOpciones addSubview:estadisticas];
+    
+    ciudades=[[CustomButton alloc]initWithFrame:CGRectMake(0, 0, containerOpciones.frame.size.width-20, 40)];
+    [ciudades setTitle:@"Ciudades" forState:UIControlStateNormal];
+    ciudades.titleLabel.font=[UIFont fontWithName:kFontType size:24];
+    ciudades.center=CGPointMake((containerOpciones.frame.size.width/2), bannerOpcionesTaxi.frame.size.height+resumenViajeLabel.frame.size.height+estadisticas.frame.size.height + 70);
+    [containerOpciones addSubview:ciudades];
     
 }
 -(void)changeState{
@@ -101,15 +107,15 @@
     }
 }
 /*-(void)alertSwitch{
-    
-}*/
+ 
+ }*/
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect
+ {
+ // Drawing code
+ }
+ */
 
 @end

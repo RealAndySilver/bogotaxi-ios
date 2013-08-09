@@ -3,7 +3,7 @@
 //  BogoTaxi
 //
 //  Created by Development on 13/12/12.
-//  Copyright (c) 2012 Andres Abril. All rights reserved.
+//  Copyright (c) 2012 iAmStudio S.A.S. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -2,30 +2,19 @@
 
 @interface FileSaver : NSObject{
     NSDictionary *datos;
-    NSDictionary *datosFriendList;
-
+    NSDictionary *datosTaximetro;
+    
 }
--(NSDictionary*)getDictionary:(NSString*)name;
--(void)setDictionary:(NSDictionary*)dictionary withName:(NSString*)name;
--(NSString*)getUserWithName:(NSString*)name andPassword:(NSString*)password;
--(void)setUserName:(NSString*)name password:(NSString*)password andId:(NSString*)ID;
--(NSString*)getUpdateFile:(int)tag;
--(NSString *)getUpdateFileWithString:(NSString*)tag;
--(void)setUpdateFile:(NSString*)name date:(NSString*)date andTag:(int)tag;
--(void)setUpdateFile:(NSString*)name date:(NSString*)date andTag:(int)tag andId:(NSString*)ID;
--(void)setLastUserName:(NSString*)name andPassword:(NSString*)password;
--(NSDictionary*)getLastUserNameAndPassword;
+-(NSDictionary*)getDictionary:(NSString*)taximetroCiudad;
+-(void)setDictionary:(NSDictionary*)dictionary withKey:(NSString*)taximetroCiudad;
 
 -(void)setUserFirstTime:(NSString*)name;
 -(NSString*)getUserFirstTime:(NSString*)name;
 
+-(NSString*)getLastCity;
+-(void)setLastCity:(NSString*)name;
 
--(NSString*)getNombre;
--(NSString*)getPassword;
-
--(void)setIP:(NSString*)ip;
--(NSString*)getIp;
-
-
+-(NSString*)getLastNameCity;
+-(void)setLastNameCity:(NSString*)name;
 
 @end

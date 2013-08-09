@@ -3,7 +3,7 @@
 //  BogoTaxi
 //
 //  Created by Nicolle Jimenez Vasquez on 24/04/13.
-//  Copyright (c) 2013 Andres Abril. All rights reserved.
+//  Copyright (c) 2013 iAmStudio S.A.S. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

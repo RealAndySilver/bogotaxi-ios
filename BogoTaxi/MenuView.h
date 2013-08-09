@@ -2,15 +2,14 @@
 //  MenuView.h
 //  BogoTaxi
 //
-//  Created by Andres Abril on 29/11/12.
-//  Copyright (c) 2012 Andres Abril. All rights reserved.
+//  Copyright (c) 2012 iAmStudio S.A.S. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "CustomButton.h"
 
 @interface MenuView : UIView{
-
+    
     CGRect myFrame;
     
     float widthFrame;

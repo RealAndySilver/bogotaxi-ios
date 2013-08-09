@@ -12,8 +12,6 @@
 #import <MapKit/MapKit.h>
 #import "BannerView.h"
 #import "CustomButton.h"
-#import "TaximetroManualViewController.h"
-#import "LlamadasViewController.h"
 #import "OpcionesViewController.h"
 #import "ConsultarPlacaViewController.h"
 #import "MenuView.h"
@@ -33,8 +31,12 @@
 #import <Social/Social.h>
 #import "AdvertenciaViewController.h"
 #import "FollowMeButton.h"
+#import "TaximetroManualViewController.h"
+#import "ActualizarTaximetroViewController.h"
+#import "OpcionesCiudadViewController.h"
+#import "LlamadasViewController.h"
 
-@interface MainViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UIAccelerometerDelegate,UIActionSheetDelegate>{
+@interface MainViewController : UIViewController<UITextFieldDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate,MFMessageComposeViewControllerDelegate,MFMailComposeViewControllerDelegate,UIAccelerometerDelegate,UIActionSheetDelegate,ActualizarTaximetroDelegate>{
     UIScrollView *mainScrollView;
     MenuView *menu;
     CalcularView *calcular;
@@ -64,7 +66,7 @@
     UIImage *alertButtonImage;
     UIImage *callUserButtonImage;
     UIImage *emergencytButtonImage;
-
+    
     //Menú
     UIView *containerMenu;
     UIButton *menuButton;
@@ -88,6 +90,7 @@
     
     CustomLabel *valorLabel;
     CustomLabel *valorInputLabel;
+    CustomLabel *valorInputLabel2;
     CustomLabel *tiempoLabel;
     CustomLabel *tiempoInputLabel;
     
@@ -161,7 +164,7 @@
     CLLocationCoordinate2D zoomLocationPast;
     BOOL banderaLocation;
     NSMutableArray *arregloDePuntos;
-
+    
     MBProgressHUD *hud;
     FileSaver *saverObj;
     
@@ -180,8 +183,36 @@
     CustomSwitch *switchEncenderLS;
     CustomLabel *valorLabelLS;
     CustomLabel *valorInputLabelLS;
+    CustomLabel *valorInputLabelLS2;
     
     UILabel *labelMovimiento;
+    NSString *undDeArranque;
+    NSString *banderazo;
+    
+    NSMutableArray *arrayViews;
+    NSMutableArray *arrayLabelsMenu;
+    NSMutableArray *arrayButtonsMenu;
+    UILabel *labelTaximetroGps;
+    UIButton *taximetroGpsButtonMenu;
+    UILabel *labelCalcular;
+    UIButton *calcularButtonMenu;
+    UILabel *labelPlaca;
+    UIButton *placaButtonMenu;
+    UILabel *labelLlamadas;
+    UIButton *llamadasButtonMenu;
+    UILabel *labelTaximetroManual;
+    UIButton *taximetroManualButtonMenu;
+    UILabel *labelOpciones;
+    UIButton *opcionesButtonMenu;
+    UILabel *labelFollow;
+    UIButton *followButtonMenu;
+    
+    UIView *viewMensajeTaximetro;
+    UIView *viewMensajeTaximetro2;
+    BOOL cambieCiudad;
+    CustomLabel *labelViewMensaje2;
+    BOOL advertencia;
+    
 }
 @property (nonatomic, retain) UIAcceleration *lastAcceleration;
 @property (strong, nonatomic) CLGeocoder *geoCoder;

@@ -49,7 +49,7 @@
         deviceKind=3;
     }
     self.view.backgroundColor=kBlueColor;
-   
+    
     alertMessage=[[AlertMessageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [alertMessage crearView];
     [self.view addSubview:alertMessage];
@@ -141,7 +141,7 @@
     if (deviceKind==2) {
         contacto.frame=CGRectMake(0, 0, (containerView.frame.size.width)-20, (containerView.frame.size.height/2)-80);
         contacto.center=CGPointMake((containerView.frame.size.width/2), opcionesTaxi.frame.size.height+ compartirGPS.frame.size.height+97);
-     }
+    }
     else if (deviceKind==3) {
         contacto.frame=CGRectMake(0, 0, (containerView.frame.size.width)-20, 250);
         contacto.center=CGPointMake((containerView.frame.size.width/2), opcionesTaxi.frame.size.height+ compartirGPS.frame.size.height+175);
@@ -170,6 +170,7 @@
     
     [opcionesTaxiView changeState];
     [opcionesTaxiView.estadisticas addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
+    [opcionesTaxiView.ciudades addTarget:self action:@selector(goTo:) forControlEvents:UIControlEventTouchUpInside];
 }
 -(void)callOpcionesCompartir{
     
@@ -193,6 +194,13 @@
         eVC=[self.storyboard instantiateViewControllerWithIdentifier:@"Estadisticas"];
         eVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:eVC animated:YES];
+    }
+    else if ([button.titleLabel.text isEqualToString:@"Ciudades"]) {
+        NSLog(@"toque el boton");
+        OpcionesCiudadViewController *ocVC=[[OpcionesCiudadViewController alloc]init];
+        ocVC=[self.storyboard instantiateViewControllerWithIdentifier:@"OpcionCiudad"];
+        ocVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:ocVC animated:YES];
     }
     else if ([button.titleLabel.text isEqualToString:@"Botón de Panico"]) {
         PanicoViewController *pVC=[[PanicoViewController alloc]init];
@@ -219,7 +227,7 @@
         adVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:adVC animated:YES];
     }
-    else if ([button.titleLabel.text isEqualToString:@"Acerca de BogoTaxi"]) {
+    else if ([button.titleLabel.text isEqualToString:@"Acerca de MedeTaxi"]) {
         AcercaDeViewController *aVC=[[AcercaDeViewController alloc]init];
         aVC=[self.storyboard instantiateViewControllerWithIdentifier:@"AcercaDe"];
         aVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -229,14 +237,14 @@
         MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
 		controller.mailComposeDelegate = self;
 		[controller setToRecipients:[NSArray arrayWithObject:@"support@iamstudio.co"]];
-		[controller setSubject:@"BogoTaxi"];
+		[controller setSubject:@"MedeTaxi"];
 		[self presentModalViewController:controller animated:YES];
     }
     else if ([button.titleLabel.text isEqualToString:@"Cuéntale a un Amigo"]) {
         MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
 		controller.mailComposeDelegate = self;
-		[controller setSubject:@"Prueba BogoTaxi"];
-		[controller setMessageBody:@"Con BogoTaxi podrás medir tu trayectoria, conocer el valor a pagar aproximado, y postear la placa y lugar donde cogiste tu Taxi en la red social que elijas." isHTML:NO];
+		[controller setSubject:@"Prueba MedeTaxi"];
+		[controller setMessageBody:@"Con MedeTaxi podrás medir tu trayectoria, conocer el valor a pagar aproximado, y postear la placa y lugar donde cogiste tu Taxi en la red social que elijas." isHTML:NO];
 		[self presentModalViewController:controller animated:YES];
 	}
     else if ([button.titleLabel.text isEqualToString:@"Me encanta esta App!"]) {

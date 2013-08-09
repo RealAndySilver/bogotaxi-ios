@@ -23,7 +23,7 @@
 
 
 @interface TaximetroManualViewController ()
-
+@property float tempDinero;
 @end
 
 @implementation TaximetroManualViewController
@@ -40,6 +40,9 @@
         deviceKind=3;
     }
     self.view.backgroundColor=kDarkGrayColor;
+    FileSaver *file=[[FileSaver alloc]init];
+    taximetro=[[Taximetro alloc]initWithCiudad:[file getLastCity]];
+    arrayViews=[[NSMutableArray alloc]init];
     CustomButton *backButton=[[CustomButton alloc]initWithFrame:CGRectMake(10, self.view.frame.size.height-40, 50, 30)];
     backButton.backgroundColor=kYellowColor;
     [backButton setTitleColor:kGrayColor forState:UIControlStateNormal];
@@ -47,7 +50,6 @@
     [backButton addTarget:self action:@selector(dismissView) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
     [self crearContainerConfiguracion];
-    taximetro=[[Taximetro alloc]initWithCiudad:@"bogota"];
 }
 
 - (void)didReceiveMemoryWarning{
@@ -58,8 +60,8 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 -(void)crearContainerConfiguracion{
+    [arrayViews removeAllObjects];
     BannerView *bannerView=[[BannerView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-10, 0)];
-
     [bannerView ponerTexto:@"TAXÍMETRO MANUAL"];
     bannerView.configBannerLabel.textColor=kYellowColor;
     [bannerView.configBannerLabel setOverlayOff:YES];
@@ -91,7 +93,7 @@
     [containerPlata addSubview:valorLabel];
     
     valorInputLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(0 , 50, containerPlata.frame.size.width, 35)];
-    [valorInputLabel ponerTexto:@"$3.500" fuente:[UIFont fontWithName:kFontType size:40] color:kDarkRedColor];
+    [valorInputLabel ponerTexto:[NSString stringWithFormat:@"$%.0f", taximetro.carreraMinimaFloat] fuente:[UIFont fontWithName:kFontType size:40] color:kDarkRedColor];
     [valorInputLabel setOverlayOff:YES];
     [valorInputLabel setCentrado:YES];
     [containerPlata addSubview:valorInputLabel];
@@ -128,93 +130,156 @@
     labelUnidades=[[CustomLabel alloc]initWithFrame:CGRectMake(0, 0, containerUnidades.frame.size.width-10, containerUnidades.frame.size.height-20)];
     labelUnidades.center=CGPointMake(containerUnidades.frame.size.width/2, (containerUnidades.frame.size.height/2)-11);
     labelUnidades.textAlignment=UITextAlignmentCenter;
-    [labelUnidades ponerTexto:@"25" fuente:[UIFont fontWithName:kFontType size:60] color:kDarkRedColor];
+    labelUnidades.adjustsFontSizeToFitWidth = YES;
     [labelUnidades setOverlayOff:YES];
     [containerUnidades addSubview:labelUnidades];
     
     
     
-    slider=[[UISlider alloc]initWithFrame:CGRectMake(10, self.view.frame.size.height-210-30, self.view.frame.size.width-20, 20)];
-    if (deviceKind==2) {
-        slider.frame=CGRectMake(10, self.view.frame.size.height-210-80, self.view.frame.size.width-20, 20);
-    }
-    else if (deviceKind==3) {
-        slider.frame=CGRectMake(10, 460, self.view.frame.size.width-20, 20);
-    }
+    slider=[[UISlider alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-20, 20)];
+    slider.center=CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    
     [slider setMinimumTrackTintColor:kYellowColor];
     [slider setThumbTintColor:kDarkGrayColor];
     [slider setMaximumTrackTintColor:[UIColor whiteColor]];
     [self.view addSubview:slider];
-    slider.minimumValue=25;
-    slider.maximumValue=399;
+    if (taximetro.medicionEnPrecio==1) {
+        [labelUnidades ponerTexto:@"0 km" fuente:[UIFont fontWithName:kFontType size:60] color:kDarkRedColor];
+        slider.minimumValue=0;
+        slider.maximumValue=100000;
+    }
+    else{
+        [labelUnidades ponerTexto:[NSString stringWithFormat:@"%i",taximetro.unidadesDeArranque] fuente:[UIFont fontWithName:kFontType size:60] color:kDarkRedColor];
+        slider.minimumValue=taximetro.unidadesDeArranque;
+        slider.maximumValue=399;
+    }
+    
     [slider addTarget:self action:@selector(sliderChange:) forControlEvents:UIControlEventValueChanged];
-    containerConfig=[[UIView alloc]initWithFrame:CGRectMake(5, self.view.frame.size.height-162-50, self.view.frame.size.width-10, 160)];
-    if (deviceKind==2) {
-        containerConfig.frame=CGRectMake(5, self.view.frame.size.height-162-100, self.view.frame.size.width-10, 160);
-    }
-    else if (deviceKind==3) {
-        containerConfig.frame=CGRectMake(5, 600, self.view.frame.size.width-10, 160);
-    }
+    
+    containerConfig=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-10, 60)];
     containerConfig.backgroundColor=kDarkGrayColor;
     containerConfig.layer.cornerRadius=3;
     containerConfig.layer.shadowColor = [[UIColor colorWithWhite:0.1 alpha:1] CGColor];
     containerConfig.layer.shadowOffset = CGSizeMake(0.0f,0.0f);
     containerConfig.layer.shadowRadius = 2;
     containerConfig.layer.shadowOpacity = 0.3;
+    
+    arrayViews=[self llenarArregloDeViews];
+    
+    //NSLog(@"areglo de views %@",arrayViews);
+    containerConfig.frame=CGRectMake(0, 0, self.view.frame.size.width-10, 40*arrayViews.count);
+    containerConfig.center=CGPointMake(self.view.frame.size.width/2, (self.view.frame.size.height/2 + self.view.frame.size.height/4)-15);
     [self.view addSubview:containerConfig];
     
+    for (UIView *view in arrayViews) {
+        int i = arrayViews.count;
+        int index = [arrayViews indexOfObject:view];
+        // ( (((widthFrame-50)/5)*index+20)+15
+        view.center=CGPointMake(containerConfig.frame.size.width/2, (containerConfig.frame.size.height/i)*index+20);
+        [containerConfig addSubview:view];
+    }
+    
+}
+-(NSMutableArray *)llenarArregloDeViews{
     int margenLabels=10;
-    nocDomFesLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 8, 130, 30)];
-    [nocDomFesLabel ponerTexto:@"Noc-Dom-Fes" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
-    [nocDomFesLabel setOverlayOff:YES];
-    [containerConfig addSubview:nocDomFesLabel];
+    NSMutableArray *array=[[NSMutableArray alloc]init];
+    [array removeAllObjects];
+    if (!(taximetro.costoNoc==0)) {
+        UIView *viewNocDomFesLabel=[[UIView alloc]initWithFrame:CGRectMake(0, 0, containerConfig.frame.size.width, 30)];
+        //[containerConfig addSubview:viewNocDomFesLabel];
+        nocDomFesLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 0, 130, 30)];
+        [nocDomFesLabel ponerTexto:@"Noc-Dom-Fes" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
+        [nocDomFesLabel setOverlayOff:YES];
+        [viewNocDomFesLabel addSubview:nocDomFesLabel];
+        nocDomFesSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 0, 0, 0)];
+        [nocDomFesSwitch addTarget:self action:@selector(switchChanged)];
+        [viewNocDomFesLabel addSubview:nocDomFesSwitch];
+        [array addObject:viewNocDomFesLabel];
+    }
+    if (!(taximetro.costoAero==0)){
+        UIView *viewAero=[[UIView alloc]initWithFrame:CGRectMake(0, 0, containerConfig.frame.size.width, 30)];
+        //[containerConfig addSubview:viewAero];
+        aeropuertoLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 0, 130, 30)];
+        [aeropuertoLabel ponerTexto:@"Aeropuerto" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
+        [aeropuertoLabel setOverlayOff:YES];
+        [viewAero addSubview:aeropuertoLabel];
+        
+        aeropuertoSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 0, 0, 0)];
+        [viewAero addSubview:aeropuertoSwitch];
+        [aeropuertoSwitch addTarget:self action:@selector(switchChanged)];
+        [array addObject:viewAero];
+        
+    }
+    if (!(taximetro.costoPuerta==0)){
+        UIView *viewPuerta=[[UIView alloc]initWithFrame:CGRectMake(0, 0, containerConfig.frame.size.width, 30)];
+        //[containerConfig addSubview:viewPuerta];
+        puertaApuertaLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 0, 130, 30)];
+        [puertaApuertaLabel ponerTexto:@"Puerta a puerta" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
+        [puertaApuertaLabel setOverlayOff:YES];
+        [viewPuerta addSubview:puertaApuertaLabel];
+        
+        puertaApuertaSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 0, 0, 0)];
+        [viewPuerta addSubview:puertaApuertaSwitch];
+        [puertaApuertaSwitch addTarget:self action:@selector(switchChanged)];
+        [array addObject:viewPuerta];
+        
+    }
+    if (!(taximetro.costoTerm==0)){
+        UIView *viewTerm=[[UIView alloc]initWithFrame:CGRectMake(0, 0, containerConfig.frame.size.width, 30)];
+        //[containerConfig addSubview:viewTerm];
+        terminalLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 0, 130, 30)];
+        [terminalLabel ponerTexto:@"Terminal" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
+        [terminalLabel setOverlayOff:YES];
+        [viewTerm addSubview:terminalLabel];
+        
+        terminalSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 0, 0, 0)];
+        [viewTerm addSubview:terminalSwitch];
+        [terminalSwitch addTarget:self action:@selector(switchChanged)];
+        [array addObject:viewTerm];
+        
+    }
+    return array;
     
-    nocDomFesSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 6, 0, 0)];
-    
-    [nocDomFesSwitch addTarget:self action:@selector(switchChanged)];
-    
-    [containerConfig addSubview:nocDomFesSwitch];
-    
-    aeropuertoLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 48, 130, 30)];
-    [aeropuertoLabel ponerTexto:@"Aeropuerto" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
-    [aeropuertoLabel setOverlayOff:YES];
-    [containerConfig addSubview:aeropuertoLabel];
-    
-    aeropuertoSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 46, 0, 0)];
-    [containerConfig addSubview:aeropuertoSwitch];
-    [aeropuertoSwitch addTarget:self action:@selector(switchChanged)];
-    
-    puertaApuertaLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 88, 130, 30)];
-    [puertaApuertaLabel ponerTexto:@"Puerta a puerta" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
-    [puertaApuertaLabel setOverlayOff:YES];
-    [containerConfig addSubview:puertaApuertaLabel];
-    
-    puertaApuertaSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 86, 0, 0)];
-    [containerConfig addSubview:puertaApuertaSwitch];
-    [puertaApuertaSwitch addTarget:self action:@selector(switchChanged)];
-    
-    terminalLabel=[[CustomLabel alloc]initWithFrame:CGRectMake(margenLabels, 128, 130, 30)];
-    [terminalLabel ponerTexto:@"Terminal" fuente:[UIFont fontWithName:kFontType size:30] color:[UIColor whiteColor]];
-    [terminalLabel setOverlayOff:YES];
-    [containerConfig addSubview:terminalLabel];
-    
-    terminalSwitch=[[CustomSwitch alloc]initWithFrame:CGRectMake(containerConfig.frame.size.width-65, 126, 0, 0)];
-    [containerConfig addSubview:terminalSwitch];
-    [terminalSwitch addTarget:self action:@selector(switchChanged)];
-
 }
 -(void)sliderChange:(UISlider*)slider1{
-    float temp=[taximetro unidadesADinero:(int)slider1.value];
-    [self agregarOquitarCargos:temp];
-    labelUnidades.text=[NSString stringWithFormat:@"%.0f",slider1.value];
+    if (taximetro.medicionEnPrecio==1) {
+        float metros=slider1.value;
+        float temp=[Taximetro conversorMetrosAUnidades:metros paraElTaximetro:taximetro];
+        //int unidades= temp-taximetro.unidadesDeArranque;
+        if (temp < taximetro.unidadesCarreraMinima) {
+            _tempDinero=taximetro.carreraMinimaFloat;
+        }
+        else{
+            _tempDinero=[taximetro unidadesADinero:temp];
+        }
+        [self agregarOquitarCargos:_tempDinero];
+        labelUnidades.text=[NSString stringWithFormat:@"%.2f km",slider1.value/1000];
+    }
+    else{
+        float temp=[taximetro unidadesADinero:(int)slider1.value];
+        [self agregarOquitarCargos:temp];
+        labelUnidades.text=[NSString stringWithFormat:@"%.0f",slider1.value];
+    }
+    
 }
 -(void)buttonPressed:(UIButton*)button{
-    if (button.tag==0) {
-        slider.value-=1;
+    if (taximetro.medicionEnPrecio==1) {
+        if (button.tag==0) {
+            slider.value-=100;
+        }
+        else if (button.tag==1){
+            slider.value+=100;
+        }
     }
-    else if (button.tag==1){
-        slider.value+=1;
+    else{
+        if (button.tag==0) {
+            slider.value-=1;
+        }
+        else if (button.tag==1){
+            slider.value+=1;
+        }
     }
+    
     [self sliderChange:slider];
 }
 -(void)agregarOquitarCargos:(float)dinero{
@@ -222,7 +287,13 @@
         dinero+=taximetro.costoNoc;
     }
     if (aeropuertoSwitch.isOn) {
-        dinero+=taximetro.costoAero;
+        if (taximetro.aeropuertoAnula==1) {
+            dinero=taximetro.costoAero;
+        }
+        else{
+            dinero+=taximetro.costoAero;
+        }
+        
     }
     if (puertaApuertaSwitch.isOn) {
         dinero+=taximetro.costoPuerta;
